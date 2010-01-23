@@ -35,6 +35,8 @@ public:
     void swapBuffers();
     void generateTexture(GLuint *textureId, GLenum *textureFormat, SDL_Surface *surface);
     void deleteTexture(GLuint *textureId);
+
+    SDL_Surface* getScreen();
 };
 
 extern Renderer *renderer;

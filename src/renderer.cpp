@@ -85,7 +85,7 @@ bool Renderer::initScreen()
     glEnable(extension);
 
     //which colour the _screen gets cleared to(black in this case)
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 
     //set the opengl window to our window size
     glViewport(0, 0, _screenWidth, _screenHeight);
@@ -118,6 +118,8 @@ bool Renderer::initScreen()
 void Renderer::drawImage(Image *img, float x, float y)
 {
     GLenum error;
+
+    glEnable(extension);
 
     glBindTexture(extension, img->getTextureId());
 
@@ -171,6 +173,8 @@ void Renderer::drawImage(Image *img, float x, float y)
 void Renderer::drawClippedImage(Image *img, float x, float y, SDL_Rect clip)
 {
     GLenum error;
+
+    glEnable(extension);
 
     glBindTexture(extension, img->getTextureId());
 
@@ -306,4 +310,9 @@ void Renderer::generateTexture(GLuint *textureId, GLenum *textureFormat, SDL_Sur
 void Renderer::deleteTexture(GLuint *textureId)
 {
     glDeleteTextures(1, textureId);
+}
+
+SDL_Surface* Renderer::getScreen()
+{
+    return _screen;
 }
