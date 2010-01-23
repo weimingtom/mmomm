@@ -31,6 +31,19 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Linker>
+			<Add option="-lSDL" />
+			<Add option="-lSDL_image" />
+			<Add option="-lGL" />
+			<Add option="-lGLU" />
+		</Linker>
+		<Unit filename="../src/collision.cpp" />
+		<Unit filename="../src/collision.h" />
+		<Unit filename="../src/image.cpp" />
+		<Unit filename="../src/image.h" />
+		<Unit filename="../src/main.cpp" />
+		<Unit filename="../src/renderer.cpp" />
+		<Unit filename="../src/renderer.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
