@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1264206145 source:/home/oipo/Programming/mmomm/src/image.cpp
+	"image.h"
+	<sstream>
+	<iostream>
+
+1264206225 /home/oipo/Programming/mmomm/src/image.h
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+	"renderer.h"
+
+1264206282 /home/oipo/Programming/mmomm/src/renderer.h
+	<GL/gl.h>
+	<GL/glu.h>
+	<string>
+	<sstream>
+	<iostream>
+	"image.h"
+
+1264205959 source:/home/oipo/Programming/mmomm/src/main.cpp
+	"renderer.h"
+	"image.h"
+
+1264206349 source:/home/oipo/Programming/mmomm/src/renderer.cpp
+	"renderer.h"
+	<GL/glext.h>
+
