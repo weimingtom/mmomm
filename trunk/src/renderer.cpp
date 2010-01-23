@@ -1,5 +1,6 @@
 #include "renderer.h"
 #include <GL/glext.h>
+#include <boost/scoped_array.hpp>
 
 Renderer *renderer = NULL;
 
@@ -16,7 +17,7 @@ GLenum extension = GL_TEXTURE_RECTANGLE_ARB;
 }*/
 
 //blatantly stolen from Box2D
-inline uint nextPowerOfTwo(uint x)
+inline unsigned nextPowerOfTwo(unsigned x)
 {
     x |= (x >> 1);
     x |= (x >> 2);
@@ -153,16 +154,16 @@ void Renderer::drawImage(Image *img, float x, float y)
           glVertex2f( x, y ); //screen coordinates
 
           //Bottom-left vertex (corner)
-          glTexCoord2f( img->getWidth(), 0 );
-          glVertex2f( x+img->getWidth(), y );
+          glTexCoord2f( GLfloat(img->getWidth()), 0 );
+          glVertex2f( GLfloat(x+img->getWidth()), y );
 
           //Bottom-right vertex (corner)
-          glTexCoord2f( img->getWidth(), img->getHeight() );
-          glVertex2f( x+img->getWidth(), y+img->getHeight() );
+          glTexCoord2f( GLfloat(img->getWidth()), GLfloat(img->getHeight()) );
+          glVertex2f( x+GLfloat(img->getWidth()), y+GLfloat(img->getHeight()) );
 
           //Top-right vertex (corner)
-          glTexCoord2f( 0, img->getHeight() );
-          glVertex2f( x, y+img->getHeight() );
+          glTexCoord2f( 0, GLfloat(img->getHeight()) );
+          glVertex2f( x, y+GLfloat(img->getHeight()) );
         glEnd();
     }
 
@@ -212,15 +213,15 @@ void Renderer::drawClippedImage(Image *img, float x, float y, SDL_Rect clip)
           glVertex2i( (int)x, (int)y ); //screen coordinates
 
           //Bottom-left vertex (corner)
-          glTexCoord2f( clip.x + clip.w, clip.y );
+          glTexCoord2f( GLfloat(clip.x + clip.w), GLfloat(clip.y) );
           glVertex2i( (int)x+(int)clip.w, (int)y );
 
           //Bottom-right vertex (corner)
-          glTexCoord2f( clip.x + clip.w, clip.y + clip.h );
+          glTexCoord2f( GLfloat(clip.x + clip.w), GLfloat(clip.y + clip.h) );
           glVertex2i( (int)x+(int)clip.w, (int)y+(int)clip.h );
 
           //Top-right vertex (corner)
-          glTexCoord2f( clip.x, clip.y + clip.h );
+          glTexCoord2f( GLfloat(clip.x), GLfloat(clip.y + clip.h) );
           glVertex2i( (int)x, (int)y+(int)clip.h );
         glEnd();
     }
@@ -286,9 +287,13 @@ void Renderer::generateTexture(GLuint *textureId, GLenum *textureFormat, SDL_Sur
         }
         else
         {
-            GLvoid *scaledImage[nextPowerOfTwo(surface->w)*nextPowerOfTwo(surface->h)];
+			int w = nextPowerOfTwo(surface->w);
+			int h = nextPowerOfTwo(surface->h);
+			int size = w * h;
+			boost::scoped_array<unsigned> imageStore(new unsigned[size]);
+            GLvoid *scaledImage = imageStore.get();
             GLint ret = gluScaleImage(*textureFormat, surface->w, surface->h, GL_UNSIGNED_BYTE, surface->pixels,
-                        nextPowerOfTwo(surface->w), nextPowerOfTwo(surface->h), GL_UNSIGNED_BYTE, scaledImage);
+                        w, h, GL_UNSIGNED_BYTE, scaledImage);
             if(ret != 0)
             {
                 //logger->echoError("A gl error happened in gluScaleImage: " + translateGLError(glGetError()));
@@ -296,7 +301,7 @@ void Renderer::generateTexture(GLuint *textureId, GLenum *textureFormat, SDL_Sur
                 return;
             }
 
-            glTexImage2D(extension, 0, internalFormat, nextPowerOfTwo(surface->w), nextPowerOfTwo(surface->h), 0,
+            glTexImage2D(extension, 0, internalFormat, w, h, 0,
                         *textureFormat, GL_UNSIGNED_BYTE, scaledImage);
         }
 

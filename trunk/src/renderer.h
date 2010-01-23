@@ -1,6 +1,9 @@
 #ifndef OPENGL_RENDERER_H_
 #define OPENGL_RENDERER_H_
 
+#ifdef WIN32
+#include <windows.h>
+#endif
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <string>
