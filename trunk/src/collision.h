@@ -1,10 +1,10 @@
 #ifndef COLLISION_H_
 #define COLLISION_H_
-// implementations horrible ineffecient - will change
 
-#include <vector>
+#include <set>
+#include <boost/unordered_map.hpp>
 
-class CollisionWorld;
+class Physical;
 struct Rect {
     Rect( double left, double top, double right, double bottom );
 
@@ -12,6 +12,78 @@ struct Rect {
     double top;
     double right;
     double bottom;
+};
+
+// A world consisting of physical objects that can collide with each other.
+// All objects in a world should be destroyed before the world is destroyed.
+class CollisionWorld {
+public:
+
+    // Constructor.
+    CollisionWorld();
+
+    // Destructor.
+    ~CollisionWorld();
+
+    // Sets whether this CollisionWorld should use instant collisions. When instant
+    // collisions are turned on, the OnCollision() methods of colliding objects are
+    // called whenever their collision rectangles overlap after either has moved.
+    // When turned off, the TriggerCollisions method should be used periodically to
+    // call the OnCollision() methods of all objects whose collision rectangles
+    // currently overlap. The default value is false.
+    void SetInstantCollisions( bool instantCollisions );
+
+    // Retrieves the current setting for instant collisions.
+    bool GetInstantCollisions() const;
+
+    // Checks all objects in this CollisionWorld for collisions. For each collision
+    // between objects A and B, both A.OnCollision(B) and B.OnCollision(A) are
+    // called, in no specified order.
+    void TriggerCollisions();
+
+private:
+
+    // Size of internal collision cells.
+    static const double CELL_SIZE;
+
+    struct CellCoord {
+        CellCoord( long x, long y );
+        bool operator==( const CellCoord& a ) const;
+
+        long x;
+        long y;
+    };
+
+    class Sort {
+    public:
+
+        bool operator()( const Physical* a, const Physical* b ) const;
+
+    };
+
+    class Hash : public boost::hash< CellCoord > {
+    public:
+
+        std::size_t operator()( const CellCoord& a ) const;
+
+    };
+
+    typedef std::set            < Physical*, Sort >       Cell;
+    typedef boost::unordered_map< CellCoord, Cell, Hash > Map;
+
+    void TriggerCollisions( Physical* context );
+
+    Cell& GetCellAtPoint( double x, double y );
+
+    friend class Physical;
+
+    Map  _map;
+    bool _instantCollisions;
+
+    long _leftBound;
+    long _topBound;
+    long _rightBound;
+    long _bottomBound;
 };
 
 // A Physical object has a (mobile) collision rectangle and is associated
@@ -22,7 +94,7 @@ public:
     // Create physical object associated with given world, and with given
     // initial collision rectangle. Can trigger OnCollision calls if the
     // associated CollisionWorld is set to use instant collisions.
-    Physical( CollisionWorld& world, const Rect& position );
+    Physical( CollisionWorld& world, const Rect& rect );
 
     // Create physical object associated with given world, and with collision
     // rectangle of given size. The top-left corner of the rectangle is set to
@@ -62,49 +134,13 @@ public:
 
 private:
 
-    friend class CollisionWorld;
+    void UpdateWorld();
+
+    typedef CollisionWorld::Cell Cell;
 
     CollisionWorld& _world;
+    Cell*           _cell;
     Rect            _rect;
-
-};
-
-// A world consisting of physical objects that can collide with each other.
-// All objects in a world should be destroyed before the world is destroyed.
-class CollisionWorld {
-public:
-
-    // Constructor.
-    CollisionWorld();
-
-    // Destructor.
-    ~CollisionWorld();
-
-    // Sets whether this CollisionWorld should use instant collisions. When instant
-    // collisions are turned on, the OnCollision() methods of colliding objects are
-    // called whenever their collision rectangles overlap after either has moved.
-    // When turned off, the TriggerCollisions method should be used periodically to
-    // call the OnCollision() methods of all objects whose collision rectangles
-    // currently overlap. The default value is false.
-    void SetInstantCollisions( bool instantCollisions );
-
-    // Retrieves the current setting for instant collisions.
-    bool GetInstantCollisions() const;
-
-    // Checks all objects in this CollisionWorld for collisions. For each collision
-    // between objects A and B, both A.OnCollision(B) and B.OnCollision(A) are
-    // called, in no specified order.
-    void TriggerCollisions() const;
-
-private:
-
-    void TriggerCollisions( Physical* context ) const;
-
-    friend class Physical;
-    typedef std::vector< Physical* > Vector;
-
-    Vector _objects;
-    bool   _instantCollisions;
 
 };
 
