@@ -73,6 +73,8 @@ private:
 
     void TriggerCollisions( Physical* context );
 
+    bool CheckCollision( Physical* a, Physical* b, const Rect& aRect );
+
     Cell& GetCellAtPoint( double x, double y );
 
     friend class Physical;
