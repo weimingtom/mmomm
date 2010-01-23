@@ -36,9 +36,14 @@
 			<Add option="-lSDL_image" />
 			<Add option="-lGL" />
 			<Add option="-lGLU" />
+			<Add option="-lguichan" />
+			<Add option="-lguichan_sdl" />
+			<Add option="-guichan_opengl" />
 		</Linker>
 		<Unit filename="../src/collision.cpp" />
 		<Unit filename="../src/collision.h" />
+		<Unit filename="../src/gui.cpp" />
+		<Unit filename="../src/gui.h" />
 		<Unit filename="../src/image.cpp" />
 		<Unit filename="../src/image.h" />
 		<Unit filename="../src/main.cpp" />
