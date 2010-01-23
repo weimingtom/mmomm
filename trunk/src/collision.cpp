@@ -44,43 +44,30 @@ void CollisionWorld::TriggerCollisions()
             Cell& c = _map[ CellCoord( x,     y + 1 ) ];
             Cell& d = _map[ CellCoord( x + 1, y + 1 ) ];
 
-            Cell cd;
-            std::set_union( c.begin(), c.end(), d.begin(), d.end(),
-                            std::insert_iterator< Cell >( cd, cd.begin() ), Sort() );
-            
-            Cell bcd;
-            std::set_union( b.begin(), b.end(), cd.begin(), cd.end(),
-                            std::insert_iterator< Cell >( bcd, bcd.begin() ), Sort() );
-
             for ( Cell::const_iterator i = a.begin(); i != a.end(); i++ ) {
-                const Rect& r1 = ( *i )->GetCollisionRect();
+                const Rect& r = ( *i )->GetCollisionRect();
                 
                 Cell::const_iterator j = i;
                 for ( j++; j != a.end(); j++ ) {
-                    const Rect& r2 = ( *j )->GetCollisionRect();
-
-                    if ( r2.left >= r1.right )
+                    if ( !CheckCollision( *i, *j, r ) )
                         break;
-
-                    if ( !( r1.left >= r2.right || r1.top >= r2.bottom ||
-                            r2.left >= r1.right || r2.top >= r1.bottom ) ) {
-                        ( *i )->OnCollision( **j );
-                        ( *j )->OnCollision( **i );
-                    }
                 }
 
-                for ( j = bcd.begin(); j != bcd.end(); j++ ) {
-                    const Rect& r2 = ( *j )->GetCollisionRect();
-
-                    if ( r2.left >= r1.right )
+                for ( j = b.begin(); j != b.end(); j++ ) {
+                    if ( !CheckCollision( *i, *j, r ) )
                         break;
-
-                    if ( !( r1.left >= r2.right || r1.top >= r2.bottom ||
-                            r2.left >= r1.right || r2.top >= r1.bottom ) ) {
-                        ( *i )->OnCollision( **j );
-                        ( *j )->OnCollision( **i );
-                    }
                 }
+
+                for ( j = c.begin(); j != c.end(); j++ ) {
+                    if ( !CheckCollision( *i, *j, r ) )
+                        break;
+                }
+
+                for ( j = d.begin(); j != d.end(); j++ ) {
+                    if ( !CheckCollision( *i, *j, r ) )
+                        break;
+                }
+
             }
         }
     }
@@ -114,39 +101,34 @@ void CollisionWorld::TriggerCollisions( Physical* context )
 {
     long x = long( floor( context->GetCollisionRect().left / CELL_SIZE ) );
     long y = long( floor( context->GetCollisionRect().top  / CELL_SIZE ) );
+    const Rect& r = context->GetCollisionRect();
 
-    Cell& a = _map[ CellCoord( x,     y     ) ];
-    Cell& b = _map[ CellCoord( x + 1, y     ) ];
-    Cell& c = _map[ CellCoord( x,     y + 1 ) ];
-    Cell& d = _map[ CellCoord( x + 1, y + 1 ) ];
-
-    Cell ab;
-    std::set_union( a.begin(), a.end(), b.begin(), b.end(),
-                    std::insert_iterator< Cell >( ab, ab.begin() ), Sort() );
-
-    Cell cd;
-    std::set_union( c.begin(), c.end(), d.begin(), d.end(),
-                    std::insert_iterator< Cell >( cd, cd.begin() ), Sort() );
-
-    Cell all;
-    std::set_union( ab.begin(), ab.end(), cd.begin(), cd.end(),
-                    std::insert_iterator< Cell >( all, all.begin() ), Sort() );
-
-    const Rect& r1 = context->GetCollisionRect();
-    for ( Cell::const_iterator i = all.begin(); i != all.end(); i++ ) {
-        if ( *i == context )
-            continue;
-        const Rect& r2 = ( *i )->GetCollisionRect();
-
-        if ( r2.left >= r1.right )
-            break;
-
-        if ( !( r1.left >= r2.right || r1.top >= r2.bottom ||
-                r2.left >= r1.right || r2.top >= r1.bottom ) ) {
-            ( *i )->OnCollision( *context );
-            context->OnCollision( **i );
+    for ( long ty = y - 1; ty <= y + 1; ty++ ) {
+        for ( long tx = x - 1; tx <= x + 1; tx++ ) {
+            Cell& cell = _map[ CellCoord( tx, ty ) ];
+            for ( Cell::const_iterator i = cell.begin(); i != cell.end(); i++ ) {
+                if ( *i == context )
+                    continue;
+                if ( !CheckCollision( context, *i, r ) )
+                    break;
+            }
         }
     }
+}
+
+bool CollisionWorld::CheckCollision( Physical* a, Physical* b, const Rect& aRect )
+{
+    const Rect& bRect = b->GetCollisionRect();
+
+    if ( bRect.left >= aRect.right )
+        return false;
+
+    if ( !( aRect.left >= bRect.right || aRect.top >= bRect.bottom ||
+            bRect.left >= aRect.right || bRect.top >= aRect.bottom ) ) {
+        a->OnCollision( *b );
+        b->OnCollision( *a );
+    }
+    return true;
 }
 
 CollisionWorld::Cell& CollisionWorld::GetCellAtPoint( double x, double y )
