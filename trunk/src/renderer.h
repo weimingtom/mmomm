@@ -19,11 +19,13 @@ using namespace std;
 class Renderer
 {
 private:
-    SDL_Surface *screen;
-    int screenHeight, screenWidth;
+    SDL_Surface *_screen;
+    int          _screenHeight;
+    int          _screenWidth;
+    GLint        _internalFormatRGB;
+    GLint        _internalFormatRGBA;
 
     bool initScreen();
-    GLint internalFormatRGB, internalFormatRGBA;
 
 public:
     Renderer(int screenWidth, int screenHeight);

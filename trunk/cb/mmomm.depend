@@ -9,7 +9,8 @@
 	<SDL/SDL_image.h>
 	"renderer.h"
 
-1264206282 /home/oipo/Programming/mmomm/src/renderer.h
+1264247249 /home/oipo/Programming/mmomm/src/renderer.h
+	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>
 	<string>
@@ -17,11 +18,17 @@
 	<iostream>
 	"image.h"
 
-1264205959 source:/home/oipo/Programming/mmomm/src/main.cpp
+1264207135 source:/home/oipo/Programming/mmomm/src/main.cpp
 	"renderer.h"
 	"image.h"
 
 1264206349 source:/home/oipo/Programming/mmomm/src/renderer.cpp
 	"renderer.h"
 	<GL/glext.h>
+
+1264246822 source:/home/oipo/Programming/mmomm/src/collision.cpp
+	"collision.h"
+
+1264246822 /home/oipo/Programming/mmomm/src/collision.h
+	<vector>
 
