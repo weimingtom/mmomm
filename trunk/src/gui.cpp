@@ -20,8 +20,6 @@ Gui::Gui(SDL_Surface *screen, bool softwareRendering)
 
         }
 
-
-
         //cout << "screen: " << screen->w << ", " << screen->h << endl;
 
         _input = new gcn::SDLInput();
@@ -39,16 +37,6 @@ Gui::Gui(SDL_Surface *screen, bool softwareRendering)
         _top->setOpaque(false);
         _gui->setTop(_top);
 
-        _label = new gcn::Label("Hello World");
-        _label->setPosition(280, 220);
-        _top->add(_label);
-
-        _window = new gcn::Window("Test window!");
-        _window->setPosition(50, 50);
-        _window->setSize(100, 100);
-        _window->setVisible(true);
-        //_window->setOpaque(false);
-        _top->add(_window);
     } catch (gcn::Exception e) {
         cout << e.getMessage() << endl;
     }
@@ -56,8 +44,6 @@ Gui::Gui(SDL_Surface *screen, bool softwareRendering)
 
 Gui::~Gui()
 {
-    delete _window;
-    delete _label;
     delete _font;
     delete _top;
     delete _gui;
@@ -65,13 +51,22 @@ Gui::~Gui()
     delete _input;
     delete _graphics;
     delete _imageLoader;
-
 }
 
 
 void Gui::pushInput(SDL_Event event)
 {
     _input->pushInput(event);
+}
+
+void Gui::addWidget(gcn::Widget *widget)
+{
+    _top->add(widget);
+}
+
+void Gui::removeWidget(gcn::Widget *widget)
+{
+    _top->remove(widget);
 }
 
 void Gui::logic()
