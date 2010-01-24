@@ -32,6 +32,9 @@ public:
     virtual void generateTexture(GLuint *textureId, GLenum *textureFormat, SDL_Surface *surface);
     virtual void deleteTexture(GLuint *textureId);
 
+    int getScreenWidth() { return _screenWidth; };
+    int getScreenHeight() { return _screenHeight; };
+
     virtual SDL_Surface* getScreen();
     virtual bool isSoftwareRenderer();
 };

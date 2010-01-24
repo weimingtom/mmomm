@@ -3,9 +3,9 @@
 #include "softwarerenderer.h"
 #include "image.h"
 #include "gui.h"
+#include "configurationmenu.h"
 
-gcn::Label *label;
-gcn::Window *window;
+ConfigurationMenu *configMenu;
 
 int main(int argc, char **argv)
 {
@@ -21,14 +21,7 @@ int main(int argc, char **argv)
     renderer   = new SoftwareRenderer(800, 600);
     Image *img = new Image("testimage.png");
     Gui *gui   = new Gui(renderer->getScreen(), renderer->isSoftwareRenderer());
-    label = new gcn::Label("Hello World");
-    label->setPosition(280, 220);
-    gui->addWidget(label);
-    window = new gcn::Window("Test window OF DOOM!");
-    window->setPosition(50, 50);
-    window->setSize(200, 200);
-    window->setVisible(true);
-    gui->addWidget(window);
+    configMenu = new ConfigurationMenu(gui);
 
     bool loop  = true;
 
@@ -55,14 +48,10 @@ int main(int argc, char **argv)
         renderer->swapBuffers();
     }
 
-    gui->removeWidget(label);
-    gui->removeWidget(window);
-
+    delete configMenu;
     delete gui;
     delete img;
     delete renderer;
-    delete label;
-    delete window;
 
     return 0;
 }

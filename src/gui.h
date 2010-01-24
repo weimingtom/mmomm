@@ -2,7 +2,6 @@
 #define GUI_H_
 
 #include <iostream>
-#include <vector>
 #include <guichan.hpp>
 #include <guichan/sdl.hpp>
 #include <guichan/opengl.hpp>
