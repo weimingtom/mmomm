@@ -37,6 +37,12 @@ bool CollisionWorld::GetInstantCollisions() const
 
 void CollisionWorld::TriggerCollisions()
 {
+    for ( CollisionList::iterator i = _collisions.begin(); i != _collisions.end(); i++ ) {
+        i->first->OnCollision( *( i->second ) );
+        i->second->OnCollision( *( i->first ) );
+    }
+    _collisions.clear();
+
     for ( long y = _topBound; y < _bottomBound; y++ ) {
         for ( long x = _leftBound; x < _rightBound; x++ ) {
             Cell& a = _map[ CellCoord( x,     y     ) ];
@@ -212,10 +218,83 @@ void Physical::SetSize( double width, double height )
 
 void Physical::Move( double xOffset, double yOffset )
 {
-    _rect.left  +=  xOffset;
-    _rect.right +=  xOffset;
-    _rect.top   +=  yOffset;
+    long rx = long( floor( _rect.left           / CollisionWorld::CELL_SIZE ) );
+    long ry = long( floor( _rect.top            / CollisionWorld::CELL_SIZE ) );
+    long dx = long( floor( _rect.left + xOffset / CollisionWorld::CELL_SIZE ) );
+    long dy = long( floor( _rect.top  + yOffset / CollisionWorld::CELL_SIZE ) );
+
+    Physical* obstacle = 0;
+
+    for ( long ty = std::min( ry, dy ) - 1; ty <= std::max( ry, dy ) + 1; ty++ ) {
+        for ( long tx = std::min( rx, dx ) - 1; tx <= std::max( rx, dx ) + 1; tx++ ) {
+            Cell& cell = _world._map[ CollisionWorld::CellCoord( tx, ty ) ];
+            for ( Cell::const_iterator i = cell.begin(); i != cell.end(); i++ ) {
+                if ( *i == this || !_world.ShouldBlock( this, *i ) )
+                    continue;
+                const Rect& iRect = ( *i )->GetCollisionRect();
+
+                if ( iRect.left >= _rect.right && iRect.left >= _rect.right + xOffset )
+                    break;
+
+                if ( yOffset > 0 && _rect.bottom < iRect.top &&
+                     _rect.bottom + yOffset >= iRect.top ) {
+                    double left  = _rect.left  + xOffset * ( iRect.top - _rect.bottom ) / yOffset;
+                    double right = _rect.right + xOffset * ( iRect.top - _rect.bottom ) / yOffset;
+                    if ( !( left >= iRect.right || right < iRect.left ) ) {
+                        xOffset *= ( iRect.top - _rect.bottom ) / yOffset;
+                        yOffset = iRect.top - _rect.bottom;
+                        obstacle = *i;
+                    }
+                }
+
+                if ( yOffset < 0 && _rect.top >= iRect.bottom &&
+                     _rect.top + yOffset < iRect.bottom ) {
+                    double left  = _rect.left  + xOffset * ( iRect.bottom - _rect.top ) / yOffset;
+                    double right = _rect.right + xOffset * ( iRect.bottom - _rect.top ) / yOffset;
+                    if ( !( left >= iRect.right || right < iRect.left ) ) {
+                        xOffset *= ( iRect.bottom - _rect.top ) / yOffset;
+                        yOffset = iRect.bottom - _rect.top;
+                        obstacle = *i;
+                    }
+                }
+
+                if ( xOffset > 0 && _rect.right < iRect.left &&
+                     _rect.right + xOffset >= iRect.left ) {
+                    double top    = _rect.top    + yOffset * ( iRect.left - _rect.right ) / xOffset;
+                    double bottom = _rect.bottom + yOffset * ( iRect.left - _rect.right ) / xOffset;
+                    if ( !( top >= iRect.bottom || bottom < iRect.top ) ) {
+                        yOffset *= ( iRect.left - _rect.right ) / xOffset;
+                        xOffset = iRect.left - _rect.right;
+                        obstacle = *i;
+                    }
+                }
+
+                if ( xOffset < 0 && _rect.left >= iRect.right &&
+                     _rect.left + xOffset < iRect.right ) {
+                    double top    = _rect.top    + yOffset * ( iRect.right - _rect.left ) / xOffset;
+                    double bottom = _rect.bottom + yOffset * ( iRect.right - _rect.left ) / xOffset;
+                    if ( !( top >= iRect.bottom || bottom < iRect.top ) ) {
+                        yOffset *= ( iRect.right - _rect.left ) / xOffset;
+                        xOffset = iRect.right - _rect.left;
+                        obstacle = *i;
+                    }
+                }
+            }
+        }
+    }
+
+    _rect.left   += xOffset;
+    _rect.top    += yOffset;
+    _rect.right  += xOffset;
     _rect.bottom += yOffset;
+    if ( obstacle ) {
+        if ( _world._instantCollisions ) {
+            OnCollision( *obstacle );
+            obstacle->OnCollision( *this );
+        }
+        else
+            _world._collisions.push_back( std::pair< Physical*, Physical* >( this, obstacle ) );
+    }
     UpdateWorld();
 }
 
