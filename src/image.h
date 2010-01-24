@@ -5,6 +5,8 @@ class Image;
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 #include "renderer.h"
 
 using namespace std;
@@ -12,7 +14,7 @@ using namespace std;
 class Image
 {
 private:
-    //SDL_Surface *surface;
+    SDL_Surface *_surface;
     GLuint textureId;
     GLenum textureFormat;
     int width;
@@ -28,7 +30,7 @@ private:
     /**
     * Gets the image surface
     */
-    //SDL_Surface* getSurface() { return surface; }
+    SDL_Surface* getSurface() { return _surface; }
     GLuint getTextureId() { return textureId; }
     void setTextureFormat(GLenum textureFormat) { this->textureFormat = textureFormat; }
     GLenum getTextureFormat() { return textureFormat; }

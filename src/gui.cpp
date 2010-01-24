@@ -1,12 +1,27 @@
 #include "gui.h"
 
-Gui::Gui(SDL_Surface *screen)
+Gui::Gui(SDL_Surface *screen, bool softwareRendering)
 {
     try {
-        _imageLoader = new gcn::OpenGLSDLImageLoader();
-        gcn::Image::setImageLoader(_imageLoader);
+        if(softwareRendering)
+        {
+            _imageLoader = new gcn::SDLImageLoader();
+            gcn::Image::setImageLoader(_imageLoader); //DON'T remove this from before the graphics initialization. I warned you.
 
-        _graphics = new gcn::OpenGLGraphics(screen->w, screen->h);
+            _graphics = new gcn::SDLGraphics();
+            ((gcn::SDLGraphics*)_graphics)->setTarget(screen);
+        }
+        else
+        {
+            _imageLoader = new gcn::OpenGLSDLImageLoader();
+            gcn::Image::setImageLoader(_imageLoader);
+
+            _graphics = new gcn::OpenGLGraphics(screen->w, screen->h);
+
+        }
+
+
+
         //cout << "screen: " << screen->w << ", " << screen->h << endl;
 
         _input = new gcn::SDLInput();

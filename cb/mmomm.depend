@@ -1,15 +1,17 @@
 # depslib dependency file v1.0
-1264206145 source:/home/oipo/Programming/mmomm/src/image.cpp
+1264360935 source:/home/oipo/Programming/mmomm/src/image.cpp
 	"image.h"
 	<sstream>
 	<iostream>
 
-1264206225 /home/oipo/Programming/mmomm/src/image.h
+1264359596 /home/oipo/Programming/mmomm/src/image.h
 	<SDL/SDL.h>
 	<SDL/SDL_image.h>
+	<GL/gl.h>
+	<GL/glu.h>
 	"renderer.h"
 
-1264294958 /home/oipo/Programming/mmomm/src/renderer.h
+1264359616 /home/oipo/Programming/mmomm/src/renderer.h
 	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>
@@ -18,33 +20,64 @@
 	<iostream>
 	"image.h"
 
-1264294997 source:/home/oipo/Programming/mmomm/src/main.cpp
+1264360406 source:/home/oipo/Programming/mmomm/src/main.cpp
 	"renderer.h"
+	"openglrenderer.h"
+	"softwarerenderer.h"
 	"image.h"
 	"gui.h"
 
-1264295917 source:/home/oipo/Programming/mmomm/src/renderer.cpp
+1264360196 source:/home/oipo/Programming/mmomm/src/renderer.cpp
 	"renderer.h"
-	<GL/glext.h>
-	<boost/scoped_array.hpp>
 
-1264287925 source:/home/oipo/Programming/mmomm/src/collision.cpp
+1264361269 source:/home/oipo/Programming/mmomm/src/collision.cpp
 	"collision.h"
 	<cmath>
 	<algorithm>
 
-1264287925 /home/oipo/Programming/mmomm/src/collision.h
+1264361269 /home/oipo/Programming/mmomm/src/collision.h
 	<set>
 	<boost/unordered_map.hpp>
+	<vector>
 
-1264295332 source:/home/oipo/Programming/mmomm/src/gui.cpp
+1264360736 source:/home/oipo/Programming/mmomm/src/gui.cpp
 	"gui.h"
 
-1264294449 /home/oipo/Programming/mmomm/src/gui.h
+1264360278 /home/oipo/Programming/mmomm/src/gui.h
 	<iostream>
 	<guichan.hpp>
 	<guichan/sdl.hpp>
 	<guichan/opengl.hpp>
 	<guichan/opengl/openglsdlimageloader.hpp>
 	"SDL.h"
+
+1264360182 /home/oipo/Programming/mmomm/src/openglrenderer.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<string>
+	<sstream>
+	<iostream>
+	"renderer.h"
+	"image.h"
+
+1264356923 source:/home/oipo/Programming/mmomm/src/openglrenderer.cpp
+	"openglrenderer.h"
+	<GL/glext.h>
+	<boost/scoped_array.hpp>
+
+1264361244 source:/home/oipo/Programming/mmomm/src/softwarerenderer.cpp
+	"softwarerenderer.h"
+	<math.h>
+
+1264360167 /home/oipo/Programming/mmomm/src/softwarerenderer.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<SDL/SDL.h>
+	<string>
+	<sstream>
+	<iostream>
+	"image.h"
+	"renderer.h"
 

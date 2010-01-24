@@ -5,6 +5,7 @@
 		<Option title="mmomm" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="Renderers/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/mmomm" prefix_auto="1" extension_auto="1" />
@@ -47,8 +48,24 @@
 		<Unit filename="../src/image.cpp" />
 		<Unit filename="../src/image.h" />
 		<Unit filename="../src/main.cpp" />
-		<Unit filename="../src/renderer.cpp" />
-		<Unit filename="../src/renderer.h" />
+		<Unit filename="../src/openglrenderer.cpp">
+			<Option virtualFolder="Renderers/" />
+		</Unit>
+		<Unit filename="../src/openglrenderer.h">
+			<Option virtualFolder="Renderers/" />
+		</Unit>
+		<Unit filename="../src/renderer.cpp">
+			<Option virtualFolder="Renderers/" />
+		</Unit>
+		<Unit filename="../src/renderer.h">
+			<Option virtualFolder="Renderers/" />
+		</Unit>
+		<Unit filename="../src/softwarerenderer.cpp">
+			<Option virtualFolder="Renderers/" />
+		</Unit>
+		<Unit filename="../src/softwarerenderer.h">
+			<Option virtualFolder="Renderers/" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />
