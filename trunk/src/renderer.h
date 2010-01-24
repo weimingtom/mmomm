@@ -1,5 +1,5 @@
-#ifndef OPENGL_RENDERER_H_
-#define OPENGL_RENDERER_H_
+#ifndef RENDERER_H_
+#define RENDERER_H_
 
 #ifdef WIN32
 #include <windows.h>
@@ -18,26 +18,22 @@ using namespace std;
 
 class Renderer
 {
-private:
-    SDL_Surface *_screen;
-    int          _screenHeight;
-    int          _screenWidth;
-    GLint        _internalFormatRGB;
-    GLint        _internalFormatRGBA;
-
-    bool initScreen();
+protected:
+    int _screenHeight;
+    int _screenWidth;
 
 public:
     Renderer(int screenWidth, int screenHeight);
 
-    void drawImage(Image *img, float x, float y);
-    void drawClippedImage(Image *img, float x, float y, SDL_Rect clip);
-    void beginDraw();
-    void swapBuffers();
-    void generateTexture(GLuint *textureId, GLenum *textureFormat, SDL_Surface *surface);
-    void deleteTexture(GLuint *textureId);
+    virtual void drawImage(Image *img, float x, float y);
+    virtual void drawClippedImage(Image *img, float x, float y, SDL_Rect clip);
+    virtual void beginDraw();
+    virtual void swapBuffers();
+    virtual void generateTexture(GLuint *textureId, GLenum *textureFormat, SDL_Surface *surface);
+    virtual void deleteTexture(GLuint *textureId);
 
-    SDL_Surface* getScreen();
+    virtual SDL_Surface* getScreen();
+    virtual bool isSoftwareRenderer();
 };
 
 extern Renderer *renderer;

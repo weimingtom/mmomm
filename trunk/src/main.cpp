@@ -1,4 +1,6 @@
 #include "renderer.h"
+#include "openglrenderer.h"
+#include "softwarerenderer.h"
 #include "image.h"
 #include "gui.h"
 
@@ -12,9 +14,10 @@ int main(int argc, char **argv)
     SDL_EnableUNICODE(1);
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-    renderer   = new Renderer(800, 600);
+    //renderer   = new OpenGLRenderer(800, 600);
+    renderer   = new SoftwareRenderer(800, 600);
     Image *img = new Image("testimage.png");
-    Gui *gui   = new Gui(renderer->getScreen());
+    Gui *gui   = new Gui(renderer->getScreen(), renderer->isSoftwareRenderer());
     bool loop  = true;
 
     while(loop)

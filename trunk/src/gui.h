@@ -14,7 +14,7 @@ class Gui
 {
 private:
     gcn::SDLInput       *_input;
-    gcn::OpenGLGraphics *_graphics;
+    gcn::Graphics *_graphics;
     gcn::ImageLoader    *_imageLoader;
 
     gcn::Gui        *_gui;
@@ -24,7 +24,7 @@ private:
     gcn::Window     *_window;
 
 public:
-    Gui(SDL_Surface *screen);
+    Gui(SDL_Surface *screen, bool softwareRendering);
     ~Gui();
 
     void pushInput(SDL_Event event);
