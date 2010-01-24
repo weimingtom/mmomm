@@ -38,7 +38,7 @@
 			<Add option="-lGLU" />
 			<Add option="-lguichan" />
 			<Add option="-lguichan_sdl" />
-			<Add option="-guichan_opengl" />
+			<Add option="-lguichan_opengl" />
 		</Linker>
 		<Unit filename="../src/collision.cpp" />
 		<Unit filename="../src/collision.h" />

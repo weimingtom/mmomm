@@ -28,13 +28,16 @@
 	<GL/glext.h>
 	<boost/scoped_array.hpp>
 
-1264246822 source:/home/oipo/Programming/mmomm/src/collision.cpp
+1264287925 source:/home/oipo/Programming/mmomm/src/collision.cpp
 	"collision.h"
+	<cmath>
+	<algorithm>
 
-1264246822 /home/oipo/Programming/mmomm/src/collision.h
-	<vector>
+1264287925 /home/oipo/Programming/mmomm/src/collision.h
+	<set>
+	<boost/unordered_map.hpp>
 
-1264279124 source:/home/oipo/Programming/mmomm/src/gui.cpp
+1264279274 source:/home/oipo/Programming/mmomm/src/gui.cpp
 	"gui.h"
 
 1264275197 /home/oipo/Programming/mmomm/src/gui.h
