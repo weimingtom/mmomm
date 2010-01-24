@@ -11,7 +11,7 @@ Gui::Gui(SDL_Surface *screen)
 
         _input = new gcn::SDLInput();
 
-        _font = new gcn::ImageFont("fixedfont.bmp", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+        _font = new gcn::ImageFont("imagefont.png", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?+-/():;%&`'*#=[]\"<>{}^~|_@$\\");
         gcn::Widget::setGlobalFont(_font);
 
         _gui = new gcn::Gui();
@@ -20,18 +20,18 @@ Gui::Gui(SDL_Surface *screen)
 
         _top = new gcn::Container();
         _top->setDimension(gcn::Rectangle(0, 0, screen->w, screen->h));
+        _top->setBaseColor(gcn::Color(0,0,0,0));
         _top->setOpaque(false);
         _gui->setTop(_top);
-
-        cout << "Opaque: " << _top->isOpaque() << endl;
 
         _label = new gcn::Label("Hello World");
         _label->setPosition(280, 220);
         _top->add(_label);
 
         _window = new gcn::Window("Test window!");
-        _window->setPosition(0, 0);
+        _window->setPosition(50, 50);
         _window->setSize(100, 100);
+        _window->setVisible(true);
         //_window->setOpaque(false);
         _top->add(_window);
     } catch (gcn::Exception e) {
@@ -61,10 +61,18 @@ void Gui::pushInput(SDL_Event event)
 
 void Gui::logic()
 {
-    _gui->logic();
+    try {
+        _gui->logic();
+    } catch (gcn::Exception e) {
+        cout << e.getMessage() << endl;
+    }
 }
 
 void Gui::draw()
 {
-    _gui->draw();
+    try {
+        _gui->draw();
+    } catch (gcn::Exception e) {
+        cout << e.getMessage() << endl;
+    }
 }

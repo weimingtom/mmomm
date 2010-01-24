@@ -32,6 +32,7 @@ public:
 
     void drawImage(Image *img, float x, float y);
     void drawClippedImage(Image *img, float x, float y, SDL_Rect clip);
+    void beginDraw();
     void swapBuffers();
     void generateTexture(GLuint *textureId, GLenum *textureFormat, SDL_Surface *surface);
     void deleteTexture(GLuint *textureId);

@@ -13,9 +13,9 @@ using namespace std;
 class Gui
 {
 private:
-    gcn::SDLInput              *_input;
-    gcn::OpenGLGraphics        *_graphics;
-    gcn::OpenGLSDLImageLoader  *_imageLoader;
+    gcn::SDLInput       *_input;
+    gcn::OpenGLGraphics *_graphics;
+    gcn::ImageLoader    *_imageLoader;
 
     gcn::Gui        *_gui;
     gcn::Container  *_top;
