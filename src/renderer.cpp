@@ -70,7 +70,7 @@ bool Renderer::initScreen()
         extension = GL_TEXTURE_2D;
     }
 
-    if(strstr(extensions, "ARB_texture_compression")) {
+    if(!strstr(extensions, "ARB_texture_compression")) {
         //logger->echoDebug("Using compression");
         cout << "Using compression" << endl;
         _internalFormatRGB = GL_COMPRESSED_RGB_ARB;
@@ -85,7 +85,7 @@ bool Renderer::initScreen()
     glEnable(extension);
 
     //which colour the _screen gets cleared to(black in this case)
-    glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     //set the opengl window to our window size
     glViewport(0, 0, _screenWidth, _screenHeight);
@@ -166,6 +166,8 @@ void Renderer::drawImage(Image *img, float x, float y)
         //logger->echoError("A gl error happened in drawImage: " + translateGLError(error));
         cout << "A GL error happened in drawImage: " << translateGLError(error) << endl;
 
+    glDisable(extension);
+
     return;
 }
 
@@ -224,13 +226,20 @@ void Renderer::drawClippedImage(Image *img, float x, float y, SDL_Rect clip)
     if((error = glGetError()) != GL_NO_ERROR)
         cout << "A GL error happened in drawClippedImage: " << translateGLError(error) << endl;
 
+    glDisable(extension);
+
     return;
+}
+
+void Renderer::beginDraw()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Renderer::swapBuffers()
 {
+    glFlush();
     SDL_GL_SwapBuffers();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 //convert to _screen format?
@@ -262,6 +271,7 @@ void Renderer::generateTexture(GLuint *textureId, GLenum *textureFormat, SDL_Sur
     }
 
     glGenTextures(1, textureId);
+    glEnable(extension);
     glBindTexture(extension, *textureId);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -305,6 +315,8 @@ void Renderer::generateTexture(GLuint *textureId, GLenum *textureFormat, SDL_Sur
     if((error = glGetError()) != GL_NO_ERROR)
         //logger->echoError("A gl error happened in gl(Sub)TexImage2D: " + translateGLError(error));
         cout << "A GL error happened in generateTexture: " << translateGLError(error) << endl;
+
+    glDisable(extension);
 }
 
 void Renderer::deleteTexture(GLuint *textureId)

@@ -7,10 +7,19 @@
 	<File name="../src/collision.h" open="1" top="0" tabpos="3">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/renderer.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="7381" topLine="255" />
+	<File name="../src/gui.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="1547" topLine="25" />
+	</File>
+	<File name="../src/gui.h" open="1" top="0" tabpos="6">
+		<Cursor position="503" topLine="0" />
+	</File>
+	<File name="../src/main.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="805" topLine="0" />
+	</File>
+	<File name="../src/renderer.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="1245" topLine="90" />
 	</File>
 	<File name="../src/renderer.h" open="1" top="0" tabpos="4">
-		<Cursor position="295" topLine="0" />
+		<Cursor position="809" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

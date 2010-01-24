@@ -9,7 +9,7 @@
 	<SDL/SDL_image.h>
 	"renderer.h"
 
-1264272794 /home/oipo/Programming/mmomm/src/renderer.h
+1264294958 /home/oipo/Programming/mmomm/src/renderer.h
 	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>
@@ -18,12 +18,12 @@
 	<iostream>
 	"image.h"
 
-1264279176 source:/home/oipo/Programming/mmomm/src/main.cpp
+1264294997 source:/home/oipo/Programming/mmomm/src/main.cpp
 	"renderer.h"
 	"image.h"
 	"gui.h"
 
-1264279220 source:/home/oipo/Programming/mmomm/src/renderer.cpp
+1264295917 source:/home/oipo/Programming/mmomm/src/renderer.cpp
 	"renderer.h"
 	<GL/glext.h>
 	<boost/scoped_array.hpp>
@@ -37,10 +37,10 @@
 	<set>
 	<boost/unordered_map.hpp>
 
-1264279274 source:/home/oipo/Programming/mmomm/src/gui.cpp
+1264295332 source:/home/oipo/Programming/mmomm/src/gui.cpp
 	"gui.h"
 
-1264275197 /home/oipo/Programming/mmomm/src/gui.h
+1264294449 /home/oipo/Programming/mmomm/src/gui.h
 	<iostream>
 	<guichan.hpp>
 	<guichan/sdl.hpp>
