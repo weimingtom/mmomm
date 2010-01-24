@@ -41,7 +41,6 @@ void CollisionWorld::TriggerCollisions()
         i->first->OnCollision( *( i->second ) );
         i->second->OnCollision( *( i->first ) );
     }
-    _collisions.clear();
 
     for ( long y = _topBound; y < _bottomBound; y++ ) {
         for ( long x = _leftBound; x < _rightBound; x++ ) {
@@ -77,6 +76,7 @@ void CollisionWorld::TriggerCollisions()
             }
         }
     }
+    _collisions.clear();
 }
 
 CollisionWorld::CellCoord::CellCoord( long x, long y )
@@ -105,6 +105,13 @@ std::size_t CollisionWorld::Hash::operator()( const CellCoord& a ) const
 
 bool CollisionWorld::CheckCollision( Physical* a, Physical* b, const Rect& aRect )
 {
+    for ( std::size_t i = 0; i < _collisions.size(); i++ ) {
+        if ( ( _collisions[ i ].first  == a && _collisions[ i ].second == b ) || 
+             ( _collisions[ i ].second == b && _collisions[ i ].first  == a ) ) {
+            return true;
+        }
+    }
+
     const Rect& bRect = b->GetCollisionRect();
 
     if ( bRect.left >= aRect.right )
@@ -202,8 +209,6 @@ void Physical::Move( double xOffset, double yOffset )
     long dx = long( floor( _rect.left + xOffset / CollisionWorld::CELL_SIZE ) );
     long dy = long( floor( _rect.top  + yOffset / CollisionWorld::CELL_SIZE ) );
 
-    Physical* obstacle = 0;
-
     for ( long ty = std::min( ry, dy ) - 1; ty <= std::max( ry, dy ) + 1; ty++ ) {
         for ( long tx = std::min( rx, dx ) - 1; tx <= std::max( rx, dx ) + 1; tx++ ) {
             Cell& cell = _world._map[ CellCoord( tx, ty ) ];
@@ -222,7 +227,8 @@ void Physical::Move( double xOffset, double yOffset )
                     if ( !( left >= iRect.right || right < iRect.left ) ) {
                         xOffset *= ( iRect.top - _rect.bottom ) / yOffset;
                         yOffset = iRect.top - _rect.bottom;
-                        obstacle = *i;
+                        _collisions.clear();
+                        _collisions.push_back( *i );
                     }
                 }
 
@@ -233,7 +239,8 @@ void Physical::Move( double xOffset, double yOffset )
                     if ( !( left >= iRect.right || right < iRect.left ) ) {
                         xOffset *= ( iRect.bottom - _rect.top ) / yOffset;
                         yOffset = iRect.bottom - _rect.top;
-                        obstacle = *i;
+                        _collisions.clear();
+                        _collisions.push_back( *i );
                     }
                 }
 
@@ -244,7 +251,8 @@ void Physical::Move( double xOffset, double yOffset )
                     if ( !( top >= iRect.bottom || bottom < iRect.top ) ) {
                         yOffset *= ( iRect.left - _rect.right ) / xOffset;
                         xOffset = iRect.left - _rect.right;
-                        obstacle = *i;
+                        _collisions.clear();
+                        _collisions.push_back( *i );
                     }
                 }
 
@@ -255,7 +263,63 @@ void Physical::Move( double xOffset, double yOffset )
                     if ( !( top >= iRect.bottom || bottom < iRect.top ) ) {
                         yOffset *= ( iRect.right - _rect.left ) / xOffset;
                         xOffset = iRect.right - _rect.left;
-                        obstacle = *i;
+                        _collisions.clear();
+                        _collisions.push_back( *i );
+                    }
+                }
+            }
+        }
+    }
+
+
+    for ( long ty = std::min( ry, dy ) - 1; ty <= std::max( ry, dy ) + 1; ty++ ) {
+        for ( long tx = std::min( rx, dx ) - 1; tx <= std::max( rx, dx ) + 1; tx++ ) {
+            Cell& cell = _world._map[ CellCoord( tx, ty ) ];
+            for ( Cell::const_iterator i = cell.begin(); i != cell.end(); i++ ) {
+                if ( *i == this || _world.ShouldBlock( this, *i ) )
+                    continue;
+                const Rect& iRect = ( *i )->GetCollisionRect();
+
+                if ( iRect.left >= _rect.right && iRect.left >= _rect.right + xOffset )
+                    break;
+
+                if ( yOffset > 0 && _rect.bottom < iRect.top &&
+                     _rect.bottom + yOffset >= iRect.top ) {
+                    double left  = _rect.left  + xOffset * ( iRect.top - _rect.bottom ) / yOffset;
+                    double right = _rect.right + xOffset * ( iRect.top - _rect.bottom ) / yOffset;
+                    if ( !( left >= iRect.right || right < iRect.left ) ) {
+                        _collisions.push_back( *i );
+                        continue;
+                    }
+                }
+
+                if ( yOffset < 0 && _rect.top >= iRect.bottom &&
+                     _rect.top + yOffset < iRect.bottom ) {
+                    double left  = _rect.left  + xOffset * ( iRect.bottom - _rect.top ) / yOffset;
+                    double right = _rect.right + xOffset * ( iRect.bottom - _rect.top ) / yOffset;
+                    if ( !( left >= iRect.right || right < iRect.left ) ) {
+                        _collisions.push_back( *i );
+                        continue;
+                    }
+                }
+
+                if ( xOffset > 0 && _rect.right < iRect.left &&
+                     _rect.right + xOffset >= iRect.left ) {
+                    double top    = _rect.top    + yOffset * ( iRect.left - _rect.right ) / xOffset;
+                    double bottom = _rect.bottom + yOffset * ( iRect.left - _rect.right ) / xOffset;
+                    if ( !( top >= iRect.bottom || bottom < iRect.top ) ) {
+                        _collisions.push_back( *i );
+                        continue;
+                    }
+                }
+
+                if ( xOffset < 0 && _rect.left >= iRect.right &&
+                     _rect.left + xOffset < iRect.right ) {
+                    double top    = _rect.top    + yOffset * ( iRect.right - _rect.left ) / xOffset;
+                    double bottom = _rect.bottom + yOffset * ( iRect.right - _rect.left ) / xOffset;
+                    if ( !( top >= iRect.bottom || bottom < iRect.top ) ) {
+                        _collisions.push_back( *i );
+                        continue;
                     }
                 }
             }
@@ -266,13 +330,9 @@ void Physical::Move( double xOffset, double yOffset )
     _rect.top    += yOffset;
     _rect.right  += xOffset;
     _rect.bottom += yOffset;
-    if ( obstacle ) {
-        if ( _world._instantCollisions ) {
-            OnCollision( *obstacle );
-            obstacle->OnCollision( *this );
-        }
-        else
-            _world._collisions.push_back( std::pair< Physical*, Physical* >( this, obstacle ) );
+    if ( !_world._instantCollisions ) {
+        for ( std::size_t i = 0; i < _collisions.size(); i++ )
+            _world._collisions.push_back( std::pair< Physical*, Physical* >( this, _collisions[ i ] ) );
     }
     UpdateWorld();
 }
@@ -290,16 +350,33 @@ void Physical::UpdateWorld()
         long y = long( floor( _rect.top  / CollisionWorld::CELL_SIZE ) );
         const Rect& r = GetCollisionRect();
 
+        for ( std::size_t i = 0; i < _collisions.size(); i++ ) {
+            OnCollision( *_collisions[ i ] );
+            _collisions[ i ]->OnCollision( *this );
+        }
+
         for ( long ty = y - 1; ty <= y + 1; ty++ ) {
             for ( long tx = x - 1; tx <= x + 1; tx++ ) {
                 Cell& cell = _world._map[ CellCoord( tx, ty ) ];
                 for ( Cell::const_iterator i = cell.begin(); i != cell.end(); i++ ) {
                     if ( *i == this )
                         continue;
+
+                    bool alreadyCollided = false;
+                    for ( std::size_t j = 0; j < _collisions.size(); j++ ) {
+                        if ( _collisions[ j ] == *i ) {
+                            alreadyCollided = true;
+                            break;
+                        }
+                    }
+                    if ( alreadyCollided )
+                        continue;
+
                     if ( !_world.CheckCollision( this, *i, r ) )
                         break;
                 }
             }
         }
     }
+    _collisions.clear();
 }
