@@ -195,7 +195,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\openglrenderer.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\renderer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\softwarerenderer.cpp"
 				>
 			</File>
 		</Filter>
@@ -217,7 +225,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\openglrenderer.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\renderer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\softwarerenderer.h"
 				>
 			</File>
 		</Filter>
