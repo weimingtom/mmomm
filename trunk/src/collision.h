@@ -146,10 +146,12 @@ private:
                        double x3, double y3, double x4, double y4,
                        double& xOut, double& yOut );
 
-    typedef CollisionWorld::Cell      Cell;
-    typedef CollisionWorld::CellCoord CellCoord;
+    typedef CollisionWorld::Cell       Cell;
+    typedef CollisionWorld::CellCoord  CellCoord;
+    typedef std::vector< Physical* >   CollisionList;
 
     CollisionWorld& _world;
+    CollisionList   _collisions;
     Cell*           _cell;
     Rect            _rect;
 
