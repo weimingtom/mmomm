@@ -21,8 +21,8 @@ void SoftwareRenderer::drawImage(Image *img, float x, float y)
 
     //the x and the y coordinates are only accepted as an SDL_Rect
     SDL_Rect offset;
-    offset.x = x;
-    offset.y = y;
+    offset.x = Sint16(x);
+    offset.y = Sint16(y);
 
     //put image on screen
     if(SDL_BlitSurface(img->getSurface(), NULL, _screen, &offset) == -1)
@@ -37,8 +37,8 @@ void SoftwareRenderer::drawClippedImage(Image *img, float x, float y, SDL_Rect c
 
     //the x and the y coordinates are only accepted as an SDL_Rect
     SDL_Rect offset;
-    offset.x = x;
-    offset.y = y;
+    offset.x = Sint16(x);
+    offset.y = Sint16(y);
 
     //put image on screen
     if(SDL_BlitSurface(img->getSurface(), &clip, _screen, &offset) == -1)
