@@ -37,6 +37,8 @@ bool CollisionWorld::GetInstantCollisions() const
 
 void CollisionWorld::TriggerCollisions()
 {
+    // Trigger collisions for objects which have blocked each other since the
+    // last time this function was called (or instant collisions turned off)
     for ( CollisionList::iterator i = _collisions.begin(); i != _collisions.end(); i++ ) {
         i->first->OnCollision( *( i->second ) );
         i->second->OnCollision( *( i->first ) );
@@ -44,6 +46,9 @@ void CollisionWorld::TriggerCollisions()
 
     for ( long y = _topBound; y < _bottomBound; y++ ) {
         for ( long x = _leftBound; x < _rightBound; x++ ) {
+            // An object's cell is defined by its top-left coordinate, so can
+            // check all possible collisions by checking objects in its cell
+            // and the cells one space down or to the right (or both)
             Cell& a = _map[ CellCoord( x,     y     ) ];
             Cell& b = _map[ CellCoord( x + 1, y     ) ];
             Cell& c = _map[ CellCoord( x,     y + 1 ) ];
@@ -52,22 +57,23 @@ void CollisionWorld::TriggerCollisions()
             for ( Cell::const_iterator i = a.begin(); i != a.end(); i++ ) {
                 const Rect& r = ( *i )->GetCollisionRect();
                 
+                // Check objects in cells, starting at the current object (so as
+                // not to check the same pair twice)
                 Cell::const_iterator j = i;
                 for ( j++; j != a.end(); j++ ) {
                     if ( !CheckCollision( *i, *j, r ) )
                         break;
                 }
 
+                // Check objects in other cells
                 for ( j = b.begin(); j != b.end(); j++ ) {
                     if ( !CheckCollision( *i, *j, r ) )
                         break;
                 }
-
                 for ( j = c.begin(); j != c.end(); j++ ) {
                     if ( !CheckCollision( *i, *j, r ) )
                         break;
                 }
-
                 for ( j = d.begin(); j != d.end(); j++ ) {
                     if ( !CheckCollision( *i, *j, r ) )
                         break;
@@ -92,7 +98,11 @@ bool CollisionWorld::CellCoord::operator==( const CellCoord& a ) const
 
 bool CollisionWorld::Sort::operator()( const Physical* a, const Physical* b ) const
 {
-    return a->GetCollisionRect().left < b->GetCollisionRect().left;
+    if ( a->GetCollisionRect().left != a->GetCollisionRect().left )
+        return a->GetCollisionRect().left < b->GetCollisionRect().left;
+    // Objects in a set cannot be equal, so need some backup ordering in case
+    // x-positions are equal
+    return a < b;
 }
 
 std::size_t CollisionWorld::Hash::operator()( const CellCoord& a ) const
@@ -105,6 +115,9 @@ std::size_t CollisionWorld::Hash::operator()( const CellCoord& a ) const
 
 bool CollisionWorld::CheckCollision( Physical* a, Physical* b, const Rect& aRect )
 {
+    // If these two objects have already collided this "frame", don't collide them
+    // again. This can happen if an object enters another as it moves, and comes to
+    // rest still overlapping it
     for ( std::size_t i = 0; i < _collisions.size(); i++ ) {
         if ( ( _collisions[ i ].first  == a && _collisions[ i ].second == b ) || 
              ( _collisions[ i ].second == b && _collisions[ i ].first  == a ) ) {
@@ -114,9 +127,11 @@ bool CollisionWorld::CheckCollision( Physical* a, Physical* b, const Rect& aRect
 
     const Rect& bRect = b->GetCollisionRect();
 
+    // Return false to indicate don't need to check further objects
     if ( bRect.left >= aRect.right )
         return false;
 
+    // Collide if rectangles overlap
     if ( !( aRect.left >= bRect.right || aRect.top >= bRect.bottom ||
             bRect.left >= aRect.right || bRect.top >= aRect.bottom ) ) {
         a->OnCollision( *b );
@@ -130,6 +145,7 @@ CollisionWorld::Cell& CollisionWorld::GetCellAtPoint( double x, double y )
     long lx = long( floor( x / CELL_SIZE ) );
     long ly = long( floor( y / CELL_SIZE ) );
 
+    // Update bounding area for all cells which potentially contain objects
     _leftBound   = std::min( _leftBound,   lx );
     _topBound    = std::min( _topBound,    ly );
     _rightBound  = std::max( _rightBound,  lx + 1 );
@@ -143,6 +159,7 @@ Physical::Physical( CollisionWorld& world, const Rect& rect )
 , _cell( 0 )
 , _rect( rect )
 {
+    // Object can't be bigger than a cell - increase CELL_SIZE if you need to
     assert( rect.right  - rect.left < CollisionWorld::CELL_SIZE );
     assert( rect.bottom - rect.top  < CollisionWorld::CELL_SIZE );
 
@@ -156,6 +173,7 @@ Physical::Physical( CollisionWorld& world, double width, double height )
 , _cell( 0 )
 , _rect( 0, 0, width, height )
 {
+    // Object can't be bigger than a cell - increase CELL_SIZE if you need to
     assert( width  < CollisionWorld::CELL_SIZE );
     assert( height < CollisionWorld::CELL_SIZE );
 
@@ -176,6 +194,7 @@ const Rect& Physical::GetCollisionRect() const
 
 void Physical::SetCollisionRect( const Rect& rect )
 {
+    // Object can't be bigger than a cell - increase CELL_SIZE if you need to
     assert( rect.right  - rect.left < CollisionWorld::CELL_SIZE );
     assert( rect.bottom - rect.top  < CollisionWorld::CELL_SIZE );
 
@@ -192,6 +211,7 @@ void Physical::SetPosition( double x, double y )
 
 void Physical::SetSize( double width, double height )
 {
+    // Object can't be bigger than a cell - increase CELL_SIZE if you need to
     assert( width  < CollisionWorld::CELL_SIZE );
     assert( height < CollisionWorld::CELL_SIZE );
 
@@ -204,6 +224,7 @@ void Physical::SetSize( double width, double height )
 
 void Physical::Move( double xOffset, double yOffset )
 {
+    // Potential coordinates to check for obstacles
     long rx = long( floor( _rect.left           / CollisionWorld::CELL_SIZE ) );
     long ry = long( floor( _rect.top            / CollisionWorld::CELL_SIZE ) );
     long dx = long( floor( _rect.left + xOffset / CollisionWorld::CELL_SIZE ) );
@@ -213,6 +234,8 @@ void Physical::Move( double xOffset, double yOffset )
         for ( long tx = std::min( rx, dx ) - 1; tx <= std::max( rx, dx ) + 1; tx++ ) {
             Cell& cell = _world._map[ CellCoord( tx, ty ) ];
             for ( Cell::const_iterator i = cell.begin(); i != cell.end(); i++ ) {
+                // Sweep to find obstacles. Only go as far as the closest obstacle allows.
+                // The closest obstacle is added to list of collisions
                 if ( *i == this || !_world.ShouldBlock( this, *i ) )
                     continue;
                 const Rect& iRect = ( *i )->GetCollisionRect();
@@ -276,6 +299,9 @@ void Physical::Move( double xOffset, double yOffset )
         for ( long tx = std::min( rx, dx ) - 1; tx <= std::max( rx, dx ) + 1; tx++ ) {
             Cell& cell = _world._map[ CellCoord( tx, ty ) ];
             for ( Cell::const_iterator i = cell.begin(); i != cell.end(); i++ ) {
+                // Now sweep again to find objects on the restricted path that don't block
+                // (only such objects exist, since path limited to closest obstacle).
+                // Add to list of collisions
                 if ( *i == this || _world.ShouldBlock( this, *i ) )
                     continue;
                 const Rect& iRect = ( *i )->GetCollisionRect();
@@ -330,6 +356,8 @@ void Physical::Move( double xOffset, double yOffset )
     _rect.top    += yOffset;
     _rect.right  += xOffset;
     _rect.bottom += yOffset;
+    // If instant collisions are turned off, need to store collisions in the
+    // CollisionWorld for the next call to TriggerCollisions
     if ( !_world._instantCollisions ) {
         for ( std::size_t i = 0; i < _collisions.size(); i++ )
             _world._collisions.push_back( std::pair< Physical*, Physical* >( this, _collisions[ i ] ) );
@@ -339,17 +367,21 @@ void Physical::Move( double xOffset, double yOffset )
 
 void Physical::UpdateWorld()
 {
+    // Change current cell
     Cell* t = &_world.GetCellAtPoint( _rect.left, _rect.top );
     if ( t != _cell ) {
         _cell->erase( this );
         t->insert( this );
         _cell = t;
     }
+    // If instanct collisions is turned on, immediately collide with everything
+    // overlapping
     if ( _world._instantCollisions ) {
         long x = long( floor( _rect.left / CollisionWorld::CELL_SIZE ) );
         long y = long( floor( _rect.top  / CollisionWorld::CELL_SIZE ) );
         const Rect& r = GetCollisionRect();
 
+        // Collide with objects that were in the path of the last Move
         for ( std::size_t i = 0; i < _collisions.size(); i++ ) {
             OnCollision( *_collisions[ i ] );
             _collisions[ i ]->OnCollision( *this );
@@ -362,6 +394,8 @@ void Physical::UpdateWorld()
                     if ( *i == this )
                         continue;
 
+                    // Don't collide twice with objects that were in the path of the
+                    // last Move and are still overlapping
                     bool alreadyCollided = false;
                     for ( std::size_t j = 0; j < _collisions.size(); j++ ) {
                         if ( _collisions[ j ] == *i ) {
