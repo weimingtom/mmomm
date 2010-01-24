@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\code\mmomm\vc\dependencies\SDL-1.2.14\include&quot;;C:\code\mmomm\vc\dependencies\OpenGL\include"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include\SDL&quot;;&quot;$(SolutionDir)\dependencies\guichan-0.8.2\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include&quot;;&quot;$(SolutionDir)\dependencies\OpenGL\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -118,7 +118,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;C:\code\mmomm\vc\dependencies\SDL-1.2.14\include&quot;;C:\code\mmomm\vc\dependencies\OpenGL\include"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include\SDL&quot;;&quot;$(SolutionDir)\dependencies\guichan-0.8.2\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include&quot;;&quot;$(SolutionDir)\dependencies\OpenGL\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
