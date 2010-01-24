@@ -4,6 +4,9 @@
 #include "image.h"
 #include "gui.h"
 
+gcn::Label *label;
+gcn::Window *window;
+
 int main(int argc, char **argv)
 {
     if ( SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO) < 0 ) {
@@ -18,6 +21,15 @@ int main(int argc, char **argv)
     renderer   = new SoftwareRenderer(800, 600);
     Image *img = new Image("testimage.png");
     Gui *gui   = new Gui(renderer->getScreen(), renderer->isSoftwareRenderer());
+    label = new gcn::Label("Hello World");
+    label->setPosition(280, 220);
+    gui->addWidget(label);
+    window = new gcn::Window("Test window OF DOOM!");
+    window->setPosition(50, 50);
+    window->setSize(200, 200);
+    window->setVisible(true);
+    gui->addWidget(window);
+
     bool loop  = true;
 
     while(loop)
@@ -43,9 +55,14 @@ int main(int argc, char **argv)
         renderer->swapBuffers();
     }
 
+    gui->removeWidget(label);
+    gui->removeWidget(window);
+
     delete gui;
     delete img;
     delete renderer;
+    delete label;
+    delete window;
 
     return 0;
 }

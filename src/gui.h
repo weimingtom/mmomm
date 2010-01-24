@@ -2,6 +2,7 @@
 #define GUI_H_
 
 #include <iostream>
+#include <vector>
 #include <guichan.hpp>
 #include <guichan/sdl.hpp>
 #include <guichan/opengl.hpp>
@@ -20,14 +21,14 @@ private:
     gcn::Gui        *_gui;
     gcn::Container  *_top;
     gcn::ImageFont  *_font;
-    gcn::Label      *_label;
-    gcn::Window     *_window;
 
 public:
     Gui(SDL_Surface *screen, bool softwareRendering);
     ~Gui();
 
     void pushInput(SDL_Event event);
+    void addWidget(gcn::Widget *widget);
+    void removeWidget(gcn::Widget *widget);
     void logic();
     void draw();
 };
