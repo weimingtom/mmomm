@@ -103,25 +103,6 @@ std::size_t CollisionWorld::Hash::operator()( const CellCoord& a ) const
     return seed;
 }
 
-void CollisionWorld::TriggerCollisions( Physical* context )
-{
-    long x = long( floor( context->GetCollisionRect().left / CELL_SIZE ) );
-    long y = long( floor( context->GetCollisionRect().top  / CELL_SIZE ) );
-    const Rect& r = context->GetCollisionRect();
-
-    for ( long ty = y - 1; ty <= y + 1; ty++ ) {
-        for ( long tx = x - 1; tx <= x + 1; tx++ ) {
-            Cell& cell = _map[ CellCoord( tx, ty ) ];
-            for ( Cell::const_iterator i = cell.begin(); i != cell.end(); i++ ) {
-                if ( *i == context )
-                    continue;
-                if ( !CheckCollision( context, *i, r ) )
-                    break;
-            }
-        }
-    }
-}
-
 bool CollisionWorld::CheckCollision( Physical* a, Physical* b, const Rect& aRect )
 {
     const Rect& bRect = b->GetCollisionRect();
@@ -160,8 +141,7 @@ Physical::Physical( CollisionWorld& world, const Rect& rect )
 
     _cell = &_world.GetCellAtPoint( _rect.left, _rect.top );
     _cell->insert( this );
-    if ( _world._instantCollisions )
-        _world.TriggerCollisions( this );
+    UpdateWorld();
 }
 
 Physical::Physical( CollisionWorld& world, double width, double height )
@@ -174,8 +154,7 @@ Physical::Physical( CollisionWorld& world, double width, double height )
 
     _cell = &_world.GetCellAtPoint( _rect.left, _rect.top );
     _cell->insert( this );
-    if ( _world._instantCollisions )
-        _world.TriggerCollisions( this );
+    UpdateWorld();
 }
 
 Physical::~Physical()
@@ -227,7 +206,7 @@ void Physical::Move( double xOffset, double yOffset )
 
     for ( long ty = std::min( ry, dy ) - 1; ty <= std::max( ry, dy ) + 1; ty++ ) {
         for ( long tx = std::min( rx, dx ) - 1; tx <= std::max( rx, dx ) + 1; tx++ ) {
-            Cell& cell = _world._map[ CollisionWorld::CellCoord( tx, ty ) ];
+            Cell& cell = _world._map[ CellCoord( tx, ty ) ];
             for ( Cell::const_iterator i = cell.begin(); i != cell.end(); i++ ) {
                 if ( *i == this || !_world.ShouldBlock( this, *i ) )
                     continue;
@@ -306,6 +285,21 @@ void Physical::UpdateWorld()
         t->insert( this );
         _cell = t;
     }
-    if ( _world._instantCollisions )
-        _world.TriggerCollisions( this );
+    if ( _world._instantCollisions ) {
+        long x = long( floor( _rect.left / CollisionWorld::CELL_SIZE ) );
+        long y = long( floor( _rect.top  / CollisionWorld::CELL_SIZE ) );
+        const Rect& r = GetCollisionRect();
+
+        for ( long ty = y - 1; ty <= y + 1; ty++ ) {
+            for ( long tx = x - 1; tx <= x + 1; tx++ ) {
+                Cell& cell = _world._map[ CellCoord( tx, ty ) ];
+                for ( Cell::const_iterator i = cell.begin(); i != cell.end(); i++ ) {
+                    if ( *i == this )
+                        continue;
+                    if ( !_world.CheckCollision( this, *i, r ) )
+                        break;
+                }
+            }
+        }
+    }
 }

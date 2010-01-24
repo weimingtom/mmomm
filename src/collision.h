@@ -45,8 +45,7 @@ public:
     void TriggerCollisions();
 
     // Must be implemented to determine whether two given objects should block each
-    // others' movement. Odd behaviour may result if this relation is either not
-    // symmetric or not transitive.
+    // others' movement. Odd behaviour could result if this relation is not symmetric.
     virtual bool ShouldBlock( Physical* a, Physical* b ) const = 0;
 
 private:
@@ -80,10 +79,7 @@ private:
     typedef boost::unordered_map< CellCoord, Cell, Hash >             Map;
     typedef std::vector         < std::pair< Physical*, Physical* > > CollisionList;
 
-    void TriggerCollisions( Physical* context );
-
     bool CheckCollision( Physical* a, Physical* b, const Rect& aRect );
-
     Cell& GetCellAtPoint( double x, double y );
 
     friend class Physical;
@@ -150,7 +146,8 @@ private:
                        double x3, double y3, double x4, double y4,
                        double& xOut, double& yOut );
 
-    typedef CollisionWorld::Cell Cell;
+    typedef CollisionWorld::Cell      Cell;
+    typedef CollisionWorld::CellCoord CellCoord;
 
     CollisionWorld& _world;
     Cell*           _cell;
