@@ -211,6 +211,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\networkCommon.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\networkPacket.cpp"
 				>
 			</File>
@@ -261,6 +265,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\networkCommon.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\networkPacket.h"
 				>
 			</File>
@@ -270,6 +278,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\openglrenderer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\packetTypes.h"
 				>
 			</File>
 			<File

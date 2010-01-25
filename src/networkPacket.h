@@ -4,9 +4,13 @@
 #include <RakNet/BitStream.h>
 #include <RakNet/RakNetTypes.h>
 #include <RakNet/RakPeerInterface.h>
-#include <boost/scoped_ptr.hpp>
+#include <string>
 
 using RakNet::BitStream;
+class User;
+
+// Extra serialization functions
+void serial(BitStream& bs, bool write, std::string& data);
 
 // Parameters for a network packet.
 // See similarly-named NetworkPacket functions.
@@ -38,7 +42,7 @@ public:
 	virtual ~NetworkPacket() { }
 	
 	// Copies the given raw packet into this structure.
-	void read(Packet *packet);
+	void read(const Packet *packet, User *user = 0);
 	
 	// Copies this structure into the given (empty) bitstream.
 	void write(BitStream& bs) const;
@@ -68,7 +72,8 @@ public:
 	RakNetTime timestamp() const { assert(useTimestamp()); return _timestamp; }
 	
 	// The system address of the sender (only available upon receipt).
-	const SystemAddress& address() const { return _address; }
+	// Server only!
+	User& sender() const { assert(_sender); return *_sender; }
 	
 	// Specify the parameters to use for sending this packet.
 	virtual NetworkParams params() const = 0;
@@ -80,6 +85,7 @@ public:
 	
 	// Respond to this packet being received.
 	// Implementation is different between client and server.
+	// HACK: Use macro to avoid errors for not defining one or the other.
 #ifdef MMOMM_CLIENT 
 	virtual void respondClient() const = 0;
 #else
@@ -88,7 +94,7 @@ public:
 
 private:
 	RakNetTime _timestamp;
-	SystemAddress _address;
+	User *_sender;
 };
 
 #endif

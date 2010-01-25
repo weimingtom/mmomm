@@ -1,10 +1,10 @@
 #ifndef NATIVE_PACKETS_H_
 #define NATIVE_PACKETS_H_
 
-// Packets sent by RakNet itself
-// Do not register these packets; automatically generated
+// Packets linked with the running of the system.
 
 #include "networkPacket.h"
+#include "packetTypes.h"
 #include <RakNet/MessageIdentifiers.h>
 #include <string>
 
@@ -14,7 +14,7 @@ public:
 
 	NetworkParams params() const
 	{
-		return NetworkParams(ID_CONNECTION_REQUEST_ACCEPTED);
+		return NetworkParams(ID_ACCOUNT_SUCCESS);
 	}
 	
 	// Respond to successful connection on client.
@@ -28,11 +28,12 @@ public:
 class DisconnectionPacket: public NetworkPacket {
 public:
 	
+	DisconnectionPacket(): _reason() { }
 	DisconnectionPacket(const std::string& reason): _reason(reason) { }
 	
 	NetworkParams params() const
 	{
-		return NetworkParams(ID_DISCONNECTION_NOTIFICATION);
+		return NetworkParams(ID_ACCOUNT_FAILURE);
 	}
 
 	// Respond to being disconnected from the server, or the connection failing.
