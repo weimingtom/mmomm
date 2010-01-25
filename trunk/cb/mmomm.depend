@@ -1,36 +1,40 @@
 # depslib dependency file v1.0
-1264360935 source:/home/oipo/Programming/mmomm/src/image.cpp
+1264380958 source:/home/oipo/Programming/mmomm/src/image.cpp
 	"image.h"
 	<sstream>
 	<iostream>
 
-1264359596 /home/oipo/Programming/mmomm/src/image.h
+1264380596 /home/oipo/Programming/mmomm/src/image.h
+	<windows.h>
 	<SDL/SDL.h>
 	<SDL/SDL_image.h>
 	<GL/gl.h>
 	<GL/glu.h>
 	"renderer.h"
 
-1264359616 /home/oipo/Programming/mmomm/src/renderer.h
+1264384832 /home/oipo/Programming/mmomm/src/renderer.h
 	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>
 	<string>
 	<sstream>
 	<iostream>
+	<assert.h>
 	"image.h"
 
-1264361481 source:/home/oipo/Programming/mmomm/src/main.cpp
+1264385959 source:/home/oipo/Programming/mmomm/src/main.cpp
 	"renderer.h"
 	"openglrenderer.h"
 	"softwarerenderer.h"
 	"image.h"
 	"gui.h"
+	"configurationmenu.h"
+	<vector>
 
-1264360196 source:/home/oipo/Programming/mmomm/src/renderer.cpp
+1264384865 source:/home/oipo/Programming/mmomm/src/renderer.cpp
 	"renderer.h"
 
-1264361269 source:/home/oipo/Programming/mmomm/src/collision.cpp
+1264369915 source:/home/oipo/Programming/mmomm/src/collision.cpp
 	"collision.h"
 	<cmath>
 	<algorithm>
@@ -40,18 +44,19 @@
 	<boost/unordered_map.hpp>
 	<vector>
 
-1264360736 source:/home/oipo/Programming/mmomm/src/gui.cpp
+1264386198 source:/home/oipo/Programming/mmomm/src/gui.cpp
 	"gui.h"
 
-1264360278 /home/oipo/Programming/mmomm/src/gui.h
+1264386025 /home/oipo/Programming/mmomm/src/gui.h
 	<iostream>
+	<assert.h>
 	<guichan.hpp>
 	<guichan/sdl.hpp>
 	<guichan/opengl.hpp>
 	<guichan/opengl/openglsdlimageloader.hpp>
 	"SDL.h"
 
-1264360182 /home/oipo/Programming/mmomm/src/openglrenderer.h
+1264384556 /home/oipo/Programming/mmomm/src/openglrenderer.h
 	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>
@@ -61,16 +66,16 @@
 	"renderer.h"
 	"image.h"
 
-1264356923 source:/home/oipo/Programming/mmomm/src/openglrenderer.cpp
+1264386236 source:/home/oipo/Programming/mmomm/src/openglrenderer.cpp
 	"openglrenderer.h"
 	<GL/glext.h>
 	<boost/scoped_array.hpp>
 
-1264361244 source:/home/oipo/Programming/mmomm/src/softwarerenderer.cpp
+1264384685 source:/home/oipo/Programming/mmomm/src/softwarerenderer.cpp
 	"softwarerenderer.h"
 	<math.h>
 
-1264360167 /home/oipo/Programming/mmomm/src/softwarerenderer.h
+1264384595 /home/oipo/Programming/mmomm/src/softwarerenderer.h
 	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>
@@ -80,4 +85,16 @@
 	<iostream>
 	"image.h"
 	"renderer.h"
+
+1264385718 /home/oipo/Programming/mmomm/src/configurationmenu.h
+	<iostream>
+	<guichan.hpp>
+	"gui.h"
+	"renderer.h"
+
+1264385460 source:/home/oipo/Programming/mmomm/src/configurationmenu.cpp
+	"configurationmenu.h"
+	<string>
+	<sstream>
+	<vector>
 

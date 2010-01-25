@@ -4,7 +4,7 @@
 
 Image::~Image()
 {
-    renderer->deleteTexture(&textureId);
+    Renderer::current().deleteTexture(&_textureId);
     if(_surface != NULL)
         SDL_FreeSurface(_surface);
 }
@@ -31,11 +31,11 @@ Image::Image(std::string filename)
         exit(1);
     }
 
-    width  = surface->w;
-    height = surface->h;
+    _width  = surface->w;
+    _height = surface->h;
 
-    renderer->generateTexture(&textureId, &textureFormat, surface);
-    if(renderer->isSoftwareRenderer())
+    Renderer::current().generateTexture(&_textureId, &_textureFormat, surface);
+    if(Renderer::current().isSoftwareRenderer())
         _surface = surface;
     else
         SDL_FreeSurface(surface);

@@ -1,11 +1,26 @@
 #include "softwarerenderer.h"
 #include <math.h>
 
-SoftwareRenderer::SoftwareRenderer(int screenWidth, int screenHeight) : Renderer(screenWidth, screenHeight)
+SoftwareRenderer::SoftwareRenderer(int screenWidth, int screenHeight, bool fullscreen) : Renderer(screenWidth, screenHeight, fullscreen)
 {
-    this->_screenWidth = screenWidth;
-    this->_screenHeight = screenHeight;
+    unsigned flags;
 
+    if(fullscreen)
+        flags = SDL_FULLSCREEN | SDL_SWSURFACE;
+    else
+        flags = SDL_SWSURFACE;
+
+    _screen = SDL_SetVideoMode(_screenWidth, _screenHeight, 0, flags);
+    if(_screen == NULL) {
+        //logger->echoError("SDL_SetVideoMode failed: " + std::string(SDL_GetError()));
+        cout << "SDL_SetVideoMode failed: " << std::string(SDL_GetError()) << endl;
+        //TODO throw exception
+    }
+}
+
+SoftwareRenderer::~SoftwareRenderer()
+{
+    SDL_FreeSurface(_screen);
     _screen = SDL_SetVideoMode(_screenWidth, _screenHeight, 0, SDL_SWSURFACE);
     if(_screen == NULL) {
         //logger->echoError("SDL_SetVideoMode failed: " + std::string(SDL_GetError()));

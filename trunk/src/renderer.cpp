@@ -1,11 +1,16 @@
 #include "renderer.h"
 
-Renderer *renderer = NULL;
+Renderer *Renderer::_current = 0;
 
-Renderer::Renderer(int screenWidth, int screenHeight)
+Renderer::Renderer(int screenWidth, int screenHeight, bool fullscreen)
 {
     this->_screenWidth = screenWidth;
     this->_screenHeight = screenHeight;
+    this->_fullscreen = fullscreen;
+}
+
+Renderer::~Renderer()
+{
 }
 
 void Renderer::drawImage(Image *img, float x, float y)

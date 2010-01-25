@@ -5,7 +5,7 @@
 		<Option title="mmomm" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Renderers/;" />
+		<Option virtualFolders="Core/;Core/;Core/Renderers/;Guis/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/mmomm" prefix_auto="1" extension_auto="1" />
@@ -41,30 +41,50 @@
 			<Add option="-lguichan_sdl" />
 			<Add option="-lguichan_opengl" />
 		</Linker>
-		<Unit filename="../src/collision.cpp" />
-		<Unit filename="../src/collision.h" />
-		<Unit filename="../src/gui.cpp" />
-		<Unit filename="../src/gui.h" />
-		<Unit filename="../src/image.cpp" />
-		<Unit filename="../src/image.h" />
-		<Unit filename="../src/main.cpp" />
+		<Unit filename="../src/collision.cpp">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/collision.h">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/configurationmenu.cpp">
+			<Option virtualFolder="Guis/" />
+		</Unit>
+		<Unit filename="../src/configurationmenu.h">
+			<Option virtualFolder="Guis/" />
+		</Unit>
+		<Unit filename="../src/gui.cpp">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/gui.h">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/image.cpp">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/image.h">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/main.cpp">
+			<Option virtualFolder="Core/" />
+		</Unit>
 		<Unit filename="../src/openglrenderer.cpp">
-			<Option virtualFolder="Renderers/" />
+			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
 		<Unit filename="../src/openglrenderer.h">
-			<Option virtualFolder="Renderers/" />
+			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
 		<Unit filename="../src/renderer.cpp">
-			<Option virtualFolder="Renderers/" />
+			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
 		<Unit filename="../src/renderer.h">
-			<Option virtualFolder="Renderers/" />
+			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
 		<Unit filename="../src/softwarerenderer.cpp">
-			<Option virtualFolder="Renderers/" />
+			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
 		<Unit filename="../src/softwarerenderer.h">
-			<Option virtualFolder="Renderers/" />
+			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
 		<Extensions>
 			<code_completion />
