@@ -21,12 +21,6 @@ SoftwareRenderer::SoftwareRenderer(int screenWidth, int screenHeight, bool fulls
 SoftwareRenderer::~SoftwareRenderer()
 {
     SDL_FreeSurface(_screen);
-    _screen = SDL_SetVideoMode(_screenWidth, _screenHeight, 0, SDL_SWSURFACE);
-    if(_screen == NULL) {
-        //logger->echoError("SDL_SetVideoMode failed: " + std::string(SDL_GetError()));
-        cout << "SDL_SetVideoMode failed: " << std::string(SDL_GetError()) << endl;
-        //TODO throw exception
-    }
 }
 
 void SoftwareRenderer::drawImage(Image *img, float x, float y)

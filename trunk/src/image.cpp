@@ -38,5 +38,8 @@ Image::Image(std::string filename)
     if(Renderer::current().isSoftwareRenderer())
         _surface = surface;
     else
+    {
         SDL_FreeSurface(surface);
+        _surface = NULL;
+    }
 }

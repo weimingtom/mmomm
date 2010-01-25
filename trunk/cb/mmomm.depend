@@ -12,7 +12,7 @@
 	<GL/glu.h>
 	"renderer.h"
 
-1264384832 /home/oipo/Programming/mmomm/src/renderer.h
+1264436173 /home/oipo/Programming/mmomm/src/renderer.h
 	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>
@@ -22,13 +22,14 @@
 	<assert.h>
 	"image.h"
 
-1264385959 source:/home/oipo/Programming/mmomm/src/main.cpp
+1264436516 source:/home/oipo/Programming/mmomm/src/main.cpp
 	"renderer.h"
 	"openglrenderer.h"
 	"softwarerenderer.h"
 	"image.h"
 	"gui.h"
 	"configurationmenu.h"
+	"networkClient.h"
 	<vector>
 
 1264384865 source:/home/oipo/Programming/mmomm/src/renderer.cpp
@@ -44,10 +45,10 @@
 	<boost/unordered_map.hpp>
 	<vector>
 
-1264386198 source:/home/oipo/Programming/mmomm/src/gui.cpp
+1264436458 source:/home/oipo/Programming/mmomm/src/gui.cpp
 	"gui.h"
 
-1264386025 /home/oipo/Programming/mmomm/src/gui.h
+1264436446 /home/oipo/Programming/mmomm/src/gui.h
 	<iostream>
 	<assert.h>
 	<guichan.hpp>
@@ -71,7 +72,7 @@
 	<GL/glext.h>
 	<boost/scoped_array.hpp>
 
-1264384685 source:/home/oipo/Programming/mmomm/src/softwarerenderer.cpp
+1264435737 source:/home/oipo/Programming/mmomm/src/softwarerenderer.cpp
 	"softwarerenderer.h"
 	<math.h>
 
@@ -86,15 +87,84 @@
 	"image.h"
 	"renderer.h"
 
-1264385718 /home/oipo/Programming/mmomm/src/configurationmenu.h
+1264436280 /home/oipo/Programming/mmomm/src/configurationmenu.h
 	<iostream>
+	<string>
+	<sstream>
+	<vector>
 	<guichan.hpp>
 	"gui.h"
 	"renderer.h"
 
-1264385460 source:/home/oipo/Programming/mmomm/src/configurationmenu.cpp
+1264436203 source:/home/oipo/Programming/mmomm/src/configurationmenu.cpp
 	"configurationmenu.h"
+
+1264424313 source:/home/oipo/Programming/mmomm/src/clientNativePackets.cpp
+	"nativePackets.h"
+
+1264424313 /home/oipo/Programming/mmomm/src/nativePackets.h
+	"networkPacket.h"
+	<RakNet/MessageIdentifiers.h>
 	<string>
-	<sstream>
-	<vector>
+
+1264424313 /home/oipo/Programming/mmomm/src/networkPacket.h
+	<RakNet/BitStream.h>
+	<RakNet/RakNetTypes.h>
+	<RakNet/RakPeerInterface.h>
+	<boost/scoped_ptr.hpp>
+
+1264424313 source:/home/oipo/Programming/mmomm/src/initializePacketManager.cpp
+	"initializePacketManager.h"
+	"networkPacketManager.h"
+
+1264424313 /home/oipo/Programming/mmomm/src/initializePacketManager.h
+
+1264424313 /home/oipo/Programming/mmomm/src/networkPacketManager.h
+	"networkPacket.h"
+	<map>
+	<boost/function.hpp>
+	<boost/tuple/tuple.hpp>
+
+1264424313 /home/oipo/Programming/mmomm/src/networkClient.h
+	<boost/noncopyable.hpp>
+	<RakNet/RakNetTypes.h>
+	"networkPacket.h"
+	"networkPacketManager.h"
+
+1264424313 source:/home/oipo/Programming/mmomm/src/networkClient.cpp
+	"networkClient.h"
+	"networkPacket.h"
+	"initializePacketManager.h"
+	"nativePackets.h"
+	<RakNet/RakNetTypes.h>
+	<RakNet/RakNetworkFactory.h>
+	<RakNet/RakPeerInterface.h>
+	<RakNet/MessageIdentifiers.h>
+	<iostream>
+
+1264376873 source:/home/oipo/Programming/mmomm/src/networkPacket.cpp
+	"networkPacket.h"
+	<RakNet/MessageIdentifiers.h>
+	<RakNet/GetTime.h>
+
+1264424313 source:/home/oipo/Programming/mmomm/src/networkServer.cpp
+	"networkServer.h"
+	"networkPacket.h"
+	"initializePacketManager.h"
+	"nativePackets.h"
+	<RakNet/RakNetTypes.h>
+	<RakNet/RakNetworkFactory.h>
+	<RakNet/RakPeerInterface.h>
+	<RakNet/MessageIdentifiers.h>
+	<iostream>
+
+1264424313 /home/oipo/Programming/mmomm/src/networkServer.h
+	<boost/noncopyable.hpp>
+	<boost/foreach.hpp>
+	<RakNet/RakNetTypes.h>
+	"networkPacket.h"
+	"networkPacketManager.h"
+
+1264424313 source:/home/oipo/Programming/mmomm/src/serverNativePackets.cpp
+	"nativePackets.h"
 

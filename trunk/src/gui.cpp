@@ -22,8 +22,6 @@ Gui::Gui(SDL_Surface *screen, bool softwareRendering)
 
         }
 
-        //cout << "screen: " << screen->w << ", " << screen->h << endl;
-
         _input = new gcn::SDLInput();
 
         _font = new gcn::ImageFont("imagefont.png", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?+-/():;%&`'*#=[]\"<>{}^~|_@$\\");
@@ -84,26 +82,6 @@ void Gui::draw()
 {
     try {
         _gui->draw();
-    } catch (gcn::Exception e) {
-        cout << e.getMessage() << endl;
-    }
-}
-
-void Gui::setTarget(SDL_Surface *screen, bool softwareRendering)
-{
-    try {
-        delete _graphics;
-        if(softwareRendering)
-        {
-            _graphics = new gcn::SDLGraphics();
-            ((gcn::SDLGraphics*)_graphics)->setTarget(screen);
-        }
-        else
-        {
-            cout << "screen: " << screen << endl;
-            _graphics = new gcn::OpenGLGraphics(screen->w, screen->h);
-        }
-        _gui->setGraphics(_graphics);
     } catch (gcn::Exception e) {
         cout << e.getMessage() << endl;
     }
