@@ -5,7 +5,7 @@
 		<Option title="mmomm" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Core/;Core/;Core/Renderers/;Guis/;" />
+		<Option virtualFolders="Core/;Core/;Core/Renderers/;Guis/;Net/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/mmomm" prefix_auto="1" extension_auto="1" />
@@ -40,7 +40,11 @@
 			<Add option="-lguichan" />
 			<Add option="-lguichan_sdl" />
 			<Add option="-lguichan_opengl" />
+			<Add option="-lRakNet" />
 		</Linker>
+		<Unit filename="../src/clientNativePackets.cpp">
+			<Option virtualFolder="Net/" />
+		</Unit>
 		<Unit filename="../src/collision.cpp">
 			<Option virtualFolder="Core/" />
 		</Unit>
@@ -65,8 +69,38 @@
 		<Unit filename="../src/image.h">
 			<Option virtualFolder="Core/" />
 		</Unit>
+		<Unit filename="../src/initializePacketManager.cpp">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/initializePacketManager.h">
+			<Option virtualFolder="Net/" />
+		</Unit>
 		<Unit filename="../src/main.cpp">
 			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/nativePackets.h">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/networkClient.cpp">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/networkClient.h">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/networkPacket.cpp">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/networkPacket.h">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/networkPacketManager.h">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/networkServer.cpp">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/networkServer.h">
+			<Option virtualFolder="Net/" />
 		</Unit>
 		<Unit filename="../src/openglrenderer.cpp">
 			<Option virtualFolder="Core/Renderers/" />
@@ -79,6 +113,9 @@
 		</Unit>
 		<Unit filename="../src/renderer.h">
 			<Option virtualFolder="Core/Renderers/" />
+		</Unit>
+		<Unit filename="../src/serverNativePackets.cpp">
+			<Option virtualFolder="Net/" />
 		</Unit>
 		<Unit filename="../src/softwarerenderer.cpp">
 			<Option virtualFolder="Core/Renderers/" />

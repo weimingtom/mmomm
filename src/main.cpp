@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 
     configMenu          = new ConfigurationMenu();
     configMenu->setCurrent(configMenu);
-	
+
 	NetworkClient::setCurrent(new NetworkClient());
 
     bool loop  = true;
@@ -47,13 +47,29 @@ int main(int argc, char **argv)
                     loop = false;
                     break;
                 case SDL_USEREVENT:
-                    cout << "User event" << endl;
                     if(event.user.code == 0) {
                         int *ints = (int*)event.user.data1;
+
+                        delete configMenu;
+                        delete gui;
+                        delete img;
                         delete renderer;
-                        renderer = new SoftwareRenderer(800, 600, (ints[0] != 0));
+
+                        if((bool)ints[3])
+                            renderer    = new SoftwareRenderer(ints[0], ints[1], (bool)ints[2]);
+                        else
+                            renderer    = new OpenGLRenderer  (ints[0], ints[1], (bool)ints[2]);
                         renderer->setCurrent(renderer);
-                        gui->setTarget(renderer->getScreen(), renderer->isSoftwareRenderer());
+
+                        img             = new Image("testimage.png");
+
+                        //gui->setTarget(renderer->getScreen(), renderer->isSoftwareRenderer());
+                        gui             = new Gui(renderer->getScreen(), renderer->isSoftwareRenderer());
+                        gui->setCurrent(gui);
+
+                        configMenu      = new ConfigurationMenu();
+                        configMenu->setCurrent(configMenu);
+
                         delete ints;
                     }
                     break;
@@ -61,16 +77,16 @@ int main(int argc, char **argv)
 
             gui->pushInput(event);
         }
-		
+
 		// Check packets
 		while (NetworkClient::current().isActive()) {
 			// Check packets until we run out
 			std::auto_ptr<NetworkPacket> packet = NetworkClient::current().receive();
 			if (!packet.get()) break;
 
-			packet->respondClient();
+			//packet->respondClient();
 		}
-		
+
         gui->logic();
 
         renderer->beginDraw();

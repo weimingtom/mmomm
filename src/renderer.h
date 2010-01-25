@@ -48,6 +48,8 @@ public:
 
     virtual SDL_Surface* getScreen();
     virtual bool isSoftwareRenderer();
+
+    bool isFullscreen() { return _fullscreen; };
 };
 
 #endif

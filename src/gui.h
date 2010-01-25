@@ -36,7 +36,6 @@ public:
     void removeWidget(gcn::Widget *widget);
     void logic();
     void draw();
-    void setTarget(SDL_Surface *screen, bool softwareRendering);
 };
 
 #endif
