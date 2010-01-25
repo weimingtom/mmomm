@@ -8,7 +8,7 @@
 #include <RakNet/MessageIdentifiers.h>
 #include <iostream>
 
-NetworkServer *NetworkServer::_current;
+NetworkServer *NetworkServer::_current = 0;
 
 NetworkServer::NetworkServer()
 :	_peer()
@@ -51,17 +51,18 @@ void NetworkServer::disconnect()
     
 }
 
-void NetworkServer::rawSend(const NetworkPacket& packet,
-	SystemAddress destination,
-	bool broadcast)
+void NetworkServer::rawSend(const BitStream& bs,
+	const NetworkPacket& packet, SystemAddress destination)
 {
-	BitStream bs;
-	packet.write(bs);
+	assert(isConnected());
+
 	// HACK: reinterpret due to weird API changes; should be kosher
 	const char *data = reinterpret_cast<char *>(bs.GetData());
 	bool success = _peer->Send(data, bs.GetNumberOfBytesUsed(),
 		packet.priority(), packet.reliability(), packet.orderingChannel(),
-		destination, broadcast);
+		destination, false);
+	(void)success;
+	assert(success);
 }
 
 // RAII class that auto-cleans packets
@@ -98,20 +99,30 @@ std::auto_ptr<NetworkPacket> NetworkServer::receive()
 		else {
 			switch (kind) {
 			case ID_NEW_INCOMING_CONNECTION:
+				// TODO: Add client
 				packet.reset(new ConnectionPacket());
 				break;
 			case ID_DISCONNECTION_NOTIFICATION:
-				packet.reset(new DisconnectionPacket("The client closed the connection."));
-				break;
 			case ID_CONNECTION_LOST:
-				packet.reset(new DisconnectionPacket("The connection to the client was lost."));
+			{
+				// TODO: Remove client
+				std::string reason;
+				switch (kind) {
+				case ID_DISCONNECTION_NOTIFICATION:
+					reason = "The client closed the connection.";
+					break;
+				default:
+					reason = "The connection to the client was lost.";
+				}
+				packet.reset(new DisconnectionPacket(reason));
 				break;
+			}
 			case ID_MODIFIED_PACKET:
 				packet.reset(new TamperPacket());
 				break;
 			default:
 				std::cout << "System packet ignored: " << kind << std::endl;
-				break;
+				return packet;
 			}
 		}
 

@@ -1,6 +1,11 @@
 #ifndef NETWORK_CLIENT_H_
 #define NETWORK_CLIENT_H_
 
+#include <boost/noncopyable.hpp>
+#include <RakNet/RakNetTypes.h>
+#include "networkPacket.h"
+#include "networkPacketManager.h"
+
 class RakPeerInterface;
 
 // Main client network controller class.
@@ -28,22 +33,36 @@ public:
 	// True if we have connected with the host.
 	bool isConnected() const { return _connected; }
 	
+	// Send out a packet to the server.
+	// packet: the packet to send
+	void send(const NetworkPacket& packet);
+	
 	// Poll to see if we've received anything; call in a loop.
 	// precondition: isActive() must be true
-	// packet: where to store the packet data
-	// returns true if a packet was received
-	//         false if nothing's ready or if we disconnected
-	//         if we disconnected, isActive will return false and
-	//         disconnectReason will have the reason we disconnected
-	bool Receive(NetworkPacket& packet);
-    
+	// returns a packet if one was received
+	//         null if nothing's ready
+	// Ownership of the packet passes to the caller.
+	std::auto_ptr<NetworkPacket> receive();
+	
+	// The global server object.
+	static NetworkClient& current() { assert(_current); return *_current; }
+	static void setCurrent(NetworkClient *current) { _current = current; }
+
 private:
     
+	// The address of the server
+	SystemAddress _address;
+
+	// Factory which creates packets by packet ID.
+	NetworkPacketManager _manager;
+
     // RakNet interface.
     RakPeerInterface* _peer;
 	
 	// Are we connected with the host?
 	bool _connected;
+
+	static NetworkClient *_current;
 };
 
 #endif
