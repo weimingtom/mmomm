@@ -1,21 +1,46 @@
 #include "networkPacket.h"
 #include <RakNet/MessageIdentifiers.h>
 #include <RakNet/GetTime.h>
+#include <RakNet/StringCompressor.h>
+#include <string>
+
+// Initializes the string compressor.
+struct StringCompressorInitializer {
+	StringCompressorInitializer()
+	{
+		StringCompressor::AddReference();
+		// NOTE: Could add custom compression table.
+	}
+};
+
+StringCompressorInitializer stringCompressorInitializer;
+
+void serial(BitStream& bs, bool write, std::string& data)
+{
+	const int bufferSize = 256;
+	if (write) {
+		StringCompressor::Instance()->EncodeString(data.c_str(), bufferSize, &bs);
+	}
+	else {
+		char buffer[bufferSize+1];
+		StringCompressor::Instance()->DecodeString(buffer, bufferSize, &bs);
+		data = buffer;
+	}
+}
+
 
 NetworkPacket::NetworkPacket()
 :	_timestamp()
-,	_address(UNASSIGNED_SYSTEM_ADDRESS)
+,	_sender()
 {
 }
 
-void NetworkPacket::read(Packet* packet)
+void NetworkPacket::read(const Packet *packet, User *user)
 {
 	_timestamp = 0;
-	_address = UNASSIGNED_SYSTEM_ADDRESS;
+	_sender = user;
 	
 	if (packet) {
-		_address = packet->systemAddress;
-
 		BitStream stream(packet->data, packet->length, false);
 		unsigned char timestamped;
 		stream.Read(timestamped);

@@ -55,10 +55,10 @@ int main(int argc, char **argv)
                         delete img;
                         delete renderer;
 
-                        if((bool)ints[3])
-                            renderer    = new SoftwareRenderer(ints[0], ints[1], (bool)ints[2]);
+                        if(ints[3] != 0)
+                            renderer    = new SoftwareRenderer(ints[0], ints[1], (ints[2] != 0));
                         else
-                            renderer    = new OpenGLRenderer  (ints[0], ints[1], (bool)ints[2]);
+                            renderer    = new OpenGLRenderer  (ints[0], ints[1], (ints[2] != 0));
                         renderer->setCurrent(renderer);
 
                         img             = new Image("testimage.png");

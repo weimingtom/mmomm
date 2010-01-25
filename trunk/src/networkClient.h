@@ -15,25 +15,32 @@ public:
     ~NetworkClient() { disconnect(); }
     
     // Connect to the specified host.
+	// precondition: isActive() is false
 	// host: IP or domain name
 	// port: port the host is listening on
+	// username: the name of the user to sign in as
+	// password: the password corresponding to the username
+	// createAccount: if true, create a new account, else log in to an existing one
 	// returns true to indicate that the connection process will proceed
 	//         false if it cannot connect to the network
-	bool connect(const std::string& host, int port);
+	bool connect(const std::string& host, int port,
+		const std::string& username, const std::string& password, bool createAccount);
     
-    // If connected, disconnect from the server.
+    // If active, disconnect from the server.
     void disconnect();
-
-	// The reason we disconnected from the server.
-	std::string disconnectReason() const;
-    
+	
     // True if the connection is active, else false.
-    bool isActive() const { return (_peer != 0); }
+	// Starts being true when connect() returns true
+	// Stops being true when a DisconnectionPacket is received
+    bool isActive() const { return (_state != STATE_DISCONNECTED); }
 	
 	// True if we have connected with the host.
-	bool isConnected() const { return _connected; }
-	
+	// Starts being true when a ConnectionPacket is received
+	// Stops being true when a DisconnectionPacket is received
+	bool isConnected() const { return (_state == STATE_CONNECTED); }
+
 	// Send out a packet to the server.
+	// precondition: isConnected() is true
 	// packet: the packet to send
 	void send(const NetworkPacket& packet);
 	
@@ -42,25 +49,50 @@ public:
 	// returns a packet if one was received
 	//         null if nothing's ready
 	// Ownership of the packet passes to the caller.
-	std::auto_ptr<NetworkPacket> receive();
+	typedef std::auto_ptr<NetworkPacket> AutoPacket;
+	AutoPacket receive();
 	
+	// Gets the username logged in (or logging in) as
+	std::string username() const { assert(isActive()); return _username; }
+	
+	// The address of the host.
+	SystemAddress host() const { assert(isConnected()); return _address; }
+
 	// The global server object.
 	static NetworkClient& current() { assert(_current); return *_current; }
 	static void setCurrent(NetworkClient *current) { _current = current; }
 
 private:
+
+	// Helper function for receiving a single possibly-internal packet.
+	AutoPacket processPacket(const Packet& packet);
     
+	enum ConnectionState {
+		STATE_DISCONNECTED,
+		STATE_CONNECTING,
+		STATE_AUTHENTICATING,
+		STATE_CONNECTED
+	};
+	
 	// The address of the server
 	SystemAddress _address;
 
 	// Factory which creates packets by packet ID.
 	NetworkPacketManager _manager;
-
+	
     // RakNet interface.
     RakPeerInterface* _peer;
 	
+	// The login credentials.
+	std::string _username;
+	std::string _password;
+	bool _createAccount;
+
 	// Are we connected with the host?
-	bool _connected;
+	ConnectionState _state;
+
+	// Packet queueing for assumption of connection.
+	AutoPacket _queuedPacket;
 
 	static NetworkClient *_current;
 };
