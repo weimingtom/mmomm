@@ -4,7 +4,7 @@
 #include <boost/noncopyable.hpp>
 #include <RakNet/RakNetTypes.h>
 #include "networkPacket.h"
-#include "networkPacketFactory.h"
+#include "networkPacketManager.h"
 
 class RakPeerInterface;
 class NetworkPacket;
@@ -53,6 +53,10 @@ public:
 	// Ownership of the packet passes to the caller.
 	std::auto_ptr<NetworkPacket> receive();
 	
+	// The global server object.
+	static NetworkServer& current() { assert(_current); return *_current; }
+	static void setCurrent(NetworkServer *current) { _current = current; }
+
 private:
     
 	// Common implementation of the send functions.
@@ -61,10 +65,12 @@ private:
 		bool broadcast);
 	
     // RakNet interface.
-    RakPeerInterface* _peer;
+    RakPeerInterface *_peer;
 	
 	// Factory which creates packets by packet ID.
-	NetworkPacketFactory _factory;
+	NetworkPacketManager _manager;
+
+	static NetworkServer *_current;
 };
 
 #endif

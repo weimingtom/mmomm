@@ -1,14 +1,20 @@
 #include "networkServer.h"
 #include "networkPacket.h"
-
+#include "initializePacketManager.h"
+#include "nativePackets.h"
 #include <RakNet/RakNetTypes.h>
 #include <RakNet/RakNetworkFactory.h>
 #include <RakNet/RakPeerInterface.h>
 #include <RakNet/MessageIdentifiers.h>
+#include <iostream>
+
+NetworkServer *NetworkServer::_current;
 
 NetworkServer::NetworkServer()
 :	_peer()
+,	_manager()
 {
+	initializePacketManager(_manager);
 }
 
 bool NetworkServer::listen(int port, int maxConnections)
@@ -58,21 +64,59 @@ void NetworkServer::rawSend(const NetworkPacket& packet,
 		destination, broadcast);
 }
 
+// RAII class that auto-cleans packets
+class AutoDepacketer {
+public:
+	AutoDepacketer(RakPeerInterface *peer, Packet* packet):
+		_peer(peer), _packet(packet) { }
+	~AutoDepacketer() { _peer->DeallocatePacket(_packet); }
+
+private:
+    RakPeerInterface *_peer;
+	Packet* _packet;
+};
+
 std::auto_ptr<NetworkPacket> NetworkServer::receive()
 {
 	assert(isConnected());
 
 	Packet* raw = _peer->Receive();
+	AutoDepacketer depacketer(_peer, raw);
 	if (raw) {
 		unsigned char kind = raw->data[0];
 		if (kind == ID_TIMESTAMP) {
 			kind = raw->data[1 + sizeof(RakNetTime)];
 		}
-		std::auto_ptr<NetworkPacket> packet(_factory.create(kind));
-		if (packet.get()) {
-			packet->read(raw);
+		std::auto_ptr<NetworkPacket> packet;
+		if (kind >= ID_USER_PACKET_ENUM) {
+			packet.reset(_manager.create(kind).release());
+			if (!packet.get()) {
+				std::cout << "Unknown user packet detected: " << kind << std::endl;
+				packet.reset(new TamperPacket());
+			}
 		}
-		_peer->DeallocatePacket(raw);
+		else {
+			switch (kind) {
+			case ID_NEW_INCOMING_CONNECTION:
+				packet.reset(new ConnectionPacket());
+				break;
+			case ID_DISCONNECTION_NOTIFICATION:
+				packet.reset(new DisconnectionPacket("The client closed the connection."));
+				break;
+			case ID_CONNECTION_LOST:
+				packet.reset(new DisconnectionPacket("The connection to the client was lost."));
+				break;
+			case ID_MODIFIED_PACKET:
+				packet.reset(new TamperPacket());
+				break;
+			default:
+				std::cout << "System packet ignored: " << kind << std::endl;
+				break;
+			}
+		}
+
+		assert(packet.get());
+		packet->read(raw);
 		return packet;
 	}
 	return std::auto_ptr<NetworkPacket>();

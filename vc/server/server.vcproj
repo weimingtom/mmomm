@@ -177,6 +177,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\src\initializePacketManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\networkPacket.cpp"
 				>
 			</File>
@@ -188,6 +192,10 @@
 				RelativePath="..\..\src\serverMain.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\..\src\serverNativePackets.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -195,11 +203,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\..\src\initializePacketManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\nativePackets.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\networkPacket.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\networkPacketFactory.h"
+				RelativePath="..\..\src\networkPacketManager.h"
 				>
 			</File>
 			<File
