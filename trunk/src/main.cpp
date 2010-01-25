@@ -4,6 +4,7 @@
 #include "image.h"
 #include "gui.h"
 #include "configurationmenu.h"
+#include "networkClient.h"
 
 #include <vector>
 
@@ -30,6 +31,8 @@ int main(int argc, char **argv)
 
     configMenu          = new ConfigurationMenu();
     configMenu->setCurrent(configMenu);
+	
+	NetworkClient::setCurrent(new NetworkClient());
 
     bool loop  = true;
 
@@ -48,7 +51,7 @@ int main(int argc, char **argv)
                     if(event.user.code == 0) {
                         int *ints = (int*)event.user.data1;
                         delete renderer;
-                        renderer = new SoftwareRenderer(800, 600, ints[0]);
+                        renderer = new SoftwareRenderer(800, 600, (ints[0] != 0));
                         renderer->setCurrent(renderer);
                         gui->setTarget(renderer->getScreen(), renderer->isSoftwareRenderer());
                         delete ints;
@@ -58,7 +61,16 @@ int main(int argc, char **argv)
 
             gui->pushInput(event);
         }
+		
+		// Check packets
+		while (NetworkClient::current().isActive()) {
+			// Check packets until we run out
+			std::auto_ptr<NetworkPacket> packet = NetworkClient::current().receive();
+			if (!packet.get()) break;
 
+			packet->respondClient();
+		}
+		
         gui->logic();
 
         renderer->beginDraw();
@@ -71,6 +83,7 @@ int main(int argc, char **argv)
     delete gui;
     delete img;
     delete renderer;
+	delete &NetworkClient::current();
 
     return 0;
 }

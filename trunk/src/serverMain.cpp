@@ -8,9 +8,13 @@ int main(int argc, char **argv)
 	NetworkServer::setCurrent(new NetworkServer());
 	
 	int port = NetworkServer::DEFAULT_PORT;
-	std::cout << "Listening on " << port << "..." << std::endl;
-	NetworkServer::current().listen(port);
+	if (!NetworkServer::current().listen(port)) {
+		std::cout << "Failed to access network." << std::endl;
+		return 1;
+	}
 	
+	std::cout << "Listening on " << port << "..." << std::endl;
+
 	// Keep looping until quit with control-c
 	for (;;) {
 		

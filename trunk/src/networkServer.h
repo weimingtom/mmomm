@@ -2,6 +2,7 @@
 #define NETWORK_SERVER_H_
 
 #include <boost/noncopyable.hpp>
+#include <boost/foreach.hpp>
 #include <RakNet/RakNetTypes.h>
 #include "networkPacket.h"
 #include "networkPacketManager.h"
@@ -37,14 +38,14 @@ public:
 	// packet: the packet to send
 	// destination: the address of the user to send to
 	void send(const NetworkPacket& packet,
-		SystemAddress destination) { rawSend(packet, destination, false); }
+		SystemAddress destination);
 	
-	// Send out a packet to all users.
+	// Send a packet to each of a sequence of desintations.
 	// packet: the packet to send
-	// exclude: an optional single user to exclude sending to.
-	void broadcast(const NetworkPacket& packet,
-		SystemAddress exclude=UNASSIGNED_SYSTEM_ADDRESS)
-		 { rawSend(packet, exclude, true); }
+	// begin/end: the iterators specifying who to send to
+	template<typename ForwardIterator>
+	void send(const NetworkPacket& packet,
+		ForwardIterator begin, ForwardIterator end);
 	
 	// Poll to see if we've received anything; call in a loop.
 	// precondition: isActive() must be true
@@ -58,12 +59,11 @@ public:
 	static void setCurrent(NetworkServer *current) { _current = current; }
 
 private:
+
+	// Send an encoded bitstream out.
+	void rawSend(const BitStream& bs, const NetworkPacket& packet,
+		SystemAddress address);
     
-	// Common implementation of the send functions.
-	void rawSend(const NetworkPacket& packet,
-		SystemAddress destination,
-		bool broadcast);
-	
     // RakNet interface.
     RakPeerInterface *_peer;
 	
@@ -72,5 +72,26 @@ private:
 
 	static NetworkServer *_current;
 };
+
+
+inline void NetworkServer::send(const NetworkPacket& packet,
+	SystemAddress destination)
+{
+	BitStream bs;
+	packet.write(bs);
+	rawSend(bs, packet, destination);
+}
+
+template<typename ForwardIterator>
+void NetworkServer::send(const NetworkPacket& packet,
+	ForwardIterator begin, ForwardIterator end)
+{
+	BitStream bs;
+	packet.write(bs);
+	BOOST_FOREACH(SystemAddress& destination, std::make_pair(begin, end))
+	{
+		rawSend(bs, packet, destination);
+	}
+}
 
 #endif

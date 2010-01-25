@@ -179,6 +179,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\src\clientNativePackets.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\collision.cpp"
 				>
 			</File>
@@ -195,7 +199,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\initializePacketManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\main.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\networkClient.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\networkPacket.cpp"
 				>
 			</File>
 			<File
@@ -230,6 +246,26 @@
 			</File>
 			<File
 				RelativePath="..\..\src\image.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\initializePacketManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\nativePackets.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\networkClient.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\networkPacket.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\networkPacketManager.h"
 				>
 			</File>
 			<File
