@@ -36,10 +36,8 @@ std::string translateGLError(GLenum errorcode)
     return errorStr;
 }
 
-OpenGLRenderer::OpenGLRenderer(int screenWidth, int screenHeight) : Renderer(screenWidth, screenHeight)
+OpenGLRenderer::OpenGLRenderer(int screenWidth, int screenHeight, bool fullscreen) : Renderer(screenWidth, screenHeight, fullscreen)
 {
-    this->_screenWidth  = screenWidth;
-    this->_screenHeight = screenHeight;
     if(!initScreen())
         cout << "Failed to initialise _screen" << endl;
     //logger->echoError("Failed to initialise _screen");
@@ -50,9 +48,15 @@ OpenGLRenderer::OpenGLRenderer(int screenWidth, int screenHeight) : Renderer(scr
 bool OpenGLRenderer::initScreen()
 {
     GLenum error;
+    unsigned flags;
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-    _screen = SDL_SetVideoMode(_screenWidth, _screenHeight, 0, SDL_OPENGL);
+    if(_fullscreen)
+        flags = SDL_FULLSCREEN | SDL_OPENGL;
+    else
+        flags = SDL_OPENGL;
+
+    _screen = SDL_SetVideoMode(_screenWidth, _screenHeight, 0, flags);
     if(_screen == NULL) {
         //logger->echoError("SDL_SetVideoMode failed: " + std::string(SDL_GetError()));
         cout << "SDL_SetVideoMode failed: " << std::string(SDL_GetError()) << endl;
@@ -111,6 +115,11 @@ bool OpenGLRenderer::initScreen()
     //logger->echoDebug("OpenGLRenderer initialised _screen successful");
     cout << "OpenGLRenderer initialised _screen successful" << endl;
     return true;
+}
+
+OpenGLRenderer::~OpenGLRenderer()
+{
+    SDL_FreeSurface(_screen);
 }
 
 void OpenGLRenderer::drawImage(Image *img, float x, float y)

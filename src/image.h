@@ -17,11 +17,11 @@ using namespace std;
 class Image
 {
 private:
-    SDL_Surface *_surface;
-    GLuint textureId;
-    GLenum textureFormat;
-    int width;
-    int height;
+    SDL_Surface     *_surface;
+    GLuint           _textureId;
+    GLenum           _textureFormat;
+    int              _width;
+    int              _height;
 
     public:
     /**
@@ -34,11 +34,11 @@ private:
     * Gets the image surface
     */
     SDL_Surface* getSurface() { return _surface; }
-    GLuint getTextureId() { return textureId; }
-    void setTextureFormat(GLenum textureFormat) { this->textureFormat = textureFormat; }
-    GLenum getTextureFormat() { return textureFormat; }
-    int getWidth() { return width; }
-    int getHeight() { return height; }
+    GLuint getTextureId() { return _textureId; }
+    void setTextureFormat(GLenum textureFormat) { this->_textureFormat = textureFormat; }
+    GLenum getTextureFormat() { return _textureFormat; }
+    int getWidth() { return _width; }
+    int getHeight() { return _height; }
 };
 
 #endif

@@ -24,7 +24,8 @@ private:
     SDL_Surface *_screen;
 
 public:
-    SoftwareRenderer(int screenWidth, int screenHeight);
+    SoftwareRenderer(int screenWidth, int screenHeight, bool fullscreen);
+    ~SoftwareRenderer();
 
     void drawImage(Image *img, float x, float y);
     void drawClippedImage(Image *img, float x, float y, SDL_Rect clip);
