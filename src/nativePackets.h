@@ -6,6 +6,7 @@
 
 #include "networkPacket.h"
 #include <RakNet/MessageIdentifiers.h>
+#include <string>
 
 // Occurs when a connection has been established.
 class ConnectionPacket: public NetworkPacket {
