@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include\SDL&quot;;&quot;$(SolutionDir)\dependencies\guichan-0.8.2\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include&quot;;&quot;$(SolutionDir)\dependencies\OpenGL\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)dependencies\raknet\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include\SDL&quot;;&quot;$(SolutionDir)\dependencies\guichan-0.8.2\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include&quot;;&quot;$(SolutionDir)\dependencies\OpenGL\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS; MMOMM_CLIENT"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,9 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="opengl32.lib glu32.lib SDL.lib SDL_image.lib SDLmain.lib"
+				AdditionalDependencies="opengl32.lib glu32.lib SDL.lib SDL_image.lib SDLmain.lib RakNetDLLDebug.lib guichanDebug.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;C:\code\mmomm\vc\dependencies\SDL-1.2.14\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)dependencies\raknet\lib&quot;;&quot;$(SolutionDir)dependencies\guichan-0.8.2\lib&quot;;&quot;$(SolutionDir)dependencies\SDL-1.2.14\lib&quot;"
 				IgnoreDefaultLibraryNames="msvcrt.lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -118,7 +118,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include\SDL&quot;;&quot;$(SolutionDir)\dependencies\guichan-0.8.2\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include&quot;;&quot;$(SolutionDir)\dependencies\OpenGL\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)dependencies\raknet\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include\SDL&quot;;&quot;$(SolutionDir)\dependencies\guichan-0.8.2\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include&quot;;&quot;$(SolutionDir)\dependencies\OpenGL\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -137,9 +137,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="opengl32.lib glu32.lib SDL.lib SDL_image.lib SDLmain.lib"
+				AdditionalDependencies="opengl32.lib glu32.lib SDL.lib SDL_image.lib SDLmain.lib RakNetDLLDebug.lib guichan.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;C:\code\mmomm\vc\dependencies\SDL-1.2.14\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)dependencies\raknet\lib&quot;;&quot;$(SolutionDir)dependencies\guichan-0.8.2\lib&quot;;&quot;$(SolutionDir)dependencies\SDL-1.2.14\lib&quot;"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -183,6 +183,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\configurationmenu.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\gui.cpp"
 				>
 			</File>
@@ -217,6 +221,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\configurationmenu.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\gui.h"
 				>
 			</File>
@@ -242,202 +250,6 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
-		</Filter>
-		<Filter
-			Name="External"
-			>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\actionevent.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\basiccontainer.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\button.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\checkbox.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\cliprectangle.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\color.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\container.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\defaultfont.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\dropdown.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\event.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\exception.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\focushandler.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\font.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\genericinput.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\graphics.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\gui_.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\guichan.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\icon.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\image_.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\imagebutton.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\imagefont.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\inputevent.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\key.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\keyevent.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\keyinput.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\label.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\listbox.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\mouseevent.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\mouseinput.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\opengl\opengl.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\opengl\openglgraphics.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\opengl\openglimage.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\radiobutton.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\rectangle.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\scrollarea.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\sdl\sdl.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\sdl\sdlgraphics.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\sdl\sdlimage.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\sdl\sdlimageloader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\sdl\sdlinput.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\selectionevent.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\slider.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\tab.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\tabbedarea.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\textbox.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\textfield.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widget.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\dependencies\guichan-0.8.2\src\widgets\window.cpp"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>
