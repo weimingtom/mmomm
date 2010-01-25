@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include\SDL&quot;;&quot;$(SolutionDir)\dependencies\guichan-0.8.2\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include&quot;;&quot;$(SolutionDir)\dependencies\OpenGL\include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS; MMOMM_CLIENT"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"

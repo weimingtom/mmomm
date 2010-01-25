@@ -76,26 +76,19 @@ public:
 	// Serialize or deserialize data from the specific packet type.
 	// bs: the stream used to serialize the data
 	// write: true means to write to the bitstream, false means to read from it
-	virtual void serialize(BitStream& bs, bool write) = 0;
+	virtual void serialize(BitStream& bs, bool write) { (void)bs; (void)write; }
+	
+	// Respond to this packet being received.
+	// Implementation is different between client and server.
+#ifdef MMOMM_CLIENT 
+	virtual void respondClient() const = 0;
+#else
+	virtual void respondServer() const = 0;
+#endif
 
 private:
 	RakNetTime _timestamp;
 	SystemAddress _address;
-};
-
-// Wrapper type for simple messages.
-template<unsigned char Kind,
-	PacketPriority Priority=LOW_PRIORITY,
-	PacketReliability Reliability=RELIABLE_ORDERED,
-	char OrderingChannel=0,
-	bool UseTimestamp=false>
-class SimplePacket: NetworkPacket {
-public:
-	// Simplest possible implementations.
-	virtual NetworkParams params() const
-		{ return PacketParams(Kind, Priority, Reliability,
-			OrderingChannel, UseTimestamp); }
-	virtual void serialize(BitStream& bs, bool write) { (void)bs; (void)write; }
 };
 
 #endif
