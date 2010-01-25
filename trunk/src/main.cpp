@@ -34,6 +34,10 @@ int main(int argc, char **argv)
 
 	NetworkClient::setCurrent(new NetworkClient());
 
+	//if (!NetworkClient::current().connect("localhost", 33033, "hangar", "awesome", false)) {
+	//	std::cout << "Could not access network." << std::endl;
+	//}
+
     bool loop  = true;
 
     while(loop)
