@@ -85,8 +85,8 @@ int main(int argc, char **argv)
                     if ( event.user.code == EVENT_LOGIN_OK ) {
                         LoginMenu::LoginData* data = (LoginMenu::LoginData*)event.user.data1;
                         NetworkClient::current().disconnect();
-	                    if (!NetworkClient::current().connect(data->host, data->port, data->username,
-                                                              data->password, data->createAccount)) {
+	                    if ( !NetworkClient::current().connect(data->host, data->port, data->username,
+                                                               data->password, data->createAccount) ) {
                             std::cout << "Could not access network "
                                       << data->host << ":" << data->port << "." << std::endl;
 	                    }
