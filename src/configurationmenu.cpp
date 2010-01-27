@@ -2,15 +2,16 @@
 
 ConfigurationMenu *ConfigurationMenu::_current = 0;
 
-ConfigurationMenu::ConfigurationMenu()
+ConfigurationMenu::ConfigurationMenu(int x, int y)
 {
     stringstream ss;
 
     try {
         _okButtonListener = new okButtonListener();
+        _cancelButtonListener = new cancelButtonListener();
 
         _window = new gcn::Window();
-        _window->setPosition(200, 200);
+        _window->setPosition(x, y);
 
         _fullscreenCheckBox = new gcn::CheckBox("Fullscreen");
         _fullscreenCheckBox->adjustSize();
@@ -56,6 +57,7 @@ ConfigurationMenu::ConfigurationMenu()
 
         _cancelButton = new gcn::Button("Cancel");
         _cancelButton->setPosition(30, 60);
+        _cancelButton->addActionListener(_cancelButtonListener);
         _window->add(_cancelButton);
 
         _window->resizeToContent();
@@ -87,5 +89,16 @@ ConfigurationMenu::~ConfigurationMenu()
     delete _okButton;
     delete _cancelButton;
     delete _okButtonListener;
+    delete _cancelButtonListener;
     delete _window;
+}
+
+int ConfigurationMenu::getX() const
+{
+    return _window->getX();
+}
+
+int ConfigurationMenu::getY() const
+{
+    return _window->getY();
 }

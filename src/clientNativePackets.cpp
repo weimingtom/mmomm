@@ -3,17 +3,17 @@
 
 void ConnectionPacket::respondClient() const
 {
-	//std::cout << "connected" << std::endl;
+	std::cout << "connected" << std::endl;
 }
 
 void DisconnectionPacket::respondClient() const
 {
-	//std::cout << "disconnected" << std::endl;
+	std::cout << "disconnected" << std::endl;
 	
 }
 
 void TamperPacket::respondClient() const
 {
 	
-	//std::cout << "tampered" << std::endl;
+	std::cout << "tampered" << std::endl;
 }

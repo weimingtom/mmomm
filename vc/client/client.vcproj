@@ -203,6 +203,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\loginmenu.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\main.cpp"
 				>
 			</File>
@@ -253,6 +257,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\events.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\gui.h"
 				>
 			</File>
@@ -262,6 +270,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\initializePacketManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\loginmenu.h"
 				>
 			</File>
 			<File
