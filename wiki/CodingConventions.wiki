@@ -11,7 +11,12 @@ Please add/edit any forgotten/mistaken things.
 {{{
 void foo(int x)
 {
-if (blah) {
+if ( blah > (x + 1) ) {
+    ...
+}
+else {
+    ...
 }}}
+ * Type* variable not Type *variable (probably?)
  * Everything in one folder and use virtual directory structure
  * 4 spaces indent
