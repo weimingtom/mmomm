@@ -7,7 +7,7 @@
 
 class Physical;
 struct Rect {
-    Rect( double left, double top, double right, double bottom );
+    Rect(double left, double top, double right, double bottom);
 
     double left;
     double top;
@@ -32,7 +32,7 @@ public:
     // When turned off, the TriggerCollisions method should be used periodically to
     // call the OnCollision() methods of all objects whose collision rectangles
     // currently overlap. The default value is false.
-    void SetInstantCollisions( bool instantCollisions );
+    void SetInstantCollisions(bool instantCollisions);
 
     // Retrieves the current setting for instant collisions.
     bool GetInstantCollisions() const;
@@ -46,7 +46,7 @@ public:
 
     // Must be implemented to determine whether two given objects should block each
     // others' movement. Odd behaviour could result if this relation is not symmetric.
-    virtual bool ShouldBlock( Physical* a, Physical* b ) const = 0;
+    virtual bool ShouldBlock(Physical* a, Physical* b) const = 0;
 
 private:
 
@@ -54,8 +54,8 @@ private:
     static const double CELL_SIZE;
 
     struct CellCoord {
-        CellCoord( long x, long y );
-        bool operator==( const CellCoord& a ) const;
+        CellCoord(long x, long y);
+        bool operator==(const CellCoord& a) const;
 
         long x;
         long y;
@@ -64,14 +64,14 @@ private:
     class Sort {
     public:
 
-        bool operator()( const Physical* a, const Physical* b ) const;
+        bool operator()(const Physical* a, const Physical* b) const;
 
     };
 
     class Hash : public boost::hash< CellCoord > {
     public:
 
-        std::size_t operator()( const CellCoord& a ) const;
+        std::size_t operator()(const CellCoord& a) const;
 
     };
 
@@ -79,8 +79,8 @@ private:
     typedef boost::unordered_map< CellCoord, Cell, Hash >             Map;
     typedef std::vector         < std::pair< Physical*, Physical* > > CollisionList;
 
-    bool CheckCollision( Physical* a, Physical* b, const Rect& aRect );
-    Cell& GetCellAtPoint( double x, double y );
+    bool CheckCollision(Physical* a, Physical* b, const Rect& aRect);
+    Cell& GetCellAtPoint(double x, double y);
 
     friend class Physical;
 
@@ -101,13 +101,13 @@ public:
     // Create physical object associated with given world, and with given
     // initial collision rectangle. Can trigger OnCollision calls if the
     // associated CollisionWorld is set to use instant collisions.
-    Physical( CollisionWorld& world, const Rect& rect );
+    Physical(CollisionWorld& world, const Rect& rect);
 
     // Create physical object associated with given world, and with collision
     // rectangle of given size. The top-left corner of the rectangle is set to
     // (0, 0). Can trigger OnCollision calls if the associated CollisionWorld
     // is set to use instant collisions.
-    Physical( CollisionWorld& world, double width, double height );
+    Physical(CollisionWorld& world, double width, double height);
 
     // Destructor.
     virtual ~Physical();
@@ -117,34 +117,31 @@ public:
 
     // Set current collision rectangle of this object. Can trigger OnCollision
     // calls if the associated CollisionWorld is set to use instant collisions.
-    void SetCollisionRect( const Rect& rect );
+    void SetCollisionRect(const Rect& rect);
 
     // Set top-left corner of the current collision rectangle of this object.
     // Can trigger OnCollision calls if the associated CollisionWorld is set to
     // use instant collisions.
-    void SetPosition( double x, double y );
+    void SetPosition(double x, double y);
 
     // Set size of the current collision rectangle of this object. The rectangle's
     // centre is preserved. Can trigger OnCollision calls if the associated
     // CollisionWorld is set to use instant collisions.
-    void SetSize( double width, double height );
+    void SetSize(double width, double height);
 
     // Move current collision rectangle of this object. Is blocked by obstacles,
     // with continuous collision detection. Can trigger OnCollision calls if the
     // associated CollisionWorld is set to use instant collisions.
-    void Move( double xOffset, double yOffset );
+    void Move(double xOffset, double yOffset);
 
     // Called when this object collides with another. When a collision occurs
     // between objects A and B, both A.OnCollision(B) and B.OnCollision(A) are
     // called, in no specified order.
-    virtual void OnCollision( Physical& other ) = 0;
+    virtual void OnCollision(Physical& other) = 0;
 
 private:
 
     void UpdateWorld();
-    bool Intersection( double x1, double y1, double x2, double y2,
-                       double x3, double y3, double x4, double y4,
-                       double& xOut, double& yOut );
 
     typedef CollisionWorld::Cell       Cell;
     typedef CollisionWorld::CellCoord  CellCoord;
