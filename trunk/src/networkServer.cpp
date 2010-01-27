@@ -14,6 +14,11 @@
 
 NetworkServer *NetworkServer::_current = 0;
 
+char toLower(char c)
+{
+    return std::tolower(c);
+}
+
 NetworkServer::NetworkServer()
 :	_authMap()
 ,	_userMap()
@@ -36,7 +41,7 @@ bool NetworkServer::listen(int port, int maxConnections)
     assert(!isConnected());
     assert(maxConnections > 0);
     assert(port >= 0 && port <= 65535);
-    
+
 	RakPeerInterface* peer = RakNetworkFactory::GetRakPeerInterface();
 
 	int threadSleepMillis = 30;
@@ -47,7 +52,7 @@ bool NetworkServer::listen(int port, int maxConnections)
 	}
     peer->SetMaximumIncomingConnections(maxConnections);
 	peer->SetOccasionalPing(true);
-	
+
 	_peer = peer;
 	return true;
 }
@@ -75,7 +80,7 @@ void NetworkServer::rawSend(const BitStream& bs,
 NetworkServer::AutoPacket NetworkServer::receive()
 {
 	assert(isConnected());
-	
+
 	for (;;) {
 		if (_queuedUser) {
 			removeUser(_queuedUser);
@@ -87,7 +92,7 @@ NetworkServer::AutoPacket NetworkServer::receive()
 			return AutoPacket();
 		}
 		AutoDepacketer depacketer(*_peer, raw);
-		
+
 		AutoPacket packet(processPacket(*raw));
 		if (packet.get()) {
 			User *user = findUser(raw->systemAddress);
@@ -105,7 +110,7 @@ NetworkServer::AutoPacket NetworkServer::receive()
 NetworkServer::AutoPacket NetworkServer::processPacket(const Packet& raw)
 {
 	unsigned char kind = packetKind(raw);
-	
+
 	// User packets
 	if (kind >= ID_NOT_INTERNAL) {
 		AutoPacket packet(_manager.create(kind));
@@ -116,11 +121,11 @@ NetworkServer::AutoPacket NetworkServer::processPacket(const Packet& raw)
 		std::cout << "Unknown user packet detected: " << kind << std::endl;
 		return AutoPacket(new TamperPacket);
 	}
-	
+
 	switch (kind) {
 	// A client just connected for the first time
 	case ID_NEW_INCOMING_CONNECTION:
-	{	
+	{
 		// TODO: Timeout for no login
 		return AutoPacket();
 	}
@@ -148,7 +153,7 @@ NetworkServer::AutoPacket NetworkServer::processPacket(const Packet& raw)
 		}
 		assert(!_queuedUser);
 		_queuedUser = user;
-		
+
 		std::string reason;
 		switch (kind) {
 		case ID_DISCONNECTION_NOTIFICATION:
@@ -177,7 +182,7 @@ std::vector<User *> NetworkServer::users() const
 		list.push_back(entry.second);
 	}
 	return list;
-	
+
 }
 
 User *NetworkServer::getUser(const std::string& name) const
@@ -195,7 +200,7 @@ std::string NetworkServer::cleanName(const std::string username)
 {
 	std::string lowerUsername = username;
 	std::transform(lowerUsername.begin(), lowerUsername.end(),
-		lowerUsername.begin(), std::tolower);
+		lowerUsername.begin(), toLower);
 	return lowerUsername;
 }
 
@@ -205,7 +210,7 @@ User *NetworkServer::createUser(const Packet& packet)
 	std::string username;
 	std::string password;
 	bool createAccount;
-	
+
 	serial(*bs, false, username);
 	serial(*bs, false, password);
 	bs->Read(createAccount);

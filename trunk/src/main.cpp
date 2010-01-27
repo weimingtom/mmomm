@@ -3,6 +3,7 @@
 #include "openglrenderer.h"
 #include "softwarerenderer.h"
 #include "image.h"
+#include "imagemanager.h"
 #include "gui.h"
 #include "configurationmenu.h"
 #include "loginmenu.h"
@@ -23,14 +24,15 @@ int main(int argc, char **argv)
     SDL_EnableUNICODE(1);
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-    //renderer   = new OpenGLRenderer(800, 600);
     Renderer *renderer  = new SoftwareRenderer(800, 600, false);
     renderer->setCurrent(renderer);
 
-    Image *img          = new Image("testimage.png");
+    ImageManager::setCurrent(new ImageManager());
 
-    Gui *gui            = new Gui(renderer->getScreen(), renderer->isSoftwareRenderer());
-    gui->setCurrent(gui);
+    weak_ptr<Image> img = ImageManager::current().getImage("testimage.png");
+    //ImageManager::current().use_count();
+
+    Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
 
     loginMenu = new LoginMenu(200, 200);
     loginMenu->setCurrent(loginMenu);
@@ -53,25 +55,25 @@ int main(int argc, char **argv)
                     if ( event.user.code == EVENT_OPTIONS_OK ) {
                         int *ints = (int*)event.user.data1;
 
-                        delete gui;
-                        delete img;
-                        delete renderer;
+                        if((ints[3] != 0) != renderer->isSoftwareRenderer())
+                        {
+                            delete &Gui::current();
+                            delete renderer;
 
-                        if(ints[3] != 0)
-                            renderer    = new SoftwareRenderer(ints[0], ints[1], (ints[2] != 0));
-                        else
-                            renderer    = new OpenGLRenderer  (ints[0], ints[1], (ints[2] != 0));
-                        renderer->setCurrent(renderer);
+                            if(ints[3] != 0)
+                                renderer    = new SoftwareRenderer(ints[0], ints[1], (ints[2] != 0));
+                            else
+                                renderer    = new OpenGLRenderer  (ints[0], ints[1], (ints[2] != 0));
+                            renderer->setCurrent(renderer);
 
-                        img             = new Image("testimage.png");
+                            ImageManager::current().reloadImages();
 
-                        //gui->setTarget(renderer->getScreen(), renderer->isSoftwareRenderer());
-                        gui             = new Gui(renderer->getScreen(), renderer->isSoftwareRenderer());
-                        gui->setCurrent(gui);
+                            Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
+                        }
 
                         loginMenu = new LoginMenu(configMenu->getX(), configMenu->getY());
                         loginMenu->setCurrent(loginMenu);
-                        delete configMenu;
+                        delete &ConfigurationMenu::current();
                         configMenu = 0;
 
                         delete ints;
@@ -101,7 +103,7 @@ int main(int argc, char **argv)
                     break;
             }
 
-            gui->pushInput(event);
+            Gui::current().pushInput(event);
         }
 
 		// Check packets
@@ -113,11 +115,11 @@ int main(int argc, char **argv)
 			//packet->respondClient();
 		}
 
-        gui->logic();
+        Gui::current().logic();
 
         renderer->beginDraw();
-        renderer->drawImage(img, 0, 0);
-        gui->draw();
+        renderer->drawImage(img.lock().get(), 0, 0);
+        Gui::current().draw();
         renderer->swapBuffers();
     }
 
@@ -130,8 +132,8 @@ int main(int argc, char **argv)
         loginMenu = 0;
     }
 
-    delete gui;
-    delete img;
+    delete &Gui::current();
+    delete &ImageManager::current();
     delete renderer;
 	delete &NetworkClient::current();
 

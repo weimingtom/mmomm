@@ -7,41 +7,59 @@
 	<File name="../src/collision.h" open="0" top="0" tabpos="3">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/configurationmenu.cpp" open="1" top="0" tabpos="7">
-		<Cursor position="945" topLine="14" />
+	<File name="../src/collisionPackets.h" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="30" />
 	</File>
-	<File name="../src/configurationmenu.h" open="1" top="0" tabpos="6">
-		<Cursor position="530" topLine="4" />
+	<File name="../src/configurationmenu.cpp" open="0" top="0" tabpos="7">
+		<Cursor position="454" topLine="0" />
 	</File>
-	<File name="../src/gui.cpp" open="1" top="0" tabpos="9">
-		<Cursor position="2333" topLine="58" />
+	<File name="../src/configurationmenu.h" open="0" top="0" tabpos="6">
+		<Cursor position="1139" topLine="28" />
 	</File>
-	<File name="../src/gui.h" open="1" top="0" tabpos="8">
-		<Cursor position="885" topLine="0" />
+	<File name="../src/gui.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="1934" topLine="37" />
 	</File>
-	<File name="../src/image.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="1085" topLine="0" />
+	<File name="../src/gui.h" open="0" top="0" tabpos="3">
+		<Cursor position="633" topLine="0" />
 	</File>
-	<File name="../src/image.h" open="0" top="0" tabpos="0">
-		<Cursor position="542" topLine="0" />
+	<File name="../src/image.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="397" topLine="12" />
 	</File>
-	<File name="../src/main.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="1436" topLine="20" />
+	<File name="../src/image.h" open="0" top="0" tabpos="4">
+		<Cursor position="500" topLine="0" />
 	</File>
-	<File name="../src/openglrenderer.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="3404" topLine="80" />
+	<File name="../src/imagemanager.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="460" topLine="0" />
+	</File>
+	<File name="../src/imagemanager.h" open="0" top="0" tabpos="2">
+		<Cursor position="655" topLine="0" />
+	</File>
+	<File name="../src/main.cpp" open="0" top="0" tabpos="6">
+		<Cursor position="851" topLine="0" />
+	</File>
+	<File name="../src/networkClient.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="2005" topLine="0" />
+	</File>
+	<File name="../src/networkClient.h" open="0" top="0" tabpos="2">
+		<Cursor position="930" topLine="0" />
+	</File>
+	<File name="../src/networkPacket.h" open="0" top="0" tabpos="0">
+		<Cursor position="685" topLine="0" />
+	</File>
+	<File name="../src/openglrenderer.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="3309" topLine="98" />
 	</File>
 	<File name="../src/openglrenderer.h" open="0" top="0" tabpos="0">
 		<Cursor position="533" topLine="0" />
 	</File>
-	<File name="../src/renderer.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="273" topLine="0" />
+	<File name="../src/renderer.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="273" topLine="5" />
 	</File>
-	<File name="../src/renderer.h" open="1" top="0" tabpos="4">
-		<Cursor position="466" topLine="1" />
+	<File name="../src/renderer.h" open="0" top="0" tabpos="4">
+		<Cursor position="1264" topLine="1" />
 	</File>
-	<File name="../src/softwarerenderer.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="188" topLine="0" />
+	<File name="../src/softwarerenderer.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="623" topLine="0" />
 	</File>
 	<File name="../src/softwarerenderer.h" open="0" top="0" tabpos="0">
 		<Cursor position="465" topLine="0" />

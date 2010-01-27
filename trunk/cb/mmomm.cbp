@@ -5,7 +5,7 @@
 		<Option title="mmomm" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Core/;Core/;Core/Renderers/;Guis/;Net/;" />
+		<Option virtualFolders="Core/;Core/;Core/Renderers/;Guis/;Net/;World/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/mmomm" prefix_auto="1" extension_auto="1" />
@@ -31,6 +31,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-DMMOMM_CLIENT" />
 		</Compiler>
 		<Linker>
 			<Add option="-lSDL" />
@@ -42,6 +43,15 @@
 			<Add option="-lguichan_opengl" />
 			<Add option="-lRakNet" />
 		</Linker>
+		<Unit filename="../src/chat.h">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/clientChat.cpp">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/clientCollisionPackets.cpp">
+			<Option virtualFolder="Net/" />
+		</Unit>
 		<Unit filename="../src/clientNativePackets.cpp">
 			<Option virtualFolder="Net/" />
 		</Unit>
@@ -51,11 +61,17 @@
 		<Unit filename="../src/collision.h">
 			<Option virtualFolder="Core/" />
 		</Unit>
+		<Unit filename="../src/collisionPackets.h">
+			<Option virtualFolder="Net/" />
+		</Unit>
 		<Unit filename="../src/configurationmenu.cpp">
 			<Option virtualFolder="Guis/" />
 		</Unit>
 		<Unit filename="../src/configurationmenu.h">
 			<Option virtualFolder="Guis/" />
+		</Unit>
+		<Unit filename="../src/events.h">
+			<Option virtualFolder="Core/" />
 		</Unit>
 		<Unit filename="../src/gui.cpp">
 			<Option virtualFolder="Core/" />
@@ -69,11 +85,23 @@
 		<Unit filename="../src/image.h">
 			<Option virtualFolder="Core/" />
 		</Unit>
+		<Unit filename="../src/imagemanager.cpp">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/imagemanager.h">
+			<Option virtualFolder="Core/" />
+		</Unit>
 		<Unit filename="../src/initializePacketManager.cpp">
 			<Option virtualFolder="Net/" />
 		</Unit>
 		<Unit filename="../src/initializePacketManager.h">
 			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/loginmenu.cpp">
+			<Option virtualFolder="Guis/" />
+		</Unit>
+		<Unit filename="../src/loginmenu.h">
+			<Option virtualFolder="Guis/" />
 		</Unit>
 		<Unit filename="../src/main.cpp">
 			<Option virtualFolder="Core/" />
@@ -87,6 +115,12 @@
 		<Unit filename="../src/networkClient.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
+		<Unit filename="../src/networkCommon.cpp">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/networkCommon.h">
+			<Option virtualFolder="Net/" />
+		</Unit>
 		<Unit filename="../src/networkPacket.cpp">
 			<Option virtualFolder="Net/" />
 		</Unit>
@@ -96,17 +130,14 @@
 		<Unit filename="../src/networkPacketManager.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
-		<Unit filename="../src/networkServer.cpp">
-			<Option virtualFolder="Net/" />
-		</Unit>
-		<Unit filename="../src/networkServer.h">
-			<Option virtualFolder="Net/" />
-		</Unit>
 		<Unit filename="../src/openglrenderer.cpp">
 			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
 		<Unit filename="../src/openglrenderer.h">
 			<Option virtualFolder="Core/Renderers/" />
+		</Unit>
+		<Unit filename="../src/packetTypes.h">
+			<Option virtualFolder="Net/" />
 		</Unit>
 		<Unit filename="../src/renderer.cpp">
 			<Option virtualFolder="Core/Renderers/" />
@@ -114,14 +145,32 @@
 		<Unit filename="../src/renderer.h">
 			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
-		<Unit filename="../src/serverNativePackets.cpp">
-			<Option virtualFolder="Net/" />
-		</Unit>
 		<Unit filename="../src/softwarerenderer.cpp">
 			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
 		<Unit filename="../src/softwarerenderer.h">
 			<Option virtualFolder="Core/Renderers/" />
+		</Unit>
+		<Unit filename="../src/vector2D.h">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/worldCommon.cpp">
+			<Option virtualFolder="World/" />
+		</Unit>
+		<Unit filename="../src/worldCommon.h">
+			<Option virtualFolder="World/" />
+		</Unit>
+		<Unit filename="../src/worldInstance.cpp">
+			<Option virtualFolder="World/" />
+		</Unit>
+		<Unit filename="../src/worldInstance.h">
+			<Option virtualFolder="World/" />
+		</Unit>
+		<Unit filename="../src/worldMap.cpp">
+			<Option virtualFolder="World/" />
+		</Unit>
+		<Unit filename="../src/worldMap.h">
+			<Option virtualFolder="World/" />
 		</Unit>
 		<Extensions>
 			<code_completion />
