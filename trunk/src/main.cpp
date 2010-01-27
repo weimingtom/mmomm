@@ -1,14 +1,17 @@
+#include "events.h"
 #include "renderer.h"
 #include "openglrenderer.h"
 #include "softwarerenderer.h"
 #include "image.h"
 #include "gui.h"
 #include "configurationmenu.h"
+#include "loginmenu.h"
 #include "networkClient.h"
 
 #include <vector>
 
-ConfigurationMenu *configMenu;
+ConfigurationMenu *configMenu = 0;
+LoginMenu* loginMenu = 0;
 
 int main(int argc, char **argv)
 {
@@ -29,14 +32,10 @@ int main(int argc, char **argv)
     Gui *gui            = new Gui(renderer->getScreen(), renderer->isSoftwareRenderer());
     gui->setCurrent(gui);
 
-    configMenu          = new ConfigurationMenu();
-    configMenu->setCurrent(configMenu);
+    loginMenu = new LoginMenu(200, 200);
+    loginMenu->setCurrent(loginMenu);
 
 	NetworkClient::setCurrent(new NetworkClient());
-
-	//if (!NetworkClient::current().connect("localhost", 33033, "hangar", "awesome", false)) {
-	//	std::cout << "Could not access network." << std::endl;
-	//}
 
     bool loop  = true;
 
@@ -51,10 +50,9 @@ int main(int argc, char **argv)
                     loop = false;
                     break;
                 case SDL_USEREVENT:
-                    if(event.user.code == 0) {
+                    if ( event.user.code == EVENT_OPTIONS_OK ) {
                         int *ints = (int*)event.user.data1;
 
-                        delete configMenu;
                         delete gui;
                         delete img;
                         delete renderer;
@@ -71,10 +69,34 @@ int main(int argc, char **argv)
                         gui             = new Gui(renderer->getScreen(), renderer->isSoftwareRenderer());
                         gui->setCurrent(gui);
 
-                        configMenu      = new ConfigurationMenu();
-                        configMenu->setCurrent(configMenu);
+                        loginMenu = new LoginMenu(configMenu->getX(), configMenu->getY());
+                        loginMenu->setCurrent(loginMenu);
+                        delete configMenu;
+                        configMenu = 0;
 
                         delete ints;
+                    }
+                    if ( event.user.code == EVENT_OPTIONS_CANCEL ) {
+                        loginMenu = new LoginMenu(configMenu->getX(), configMenu->getY());
+                        loginMenu->setCurrent(loginMenu);
+                        delete configMenu;
+                        configMenu = 0;
+                    }
+                    if ( event.user.code == EVENT_LOGIN_OK ) {
+                        LoginMenu::LoginData* data = (LoginMenu::LoginData*)event.user.data1;
+                        NetworkClient::current().disconnect();
+	                    if (!NetworkClient::current().connect(data->host, data->port, data->username,
+                                                              data->password, data->createAccount)) {
+                            std::cout << "Could not access network "
+                                      << data->host << ":" << data->port << "." << std::endl;
+	                    }
+                        delete data;
+                    }
+                    if ( event.user.code == EVENT_LOGIN_OPTIONS ) {
+                        configMenu = new ConfigurationMenu(loginMenu->getX(), loginMenu->getY());
+                        configMenu->setCurrent(configMenu);
+                        delete loginMenu;
+                        loginMenu = 0;
                     }
                     break;
             }
@@ -99,7 +121,15 @@ int main(int argc, char **argv)
         renderer->swapBuffers();
     }
 
-    delete configMenu;
+    if ( configMenu ) {
+        delete configMenu;
+        configMenu = 0;
+    }
+    if ( loginMenu ) {
+        delete loginMenu;
+        loginMenu = 0;
+    }
+
     delete gui;
     delete img;
     delete renderer;

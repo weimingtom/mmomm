@@ -43,6 +43,9 @@ void NetworkPacket::read(const Packet *packet, User *user)
 	if (packet) {
 		BitStream stream(packet->data, packet->length, false);
 		unsigned char timestamped;
+        // Hey nagel I am getting a crash at this line just below; happens when you have connected
+        // to localhost but you're not actually running a server (connection to localhost appears 
+        // to work okay, but it crashes after a little while
 		stream.Read(timestamped);
 		if (timestamped == ID_TIMESTAMP) {
 			assert(useTimestamp());
