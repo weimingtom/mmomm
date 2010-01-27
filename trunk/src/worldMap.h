@@ -36,6 +36,7 @@ public:
     const WorldCell& GetCell(long x, long y);
     void SetCell(long x, long y, const WorldCell& cell);
 
+    // Directly access the correct tile of the underlying cell at the given position.
     const Tile& GetTile(long x, long y);
     void SetTile(long x, long y, const Tile& tile);
 
