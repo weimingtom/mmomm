@@ -35,8 +35,11 @@
 			<Add option="-lRakNet" />
 			<Add option="-lpthread" />
 		</Linker>
+		<Unit filename="../src/chat.h" />
+		<Unit filename="../src/collisionPackets.h" />
 		<Unit filename="../src/initializePacketManager.cpp" />
 		<Unit filename="../src/initializePacketManager.h" />
+		<Unit filename="../src/nativePackets.h" />
 		<Unit filename="../src/networkCommon.cpp" />
 		<Unit filename="../src/networkCommon.h" />
 		<Unit filename="../src/networkPacket.cpp" />
@@ -45,6 +48,8 @@
 		<Unit filename="../src/networkServer.cpp" />
 		<Unit filename="../src/networkServer.h" />
 		<Unit filename="../src/packetTypes.h" />
+		<Unit filename="../src/serverChat.cpp" />
+		<Unit filename="../src/serverCollisionPackets.cpp" />
 		<Unit filename="../src/serverMain.cpp" />
 		<Unit filename="../src/serverNativePackets.cpp" />
 		<Extensions>
