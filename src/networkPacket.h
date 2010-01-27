@@ -5,12 +5,41 @@
 #include <RakNet/RakNetTypes.h>
 #include <RakNet/RakPeerInterface.h>
 #include <string>
+#include <vector>
+#include <boost/foreach.hpp>
+#include "vector2D.h"
 
 using RakNet::BitStream;
 class User;
 
 // Extra serialization functions
+template<typename T>
+void serial(BitStream& bs, bool write, T& data)
+{
+	bs.SerializeCompressed(bs, write, data);
+}
+template<typename T>
+void serial(BitStream& bs, bool write, std::vector<T>& data)
+{
+	if (write) {
+		bs.WriteCompressed(data.size());
+		BOOST_FOREACH(T& value, data) {
+			serial(bs, write, value);
+		}
+	}
+	else {
+		typedef std::vector<T>::size_type Size;
+		Size size;
+		bs.ReadCompressed(size);
+		data.resize(size);
+		for (Size i = 0; i < size; ++i) {
+			serial(bs, write, data[i]);
+		}
+	}
+	bs.SerializeCompressed(write, data);
+}
 void serial(BitStream& bs, bool write, std::string& data);
+void serial(BitStream& bs, bool write, Vector2D& data);
 
 // Parameters for a network packet.
 // See similarly-named NetworkPacket functions.

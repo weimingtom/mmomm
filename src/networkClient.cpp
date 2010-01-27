@@ -96,11 +96,18 @@ NetworkClient::AutoPacket NetworkClient::receive()
 		
 		AutoPacket packet(processPacket(*raw));
 		
+		if (!_peer) {
+			// Only disconnection packets should disconnect
+			assert(packet.get());
+			assert(packet->kind() == ID_ACCOUNT_FAILURE);
+			depacketer.reset();
+			return packet;
+		}
 		
 		if (!packet.get()) {
 			continue;
 		}
-
+		
 		// Only disconnect and connect packets are allowed when not connected
 		if (!isConnected() &&
 				packet->kind() != ID_ACCOUNT_SUCCESS &&
@@ -121,6 +128,7 @@ NetworkClient::AutoPacket NetworkClient::receive()
 			std::cout << "Received packet while authenticating (early connect): " << packet->kind() << std::endl;
 		}
 
+		assert(packet.get());
 		packet->read(raw);
 		return packet;
 	}

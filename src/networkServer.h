@@ -7,6 +7,7 @@
 #include "networkPacket.h"
 #include "networkPacketManager.h"
 #include <map>
+#include <vector>
 
 // Main server network controller class.
 class NetworkServer: boost::noncopyable {
@@ -56,6 +57,13 @@ public:
 	typedef std::auto_ptr<NetworkPacket> AutoPacket;
 	AutoPacket receive();
 	
+	// Gets the list of users.
+	std::vector<User *> users() const;
+
+	// Gets a specific user by name
+	// returns null if not found
+	User *getUser(const std::string& name) const;
+	
 	// The global server object.
 	static NetworkServer& current() { assert(_current); return *_current; }
 	static void setCurrent(NetworkServer *current) { _current = current; }
@@ -64,7 +72,7 @@ public:
 	// TODO: Authentication file serialization.
 	void readAuthenticationFile(const std::string& filename) { (void)filename; }
 	void writeAuthenticationFile(const std::string& filename) { (void)filename; }
-	
+
 private:
 	
 	// Helper function for receiving a single possibly-internal packet.
@@ -89,7 +97,10 @@ private:
 	
 	// Create a salty password.
 	// TODO: Hash passwords.
-	std::string hashPassword(const std::string& username, const std::string& password) { (void)username; return password; }
+	static std::string hashPassword(const std::string& username, const std::string& password) { (void)username; return password; }
+
+	// Cleans a username and returns the result.
+	static std::string cleanName(const std::string username);
 	
 	// The mapping of usernames to hashed passwords
 	typedef std::map<std::string, std::string> AuthenticationMap;
@@ -126,9 +137,9 @@ void NetworkServer::send(const NetworkPacket& packet,
 {
 	BitStream bs;
 	packet.write(bs);
-	BOOST_FOREACH(const User& user, std::make_pair(begin, end))
+	BOOST_FOREACH(const User *user, std::make_pair(begin, end))
 	{
-		rawSend(bs, packet, user);
+		rawSend(bs, packet, *user);
 	}
 }
 

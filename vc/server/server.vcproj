@@ -193,6 +193,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\serverChat.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\serverCollisionPackets.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\serverMain.cpp"
 				>
 			</File>
@@ -206,6 +214,14 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\..\src\chat.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\collisionPackets.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\src\initializePacketManager.h"
 				>
@@ -232,6 +248,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\user.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\vector2D.h"
 				>
 			</File>
 		</Filter>

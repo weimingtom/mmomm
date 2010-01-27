@@ -170,6 +170,35 @@ NetworkServer::AutoPacket NetworkServer::processPacket(const Packet& raw)
 	}
 }
 
+std::vector<User *> NetworkServer::users() const
+{
+	std::vector<User *> list;
+	BOOST_FOREACH(const UserMap::value_type& entry, _userMap) {
+		list.push_back(entry.second);
+	}
+	return list;
+	
+}
+
+User *NetworkServer::getUser(const std::string& name) const
+{
+	std::string clean = cleanName(name);
+	BOOST_FOREACH(User *user, users()) {
+		if (cleanName(user->username()) == clean) {
+			return user;
+		}
+	}
+	return 0;
+}
+
+std::string NetworkServer::cleanName(const std::string username)
+{
+	std::string lowerUsername = username;
+	std::transform(lowerUsername.begin(), lowerUsername.end(),
+		lowerUsername.begin(), std::tolower);
+	return lowerUsername;
+}
+
 User *NetworkServer::createUser(const Packet& packet)
 {
 	std::auto_ptr<BitStream> bs(packetStream(packet));
@@ -181,9 +210,7 @@ User *NetworkServer::createUser(const Packet& packet)
 	serial(*bs, false, password);
 	bs->Read(createAccount);
 
-	std::string lowerUsername = username;
-	std::transform(lowerUsername.begin(), lowerUsername.end(),
-		lowerUsername.begin(), std::tolower);
+	std::string lowerUsername = cleanName(username);
 	password = hashPassword(lowerUsername, password);
 	if (!createAccount) {
 		AuthenticationMap::const_iterator found = _authMap.find(lowerUsername);
