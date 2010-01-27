@@ -37,6 +37,11 @@ void WorldMap::SetCell(long x, long y, const WorldCell& cell)
     _map[CellCoord(x, y)] = cell;
 }
 
+void WorldMap::DiscardCell(long x, long y)
+{
+    _map.erase(CellCoord(x, y));
+}
+
 const Tile& WorldMap::GetTile(long x, long y)
 {
     long uWidth  = unsigned(WorldCell::WIDTH );

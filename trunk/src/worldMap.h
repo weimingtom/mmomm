@@ -33,8 +33,14 @@ private:
 class WorldMap {
 public:
 
+    // If no cell exists at the specified position, a blank cell is created and returned.
     const WorldCell& GetCell(long x, long y);
+
+    // Copy cell data over specified position.
     void SetCell(long x, long y, const WorldCell& cell);
+
+    // Removes the given cell from memory, if it exists.
+    void DiscardCell(long x, long y);
 
     // Directly access the correct tile of the underlying cell at the given position.
     const Tile& GetTile(long x, long y);
