@@ -11,6 +11,7 @@ class Image;
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "renderer.h"
+#include "imagemanager.h"
 
 using namespace std;
 
@@ -18,21 +19,21 @@ class Image
 {
 private:
     SDL_Surface     *_surface;
+    string           _filename;
     GLuint           _textureId;
     GLenum           _textureFormat;
     int              _width;
     int              _height;
 
-    public:
-    /**
-    * Constructor of Image.
-    * @param filename the name of the file to load
-    */
-    Image(std::string filename);
+    void load();
+    void destroy();
+
+public:
+    Image(string filename);
     ~Image();
-    /**
-    * Gets the image surface
-    */
+
+    void reload();
+
     SDL_Surface* getSurface() { return _surface; }
     GLuint getTextureId() { return _textureId; }
     void setTextureFormat(GLenum textureFormat) { this->_textureFormat = textureFormat; }

@@ -29,7 +29,7 @@ public:
     ~Gui();
 
     static Gui& current() { assert(_current); return *_current; }
-    void setCurrent(Gui *current) { _current = current; }
+    static void setCurrent(Gui *current) { _current = current; }
 
     void pushInput(SDL_Event event);
     void addWidget(gcn::Widget *widget);

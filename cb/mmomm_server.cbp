@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="mmomm_server" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/mmomm_server" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/mmomm_server" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Linker>
+			<Add option="-lRakNet" />
+			<Add option="-lpthread" />
+		</Linker>
+		<Unit filename="../src/initializePacketManager.cpp" />
+		<Unit filename="../src/initializePacketManager.h" />
+		<Unit filename="../src/networkCommon.cpp" />
+		<Unit filename="../src/networkCommon.h" />
+		<Unit filename="../src/networkPacket.cpp" />
+		<Unit filename="../src/networkPacket.h" />
+		<Unit filename="../src/networkPacketManager.h" />
+		<Unit filename="../src/networkServer.cpp" />
+		<Unit filename="../src/networkServer.h" />
+		<Unit filename="../src/packetTypes.h" />
+		<Unit filename="../src/serverMain.cpp" />
+		<Unit filename="../src/serverNativePackets.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

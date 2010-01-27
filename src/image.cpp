@@ -4,20 +4,30 @@
 
 Image::~Image()
 {
-    Renderer::current().deleteTexture(&_textureId);
-    if(_surface != NULL)
-        SDL_FreeSurface(_surface);
+    destroy();
 }
 
-Image::Image(std::string filename)
+Image::Image(string filename)
+:   _filename(filename)
+{
+    load();
+}
+
+void Image::reload()
+{
+    destroy();
+    load();
+}
+
+void Image::load()
 {
     SDL_Surface *loadedImage = NULL;
-    loadedImage = IMG_Load(filename.c_str());
+    loadedImage = IMG_Load(_filename.c_str());
 
     if (!loadedImage)
     {
-        //logger->echoError("Could not load image: " + std::string(IMG_GetError()));
-        cout << "Could not load image: " << std::string(IMG_GetError()) << endl;
+        //logger->echoError("Could not load image: " + string(IMG_GetError()));
+        cout << "Could not load image: " << string(IMG_GetError()) << endl;
         exit(1);
     }
 
@@ -26,8 +36,8 @@ Image::Image(std::string filename)
     if (!surface)
     {
         /*logger->echoError("Could not convert image to display pixel format: " +
-                          std::string(SDL_GetError()));*/
-        cout << "Could not convert image to display pixel format: " << std::string(SDL_GetError()) << endl;
+                          string(SDL_GetError()));*/
+        cout << "Could not convert image to display pixel format: " << string(SDL_GetError()) << endl;
         exit(1);
     }
 
@@ -43,3 +53,11 @@ Image::Image(std::string filename)
         _surface = NULL;
     }
 }
+
+void Image::destroy()
+{
+    Renderer::current().deleteTexture(&_textureId);
+    if(_surface != NULL)
+        SDL_FreeSurface(_surface);
+}
+

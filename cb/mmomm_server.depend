@@ -1,0 +1,100 @@
+# depslib dependency file v1.0
+1264618017 source:/home/oipo/Programming/mmomm/src/networkCommon.cpp
+	"networkCommon.h"
+	<RakNet/MessageIdentifiers.h>
+	<iostream>
+
+1264632732 /home/oipo/Programming/mmomm/src/networkCommon.h
+	"networkPacket.h"
+	<ostream>
+	<memory>
+
+1264632980 /home/oipo/Programming/mmomm/src/networkPacket.h
+	<RakNet/BitStream.h>
+	<RakNet/RakNetTypes.h>
+	<RakNet/RakPeerInterface.h>
+	<string>
+	<vector>
+	<boost/foreach.hpp>
+	"vector2D.h"
+
+1264632732 source:/home/oipo/Programming/mmomm/src/networkPacket.cpp
+	"networkPacket.h"
+	<RakNet/MessageIdentifiers.h>
+	<RakNet/GetTime.h>
+	<RakNet/StringCompressor.h>
+	<string>
+
+1264618017 source:/home/oipo/Programming/mmomm/src/serverNativePackets.cpp
+	"nativePackets.h"
+	"user.h"
+	<iostream>
+
+1264618017 /home/oipo/Programming/mmomm/src/nativePackets.h
+	"networkPacket.h"
+	"packetTypes.h"
+	<RakNet/MessageIdentifiers.h>
+	<string>
+
+1264632732 /home/oipo/Programming/mmomm/src/packetTypes.h
+	<RakNet/MessageIdentifiers.h>
+
+1264618017 /home/oipo/Programming/mmomm/src/user.h
+
+1264618813 source:/home/oipo/Programming/mmomm/src/networkServer.cpp
+	"networkServer.h"
+	"networkCommon.h"
+	"networkPacket.h"
+	"user.h"
+	"initializePacketManager.h"
+	"nativePackets.h"
+	<RakNet/RakNetTypes.h>
+	<RakNet/RakNetworkFactory.h>
+	<RakNet/RakPeerInterface.h>
+	<RakNet/MessageIdentifiers.h>
+	<iostream>
+	<cctype>
+	<functional>
+
+1264632732 /home/oipo/Programming/mmomm/src/networkServer.h
+	<boost/noncopyable.hpp>
+	<boost/foreach.hpp>
+	<RakNet/RakNetTypes.h>
+	"networkPacket.h"
+	"networkPacketManager.h"
+	<map>
+	<vector>
+
+1264424313 /home/oipo/Programming/mmomm/src/networkPacketManager.h
+	"networkPacket.h"
+	<map>
+	<boost/function.hpp>
+	<boost/tuple/tuple.hpp>
+
+1264424313 /home/oipo/Programming/mmomm/src/initializePacketManager.h
+
+1264424313 source:/home/oipo/Programming/mmomm/src/serverMain.cpp
+	"networkServer.h"
+	<RakNet/RakSleep.h>
+	<iostream>
+
+1264632732 source:/home/oipo/Programming/mmomm/src/initializePacketManager.cpp
+	"initializePacketManager.h"
+	"networkPacketManager.h"
+	"chat.h"
+	"collisionPackets.h"
+
+1264632732 /home/oipo/Programming/mmomm/src/vector2D.h
+	<cmath>
+
+1264632732 /home/oipo/Programming/mmomm/src/chat.h
+	"networkPacket.h"
+	"packetTypes.h"
+	<string>
+
+1264632732 /home/oipo/Programming/mmomm/src/collisionPackets.h
+	"networkPacket.h"
+	"packetTypes.h"
+	"vector2D.h"
+	<string>
+
