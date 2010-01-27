@@ -24,7 +24,9 @@ class AutoDepacketer {
 public:
 	AutoDepacketer(RakPeerInterface& peer, Packet* packet):
 		_peer(peer), _packet(packet) { }
-	~AutoDepacketer() { _peer.DeallocatePacket(_packet); }
+	~AutoDepacketer() { if (_packet) _peer.DeallocatePacket(_packet); }
+
+	void reset() { _packet = 0; }
 
 private:
     RakPeerInterface& _peer;
