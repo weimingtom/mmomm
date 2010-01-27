@@ -1,6 +1,7 @@
 #ifndef COLLISION_H_
 #define COLLISION_H_
 
+#include "worldCommon.h"
 #include <set>
 #include <boost/unordered_map.hpp>
 #include <vector>
@@ -53,14 +54,6 @@ private:
     // Size of internal collision cells.
     static const double CELL_SIZE;
 
-    struct CellCoord {
-        CellCoord(long x, long y);
-        bool operator==(const CellCoord& a) const;
-
-        long x;
-        long y;
-    };
-
     class Sort {
     public:
 
@@ -68,15 +61,8 @@ private:
 
     };
 
-    class Hash : public boost::hash< CellCoord > {
-    public:
-
-        std::size_t operator()(const CellCoord& a) const;
-
-    };
-
     typedef std::set            < Physical*, Sort >                   Cell;
-    typedef boost::unordered_map< CellCoord, Cell, Hash >             Map;
+    typedef boost::unordered_map< CellCoord, Cell, CellCoord::Hash >  Map;
     typedef std::vector         < std::pair< Physical*, Physical* > > CollisionList;
 
     bool CheckCollision(Physical* a, Physical* b, const Rect& aRect);
@@ -144,7 +130,6 @@ private:
     void UpdateWorld();
 
     typedef CollisionWorld::Cell       Cell;
-    typedef CollisionWorld::CellCoord  CellCoord;
     typedef std::vector< Physical* >   CollisionList;
 
     CollisionWorld& _world;

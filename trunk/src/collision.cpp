@@ -85,17 +85,6 @@ void CollisionWorld::TriggerCollisions()
     _collisions.clear();
 }
 
-CollisionWorld::CellCoord::CellCoord(long x, long y)
-{
-    this->x = x;
-    this->y = y;
-}
-
-bool CollisionWorld::CellCoord::operator==(const CellCoord& a) const
-{
-    return x == a.x && y == a.y;
-}
-
 bool CollisionWorld::Sort::operator()(const Physical* a, const Physical* b) const
 {
     if ( a->GetCollisionRect().left != a->GetCollisionRect().left )
@@ -103,14 +92,6 @@ bool CollisionWorld::Sort::operator()(const Physical* a, const Physical* b) cons
     // Objects in a set cannot be equal, so need some backup ordering in case
     // x-positions are equal
     return a < b;
-}
-
-std::size_t CollisionWorld::Hash::operator()(const CellCoord& a) const
-{
-    std::size_t seed = 0;
-    boost::hash_combine(seed, a.x);
-    boost::hash_combine(seed, a.y);
-    return seed;
 }
 
 bool CollisionWorld::CheckCollision(Physical* a, Physical* b, const Rect& aRect)
