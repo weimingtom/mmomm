@@ -239,6 +239,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\worldInstance.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\worldMap.cpp"
 				>
 			</File>
@@ -314,6 +318,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\worldCommon.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\worldInstance.h"
 				>
 			</File>
 			<File
