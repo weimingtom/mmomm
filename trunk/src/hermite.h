@@ -6,13 +6,14 @@
 // Keeps track of a hermite interpolation.
 class HermiteInterpolation {
 public:
-
+	
+	HermiteInterpolation();
 	HermiteInterpolation(double initialTime, double finalTime,
 		const Vector2D& initialPosition, const Vector2D& finalPosition,
 		const Vector2D& initialVelocity, const Vector2D& finalVelocity);
 	
-	// Determine whether we're still in the middle of an interpolation
-	bool stillInterpolating(double t) const;
+	// Determine the end of the interpolation
+	double finalTime() const { return _finalTime; }
 	
 	// Interpolate position at the specified time.
 	// If past the final time, it will interpolate correctly
@@ -32,8 +33,6 @@ private:
 	Vector2D _finalVelocity;
 	
 };
-
-
 
 #endif
 
