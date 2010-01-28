@@ -12,16 +12,16 @@ ImageManager::~ImageManager()
 {
 }
 
-weak_ptr<Image> ImageManager::getImage(string filename)
+ImageManager::weak_ptr ImageManager::getImage(string filename)
 {
     imgmap::iterator it = images.find(filename);
     if(it == images.end()) {
-        shared_ptr<Image> img(new Image(filename));
-        weak_ptr<Image> wptr_img(img);
-        images.insert(pair<string, weak_ptr<Image> >(filename, wptr_img));
+        shared_ptr img(new Image(filename));
+        weak_ptr wptr_img(img);
+        images.insert(pair<string, weak_ptr >(filename, wptr_img));
         return wptr_img;
     } else {
-        weak_ptr<Image> wptr_img(images[filename]);
+        weak_ptr wptr_img(images[filename]);
         return wptr_img;
     }
 }

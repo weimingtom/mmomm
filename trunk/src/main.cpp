@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 
     ImageManager::setCurrent(new ImageManager());
 
-    weak_ptr<Image> img = ImageManager::current().getImage("testimage.png");
+    ImageManager::weak_ptr img = ImageManager::current().getImage("testimage.png");
     //ImageManager::current().use_count();
 
     Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));

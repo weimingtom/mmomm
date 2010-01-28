@@ -8,9 +8,8 @@
 #include "image.h"
 
 using namespace std;
-using namespace boost;
 
-typedef unordered_map<string, shared_ptr<Image> > imgmap;
+typedef boost::unordered_map<string, boost::shared_ptr<Image> > imgmap;
 
 class ImageManager
 {
@@ -19,13 +18,16 @@ private:
     imgmap images;
 
 public:
+    typedef boost::weak_ptr<Image>   weak_ptr;
+    typedef boost::shared_ptr<Image> shared_ptr;
+
     ImageManager();
     ~ImageManager();
 
     static ImageManager& current() { assert(_current); return *_current; }
     static void setCurrent(ImageManager *current) { _current = current; }
 
-    weak_ptr<Image> getImage(string filename);
+    weak_ptr getImage(string filename);
     void reloadImages();
     void use_count();
 };
