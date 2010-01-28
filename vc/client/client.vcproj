@@ -209,6 +209,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\imagemanager.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\initializePacketManager.cpp"
 				>
 			</File>
@@ -288,6 +292,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\image.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\imagemanager.h"
 				>
 			</File>
 			<File
