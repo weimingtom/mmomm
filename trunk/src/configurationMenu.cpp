@@ -1,4 +1,4 @@
-#include "configurationmenu.h"
+#include "configurationMenu.h"
 
 ConfigurationMenu *ConfigurationMenu::_current = 0;
 

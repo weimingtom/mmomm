@@ -1,4 +1,4 @@
-#include "openglrenderer.h"
+#include "openglRenderer.h"
 #include <GL/glext.h>
 #include <boost/scoped_array.hpp>
 
