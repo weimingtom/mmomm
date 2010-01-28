@@ -1,4 +1,4 @@
-#include "ChatWindow.h"
+#include "chatWindow.h"
 
 ChatWindow *ChatWindow::_current = 0;
 
