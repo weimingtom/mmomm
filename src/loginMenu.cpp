@@ -1,4 +1,4 @@
-#include "loginmenu.h"
+#include "loginMenu.h"
 
 LoginMenu *LoginMenu::_current = 0;
 

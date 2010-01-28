@@ -1,4 +1,4 @@
-#include "imagemanager.h"
+#include "imageManager.h"
 
 #include <vector>
 

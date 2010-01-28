@@ -1,4 +1,4 @@
-#include "softwarerenderer.h"
+#include "softwareRenderer.h"
 #include <math.h>
 
 SoftwareRenderer::SoftwareRenderer(int screenWidth, int screenHeight, bool fullscreen) : Renderer(screenWidth, screenHeight, fullscreen)

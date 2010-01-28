@@ -11,7 +11,7 @@ class Image;
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "renderer.h"
-#include "imagemanager.h"
+#include "imageManager.h"
 
 using namespace std;
 
