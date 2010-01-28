@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     SDL_EnableUNICODE(1);
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-    Renderer *renderer  = new SoftwareRenderer(800, 600, false);
+    Renderer *renderer  = new SoftwareRenderer(640, 480, false);
     renderer->setCurrent(renderer);
 
     ImageManager::setCurrent(new ImageManager());
@@ -36,10 +36,10 @@ int main(int argc, char **argv)
 
     Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
 
-    loginMenu = new LoginMenu(200, 200);
+    loginMenu = new LoginMenu(100, 150);
     loginMenu->setCurrent(loginMenu);
 
-    chatWindow = new ChatWindow(400, 200);
+    chatWindow = new ChatWindow(300, 150);
     chatWindow->setCurrent(chatWindow);
 
 	NetworkClient::setCurrent(new NetworkClient());
