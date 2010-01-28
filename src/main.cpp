@@ -8,11 +8,13 @@
 #include "configurationmenu.h"
 #include "loginmenu.h"
 #include "networkClient.h"
+#include "chatWindow.h"
 
 #include <vector>
 
 ConfigurationMenu *configMenu = 0;
 LoginMenu* loginMenu = 0;
+ChatWindow* chatWindow = 0;
 
 int main(int argc, char **argv)
 {
@@ -36,6 +38,9 @@ int main(int argc, char **argv)
 
     loginMenu = new LoginMenu(200, 200);
     loginMenu->setCurrent(loginMenu);
+
+    chatWindow = new ChatWindow(400, 200);
+    chatWindow->setCurrent(chatWindow);
 
 	NetworkClient::setCurrent(new NetworkClient());
 
@@ -130,6 +135,10 @@ int main(int argc, char **argv)
     if ( loginMenu ) {
         delete loginMenu;
         loginMenu = 0;
+    }
+    if ( chatWindow ) {
+        delete chatWindow;
+        chatWindow = 0;
     }
 
     delete &Gui::current();
