@@ -62,7 +62,7 @@ public:
 	NetworkParams params() const
 	{
 		return NetworkParams(ID_COLLISION_CREATE, HIGH_PRIORITY,
-				RELIABLE);
+				RELIABLE, ORDER_DEFAULT, true);
 	}
 	
 	// Respond to successful connection on client.
@@ -104,7 +104,7 @@ public:
 	{
 		// Could be just UNRELIABLE, though packet inversion would look odd
 		return NetworkParams(ID_COLLISION_UPDATE, HIGH_PRIORITY,
-				UNRELIABLE_SEQUENCED, SEQUENCE_WORLD);
+				UNRELIABLE, SEQUENCE_DEFAULT, true);
 	}
 	
 	// Respond to successful connection on client.

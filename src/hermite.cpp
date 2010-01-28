@@ -1,6 +1,16 @@
 #include "hermite.h"
 #include <cassert>
 
+HermiteInterpolation::HermiteInterpolation()
+: _initialTime()
+, _finalTime()
+, _initialPosition()
+, _finalPosition()
+, _initialVelocity()
+, _finalVelocity()
+{
+}
+
 HermiteInterpolation::HermiteInterpolation(double initialTime, double finalTime,
 	const Vector2D& initialPosition, const Vector2D& finalPosition,
 	const Vector2D& initialVelocity, const Vector2D& finalVelocity)
@@ -11,12 +21,6 @@ HermiteInterpolation::HermiteInterpolation(double initialTime, double finalTime,
 , _initialVelocity(initialVelocity)
 , _finalVelocity(finalVelocity)
 {
-}
-
-bool HermiteInterpolation::stillInterpolating(double t) const
-{
-	assert(t > _initialTime);
-	return (t < _finalTime);
 }
 
 Vector2D HermiteInterpolation::interpolatePosition(double t) const
