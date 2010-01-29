@@ -11,6 +11,8 @@ Animation::Animation(ImageManager::shared_ptr img, int frameWidth, int frameHeig
 {
     _totalHoriFrames = _img.get()->getWidth()  / _frameWidth;
     _totalVertFrames = _img.get()->getHeight() / _frameHeight;
+
+    cout << "Created animation with " << _totalHoriFrames << "x" << _totalVertFrames << " frames" << endl;
 }
 
 Animation::~Animation()
@@ -18,8 +20,10 @@ Animation::~Animation()
 }
 
 
-void Animation::update(int msPassed)
+void Animation::update(unsigned msPassed)
 {
+    //cout << "updating \"" << getImage().get()->getFilename() << "\" with " << msPassed << endl;
+
     int maxTime = getHoriFrameNo()*getVertFrameNo()*_interval;
     _totalTime += msPassed;
 

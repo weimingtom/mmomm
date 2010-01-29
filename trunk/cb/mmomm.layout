@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
+	<File name="../src/animation.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="926" topLine="0" />
+	</File>
+	<File name="../src/animation.h" open="0" top="0" tabpos="0">
+		<Cursor position="1653" topLine="0" />
+	</File>
+	<File name="../src/animationManager.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="1449" topLine="11" />
+	</File>
+	<File name="../src/animationManager.h" open="0" top="0" tabpos="0">
+		<Cursor position="143" topLine="0" />
+	</File>
+	<File name="../src/chatWindow.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="828" topLine="0" />
+	</File>
+	<File name="../src/chatWindow.h" open="0" top="0" tabpos="0">
+		<Cursor position="405" topLine="0" />
+	</File>
 	<File name="../src/collision.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="0" topLine="0" />
+		<Cursor position="0" topLine="81" />
 	</File>
 	<File name="../src/collision.h" open="0" top="0" tabpos="3">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/collisionPackets.h" open="0" top="0" tabpos="0">
-		<Cursor position="0" topLine="30" />
+	<File name="../src/configurationMenu.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="2450" topLine="43" />
 	</File>
 	<File name="../src/gui.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="1934" topLine="37" />
@@ -17,13 +35,22 @@
 		<Cursor position="633" topLine="0" />
 	</File>
 	<File name="../src/image.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="397" topLine="12" />
+		<Cursor position="397" topLine="0" />
 	</File>
 	<File name="../src/image.h" open="0" top="0" tabpos="4">
-		<Cursor position="500" topLine="0" />
+		<Cursor position="1056" topLine="0" />
+	</File>
+	<File name="../src/imageManager.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="712" topLine="5" />
+	</File>
+	<File name="../src/imageManager.h" open="0" top="0" tabpos="0">
+		<Cursor position="348" topLine="0" />
+	</File>
+	<File name="../src/loginMenu.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="2757" topLine="55" />
 	</File>
 	<File name="../src/main.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="851" topLine="0" />
+		<Cursor position="1771" topLine="18" />
 	</File>
 	<File name="../src/networkClient.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="2005" topLine="0" />
@@ -39,5 +66,14 @@
 	</File>
 	<File name="../src/renderer.h" open="0" top="0" tabpos="4">
 		<Cursor position="1264" topLine="1" />
+	</File>
+	<File name="../src/worldCommon.h" open="0" top="0" tabpos="0">
+		<Cursor position="14" topLine="0" />
+	</File>
+	<File name="../src/worldInstance.h" open="0" top="0" tabpos="0">
+		<Cursor position="41" topLine="0" />
+	</File>
+	<File name="../src/worldMap.h" open="0" top="0" tabpos="0">
+		<Cursor position="36" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

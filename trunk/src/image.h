@@ -39,6 +39,7 @@ public:
     GLenum getTextureFormat()                   { return _textureFormat; }
     int getWidth()                              { return _width; }
     int getHeight()                             { return _height; }
+    string getFilename()                        { return _filename; }
 };
 
 #endif

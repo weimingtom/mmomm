@@ -4,7 +4,7 @@
 	<sstream>
 	<iostream>
 
-1264781990 /home/oipo/Programming/mmomm/src/image.h
+1264790374 /home/oipo/Programming/mmomm/src/image.h
 	<windows.h>
 	<SDL/SDL.h>
 	<SDL/SDL_image.h>
@@ -22,13 +22,15 @@
 	<assert.h>
 	"image.h"
 
-1264780084 source:/home/oipo/Programming/mmomm/src/main.cpp
+1264790935 source:/home/oipo/Programming/mmomm/src/main.cpp
 	"events.h"
 	"renderer.h"
 	"openglRenderer.h"
 	"softwareRenderer.h"
 	"image.h"
 	"imageManager.h"
+	"animation.h"
+	"animationManager.h"
 	"gui.h"
 	"configurationMenu.h"
 	"loginMenu.h"
@@ -364,19 +366,20 @@
 	"image.h"
 	"renderer.h"
 
-1264783636 source:/home/oipo/Programming/mmomm/src/animation.cpp
+1264790595 source:/home/oipo/Programming/mmomm/src/animation.cpp
 	"animation.h"
 
-1264783623 /home/oipo/Programming/mmomm/src/animation.h
+1264791002 /home/oipo/Programming/mmomm/src/animation.h
 	"image.h"
 	"imageManager.h"
 
-1264784333 source:/home/oipo/Programming/mmomm/src/animationManager.cpp
+1264790221 source:/home/oipo/Programming/mmomm/src/animationManager.cpp
 	<boost/foreach.hpp>
 	"animationManager.h"
 
-1264783729 /home/oipo/Programming/mmomm/src/animationManager.h
+1264790101 /home/oipo/Programming/mmomm/src/animationManager.h
 	<boost/shared_ptr.hpp>
 	<boost/unordered_map.hpp>
+	<vector>
 	"animation.h"
 

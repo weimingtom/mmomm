@@ -154,12 +154,6 @@
 		<Unit filename="../src/networkPacketManager.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
-		<Unit filename="../src/networkServer.cpp">
-			<Option virtualFolder="Net/" />
-		</Unit>
-		<Unit filename="../src/networkServer.h">
-			<Option virtualFolder="Net/" />
-		</Unit>
 		<Unit filename="../src/openglRenderer.cpp">
 			<Option virtualFolder="Core/Renderers/" />
 		</Unit>

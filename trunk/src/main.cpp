@@ -33,12 +33,14 @@ int main(int argc, char **argv)
 
     ImageManager::setCurrent(new ImageManager());
 
-    ImageManager::shared_ptr img  = ImageManager::current().getImage("testimage.png");
+    ImageManager::shared_ptr img  = ImageManager::current().getImage("001-Fighter01.png");
 #ifndef NDEBUG
     ImageManager::current().use_count();
 #endif
 
     AnimationManager::setCurrent(new AnimationManager());
+    int id = AnimationManager::current().createAnimation(img, 32, 48, 250);
+    AnimationManager::shared_ptr anim_ptr = AnimationManager::current().getAnimation(id);
 
     Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
 
@@ -51,6 +53,8 @@ int main(int argc, char **argv)
 	NetworkClient::setCurrent(new NetworkClient());
 
     bool loop  = true;
+    unsigned prevtime = SDL_GetTicks();
+    unsigned curtime = prevtime;
 
     while(loop)
     {
@@ -126,13 +130,29 @@ int main(int argc, char **argv)
 			//packet->respondClient();
 		}
 
-        Gui::current().logic();
-        //AnimationManager::current().update(time);
+		curtime = SDL_GetTicks();
 
-        renderer->beginDraw();
-        renderer->drawImage(img.get(), 0, 0);
-        Gui::current().draw();
-        renderer->swapBuffers();
+        Gui::current().logic();
+
+        if(curtime > prevtime + 20)
+        {
+            AnimationManager::current().update(curtime-prevtime);
+            prevtime = curtime;
+
+            renderer->beginDraw();
+            BOOST_FOREACH(AnimationManager::shared_ptr anim, AnimationManager::current().getActiveAnimations())
+            {
+                SDL_Rect clip;
+                clip.x = anim.get()->getCurrentFrameX();
+                clip.y = anim.get()->getCurrentFrameY();
+                clip.w = anim.get()->getFrameWidth();
+                clip.h = anim.get()->getFrameHeight();
+                renderer->drawClippedImage(anim.get()->getImage().get(), 0, 0, clip);
+            }
+            Gui::current().draw();
+            renderer->swapBuffers();
+
+        }
     }
 
     if ( configMenu ) {
