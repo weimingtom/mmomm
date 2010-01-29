@@ -3,7 +3,6 @@
 
 #include <string>
 #include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
 #include <boost/unordered_map.hpp>
 #include "image.h"
 
@@ -15,10 +14,9 @@ class ImageManager
 {
 private:
     static ImageManager *_current;
-    imgmap images;
+    imgmap               _images;
 
 public:
-    typedef boost::weak_ptr<Image>   weak_ptr;
     typedef boost::shared_ptr<Image> shared_ptr;
 
     ImageManager();
@@ -27,9 +25,12 @@ public:
     static ImageManager& current() { assert(_current); return *_current; }
     static void setCurrent(ImageManager *current) { _current = current; }
 
-    weak_ptr getImage(string filename);
+    shared_ptr getImage(string filename);
     void reloadImages();
+
+#ifndef NDEBUG
     void use_count();
+#endif
 };
 
 #endif

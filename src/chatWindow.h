@@ -17,8 +17,9 @@ class ChatWindow
 {
 private:
 	gcn::Window				 *_window;
-    gcn::TextField           *_chatField;
-    gcn::Label               *_chatLabel;
+    gcn::TextField           *_inputField;
+    gcn::TextBox             *_chatBox;
+    gcn::Label               *_inputLabel;
 
     static ChatWindow *_current;
 

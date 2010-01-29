@@ -1,5 +1,5 @@
-#ifndef WORLDMAP_H_
-#define WORLDMAP_H_
+#ifndef WORLD_MAP_H_
+#define WORLD_MAP_H_
 
 #include "worldCommon.h"
 #ifdef NDEBUG

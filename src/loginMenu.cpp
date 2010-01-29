@@ -10,7 +10,7 @@ LoginMenu::LoginMenu(int x, int y)
         _okButtonListener = new okButtonListener();
         _optionsButtonListener = new optionsButtonListener();
 
-        _window = new gcn::Window();
+        _window = new gcn::Window("Login");
         _window->setPosition(x, y);
 
         _createAccountCheckBox = new gcn::CheckBox("Create New Account");

@@ -11,7 +11,6 @@ class Image;
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "renderer.h"
-#include "imageManager.h"
 
 using namespace std;
 
@@ -34,12 +33,12 @@ public:
 
     void reload();
 
-    SDL_Surface* getSurface() { return _surface; }
-    GLuint getTextureId() { return _textureId; }
+    SDL_Surface* getSurface()                   { return _surface; }
+    GLuint getTextureId()                       { return _textureId; }
     void setTextureFormat(GLenum textureFormat) { this->_textureFormat = textureFormat; }
-    GLenum getTextureFormat() { return _textureFormat; }
-    int getWidth() { return _width; }
-    int getHeight() { return _height; }
+    GLenum getTextureFormat()                   { return _textureFormat; }
+    int getWidth()                              { return _width; }
+    int getHeight()                             { return _height; }
 };
 
 #endif

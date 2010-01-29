@@ -12,16 +12,16 @@ ImageManager::~ImageManager()
 {
 }
 
-ImageManager::weak_ptr ImageManager::getImage(string filename)
+ImageManager::shared_ptr ImageManager::getImage(string filename)
 {
-    imgmap::iterator it = images.find(filename);
-    if(it == images.end()) {
+    imgmap::iterator it = _images.find(filename);
+    if(it == _images.end()) {
         shared_ptr img(new Image(filename));
-        weak_ptr wptr_img(img);
-        images.insert(pair<string, weak_ptr >(filename, wptr_img));
+        shared_ptr wptr_img(img);
+        _images.insert(pair<string, shared_ptr>(filename, img));
         return wptr_img;
     } else {
-        weak_ptr wptr_img(images[filename]);
+        shared_ptr wptr_img(_images[filename]);
         return wptr_img;
     }
 }
@@ -30,23 +30,27 @@ void ImageManager::reloadImages()
 {
     imgmap::iterator it;
     vector<string> scheduledForDeletion;
-    for(it = images.begin(); it != images.end(); it++) {
-        if((*it).second.use_count() == 0)
+    for(it = _images.begin(); it != _images.end(); it++) {
+        if((*it).second.unique())
             scheduledForDeletion.push_back((*it).first);
         else
             (*it).second.get()->reload();
     }
 
     for(unsigned i = 0; i < scheduledForDeletion.size(); i++) {
+#ifndef NDEBUG
         cout << "Deleting: " << scheduledForDeletion[i] << endl;
-        images.erase(scheduledForDeletion[i]);
+#endif
+        _images.erase(scheduledForDeletion[i]);
     }
 }
 
+#ifndef NDEBUG
 void ImageManager::use_count()
 {
     imgmap::iterator it;
-    for(it = images.begin(); it != images.end(); it++) {
-        cout << "stuff: " << (*it).second.use_count() << endl;
+    for(it = _images.begin(); it != _images.end(); it++) {
+        cout << "use_count of \"" << (*it).first << "\": " << (*it).second.use_count() << endl;
     }
 }
+#endif
