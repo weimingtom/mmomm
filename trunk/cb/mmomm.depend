@@ -4,14 +4,13 @@
 	<sstream>
 	<iostream>
 
-1264631557 /home/oipo/Programming/mmomm/src/image.h
+1264781990 /home/oipo/Programming/mmomm/src/image.h
 	<windows.h>
 	<SDL/SDL.h>
 	<SDL/SDL_image.h>
 	<GL/gl.h>
 	<GL/glu.h>
 	"renderer.h"
-	"imagemanager.h"
 
 1264436173 /home/oipo/Programming/mmomm/src/renderer.h
 	<windows.h>
@@ -23,17 +22,18 @@
 	<assert.h>
 	"image.h"
 
-1264632732 source:/home/oipo/Programming/mmomm/src/main.cpp
+1264780084 source:/home/oipo/Programming/mmomm/src/main.cpp
 	"events.h"
 	"renderer.h"
-	"openglrenderer.h"
-	"softwarerenderer.h"
+	"openglRenderer.h"
+	"softwareRenderer.h"
 	"image.h"
-	"imagemanager.h"
+	"imageManager.h"
 	"gui.h"
-	"configurationmenu.h"
-	"loginmenu.h"
+	"configurationMenu.h"
+	"loginMenu.h"
 	"networkClient.h"
+	"chatWindow.h"
 	<vector>
 
 1264384865 source:/home/oipo/Programming/mmomm/src/renderer.cpp
@@ -164,9 +164,11 @@
 	<RakNet/StringCompressor.h>
 	<string>
 
-1264424313 source:/home/oipo/Programming/mmomm/src/networkServer.cpp
+1264724680 source:/home/oipo/Programming/mmomm/src/networkServer.cpp
 	"networkServer.h"
+	"networkCommon.h"
 	"networkPacket.h"
+	"user.h"
 	"initializePacketManager.h"
 	"nativePackets.h"
 	<RakNet/RakNetTypes.h>
@@ -174,13 +176,17 @@
 	<RakNet/RakPeerInterface.h>
 	<RakNet/MessageIdentifiers.h>
 	<iostream>
+	<cctype>
+	<functional>
 
-1264424313 /home/oipo/Programming/mmomm/src/networkServer.h
+1264632732 /home/oipo/Programming/mmomm/src/networkServer.h
 	<boost/noncopyable.hpp>
 	<boost/foreach.hpp>
 	<RakNet/RakNetTypes.h>
 	"networkPacket.h"
 	"networkPacketManager.h"
+	<map>
+	<vector>
 
 1264618017 source:/home/oipo/Programming/mmomm/src/serverNativePackets.cpp
 	"nativePackets.h"
@@ -190,7 +196,7 @@
 1264632732 /home/oipo/Programming/mmomm/src/packetTypes.h
 	<RakNet/MessageIdentifiers.h>
 
-1264618017 /home/oipo/Programming/mmomm/src/worldCommon.h
+1264779205 /home/oipo/Programming/mmomm/src/worldCommon.h
 	<boost/functional/hash.hpp>
 
 1264618017 /home/oipo/Programming/mmomm/src/events.h
@@ -221,7 +227,7 @@
 1264618017 source:/home/oipo/Programming/mmomm/src/worldMap.cpp
 	"worldMap.h"
 
-1264618017 /home/oipo/Programming/mmomm/src/worldMap.h
+1264779213 /home/oipo/Programming/mmomm/src/worldMap.h
 	"worldCommon.h"
 	<boost/multi_array.hpp>
 	<boost/unordered_map.hpp>
@@ -254,7 +260,7 @@
 	"packetTypes.h"
 	<string>
 
-1264632732 /home/oipo/Programming/mmomm/src/collisionPackets.h
+1264724680 /home/oipo/Programming/mmomm/src/collisionPackets.h
 	"networkPacket.h"
 	"packetTypes.h"
 	"vector2D.h"
@@ -265,10 +271,112 @@
 	"worldMap.h"
 	"collision.h"
 
-1264632732 /home/oipo/Programming/mmomm/src/worldInstance.h
+1264779209 /home/oipo/Programming/mmomm/src/worldInstance.h
 	"collision.h"
 
 1264632732 source:/home/oipo/Programming/mmomm/src/clientCollisionPackets.cpp
 	"collisionPackets.h"
 	<iostream>
+
+1264782135 /home/oipo/Programming/mmomm/src/imageManager.h
+	<string>
+	<boost/shared_ptr.hpp>
+	<boost/unordered_map.hpp>
+	"image.h"
+
+1264779015 source:/home/oipo/Programming/mmomm/src/chatWindow.cpp
+	"chatWindow.h"
+
+1264778905 /home/oipo/Programming/mmomm/src/chatWindow.h
+	<iostream>
+	<string>
+	<sstream>
+	<vector>
+	<guichan.hpp>
+	"gui.h"
+	"renderer.h"
+	"events.h"
+
+1264778750 source:/home/oipo/Programming/mmomm/src/configurationMenu.cpp
+	"configurationMenu.h"
+
+1264724680 /home/oipo/Programming/mmomm/src/configurationMenu.h
+	<iostream>
+	<string>
+	<sstream>
+	<vector>
+	<guichan.hpp>
+	"gui.h"
+	"renderer.h"
+	"events.h"
+
+1264724680 source:/home/oipo/Programming/mmomm/src/hermite.cpp
+	"hermite.h"
+	<cassert>
+
+1264724680 /home/oipo/Programming/mmomm/src/hermite.h
+	"vector2D.h"
+
+1264782156 source:/home/oipo/Programming/mmomm/src/imageManager.cpp
+	"imageManager.h"
+	<vector>
+
+1264778747 source:/home/oipo/Programming/mmomm/src/loginMenu.cpp
+	"loginMenu.h"
+
+1264724680 /home/oipo/Programming/mmomm/src/loginMenu.h
+	<iostream>
+	<string>
+	<sstream>
+	<vector>
+	<guichan.hpp>
+	"gui.h"
+	"renderer.h"
+	"events.h"
+
+1264724680 source:/home/oipo/Programming/mmomm/src/openglRenderer.cpp
+	"openglRenderer.h"
+	<GL/glext.h>
+	<boost/scoped_array.hpp>
+
+1264724680 /home/oipo/Programming/mmomm/src/openglRenderer.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<string>
+	<sstream>
+	<iostream>
+	"renderer.h"
+	"image.h"
+
+1264724680 source:/home/oipo/Programming/mmomm/src/softwareRenderer.cpp
+	"softwareRenderer.h"
+	<math.h>
+
+1264724680 /home/oipo/Programming/mmomm/src/softwareRenderer.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<SDL/SDL.h>
+	<string>
+	<sstream>
+	<iostream>
+	"image.h"
+	"renderer.h"
+
+1264783636 source:/home/oipo/Programming/mmomm/src/animation.cpp
+	"animation.h"
+
+1264783623 /home/oipo/Programming/mmomm/src/animation.h
+	"image.h"
+	"imageManager.h"
+
+1264784333 source:/home/oipo/Programming/mmomm/src/animationManager.cpp
+	<boost/foreach.hpp>
+	"animationManager.h"
+
+1264783729 /home/oipo/Programming/mmomm/src/animationManager.h
+	<boost/shared_ptr.hpp>
+	<boost/unordered_map.hpp>
+	"animation.h"
 
