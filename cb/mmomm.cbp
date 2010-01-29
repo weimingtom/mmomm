@@ -43,6 +43,18 @@
 			<Add option="-lguichan_opengl" />
 			<Add option="-lRakNet" />
 		</Linker>
+		<Unit filename="../src/animation.cpp">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/animation.h">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/animationManager.cpp">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/animationManager.h">
+			<Option virtualFolder="Core/" />
+		</Unit>
 		<Unit filename="../src/chat.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
