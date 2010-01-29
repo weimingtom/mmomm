@@ -46,6 +46,12 @@
 		<Unit filename="../src/chat.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
+		<Unit filename="../src/chatWindow.cpp">
+			<Option virtualFolder="Guis/" />
+		</Unit>
+		<Unit filename="../src/chatWindow.h">
+			<Option virtualFolder="Guis/" />
+		</Unit>
 		<Unit filename="../src/clientChat.cpp">
 			<Option virtualFolder="Net/" />
 		</Unit>
@@ -64,10 +70,10 @@
 		<Unit filename="../src/collisionPackets.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
-		<Unit filename="../src/configurationmenu.cpp">
+		<Unit filename="../src/configurationMenu.cpp">
 			<Option virtualFolder="Guis/" />
 		</Unit>
-		<Unit filename="../src/configurationmenu.h">
+		<Unit filename="../src/configurationMenu.h">
 			<Option virtualFolder="Guis/" />
 		</Unit>
 		<Unit filename="../src/events.h">
@@ -79,16 +85,22 @@
 		<Unit filename="../src/gui.h">
 			<Option virtualFolder="Core/" />
 		</Unit>
+		<Unit filename="../src/hermite.cpp">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/hermite.h">
+			<Option virtualFolder="Core/" />
+		</Unit>
 		<Unit filename="../src/image.cpp">
 			<Option virtualFolder="Core/" />
 		</Unit>
 		<Unit filename="../src/image.h">
 			<Option virtualFolder="Core/" />
 		</Unit>
-		<Unit filename="../src/imagemanager.cpp">
+		<Unit filename="../src/imageManager.cpp">
 			<Option virtualFolder="Core/" />
 		</Unit>
-		<Unit filename="../src/imagemanager.h">
+		<Unit filename="../src/imageManager.h">
 			<Option virtualFolder="Core/" />
 		</Unit>
 		<Unit filename="../src/initializePacketManager.cpp">
@@ -97,10 +109,10 @@
 		<Unit filename="../src/initializePacketManager.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
-		<Unit filename="../src/loginmenu.cpp">
+		<Unit filename="../src/loginMenu.cpp">
 			<Option virtualFolder="Guis/" />
 		</Unit>
-		<Unit filename="../src/loginmenu.h">
+		<Unit filename="../src/loginMenu.h">
 			<Option virtualFolder="Guis/" />
 		</Unit>
 		<Unit filename="../src/main.cpp">
@@ -130,10 +142,16 @@
 		<Unit filename="../src/networkPacketManager.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
-		<Unit filename="../src/openglrenderer.cpp">
+		<Unit filename="../src/networkServer.cpp">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/networkServer.h">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/openglRenderer.cpp">
 			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
-		<Unit filename="../src/openglrenderer.h">
+		<Unit filename="../src/openglRenderer.h">
 			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
 		<Unit filename="../src/packetTypes.h">
@@ -145,11 +163,14 @@
 		<Unit filename="../src/renderer.h">
 			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
-		<Unit filename="../src/softwarerenderer.cpp">
+		<Unit filename="../src/softwareRenderer.cpp">
 			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
-		<Unit filename="../src/softwarerenderer.h">
+		<Unit filename="../src/softwareRenderer.h">
 			<Option virtualFolder="Core/Renderers/" />
+		</Unit>
+		<Unit filename="../src/user.h">
+			<Option virtualFolder="Net/" />
 		</Unit>
 		<Unit filename="../src/vector2D.h">
 			<Option virtualFolder="Core/" />
