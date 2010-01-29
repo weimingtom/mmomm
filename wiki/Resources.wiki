@@ -29,7 +29,11 @@ Maybe chaos doesn't just grow back of the edges but on any unactive area?
 Any more ideas.
 
 Resources.
-Trees: To obtain wood/food/seeds?
-Wood: To build structures?
+Trees: To obtain wood/food/seeds.
+Wood: To build structures.
 Seeds: To grow trees.
-
+Ore: General resource?
+Stone: To build structures.
+Gems: To create artifacts.
+-Gems bestow magical properties upon artifacts. 
+-Gems can be combined to create more powerful ones?
