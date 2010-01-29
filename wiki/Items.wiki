@@ -1,1 +1,14 @@
-Test
+Characters can equip what items:
+Weapon(?)
+Armor(?)
+Helmet(?)
+Boots(?)
+Gloves(?)
+Amulet(?)
+Ring(s)(?)
+Cape(?)
+Bag(?)
+
+
+Items are found/created how:
+???
