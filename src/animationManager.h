@@ -3,6 +3,7 @@
 
 #include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
+#include <vector>
 #include "animation.h"
 
 using namespace std;
@@ -26,10 +27,11 @@ public:
     static AnimationManager& current() { assert(_current); return *_current; }
     static void setCurrent(AnimationManager *current) { _current = current; }
 
-    shared_ptr  getAnimation(int id);
-    int         createAnimation(ImageManager::shared_ptr img, int frameWidth, int frameHeight,
-                                int interval, int startFrame = 0, bool active = true);
-    void        update(int msPassed);
+    shared_ptr          getAnimation(int id);
+    vector<shared_ptr>  getActiveAnimations();
+    int                 createAnimation(ImageManager::shared_ptr img, int frameWidth, int frameHeight,
+                                        int interval, int startFrame = 0, bool active = true);
+    void                update(unsigned msPassed);
 };
 
 #endif

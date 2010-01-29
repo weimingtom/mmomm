@@ -24,7 +24,7 @@ public:
               int interval, int startFrame = 0, bool active = true);
     ~Animation();
 
-    void update(int msPassed);
+    void update(unsigned msPassed);
 
     void                        setCurrentFrame(int currentFrame)   { _currentFrame = currentFrame; }
     void                        setActive(bool active)              { _active = active; }
@@ -36,7 +36,7 @@ public:
     int                         getVertFrameNo()    { return _totalVertFrames; }
     int                         getCurrentFrame()   { return _currentFrame; }
     int                         getCurrentFrameX()  { return (_currentFrame - (int(_currentFrame/getHoriFrameNo()))*getVertFrameNo()) *_frameWidth; }
-    int                         getCurrentFrameY()  { return ((int(_currentFrame/getHoriFrameNo()))*getVertFrameNo()) *_frameWidth; }
+    int                         getCurrentFrameY()  { return (int(_currentFrame/getHoriFrameNo())) *_frameHeight; }
 
     bool                        isActive()          { return _active; }
 };

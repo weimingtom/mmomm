@@ -43,10 +43,20 @@ int AnimationManager::createAnimation(ImageManager::shared_ptr img, int frameWid
     return _idCounter;
 }
 
-void AnimationManager::update(int msPassed)
+void AnimationManager::update(unsigned msPassed)
 {
     for(animap::iterator it = _activeAnimations.begin(); it != _activeAnimations.end(); it++)
     {
         (*it).second.get()->update(msPassed);
     }
+}
+
+vector<AnimationManager::shared_ptr> AnimationManager::getActiveAnimations()
+{
+    vector<shared_ptr> anims;
+    for(animap::iterator it = _activeAnimations.begin(); it != _activeAnimations.end(); it++)
+    {
+        anims.push_back((*it).second);
+    }
+    return anims;
 }
