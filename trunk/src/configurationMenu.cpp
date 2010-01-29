@@ -10,7 +10,7 @@ ConfigurationMenu::ConfigurationMenu(int x, int y)
         _okButtonListener = new okButtonListener();
         _cancelButtonListener = new cancelButtonListener();
 
-        _window = new gcn::Window();
+        _window = new gcn::Window("Configuration");
         _window->setPosition(x, y);
 
         _fullscreenCheckBox = new gcn::CheckBox("Fullscreen");
@@ -72,16 +72,6 @@ ConfigurationMenu::ConfigurationMenu(int x, int y)
 
 ConfigurationMenu::~ConfigurationMenu()
 {
-/*    _window->remove(_fullscreenCheckBox);
-    _window->remove(_screenResolutionLabel);
-    _window->remove(_widthField);
-    _window->remove(_heightField);
-    _window->remove(_okButton);
-    _window->remove(_cancelButton);
-    */
-
-    //Gui::current().removeWidget(_window);
-
     delete _fullscreenCheckBox;
     delete _screenResolutionLabel;
     delete _widthField;

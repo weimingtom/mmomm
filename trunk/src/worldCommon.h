@@ -1,5 +1,5 @@
-#ifndef WORLDCOMMON_H_
-#define WORLDCOMMON_H_
+#ifndef WORLD_COMMON_H_
+#define WORLD_COMMON_H_
 
 #include <boost/functional/hash.hpp>
 

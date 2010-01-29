@@ -4,6 +4,8 @@
 #include "softwareRenderer.h"
 #include "image.h"
 #include "imageManager.h"
+#include "animation.h"
+#include "animationManager.h"
 #include "gui.h"
 #include "configurationMenu.h"
 #include "loginMenu.h"
@@ -31,8 +33,12 @@ int main(int argc, char **argv)
 
     ImageManager::setCurrent(new ImageManager());
 
-    ImageManager::weak_ptr img = ImageManager::current().getImage("testimage.png");
-    //ImageManager::current().use_count();
+    ImageManager::shared_ptr img  = ImageManager::current().getImage("testimage.png");
+#ifndef NDEBUG
+    ImageManager::current().use_count();
+#endif
+
+    AnimationManager::setCurrent(new AnimationManager());
 
     Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
 
@@ -121,9 +127,10 @@ int main(int argc, char **argv)
 		}
 
         Gui::current().logic();
+        //AnimationManager::current().update(time);
 
         renderer->beginDraw();
-        renderer->drawImage(img.lock().get(), 0, 0);
+        renderer->drawImage(img.get(), 0, 0);
         Gui::current().draw();
         renderer->swapBuffers();
     }

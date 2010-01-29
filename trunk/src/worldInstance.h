@@ -1,5 +1,5 @@
-#ifndef WORLDINSTANCE_H_
-#define WORLDINSTANCE_H_
+#ifndef WORLD_INSTANCE_H_
+#define WORLD_INSTANCE_H_
 
 #include "collision.h"
 
