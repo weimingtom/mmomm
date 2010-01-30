@@ -35,7 +35,7 @@ public:
     int                         getHoriFrameNo()    { return _totalHoriFrames; }
     int                         getVertFrameNo()    { return _totalVertFrames; }
     int                         getCurrentFrame()   { return _currentFrame; }
-    int                         getCurrentFrameX()  { return (_currentFrame - (int(_currentFrame/getHoriFrameNo()))*getVertFrameNo()) *_frameWidth; }
+	int                         getCurrentFrameX()  { return _currentFrame % getHoriFrameNo() *_frameWidth; }
     int                         getCurrentFrameY()  { return (int(_currentFrame/getHoriFrameNo())) *_frameHeight; }
 
     bool                        isActive()          { return _active; }
