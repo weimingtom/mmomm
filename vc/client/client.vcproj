@@ -181,6 +181,14 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\src\animation.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\animationManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\chatWindow.cpp"
 				>
 			</File>
@@ -270,6 +278,14 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\..\src\animation.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\animationManager.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\src\chat.h"
 				>
