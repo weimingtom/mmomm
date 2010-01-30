@@ -70,25 +70,25 @@ int main(int argc, char **argv)
                     if ( event.user.code == EVENT_OPTIONS_OK ) {
                         int *ints = (int*)event.user.data1;
 
-                        if((ints[3] != 0) != renderer->isSoftwareRenderer())
-                        {
-                            delete &Gui::current();
-                            delete renderer;
+                        delete &ChatWindow::current();
+                        delete &Gui::current();
+                        delete renderer;
 
-                            if(ints[3] != 0)
-                                renderer    = new SoftwareRenderer(ints[0], ints[1], (ints[2] != 0));
-                            else
-                                renderer    = new OpenGLRenderer  (ints[0], ints[1], (ints[2] != 0));
-                            renderer->setCurrent(renderer);
+                        if(ints[3] != 0)
+                            renderer    = new SoftwareRenderer(ints[0], ints[1], (ints[2] != 0));
+                        else
+                            renderer    = new OpenGLRenderer  (ints[0], ints[1], (ints[2] != 0));
+                        renderer->setCurrent(renderer);
 
-                            ImageManager::current().reloadImages();
+                        ImageManager::current().reloadImages();
 
-                            Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
-                        }
+                        Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
 
                         loginMenu = new LoginMenu(configMenu->getX(), configMenu->getY());
                         loginMenu->setCurrent(loginMenu);
                         delete &ConfigurationMenu::current();
+                        chatWindow = new ChatWindow(300, 150);
+                        chatWindow->setCurrent(chatWindow);
                         configMenu = 0;
 
                         delete ints;
