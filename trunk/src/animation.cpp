@@ -9,10 +9,11 @@ Animation::Animation(ImageManager::shared_ptr img, int frameWidth, int frameHeig
 ,   _currentFrame(startFrame)
 ,   _active(active)
 {
+	_totalTime = 0;
     _totalHoriFrames = _img.get()->getWidth()  / _frameWidth;
     _totalVertFrames = _img.get()->getHeight() / _frameHeight;
 
-    cout << "Created animation with " << _totalHoriFrames << "x" << _totalVertFrames << " frames" << endl;
+    cout << "Created animation with " << _totalHoriFrames << "x" << _totalVertFrames << " frames and interval = " << _interval << endl;
 }
 
 Animation::~Animation()
