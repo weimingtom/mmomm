@@ -1,13 +1,13 @@
 #include "clientActor.h"
 
-ClientActor::ClientActor(long actorId, const Rect& rect, ClientAnimations::Animation animation)
-: Actor(actorId, rect)
-, _tempId(ClientAnimations::Get(animation))
-, _animation(AnimationManager::current().getAnimation(_tempId))
+ClientActor::ClientActor(ActorID actorID, const Rect& rect, ClientAnimations::Animation animation)
+: Actor(actorID, rect)
+, _tempID(ClientAnimations::Get(animation))
+, _animation(AnimationManager::current().getAnimation(_tempID))
 {
 }
 
 ClientActor::~ClientActor()
 {
-    AnimationManager::current().deleteAnimation(_tempId);
+    AnimationManager::current().deleteAnimation(_tempID);
 }
