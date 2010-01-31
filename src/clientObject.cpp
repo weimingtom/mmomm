@@ -1,7 +1,7 @@
 #include "clientObject.h"
 
-ClientObject::ClientObject(WorldInstance& world, const Rect& rect, ClientAnimations::Animation animation)
-: Object( world, rect )
+ClientObject::ClientObject(const Rect& rect, ClientAnimations::Animation animation)
+: Object( rect )
 , _tempId(ClientAnimations::Get(animation))
 , _animation(AnimationManager::current().getAnimation(_tempId))
 {
