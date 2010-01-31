@@ -1,16 +1,23 @@
 #include "object.h"
 #include "worldInstance.h"
 
-Object::Object(const Rect& rect)
+Object::Object(long objectId, const Rect& rect)
 : Physical(WorldInstance::current().GetCollision(), rect)
+, _objectId(objectId)
 {
 }
 
-Object::Object(double width, double height)
+Object::Object(long objectId, double width, double height)
 : Physical(WorldInstance::current().GetCollision(), width, height)
+, _objectId(objectId)
 {
 }
 
 Object::~Object()
 {
+}
+
+long Object::GetId() const
+{
+    return _objectId;
 }

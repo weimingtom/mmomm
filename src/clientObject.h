@@ -8,7 +8,7 @@
 class ClientObject : public Object {
 public:
 
-    ClientObject(const Rect& rect, ClientAnimations::Animation animation);
+    ClientObject(long objectId, const Rect& rect, ClientAnimations::Animation animation);
     virtual ~ClientObject();
 
     virtual void OnCollision(Physical& other) { }
