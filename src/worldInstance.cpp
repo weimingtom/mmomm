@@ -35,3 +35,8 @@ WorldMap& WorldInstance::GetWorldMap()
 {
     return *_worldMap;
 }
+
+void WorldInstance::AddActor(Actor* actor)
+{
+    _actors.push_back(actor);
+}

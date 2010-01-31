@@ -1,4 +1,4 @@
-
+#include "worldInstance.h"
 #include "networkServer.h"
 #include <RakNet/RakSleep.h>
 #include <iostream>
@@ -6,6 +6,7 @@
 int main(int argc, char **argv)
 {
 	NetworkServer::setCurrent(new NetworkServer());
+    WorldInstance::setCurrent(new WorldInstance());
 	
 	int port = NetworkServer::DEFAULT_PORT;
 	if (!NetworkServer::current().listen(port)) {
@@ -28,9 +29,12 @@ int main(int argc, char **argv)
 		}
 
 		// Update time step.
-		//world->update(time);
+        WorldInstance::current().Update();
 		
 		// Sleep until next frame.
 		RakSleep(30);
 	}
+
+    delete &NetworkServer::current();
+    delete &WorldInstance::current();
 }
