@@ -8,6 +8,7 @@
 #include <vector>
 #include <boost/foreach.hpp>
 #include "vector2D.h"
+#include "frameTimer.h"
 
 using RakNet::BitStream;
 class User;
@@ -98,7 +99,7 @@ public:
 
 	// The timestamp on this packet (only available upon receipt).
 	// Should only be available if useTimestamp.
-	RakNetTime timestamp() const { assert(useTimestamp()); return _timestamp; }
+	double timestamp() const { assert(useTimestamp()); return FrameTimer::fromTimestamp(_timestamp); }
 
 	// The system address of the sender (only available upon receipt).
 	// Server only!
