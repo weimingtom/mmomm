@@ -8,15 +8,15 @@
 class ClientActor : public Actor {
 public:
 
-    ClientActor(long objectId, const Rect& rect, ClientAnimations::Animation animation);
+    ClientActor(long actorId, const Rect& rect, ClientAnimations::Animation animation);
     virtual ~ClientActor();
 
     virtual void OnCollision(Physical& other) { }
 
 private:
 
-    int                          _tempId;
-    AnimationManager::shared_ptr _animation;
+    int                        _tempId;
+    AnimationManager::weak_ptr _animation;
 
 };
 
