@@ -4,6 +4,9 @@
 
 Image::~Image()
 {
+#ifndef NDEBUG
+    cout << _filename << " destroyed" << endl;
+#endif
     destroy();
 }
 
@@ -58,6 +61,9 @@ void Image::destroy()
 {
     Renderer::current().deleteTexture(&_textureId);
     if(_surface != NULL)
+    {
         SDL_FreeSurface(_surface);
+        _surface = 0;
+    }
 }
 

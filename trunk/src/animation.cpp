@@ -13,11 +13,16 @@ Animation::Animation(ImageManager::shared_ptr img, int frameWidth, int frameHeig
     _totalHoriFrames = _img.get()->getWidth()  / _frameWidth;
     _totalVertFrames = _img.get()->getHeight() / _frameHeight;
 
+#ifndef NDEBUG
     cout << "Created animation with " << _totalHoriFrames << "x" << _totalVertFrames << " frames and interval = " << _interval << endl;
+#endif
 }
 
 Animation::~Animation()
 {
+#ifndef NDEBUG
+    cout << "Animation of " << _img.get()->getFilename() << " destroyed" << endl;
+#endif
 }
 
 

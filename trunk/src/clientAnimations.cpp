@@ -17,3 +17,4 @@ int ClientAnimations::Get(Animation animation)
     assert(_templates.find(animation) != _templates.end());
     return AnimationManager::current().createNewInstanceOf(_templates[animation], -1, -1, true);
 }
+

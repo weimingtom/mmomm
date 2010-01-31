@@ -2,6 +2,7 @@
 #define ANIMATION_MANAGER_H_
 
 #include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
 #include <boost/unordered_map.hpp>
 #include <vector>
 #include "animation.h"
@@ -20,6 +21,7 @@ private:
 
 public:
     typedef boost::shared_ptr<Animation> shared_ptr;
+    typedef boost::weak_ptr<Animation>   weak_ptr;
 
     AnimationManager();
     ~AnimationManager();
@@ -27,8 +29,8 @@ public:
     static AnimationManager& current() { assert(_current); return *_current; }
     static void setCurrent(AnimationManager *current) { _current = current; }
 
-    shared_ptr          getAnimation(int id, bool reverse = false);
-    vector<shared_ptr>  getActiveAnimations();
+    weak_ptr            getAnimation(int id, bool reverse = false);
+    vector<weak_ptr>    getActiveAnimations();
     int                 createAnimation(ImageManager::shared_ptr img, int frameWidth, int frameHeight,
                                         int interval, int startFrame = 0, bool active = true);
     int                 createNewInstanceOf(int id, int interval = -1, int startFrame = -1, int active = -1);
