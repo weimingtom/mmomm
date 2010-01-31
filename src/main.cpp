@@ -44,7 +44,7 @@ int main(int argc, char **argv)
     WorldInstance::setCurrent(new WorldInstance());
 
     int id = ClientAnimations::Get(ClientAnimations::FIGHTER);
-    AnimationManager::shared_ptr anim_ptr = AnimationManager::current().getAnimation(id);
+    AnimationManager::weak_ptr anim_ptr = AnimationManager::current().getAnimation(id);
 
     Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
 
@@ -138,20 +138,18 @@ int main(int argc, char **argv)
 
         Gui::current().logic();
 
-        if(curtime > prevtime + 20)
-        {
+        if(curtime > prevtime + 20) {
             AnimationManager::current().update(curtime-prevtime);
             prevtime = curtime;
 
             renderer->beginDraw();
-            BOOST_FOREACH(AnimationManager::shared_ptr anim, AnimationManager::current().getActiveAnimations())
-            {
+            BOOST_FOREACH(AnimationManager::weak_ptr anim, AnimationManager::current().getActiveAnimations()) {
                 SDL_Rect clip;
-                clip.x = anim.get()->getCurrentFrameX();
-                clip.y = anim.get()->getCurrentFrameY();
-                clip.w = anim.get()->getFrameWidth();
-                clip.h = anim.get()->getFrameHeight();
-                renderer->drawClippedImage(anim.get()->getImage().get(), 0, 0, clip);
+                clip.x = anim.lock().get()->getCurrentFrameX();
+                clip.y = anim.lock().get()->getCurrentFrameY();
+                clip.w = anim.lock().get()->getFrameWidth();
+                clip.h = anim.lock().get()->getFrameHeight();
+                renderer->drawClippedImage(anim.lock().get()->getImage().get(), 0, 0, clip);
             }
             Gui::current().draw();
             renderer->swapBuffers();
@@ -159,15 +157,15 @@ int main(int argc, char **argv)
         }
     }
 
-    if ( configMenu ) {
+    if (configMenu) {
         delete configMenu;
         configMenu = 0;
     }
-    if ( loginMenu ) {
+    if (loginMenu) {
         delete loginMenu;
         loginMenu = 0;
     }
-    if ( chatWindow ) {
+    if (chatWindow) {
         delete chatWindow;
         chatWindow = 0;
     }
@@ -175,8 +173,8 @@ int main(int argc, char **argv)
     AnimationManager::current().deleteAnimation(id);
 
     delete &Gui::current();
-    delete &ImageManager::current();
     delete &AnimationManager::current();
+    delete &ImageManager::current();
     delete renderer;
 	delete &NetworkClient::current();
     delete &WorldInstance::current();

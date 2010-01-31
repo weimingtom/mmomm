@@ -5,7 +5,7 @@
 		<Option title="mmomm" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Core/;Core/;Core/Renderers/;Guis/;Net/;World/;" />
+		<Option virtualFolders="Core/;Core/;Core/Renderers/;Guis/;Net/;World/;Core/Animations/;Core/Actors/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/mmomm" prefix_auto="1" extension_auto="1" />
@@ -22,7 +22,9 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-march=i486" />
 					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -43,17 +45,23 @@
 			<Add option="-lguichan_opengl" />
 			<Add option="-lRakNet" />
 		</Linker>
+		<Unit filename="../src/actor.cpp">
+			<Option virtualFolder="Core/Actors/" />
+		</Unit>
+		<Unit filename="../src/actor.h">
+			<Option virtualFolder="Core/Actors/" />
+		</Unit>
 		<Unit filename="../src/animation.cpp">
-			<Option virtualFolder="Core/" />
+			<Option virtualFolder="Core/Animations/" />
 		</Unit>
 		<Unit filename="../src/animation.h">
-			<Option virtualFolder="Core/" />
+			<Option virtualFolder="Core/Animations/" />
 		</Unit>
 		<Unit filename="../src/animationManager.cpp">
-			<Option virtualFolder="Core/" />
+			<Option virtualFolder="Core/Animations/" />
 		</Unit>
 		<Unit filename="../src/animationManager.h">
-			<Option virtualFolder="Core/" />
+			<Option virtualFolder="Core/Animations/" />
 		</Unit>
 		<Unit filename="../src/chat.h">
 			<Option virtualFolder="Net/" />
@@ -63,6 +71,18 @@
 		</Unit>
 		<Unit filename="../src/chatWindow.h">
 			<Option virtualFolder="Guis/" />
+		</Unit>
+		<Unit filename="../src/clientActor.cpp">
+			<Option virtualFolder="Core/Actors/" />
+		</Unit>
+		<Unit filename="../src/clientActor.h">
+			<Option virtualFolder="Core/Actors/" />
+		</Unit>
+		<Unit filename="../src/clientAnimations.cpp">
+			<Option virtualFolder="Core/Animations/" />
+		</Unit>
+		<Unit filename="../src/clientAnimations.h">
+			<Option virtualFolder="Core/Animations/" />
 		</Unit>
 		<Unit filename="../src/clientChat.cpp">
 			<Option virtualFolder="Net/" />

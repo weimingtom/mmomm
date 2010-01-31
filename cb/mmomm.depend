@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1264632606 source:/home/oipo/Programming/mmomm/src/image.cpp
+1264947017 source:/home/oipo/Programming/mmomm/src/image.cpp
 	"image.h"
 	<sstream>
 	<iostream>
@@ -22,7 +22,7 @@
 	<assert.h>
 	"image.h"
 
-1264816398 source:/home/oipo/Programming/mmomm/src/main.cpp
+1264946995 source:/home/oipo/Programming/mmomm/src/main.cpp
 	"events.h"
 	"renderer.h"
 	"openglRenderer.h"
@@ -31,11 +31,13 @@
 	"imageManager.h"
 	"animation.h"
 	"animationManager.h"
+	"clientAnimations.h"
 	"gui.h"
 	"configurationMenu.h"
 	"loginMenu.h"
 	"networkClient.h"
 	"chatWindow.h"
+	"worldInstance.h"
 	<vector>
 
 1264384865 source:/home/oipo/Programming/mmomm/src/renderer.cpp
@@ -229,7 +231,7 @@
 1264618017 source:/home/oipo/Programming/mmomm/src/worldMap.cpp
 	"worldMap.h"
 
-1264779213 /home/oipo/Programming/mmomm/src/worldMap.h
+1264943981 /home/oipo/Programming/mmomm/src/worldMap.h
 	"worldCommon.h"
 	<boost/multi_array.hpp>
 	<boost/unordered_map.hpp>
@@ -268,12 +270,12 @@
 	"vector2D.h"
 	<string>
 
-1264632732 source:/home/oipo/Programming/mmomm/src/worldInstance.cpp
+1264943981 source:/home/oipo/Programming/mmomm/src/worldInstance.cpp
 	"worldInstance.h"
 	"worldMap.h"
 	"collision.h"
 
-1264779209 /home/oipo/Programming/mmomm/src/worldInstance.h
+1264943981 /home/oipo/Programming/mmomm/src/worldInstance.h
 	"collision.h"
 
 1264632732 source:/home/oipo/Programming/mmomm/src/clientCollisionPackets.cpp
@@ -319,7 +321,7 @@
 1264724680 /home/oipo/Programming/mmomm/src/hermite.h
 	"vector2D.h"
 
-1264782156 source:/home/oipo/Programming/mmomm/src/imageManager.cpp
+1264946890 source:/home/oipo/Programming/mmomm/src/imageManager.cpp
 	"imageManager.h"
 	<vector>
 
@@ -366,20 +368,43 @@
 	"image.h"
 	"renderer.h"
 
-1264820941 source:/home/oipo/Programming/mmomm/src/animation.cpp
+1264946941 source:/home/oipo/Programming/mmomm/src/animation.cpp
 	"animation.h"
 
 1264901180 /home/oipo/Programming/mmomm/src/animation.h
 	"image.h"
 	"imageManager.h"
 
-1264790221 source:/home/oipo/Programming/mmomm/src/animationManager.cpp
+1264946880 source:/home/oipo/Programming/mmomm/src/animationManager.cpp
 	<boost/foreach.hpp>
 	"animationManager.h"
 
-1264901860 /home/oipo/Programming/mmomm/src/animationManager.h
+1264946693 /home/oipo/Programming/mmomm/src/animationManager.h
 	<boost/shared_ptr.hpp>
+	<boost/weak_ptr.hpp>
 	<boost/unordered_map.hpp>
 	<vector>
 	"animation.h"
+
+1264943981 source:/home/oipo/Programming/mmomm/src/actor.cpp
+	"actor.h"
+	"worldInstance.h"
+
+1264943981 /home/oipo/Programming/mmomm/src/actor.h
+	"collision.h"
+
+1264945073 source:/home/oipo/Programming/mmomm/src/clientActor.cpp
+	"clientActor.h"
+
+1264943981 /home/oipo/Programming/mmomm/src/clientActor.h
+	"actor.h"
+	"clientAnimations.h"
+	"animationManager.h"
+
+1264946857 /home/oipo/Programming/mmomm/src/clientAnimations.h
+	<boost/unordered_map.hpp>
+
+1264946853 source:/home/oipo/Programming/mmomm/src/clientAnimations.cpp
+	"clientAnimations.h"
+	"animationManager.h"
 
