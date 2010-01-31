@@ -29,7 +29,10 @@ public:
     const WorldMap& GetWorldMap() const;
     /* */ WorldMap& GetWorldMap();
 
-    virtual void Update() { }
+    typedef boost::unordered_map< ActorID, Actor * > ActorMap;
+    const ActorMap& GetActorMap() const;
+
+    virtual void Update();
 
     static WorldInstance& current() { assert(_current); return *_current; }
     static void setCurrent(WorldInstance* current) { _current = current; }
@@ -41,7 +44,6 @@ private:
     CollisionWorld* _collision;
     WorldMap*       _worldMap;
 	
-	typedef boost::unordered_map< ActorID, Actor * > ActorMap;
     ActorMap        _actors;
 
 	// The actorID to use next

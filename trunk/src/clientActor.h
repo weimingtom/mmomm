@@ -12,6 +12,7 @@ public:
     virtual ~ClientActor();
 
     virtual void OnCollision(Physical& other) { }
+    AnimationManager::weak_ptr GetAnimation() const;
 
 private:
 

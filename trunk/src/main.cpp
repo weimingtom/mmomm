@@ -12,7 +12,8 @@
 #include "loginMenu.h"
 #include "networkClient.h"
 #include "chatWindow.h"
-#include "worldInstance.h"
+#include "clientWorldInstance.h"
+#include "clientActor.h"
 
 #include <vector>
 
@@ -41,10 +42,9 @@ int main(int argc, char **argv)
     AnimationManager::setCurrent(new AnimationManager());
     ClientAnimations::Setup();
 
-    WorldInstance::setCurrent(new WorldInstance());
-
-    int id = ClientAnimations::Get(ClientAnimations::FIGHTER);
-    AnimationManager::weak_ptr anim_ptr = AnimationManager::current().getAnimation(id);
+    WorldInstance::setCurrent(new ClientWorldInstance());
+    // TEST
+    new ClientActor(0, Rect(0.0, 0.0, 1.0, 1.0), ClientAnimations::FIGHTER);
 
     Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
 
@@ -143,14 +143,7 @@ int main(int argc, char **argv)
             prevtime = curtime;
 
             renderer->beginDraw();
-            BOOST_FOREACH(AnimationManager::weak_ptr anim, AnimationManager::current().getActiveAnimations()) {
-                SDL_Rect clip;
-                clip.x = anim.lock().get()->getCurrentFrameX();
-                clip.y = anim.lock().get()->getCurrentFrameY();
-                clip.w = anim.lock().get()->getFrameWidth();
-                clip.h = anim.lock().get()->getFrameHeight();
-                renderer->drawClippedImage(anim.lock().get()->getImage().get(), 0, 0, clip);
-            }
+            ClientWorldInstance::current().Render(0, 0);
             Gui::current().draw();
             renderer->swapBuffers();
 
@@ -170,14 +163,12 @@ int main(int argc, char **argv)
         chatWindow = 0;
     }
 
-    AnimationManager::current().deleteAnimation(id);
-
+    delete &WorldInstance::current();
     delete &Gui::current();
     delete &AnimationManager::current();
     delete &ImageManager::current();
     delete renderer;
 	delete &NetworkClient::current();
-    delete &WorldInstance::current();
 
     return 0;
 }

@@ -217,6 +217,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\clientWorldInstance.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\collision.cpp"
 				>
 			</File>
@@ -316,6 +320,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\clientAnimations.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\clientWorldInstance.h"
 				>
 			</File>
 			<File

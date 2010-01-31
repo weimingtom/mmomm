@@ -42,6 +42,18 @@ WorldMap& WorldInstance::GetWorldMap()
     return *_worldMap;
 }
 
+const WorldInstance::ActorMap& WorldInstance::GetActorMap() const
+{
+    return _actors;
+}
+
+void WorldInstance::Update()
+{
+    for ( ActorMap::iterator i = _actors.begin(); i != _actors.end(); i++ ) {
+        i->second->Update();
+    }
+}
+
 void WorldInstance::addActor(Actor* actor)
 {
 	assert(!_actors.count(actor->id()));

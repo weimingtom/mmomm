@@ -19,6 +19,8 @@ public:
 
 	ActorID id() const { return _actorID; }
 
+    virtual void Update() { }
+
 private:
 	
 	void assignNewID();
