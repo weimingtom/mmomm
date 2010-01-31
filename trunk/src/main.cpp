@@ -6,6 +6,7 @@
 #include "imageManager.h"
 #include "animation.h"
 #include "animationManager.h"
+#include "clientAnimations.h"
 #include "gui.h"
 #include "configurationMenu.h"
 #include "loginMenu.h"
@@ -32,14 +33,14 @@ int main(int argc, char **argv)
     renderer->setCurrent(renderer);
 
     ImageManager::setCurrent(new ImageManager());
-
-    ImageManager::shared_ptr img  = ImageManager::current().getImage("001-Fighter01.png");
 #ifndef NDEBUG
     ImageManager::current().use_count();
 #endif
 
     AnimationManager::setCurrent(new AnimationManager());
-    int id = AnimationManager::current().createAnimation(img, 32, 48, 250);
+    ClientAnimations::Setup();
+
+    int id = ClientAnimations::Get(ClientAnimations::FIGHTER);
     AnimationManager::shared_ptr anim_ptr = AnimationManager::current().getAnimation(id);
 
     Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
@@ -167,6 +168,8 @@ int main(int argc, char **argv)
         delete chatWindow;
         chatWindow = 0;
     }
+
+    AnimationManager::current().deleteAnimation(id);
 
     delete &Gui::current();
     delete &ImageManager::current();
