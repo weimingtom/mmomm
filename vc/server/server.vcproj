@@ -193,6 +193,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\monster.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\networkCommon.cpp"
 				>
 			</File>
@@ -264,6 +268,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\initializePacketManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\monster.h"
 				>
 			</File>
 			<File
