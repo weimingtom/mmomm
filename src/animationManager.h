@@ -27,10 +27,12 @@ public:
     static AnimationManager& current() { assert(_current); return *_current; }
     static void setCurrent(AnimationManager *current) { _current = current; }
 
-    shared_ptr          getAnimation(int id);
+    shared_ptr          getAnimation(int id, bool reverse = false);
     vector<shared_ptr>  getActiveAnimations();
     int                 createAnimation(ImageManager::shared_ptr img, int frameWidth, int frameHeight,
                                         int interval, int startFrame = 0, bool active = true);
+    int                 createNewInstanceOf(int id, int interval = -1, int startFrame = -1, int active = -1);
+    void                deleteAnimation(int id);
     void                update(unsigned msPassed);
 };
 

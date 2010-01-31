@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="../src/animation.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="926" topLine="0" />
+	<File name="../src/animation.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="956" topLine="0" />
 	</File>
-	<File name="../src/animation.h" open="0" top="0" tabpos="0">
+	<File name="../src/animation.h" open="1" top="1" tabpos="2">
 		<Cursor position="1653" topLine="0" />
 	</File>
 	<File name="../src/animationManager.cpp" open="0" top="0" tabpos="0">
@@ -50,7 +50,7 @@
 		<Cursor position="2757" topLine="55" />
 	</File>
 	<File name="../src/main.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="1771" topLine="18" />
+		<Cursor position="2999" topLine="118" />
 	</File>
 	<File name="../src/networkClient.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="2005" topLine="0" />
@@ -61,11 +61,17 @@
 	<File name="../src/networkPacket.h" open="0" top="0" tabpos="0">
 		<Cursor position="685" topLine="0" />
 	</File>
+	<File name="../src/openglRenderer.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="5408" topLine="180" />
+	</File>
 	<File name="../src/renderer.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="273" topLine="5" />
 	</File>
 	<File name="../src/renderer.h" open="0" top="0" tabpos="4">
 		<Cursor position="1264" topLine="1" />
+	</File>
+	<File name="../src/softwareRenderer.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="21" />
 	</File>
 	<File name="../src/worldCommon.h" open="0" top="0" tabpos="0">
 		<Cursor position="14" topLine="0" />
