@@ -14,7 +14,7 @@ public:
     static ServerWorldInstance& current();
 
     void AddUser(User& user, PlayerActor* actor);
-    void RemoveUser(User& user );
+    void RemoveUser(User& user);
     PlayerActor* GetUserActor(User& user) const;
 
 private:

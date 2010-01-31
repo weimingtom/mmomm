@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     SDL_EnableUNICODE(1);
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-    Renderer *renderer  = new SoftwareRenderer(640, 480, false);
+    Renderer *renderer = new SoftwareRenderer(640, 480, false);
     renderer->setCurrent(renderer);
 
     ImageManager::setCurrent(new ImageManager());
