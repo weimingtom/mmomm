@@ -1,13 +1,12 @@
 #include "serverWorldInstance.h"
 #include "networkServer.h"
-#include <RakNet/RakSleep.h>
+#include "frameTimer.h"
 #include <iostream>
 
 int main(int argc, char **argv)
 {
 	NetworkServer::setCurrent(new NetworkServer());
     WorldInstance::setCurrent(new ServerWorldInstance());
-	
 	int port = NetworkServer::DEFAULT_PORT;
 	if (!NetworkServer::current().listen(port)) {
 		std::cout << "Failed to access network." << std::endl;
@@ -16,6 +15,8 @@ int main(int argc, char **argv)
 	
 	std::cout << "Listening on " << port << "..." << std::endl;
 
+	FrameTimer::setCurrent(new FrameTimer());
+	
 	// Keep looping until quit with control-c
 	for (;;) {
 		
@@ -32,7 +33,7 @@ int main(int argc, char **argv)
         WorldInstance::current().Update();
 		
 		// Sleep until next frame.
-		RakSleep(30);
+		FrameTimer::current().step();
 	}
 
     delete &NetworkServer::current();

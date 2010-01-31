@@ -229,6 +229,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\frameTimer.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\gui.cpp"
 				>
 			</File>
@@ -340,6 +344,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\events.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\frameTimer.h"
 				>
 			</File>
 			<File
