@@ -6,6 +6,8 @@
 #include <boost/unordered_map.hpp>
 #include <vector>
 
+typedef unsigned long ActorID;
+
 class Physical;
 struct Rect {
     Rect(double left, double top, double right, double bottom);
