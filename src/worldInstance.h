@@ -4,6 +4,8 @@
 #include "collision.h"
 
 class WorldMap;
+class Object;
+
 class TestCollision : public CollisionWorld {
 public:
 
@@ -30,6 +32,9 @@ private:
 
     CollisionWorld* _collision;
     WorldMap*       _worldMap;
+
+    typedef std::vector< Object* > ObjectList;
+    ObjectList      _objects;
 
 };
 

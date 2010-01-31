@@ -193,6 +193,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\clientAnimations.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\clientChat.cpp"
 				>
 			</File>
@@ -202,6 +206,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\clientNativePackets.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\clientObject.cpp"
 				>
 			</File>
 			<File
@@ -249,6 +257,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\object.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\openglrenderer.cpp"
 				>
 			</File>
@@ -292,6 +304,14 @@
 			</File>
 			<File
 				RelativePath="..\..\src\chatwindow.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\clientAnimations.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\clientObject.h"
 				>
 			</File>
 			<File
@@ -348,6 +368,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\networkPacketManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\object.h"
 				>
 			</File>
 			<File
