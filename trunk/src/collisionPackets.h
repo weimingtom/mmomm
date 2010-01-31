@@ -12,16 +12,17 @@
 // Gives information about the initial state of an object.
 struct CreationUpdate {
 	ActorID id;
-
-	Vector2D position;
+	Rect rect;
 	Vector2D velocity;
+	int animation;
 };
 
 inline void serial(BitStream& bs, bool write, CreationUpdate& data)
 {
 	bs.Serialize(write, data.id);
-	serial(bs, write, data.position);
+	serial(bs, write, data.rect);
 	serial(bs, write, data.velocity);
+	serial(bs, write, data.animation);
 }
 
 // Informs the player that an entity is no longer relevant
@@ -66,11 +67,11 @@ public:
 				RELIABLE, ORDER_DEFAULT, true);
 	}
 	
-	// Respond to successful connection on client.
+	// Respond to object creation on client.
 	void respondClient() const;
 	
-	// Respond to a new incoming connection.
-	void respondServer() const;
+	// Invalid message on server.
+	void respondServer() const { }
 	
 	// Serialization function.
 	void serialize(BitStream& bs, bool write)
@@ -108,10 +109,10 @@ public:
 				UNRELIABLE, SEQUENCE_DEFAULT, true);
 	}
 	
-	// Respond to successful connection on client.
+	// Respond to actor movement on client.
 	void respondClient() const;
 	
-	// Respond to a new incoming connection.
+	// Respond to player movement on server.
 	void respondServer() const;
 	
 	// Serialization function.

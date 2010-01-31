@@ -20,6 +20,13 @@ public:
 	ActorID id() const { return _actorID; }
 
     virtual void Update() { }
+	
+	// Tells the given actor to interpolate movement with the specified data.
+	// Most actors do not need to implement this.
+	// packetTime: absolute time on the packet
+	// packetPosition: position of the actor at that time
+	// packetVelocity: velocity of the actor at that time
+	virtual void interpolate(double packetTime, const Vector2D& packetPosition, const Vector2D& packetVelocity) { }
 
 private:
 	

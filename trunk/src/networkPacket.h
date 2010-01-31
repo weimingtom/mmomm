@@ -17,7 +17,7 @@ class User;
 template<typename T>
 void serial(BitStream& bs, bool write, T& data)
 {
-	bs.SerializeCompressed(bs, write, data);
+	bs.SerializeCompressed(write, data);
 }
 template<typename T>
 void serial(BitStream& bs, bool write, std::vector<T>& data)

@@ -237,6 +237,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\hermite.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\image.cpp"
 				>
 			</File>
@@ -352,6 +356,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\gui.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\hermite.h"
 				>
 			</File>
 			<File

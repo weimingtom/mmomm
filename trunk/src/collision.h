@@ -5,11 +5,13 @@
 #include <set>
 #include <boost/unordered_map.hpp>
 #include <vector>
+#include "vector2D.h"
 
 typedef unsigned long ActorID;
 
 class Physical;
 struct Rect {
+	Rect();
     Rect(double left, double top, double right, double bottom);
 
     double left;
@@ -111,6 +113,8 @@ public:
     // Can trigger OnCollision calls if the associated CollisionWorld is set to
     // use instant collisions.
     void SetPosition(double x, double y);
+	void SetPosition(const Vector2D& position) { SetPosition(position.x, position.y); }
+	Vector2D GetPosition() const;
 
     // Set size of the current collision rectangle of this object. The rectangle's
     // centre is preserved. Can trigger OnCollision calls if the associated

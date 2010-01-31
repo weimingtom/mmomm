@@ -39,28 +39,28 @@ int main(int argc, char **argv)
 #ifndef NDEBUG
     ImageManager::current().use_count();
 #endif
-
+	
     AnimationManager::setCurrent(new AnimationManager());
     ClientAnimations::Setup();
-
+	
     WorldInstance::setCurrent(new ClientWorldInstance());
     // TEST
-    new ClientActor(0, Rect(0.0, 0.0, 1.0, 1.0), ClientAnimations::FIGHTER);
-
+    new ClientActor(0, Rect(0.0, 0.0, 1.0, 1.0), Vector2D(0, 0), ClientAnimations::FIGHTER);
+	
     Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
-
+	
     loginMenu = new LoginMenu(100, 150);
     loginMenu->setCurrent(loginMenu);
-
+	
     chatWindow = new ChatWindow(300, 150);
     chatWindow->setCurrent(chatWindow);
-
+	
 	NetworkClient::setCurrent(new NetworkClient());
-
+	
 	FrameTimer::setCurrent(new FrameTimer());
-
+	
     bool loop  = true;
-
+	
     while(loop)
     {
         SDL_Event event;

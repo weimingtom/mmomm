@@ -4,6 +4,14 @@
 
 const double CollisionWorld::CELL_SIZE = 32.0;
 
+Rect::Rect()
+{
+    this->left   = 0;
+    this->top    = 0;
+    this->right  = 0;
+    this->bottom = 0;
+}
+
 Rect::Rect(double left, double top, double right, double bottom)
 {
     this->left   = left;
@@ -188,6 +196,11 @@ void Physical::SetPosition(double x, double y)
     _rect.left = x;
     _rect.top  = y;
     UpdateWorld();
+}
+
+Vector2D Physical::GetPosition() const
+{
+	return Vector2D(_rect.left, _rect.top);
 }
 
 void Physical::SetSize(double width, double height)
