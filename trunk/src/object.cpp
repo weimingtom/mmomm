@@ -1,13 +1,13 @@
 #include "object.h"
 #include "worldInstance.h"
 
-Object::Object(WorldInstance& worldInstance, const Rect& rect)
-: Physical(worldInstance.GetCollision(), rect)
+Object::Object(const Rect& rect)
+: Physical(WorldInstance::current().GetCollision(), rect)
 {
 }
 
-Object::Object(WorldInstance& worldInstance, double width, double height)
-: Physical(worldInstance.GetCollision(), width, height)
+Object::Object(double width, double height)
+: Physical(WorldInstance::current().GetCollision(), width, height)
 {
 }
 

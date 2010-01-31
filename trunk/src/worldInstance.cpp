@@ -2,6 +2,8 @@
 #include "worldMap.h"
 #include "collision.h"
 
+WorldInstance* WorldInstance::_current = 0;
+
 WorldInstance::WorldInstance()
 {
     _collision = new TestCollision();

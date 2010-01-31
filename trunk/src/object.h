@@ -8,8 +8,8 @@ class WorldInstance;
 class Object : public Physical {
 public:
 
-    Object(WorldInstance& world, const Rect& rect);
-    Object(WorldInstance& world, double width, double height);
+    Object(const Rect& rect);
+    Object(double width, double height);
 
     virtual ~Object();
 

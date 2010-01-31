@@ -12,6 +12,7 @@
 #include "loginMenu.h"
 #include "networkClient.h"
 #include "chatWindow.h"
+#include "worldInstance.h"
 
 #include <vector>
 
@@ -39,6 +40,8 @@ int main(int argc, char **argv)
 
     AnimationManager::setCurrent(new AnimationManager());
     ClientAnimations::Setup();
+
+    WorldInstance::setCurrent(new WorldInstance());
 
     int id = ClientAnimations::Get(ClientAnimations::FIGHTER);
     AnimationManager::shared_ptr anim_ptr = AnimationManager::current().getAnimation(id);
@@ -173,8 +176,10 @@ int main(int argc, char **argv)
 
     delete &Gui::current();
     delete &ImageManager::current();
+    delete &AnimationManager::current();
     delete renderer;
 	delete &NetworkClient::current();
+    delete &WorldInstance::current();
 
     return 0;
 }
