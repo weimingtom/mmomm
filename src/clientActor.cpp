@@ -11,3 +11,8 @@ ClientActor::~ClientActor()
 {
     AnimationManager::current().deleteAnimation(_tempID);
 }
+
+AnimationManager::weak_ptr ClientActor::GetAnimation() const
+{
+    return _animation;
+}
