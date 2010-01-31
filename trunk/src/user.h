@@ -1,6 +1,9 @@
 #ifndef USER_H_
 #define USER_H_
 
+#include <string>
+#include <RakNet/RakNetTypes.h>
+
 class User {
 public:
 	User(const std::string& username, const SystemAddress& address)

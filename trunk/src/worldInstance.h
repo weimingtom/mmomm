@@ -4,7 +4,7 @@
 #include "collision.h"
 
 class WorldMap;
-class Object;
+class Actor;
 
 class TestCollision : public CollisionWorld {
 public:
@@ -28,6 +28,10 @@ public:
     const WorldMap& GetWorldMap() const;
     /* */ WorldMap& GetWorldMap();
 
+    void AddActor( Actor* actor );
+
+    virtual void Update() { }
+
     static WorldInstance& current() { assert(_current); return *_current; }
     static void setCurrent(WorldInstance* current) { _current = current; }
 
@@ -38,8 +42,8 @@ private:
     CollisionWorld* _collision;
     WorldMap*       _worldMap;
 
-    typedef std::vector< Object* > ObjectList;
-    ObjectList      _objects;
+    typedef std::vector< Actor* > ActorList;
+    ActorList       _actors;
 
 };
 

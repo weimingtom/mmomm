@@ -177,6 +177,14 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\src\actor.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\collision.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\hermite.cpp"
 				>
 			</File>
@@ -197,6 +205,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\playerActor.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\serverChat.cpp"
 				>
 			</File>
@@ -212,6 +224,18 @@
 				RelativePath="..\..\src\serverNativePackets.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\..\src\worldCommon.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\worldInstance.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\worldMap.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -219,7 +243,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\..\src\actor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\chat.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\collision.h"
 				>
 			</File>
 			<File
@@ -255,11 +287,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\playerActor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\user.h"
 				>
 			</File>
 			<File
 				RelativePath="..\..\src\vector2D.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\worldInstance.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\worldMap.h"
 				>
 			</File>
 		</Filter>
