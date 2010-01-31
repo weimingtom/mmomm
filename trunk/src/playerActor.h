@@ -7,8 +7,10 @@ class User;
 class PlayerActor : public Actor {
 public:
 
-    PlayerActor(unsigned long actorId, User& user, const Rect& rect);
+    PlayerActor(User& user, const Rect& rect);
     virtual ~PlayerActor();
+
+    virtual void OnCollision(Physical& other) { }
 
 private:
 

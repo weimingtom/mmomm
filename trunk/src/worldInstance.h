@@ -21,7 +21,7 @@ class WorldInstance {
 public:
 
     WorldInstance();
-    ~WorldInstance();
+    virtual ~WorldInstance();
 
     const CollisionWorld& GetCollision() const;
     /* */ CollisionWorld& GetCollision();
