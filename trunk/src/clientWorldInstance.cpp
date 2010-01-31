@@ -35,8 +35,8 @@ void ClientWorldInstance::Render(double xCentre, double yCentre) const
         clip.h = anim.lock().get()->getFrameHeight();
 
         const Rect& r = a->GetCollisionRect();
-        double tx = (PIXELS_PER_WORLD_UNIT * (r.left + r.right ) / 2.0 - xCentre) + (renderer.getScreenWidth()  - clip.w) / 2.0;
-        double ty = (PIXELS_PER_WORLD_UNIT * (r.top  + r.bottom) / 2.0 - yCentre) + (renderer.getScreenHeight() - clip.h) / 2.0;
+        double tx = PIXELS_PER_WORLD_UNIT * ((r.left + r.right ) / 2.0 - xCentre) + (renderer.getScreenWidth()  - clip.w) / 2.0;
+        double ty = PIXELS_PER_WORLD_UNIT * ((r.top  + r.bottom) / 2.0 - yCentre) + (renderer.getScreenHeight() - clip.h) / 2.0;
         if ( tx + clip.w < 0 || tx >= renderer.getScreenWidth() || ty + clip.h < 0 || ty >= renderer.getScreenHeight() )
             continue;
         renderer.drawClippedImage(anim.lock().get()->getImage().get(), float(tx), float(ty), clip);
