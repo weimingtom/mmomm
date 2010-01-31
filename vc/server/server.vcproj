@@ -229,6 +229,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\serverWorldInstance.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\worldCommon.cpp"
 				>
 			</File>
@@ -296,6 +300,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\playerActor.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\serverWorldInstance.h"
 				>
 			</File>
 			<File

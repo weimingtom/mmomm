@@ -1,4 +1,4 @@
-#include "worldInstance.h"
+#include "serverWorldInstance.h"
 #include "networkServer.h"
 #include <RakNet/RakSleep.h>
 #include <iostream>
@@ -6,7 +6,7 @@
 int main(int argc, char **argv)
 {
 	NetworkServer::setCurrent(new NetworkServer());
-    WorldInstance::setCurrent(new WorldInstance());
+    WorldInstance::setCurrent(new ServerWorldInstance());
 	
 	int port = NetworkServer::DEFAULT_PORT;
 	if (!NetworkServer::current().listen(port)) {
