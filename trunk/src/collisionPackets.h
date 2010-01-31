@@ -6,11 +6,12 @@
 #include "networkPacket.h"
 #include "packetTypes.h"
 #include "vector2D.h"
+#include "collision.h"
 #include <string>
 
 // Gives information about the initial state of an object.
 struct CreationUpdate {
-	int id;
+	ActorID id;
 
 	Vector2D position;
 	Vector2D velocity;
@@ -35,7 +36,7 @@ inline void serial(BitStream& bs, bool write, DestructionUpdate& data)
 
 // Informs the player of an entity's new position and velocity
 struct MovementUpdate {
-	int id;
+	ActorID id;
 	Vector2D position;
 	Vector2D velocity;
 };

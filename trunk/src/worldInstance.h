@@ -2,6 +2,7 @@
 #define WORLD_INSTANCE_H_
 
 #include "collision.h"
+#include <boost/unordered_map.hpp>
 
 class WorldMap;
 class Actor;
@@ -28,23 +29,32 @@ public:
     const WorldMap& GetWorldMap() const;
     /* */ WorldMap& GetWorldMap();
 
-    void AddActor( Actor* actor );
-
     virtual void Update() { }
 
     static WorldInstance& current() { assert(_current); return *_current; }
     static void setCurrent(WorldInstance* current) { _current = current; }
-
+	
 private:
-
+	
     static WorldInstance *_current;
 
     CollisionWorld* _collision;
     WorldMap*       _worldMap;
+	
+	typedef boost::unordered_map< ActorID, Actor * > ActorMap;
+    ActorMap        _actors;
 
-    typedef std::vector< Actor* > ActorList;
-    ActorList       _actors;
+	// The actorID to use next
+	mutable ActorID	_nextID;
 
+	// Add/remove the specified actor from the map.
+	// Called automatically.
+	friend class Actor;
+	void addActor(Actor* actor);
+	void removeActor(Actor* actor);
+
+	// Find an unused actor id
+	ActorID generateID() const;
 };
 
 #endif

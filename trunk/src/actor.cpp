@@ -1,23 +1,49 @@
 #include "actor.h"
 #include "worldInstance.h"
 
-Actor::Actor(unsigned long actorId, const Rect& rect)
+Actor::Actor(const Rect& rect)
 : Physical(WorldInstance::current().GetCollision(), rect)
-, _actorId(actorId)
 {
+	assignNewID();
+	addToWorld();
 }
 
-Actor::Actor(unsigned long actorId, double width, double height)
+Actor::Actor(double width, double height)
 : Physical(WorldInstance::current().GetCollision(), width, height)
-, _actorId(actorId)
 {
+	assignNewID();
+	addToWorld();
+}
+
+Actor::Actor(unsigned long actorID, const Rect& rect)
+: Physical(WorldInstance::current().GetCollision(), rect)
+, _actorID(actorID)
+{
+	addToWorld();
+}
+
+Actor::Actor(unsigned long actorID, double width, double height)
+: Physical(WorldInstance::current().GetCollision(), width, height)
+, _actorID(actorID)
+{
+	addToWorld();
 }
 
 Actor::~Actor()
 {
+	removeFromWorld();
 }
 
-unsigned long Actor::GetId() const
+void Actor::assignNewID()
 {
-    return _actorId;
+	_actorID = WorldInstance::current().generateID();
+}
+
+void Actor::addToWorld()
+{
+	WorldInstance::current().addActor(this);
+}
+void Actor::removeFromWorld()
+{
+	WorldInstance::current().removeActor(this);
 }

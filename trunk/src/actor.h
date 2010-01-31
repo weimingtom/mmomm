@@ -8,16 +8,24 @@ class WorldInstance;
 class Actor : public Physical {
 public:
 
-    Actor(unsigned long actorId, const Rect& rect);
-    Actor(unsigned long actorId, double width, double height);
+	// Server-only autoassign ID
+    Actor(const Rect& rect);
+    Actor(double width, double height);
+	// Client-only
+    Actor(unsigned long actorID, const Rect& rect);
+    Actor(unsigned long actorID, double width, double height);
 
     virtual ~Actor();
 
-    unsigned long GetId() const;
+	ActorID id() const { return _actorID; }
 
 private:
-
-    unsigned long _actorId;
+	
+	void assignNewID();
+	void addToWorld();
+	void removeFromWorld();
+	
+    ActorID _actorID;
 
 };
 
