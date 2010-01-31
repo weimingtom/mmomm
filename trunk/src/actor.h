@@ -8,16 +8,16 @@ class WorldInstance;
 class Actor : public Physical {
 public:
 
-    Actor(long actorId, const Rect& rect);
-    Actor(long actorId, double width, double height);
+    Actor(unsigned long actorId, const Rect& rect);
+    Actor(unsigned long actorId, double width, double height);
 
     virtual ~Actor();
 
-    long GetId() const;
+    unsigned long GetId() const;
 
 private:
 
-    long _actorId;
+    unsigned long _actorId;
 
 };
 

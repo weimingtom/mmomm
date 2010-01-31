@@ -3,11 +3,17 @@
 
 #include <boost/unordered_map.hpp>
 
+// Define animations
+#define ANIMATION_LIST \
+    ANIMATION( FIGHTER, "001-Fighter01.png", 32, 48, 250 )
+
 class ClientAnimations {
 public:
 
     enum Animation {
-        FIGHTER
+#define ANIMATION( name, image, width, height, time ) name,
+        ANIMATION_LIST
+#undef ANIMATION
     };
 
     // Create standard animations.

@@ -1,13 +1,13 @@
 #include "actor.h"
 #include "worldInstance.h"
 
-Actor::Actor(long actorId, const Rect& rect)
+Actor::Actor(unsigned long actorId, const Rect& rect)
 : Physical(WorldInstance::current().GetCollision(), rect)
 , _actorId(actorId)
 {
 }
 
-Actor::Actor(long actorId, double width, double height)
+Actor::Actor(unsigned long actorId, double width, double height)
 : Physical(WorldInstance::current().GetCollision(), width, height)
 , _actorId(actorId)
 {
@@ -17,7 +17,7 @@ Actor::~Actor()
 {
 }
 
-long Actor::GetId() const
+unsigned long Actor::GetId() const
 {
     return _actorId;
 }
