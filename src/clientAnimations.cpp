@@ -4,7 +4,7 @@
 boost::unordered_map< ClientAnimations::Animation, int > ClientAnimations::_templates;
 
 #define ANIMATION( name, image, width, height, time ) img = ImageManager::current().getImage(image);\
-                                                      _templates[ name ] = AnimationManager::current().createAnimation(img, width, height, time);
+                                                      _templates[ name ] = AnimationManager::current().createAnimation(img, width, height, time, 0, false);
 void ClientAnimations::Setup()
 {
     ImageManager::shared_ptr img;
@@ -15,5 +15,5 @@ void ClientAnimations::Setup()
 int ClientAnimations::Get(Animation animation)
 {
     assert(_templates.find(animation) != _templates.end());
-    return AnimationManager::current().createNewInstanceOf(_templates[animation]);
+    return AnimationManager::current().createNewInstanceOf(_templates[animation], -1, -1, true);
 }
