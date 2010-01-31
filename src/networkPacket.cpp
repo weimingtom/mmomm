@@ -1,6 +1,5 @@
 #include "networkPacket.h"
 #include <RakNet/MessageIdentifiers.h>
-#include <RakNet/GetTime.h>
 #include <RakNet/StringCompressor.h>
 #include <string>
 
@@ -67,7 +66,7 @@ void NetworkPacket::write(BitStream& bs) const
 {
 	if (useTimestamp()) {
 		bs.Write(static_cast<unsigned char>(ID_TIMESTAMP));
-		bs.Write(RakNet::GetTime());
+		bs.Write(FrameTimer::toTimestamp(FrameTimer::current().frameTime()));
 	}
 	bs.Write(kind());
 	

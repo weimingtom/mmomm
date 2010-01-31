@@ -26,7 +26,7 @@ inline void serial(BitStream& bs, bool write, CreationUpdate& data)
 
 // Informs the player that an entity is no longer relevant
 struct DestructionUpdate {
-	int id;
+	ActorID id;
 };
 
 inline void serial(BitStream& bs, bool write, DestructionUpdate& data)
