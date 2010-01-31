@@ -32,10 +32,10 @@ public:
     weak_ptr            getAnimation(int id, bool reverse = false);
     vector<weak_ptr>    getActiveAnimations();
     int                 createAnimation(ImageManager::shared_ptr img, int frameWidth, int frameHeight,
-                                        int interval, int startFrame = 0, bool active = true);
-    int                 createNewInstanceOf(int id, int interval = -1, int startFrame = -1, int active = -1);
+                                        double interval, int startFrame = 0, bool active = true);
+    int                 createNewInstanceOf(int id, double interval = -1, int startFrame = -1, int active = -1);
     void                deleteAnimation(int id);
-    void                update(unsigned msPassed);
+    void                update(double elapsed);
 };
 
 #endif

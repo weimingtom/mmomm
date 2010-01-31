@@ -5,7 +5,7 @@
 
 // Define animations
 #define ANIMATION_LIST \
-    ANIMATION( FIGHTER, "001-Fighter01.png", 32, 48, 250 )
+    ANIMATION( FIGHTER, "001-Fighter01.png", 32, 48, .25 )
 
 class ClientAnimations {
 public:

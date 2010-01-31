@@ -40,7 +40,7 @@ AnimationManager::weak_ptr AnimationManager::getAnimation(int id, bool reverse) 
 }
 
 int AnimationManager::createAnimation(ImageManager::shared_ptr img, int frameWidth, int frameHeight,
-                                      int interval, int startFrame, bool active)
+                                      double interval, int startFrame, bool active)
 {
     _idCounter++;
     shared_ptr anim = shared_ptr(new Animation(img, frameWidth, frameHeight, interval, startFrame, active));
@@ -53,9 +53,9 @@ int AnimationManager::createAnimation(ImageManager::shared_ptr img, int frameWid
     return _idCounter;
 }
 
-int AnimationManager::createNewInstanceOf(int id, int interval, int startFrame, int active)
+int AnimationManager::createNewInstanceOf(int id, double interval, int startFrame, int active)
 {
-    int         actualInterval  = interval;
+    double      actualInterval  = interval;
     int         actualFrame     = startFrame;
     bool        actualActive    = (active != 0);
     Animation  *anim            = getAnimation(id, !active).lock().get();
@@ -79,10 +79,10 @@ void AnimationManager::deleteAnimation(int id)
     _inactiveAnimations.erase(id);
 }
 
-void AnimationManager::update(unsigned msPassed)
+void AnimationManager::update(double elapsed)
 {
     for(animap::iterator it = _activeAnimations.begin(); it != _activeAnimations.end(); it++) {
-        (*it).second.get()->update(msPassed);
+        (*it).second.get()->update(elapsed);
     }
 }
 

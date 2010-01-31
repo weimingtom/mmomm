@@ -1,7 +1,7 @@
 #include "animation.h"
 
 Animation::Animation(ImageManager::shared_ptr img, int frameWidth, int frameHeight,
-                     int interval, int startFrame, bool active)
+                     double interval, int startFrame, bool active)
 :   _img(img)
 ,   _frameWidth(frameWidth)
 ,   _frameHeight(frameHeight)
@@ -9,6 +9,7 @@ Animation::Animation(ImageManager::shared_ptr img, int frameWidth, int frameHeig
 ,   _currentFrame(startFrame)
 ,   _active(active)
 {
+	assert(interval > 0);
 	_totalTime = 0;
     _totalHoriFrames = _img.get()->getWidth()  / _frameWidth;
     _totalVertFrames = _img.get()->getHeight() / _frameHeight;
@@ -26,15 +27,15 @@ Animation::~Animation()
 }
 
 
-void Animation::update(unsigned msPassed)
+void Animation::update(double elapsed)
 {
     //cout << "updating \"" << getImage().get()->getFilename() << "\" with " << msPassed << endl;
 
-    int maxTime = getHoriFrameNo()*getVertFrameNo()*_interval;
-    _totalTime += msPassed;
+    double maxTime = getHoriFrameNo()*getVertFrameNo()*_interval;
+    _totalTime += elapsed;
+	
+	while (_totalTime > maxTime)
+		_totalTime -= maxTime;
 
-    if(_totalTime > maxTime)
-        _totalTime -= maxTime;
-
-    _currentFrame = _totalTime/_interval;
+    _currentFrame = int(_totalTime/_interval);
 }

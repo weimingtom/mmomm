@@ -14,6 +14,7 @@
 #include "chatWindow.h"
 #include "clientWorldInstance.h"
 #include "clientActor.h"
+#include "frameTimer.h"
 
 #include <vector>
 
@@ -56,9 +57,9 @@ int main(int argc, char **argv)
 
 	NetworkClient::setCurrent(new NetworkClient());
 
+	FrameTimer::setCurrent(new FrameTimer());
+
     bool loop  = true;
-    unsigned prevtime = SDL_GetTicks();
-    unsigned curtime = prevtime;
 
     while(loop)
     {
@@ -134,20 +135,18 @@ int main(int argc, char **argv)
 			//packet->respondClient();
 		}
 
-		curtime = SDL_GetTicks();
-
         Gui::current().logic();
 
-        if(curtime > prevtime + 20) {
-            AnimationManager::current().update(curtime-prevtime);
-            prevtime = curtime;
+		{
+			AnimationManager::current().update(FrameTimer::current().elapsed());
 
             renderer->beginDraw();
             ClientWorldInstance::current().Render(0, 0);
             Gui::current().draw();
             renderer->swapBuffers();
+		}
 
-        }
+		FrameTimer::current().step();
     }
 
     if (configMenu) {
@@ -169,6 +168,7 @@ int main(int argc, char **argv)
     delete &ImageManager::current();
     delete renderer;
 	delete &NetworkClient::current();
+	delete &FrameTimer::current();
 
     return 0;
 }
