@@ -8,10 +8,16 @@ class WorldInstance;
 class Object : public Physical {
 public:
 
-    Object(const Rect& rect);
-    Object(double width, double height);
+    Object(long objectId, const Rect& rect);
+    Object(long objectId, double width, double height);
 
     virtual ~Object();
+
+    long GetId() const;
+
+private:
+
+    long _objectId;
 
 };
 
