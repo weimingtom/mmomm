@@ -1,15 +1,15 @@
-#ifndef CLIENTOBJECT_H_
-#define CLIENTOBJECT_H_
+#ifndef CLIENTACTOR_H_
+#define CLIENTACTOR_H_
 
-#include "object.h"
+#include "actor.h"
 #include "clientAnimations.h"
 #include "animationManager.h"
 
-class ClientObject : public Object {
+class ClientActor : public Actor {
 public:
 
-    ClientObject(long objectId, const Rect& rect, ClientAnimations::Animation animation);
-    virtual ~ClientObject();
+    ClientActor(long objectId, const Rect& rect, ClientAnimations::Animation animation);
+    virtual ~ClientActor();
 
     virtual void OnCollision(Physical& other) { }
 

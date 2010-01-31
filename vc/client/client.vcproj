@@ -181,6 +181,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\src\actor.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\animation.cpp"
 				>
 			</File>
@@ -190,6 +194,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\chatWindow.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\clientActor.cpp"
 				>
 			</File>
 			<File
@@ -206,10 +214,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\clientNativePackets.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\clientObject.cpp"
 				>
 			</File>
 			<File
@@ -257,10 +261,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\object.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\openglrenderer.cpp"
 				>
 			</File>
@@ -291,6 +291,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\..\src\actor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\animation.h"
 				>
 			</File>
@@ -307,11 +311,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\clientAnimations.h"
+				RelativePath="..\..\src\clientActor.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\clientObject.h"
+				RelativePath="..\..\src\clientAnimations.h"
 				>
 			</File>
 			<File
@@ -368,10 +372,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\networkPacketManager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\object.h"
 				>
 			</File>
 			<File
