@@ -37,6 +37,7 @@ public:
     int                         getCurrentFrame()   { return _currentFrame; }
 	int                         getCurrentFrameX()  { return _currentFrame % getHoriFrameNo() *_frameWidth; }
     int                         getCurrentFrameY()  { return (int(_currentFrame/getHoriFrameNo())) *_frameHeight; }
+    int                         getInterval()       { return _interval; }
 
     bool                        isActive()          { return _active; }
 };

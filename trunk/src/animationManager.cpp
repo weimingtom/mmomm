@@ -12,20 +12,31 @@ AnimationManager::~AnimationManager()
 {
 }
 
-AnimationManager::shared_ptr AnimationManager::getAnimation(int id)
+AnimationManager::shared_ptr AnimationManager::getAnimation(int id, bool reverse) //TODO: exception throwing?
 {
-    animap::iterator it = _activeAnimations.find(id);
-    if(it == _activeAnimations.end())
+    if(reverse)
     {
         animap::iterator it = _inactiveAnimations.find(id);
-        assert(it != _activeAnimations.end());
-        shared_ptr ptr_img(_inactiveAnimations[id]);
-        return ptr_img;
-    }
-    else
-    {
-        shared_ptr ptr_img(_activeAnimations[id]);
-        return ptr_img;
+        if(it == _inactiveAnimations.end()) {
+            animap::iterator it = _activeAnimations.find(id);
+            assert(it != _activeAnimations.end());
+            shared_ptr ptr_img(_activeAnimations[id]);
+            return ptr_img;
+        } else {
+            shared_ptr ptr_img(_inactiveAnimations[id]);
+            return ptr_img;
+        }
+    } else {
+        animap::iterator it = _activeAnimations.find(id);
+        if(it == _activeAnimations.end()) {
+            animap::iterator it = _inactiveAnimations.find(id);
+            assert(it != _inactiveAnimations.end());
+            shared_ptr ptr_img(_inactiveAnimations[id]);
+            return ptr_img;
+        } else {
+            shared_ptr ptr_img(_activeAnimations[id]);
+            return ptr_img;
+        }
     }
 }
 
@@ -43,10 +54,35 @@ int AnimationManager::createAnimation(ImageManager::shared_ptr img, int frameWid
     return _idCounter;
 }
 
+int AnimationManager::createNewInstanceOf(int id, int interval, int startFrame, int active)
+{
+    int         actualInterval  = interval;
+    int         actualFrame     = startFrame;
+    bool        actualActive    = (active != 0);
+    Animation  *anim            = getAnimation(id, !active).get();
+
+    if(interval == -1)
+        actualInterval = anim->getInterval();
+
+    if(startFrame == -1)
+        actualFrame = anim->getCurrentFrame();
+
+    if(active == -1)
+        actualActive = anim->isActive();
+
+    return createAnimation(anim->getImage(), anim->getFrameWidth(), anim->getFrameHeight(),
+                           actualInterval, actualFrame, actualActive);
+}
+
+void AnimationManager::deleteAnimation(int id)
+{
+    _activeAnimations.erase(id);
+    _inactiveAnimations.erase(id);
+}
+
 void AnimationManager::update(unsigned msPassed)
 {
-    for(animap::iterator it = _activeAnimations.begin(); it != _activeAnimations.end(); it++)
-    {
+    for(animap::iterator it = _activeAnimations.begin(); it != _activeAnimations.end(); it++) {
         (*it).second.get()->update(msPassed);
     }
 }
@@ -54,8 +90,7 @@ void AnimationManager::update(unsigned msPassed)
 vector<AnimationManager::shared_ptr> AnimationManager::getActiveAnimations()
 {
     vector<shared_ptr> anims;
-    for(animap::iterator it = _activeAnimations.begin(); it != _activeAnimations.end(); it++)
-    {
+    for(animap::iterator it = _activeAnimations.begin(); it != _activeAnimations.end(); it++) {
         anims.push_back((*it).second);
     }
     return anims;
