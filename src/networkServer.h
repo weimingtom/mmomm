@@ -12,6 +12,10 @@
 // Main server network controller class.
 class NetworkServer: boost::noncopyable {
 public:
+	
+	// Default host (empty string)
+	static const std::string DEFAULT_HOST;
+
 	// Default maximum number of connections.
 	static const int DEFAULT_MAX_CONNECTIONS = 20;
 
@@ -23,10 +27,12 @@ public:
     
     // Listen for new incoming connections.
 	// precondition: isConnected() must be false
+	// host: an ip to bind to, or an empty string
 	// port: the port to listen on
 	// maxConnections: the maximum number of clients allowed to connect
 	// returns false if it cannot access the network
-    bool listen(int port = DEFAULT_PORT, int maxConnections = DEFAULT_MAX_CONNECTIONS);
+	bool listen(const std::string& host = DEFAULT_HOST, int port = DEFAULT_PORT,
+		int maxConnections = DEFAULT_MAX_CONNECTIONS);
     
     // If connected, disconnect from all clients.
     void disconnect();
