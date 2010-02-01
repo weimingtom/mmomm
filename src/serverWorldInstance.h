@@ -17,9 +17,11 @@ public:
     void RemoveUser(User& user);
     PlayerActor* GetUserActor(User& user) const;
 
+    typedef boost::unordered_map< User*, PlayerActor* > UserMap;
+    const UserMap& GetUserMap() const;
+
 private:
 
-    typedef boost::unordered_map< User*, PlayerActor* > UserMap;
     UserMap _userMap;
 
 };

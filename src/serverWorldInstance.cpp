@@ -30,6 +30,11 @@ PlayerActor* ServerWorldInstance::GetUserActor(User& user) const
     return i->second;
 }
 
+const ServerWorldInstance::UserMap& ServerWorldInstance::GetUserMap() const
+{
+    return _userMap;
+}
+
 ServerWorldInstance& ServerWorldInstance::current()
 {
     assert(dynamic_cast< ServerWorldInstance* >(&WorldInstance::current()));

@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 	
     WorldInstance::setCurrent(new ClientWorldInstance());
     // TEST
-    new ClientActor(0, Rect(0.0, 0.0, 1.0, 1.0), Vector2D(0, 0), ClientAnimations::FIGHTER);
+    //new ClientActor(0, Rect(0.0, 0.0, 1.0, 1.0), Vector2D(0, 0), ClientAnimations::FIGHTER);
 	
     Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
 	
@@ -132,7 +132,7 @@ int main(int argc, char **argv)
 			std::auto_ptr<NetworkPacket> packet = NetworkClient::current().receive();
 			if (!packet.get()) break;
 
-			//packet->respondClient();
+			packet->respondClient();
 		}
 
         Gui::current().logic();

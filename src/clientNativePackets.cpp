@@ -1,19 +1,18 @@
 #include "nativePackets.h"
+#include "chatWindow.h"
 #include <iostream>
 
 void ConnectionPacket::respondClient() const
 {
-	std::cout << "connected" << std::endl;
+    ChatWindow::current().addText( "Connected." );
 }
 
 void DisconnectionPacket::respondClient() const
 {
-	std::cout << "disconnected" << std::endl;
-	
+    ChatWindow::current().addText( "Disconnected." );
 }
 
 void TamperPacket::respondClient() const
 {
-	
-	std::cout << "tampered" << std::endl;
+	ChatWindow::current().addText( "Tampered." );
 }
