@@ -1,24 +1,26 @@
 #include "clientActor.h"
 #include "frameTimer.h"
+#include "sprite.h"
 
-ClientActor::ClientActor(ActorID actorID, const Rect& rect, const Vector2D& velocity, ClientAnimations::Animation animation)
+ClientActor::ClientActor(ActorID actorID, const Rect& rect, const Vector2D& velocity, ClientSprites::SpriteType sprite)
 : Actor(actorID, rect)
-, _tempID(ClientAnimations::Get(animation))
-, _animation(AnimationManager::current().getAnimation(_tempID))
+, _sprite(ClientSprites::Get(sprite))
 , _velocity(velocity)
 , _hermite()
 , _useHermite(false)
 {
+    // TEST!
+    _sprite->PlayAnimation( "walk-right", 4 );
 }
 
 ClientActor::~ClientActor()
 {
-    AnimationManager::current().deleteAnimation(_tempID);
+    delete _sprite;
 }
 
-AnimationManager::weak_ptr ClientActor::GetAnimation() const
+Sprite* ClientActor::GetSprite() const
 {
-    return _animation;
+    return _sprite;
 }
 
 void ClientActor::Update()

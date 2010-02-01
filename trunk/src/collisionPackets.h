@@ -14,7 +14,7 @@ struct CreationUpdate {
 	ActorID id;
 	Rect rect;
 	Vector2D velocity;
-	int animation;
+	int sprite;
 };
 
 inline void serial(BitStream& bs, bool write, CreationUpdate& data)
@@ -22,7 +22,7 @@ inline void serial(BitStream& bs, bool write, CreationUpdate& data)
 	bs.Serialize(write, data.id);
 	serial(bs, write, data.rect);
 	serial(bs, write, data.velocity);
-	serial(bs, write, data.animation);
+	serial(bs, write, data.sprite);
 }
 
 // Informs the player that an entity is no longer relevant

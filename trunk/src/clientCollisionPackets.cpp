@@ -13,7 +13,7 @@ void CreationPacket::respondClient() const
 		}
 
 		ClientActor *actor = new ClientActor(create.id, create.rect, create.velocity,
-			ClientAnimations::Animation(create.animation));
+			ClientSprites::SpriteType(create.sprite));
 	}
 	BOOST_FOREACH(const DestructionUpdate& destruct, destruction()) {
 		WorldInstance::ActorMap::const_iterator found =

@@ -6,7 +6,7 @@
 #include "imageManager.h"
 #include "animation.h"
 #include "animationManager.h"
-#include "clientAnimations.h"
+#include "clientSprites.h"
 #include "gui.h"
 #include "configurationMenu.h"
 #include "loginMenu.h"
@@ -41,11 +41,9 @@ int main(int argc, char **argv)
 #endif
 	
     AnimationManager::setCurrent(new AnimationManager());
-    ClientAnimations::Setup();
+    ClientSprites::Setup();
 	
     WorldInstance::setCurrent(new ClientWorldInstance());
-    // TEST
-    //new ClientActor(0, Rect(0.0, 0.0, 1.0, 1.0), Vector2D(0, 0), ClientAnimations::FIGHTER);
 	
     Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
 	
@@ -166,6 +164,7 @@ int main(int argc, char **argv)
         chatWindow = 0;
     }
 
+    ClientSprites::Delete();
     delete &WorldInstance::current();
     delete &Gui::current();
     delete &AnimationManager::current();

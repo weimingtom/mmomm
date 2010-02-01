@@ -40,10 +40,10 @@ AnimationManager::weak_ptr AnimationManager::getAnimation(int id, bool reverse) 
 }
 
 int AnimationManager::createAnimation(ImageManager::shared_ptr img, int frameWidth, int frameHeight,
-                                      double interval, int startFrame, bool active)
+                                      double interval, int startFrame, int endFrame, bool active)
 {
     _idCounter++;
-    shared_ptr anim = shared_ptr(new Animation(img, frameWidth, frameHeight, interval, startFrame, active));
+    shared_ptr anim = shared_ptr(new Animation(img, frameWidth, frameHeight, interval, startFrame, endFrame, active));
 
     if(active)
         _activeAnimations.insert(pair<int, shared_ptr>(_idCounter, anim));
@@ -53,10 +53,11 @@ int AnimationManager::createAnimation(ImageManager::shared_ptr img, int frameWid
     return _idCounter;
 }
 
-int AnimationManager::createNewInstanceOf(int id, double interval, int startFrame, int active)
+int AnimationManager::createNewInstanceOf(int id, double interval, int startFrame, int endFrame, int active)
 {
     double      actualInterval  = interval;
-    int         actualFrame     = startFrame;
+    int         actualStart     = startFrame;
+    int         actualEnd       = endFrame;
     bool        actualActive    = (active != 0);
     Animation  *anim            = getAnimation(id, !active).lock().get();
 
@@ -64,13 +65,16 @@ int AnimationManager::createNewInstanceOf(int id, double interval, int startFram
         actualInterval = anim->getInterval();
 
     if(startFrame == -1)
-        actualFrame = anim->getCurrentFrame();
+        actualStart = anim->getStartFrame();
+
+    if(endFrame == -1)
+        actualEnd = anim->getEndFrame();
 
     if(active == -1)
         actualActive = anim->isActive();
 
     return createAnimation(anim->getImage(), anim->getFrameWidth(), anim->getFrameHeight(),
-                           actualInterval, actualFrame, actualActive);
+                           actualInterval, actualStart, actualEnd, actualActive);
 }
 
 void AnimationManager::deleteAnimation(int id)
@@ -93,4 +97,26 @@ vector<AnimationManager::weak_ptr> AnimationManager::getActiveAnimations()
         anims.push_back((*it).second);
     }
     return anims;
+}
+
+void AnimationManager::setAnimationActive(int id, bool active)
+{
+    animap::iterator i = _activeAnimations.find(id);
+    animap::iterator j = _inactiveAnimations.find(id);
+    if ( i == _activeAnimations.end() && !active ) {
+        j->second->setActive(false);
+        return;
+    }
+    if ( j == _inactiveAnimations.end() && active ) {
+        i->second->setActive(true);
+        return;
+    }
+    if ( active ) {
+        _activeAnimations[id] = j->second;
+        _inactiveAnimations.erase(id);
+    }
+    else {
+        _inactiveAnimations[id] = i->second;
+        _activeAnimations.erase(id);
+    }
 }

@@ -31,10 +31,13 @@ public:
 
     weak_ptr            getAnimation(int id, bool reverse = false);
     vector<weak_ptr>    getActiveAnimations();
+    // Start frame is inclusive, end frame exclusive. Default value of endFrame (-1) sets to all possible frames.
     int                 createAnimation(ImageManager::shared_ptr img, int frameWidth, int frameHeight,
-                                        double interval, int startFrame = 0, bool active = true);
-    int                 createNewInstanceOf(int id, double interval = -1, int startFrame = -1, int active = -1);
+                                        double interval, int startFrame = 0, int endFrame = -1, bool active = true);
+    // Default values (-1) indicate the value should be copied from existing animation.
+    int                 createNewInstanceOf(int id, double interval = -1, int startFrame = -1, int endFrame = -1, int active = -1);
     void                deleteAnimation(int id);
+    void                setAnimationActive(int id, bool active);
     void                update(double elapsed);
 };
 

@@ -2,18 +2,19 @@
 #define CLIENTACTOR_H_
 
 #include "actor.h"
-#include "clientAnimations.h"
+#include "clientSprites.h"
 #include "animationManager.h"
 #include "hermite.h"
+class Sprite;
 
 class ClientActor : public Actor {
 public:
 
-    ClientActor(ActorID actorID, const Rect& rect, const Vector2D& velocity, ClientAnimations::Animation animation);
+    ClientActor(ActorID actorID, const Rect& rect, const Vector2D& velocity, ClientSprites::SpriteType sprite);
     virtual ~ClientActor();
 
     virtual void OnCollision(Physical& other) { }
-    AnimationManager::weak_ptr GetAnimation() const;
+    Sprite* GetSprite() const;
 
     virtual void Update();
 	virtual void interpolate(double packetTime, const Vector2D& packetPosition, const Vector2D& packetVelocity);
@@ -21,7 +22,7 @@ public:
 private:
 
     int                        _tempID;
-    AnimationManager::weak_ptr _animation;
+    Sprite*                    _sprite;
 	Vector2D                   _velocity;
 	HermiteInterpolation	   _hermite;
 	bool                       _useHermite;

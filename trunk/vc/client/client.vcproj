@@ -201,10 +201,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\clientAnimations.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\clientChat.cpp"
 				>
 			</File>
@@ -214,6 +210,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\clientNativePackets.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\clientSprites.cpp"
 				>
 			</File>
 			<File
@@ -285,6 +285,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\sprite.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\worldCommon.cpp"
 				>
 			</File>
@@ -327,7 +331,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\clientAnimations.h"
+				RelativePath="..\..\src\clientSprites.h"
 				>
 			</File>
 			<File
@@ -412,6 +416,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\softwarerenderer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\sprite.h"
 				>
 			</File>
 			<File
