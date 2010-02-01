@@ -66,6 +66,12 @@ int main(int argc, char **argv)
         while(SDL_PollEvent(&event)) {
 
             switch (event.type) {
+                case SDL_KEYDOWN:
+                    ClientWorldInstance::current().KeyDown(event.key.keysym.sym);
+                    break;
+                case SDL_KEYUP:
+                    ClientWorldInstance::current().KeyUp(event.key.keysym.sym);
+                    break;
                 case SDL_QUIT:
                     loop = false;
                     break;
@@ -138,15 +144,13 @@ int main(int argc, char **argv)
 		}
 
         Gui::current().logic();
+		AnimationManager::current().update(FrameTimer::current().elapsed());
+        WorldInstance::current().Update(FrameTimer::current().elapsed());
 
-		{
-			AnimationManager::current().update(FrameTimer::current().elapsed());
-
-            renderer->beginDraw();
-            ClientWorldInstance::current().Render(0, 0);
-            Gui::current().draw();
-            renderer->swapBuffers();
-		}
+        renderer->beginDraw();
+        ClientWorldInstance::current().Render(0, 0);
+        Gui::current().draw();
+        renderer->swapBuffers();
 
 		FrameTimer::current().step();
     }

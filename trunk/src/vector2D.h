@@ -108,7 +108,7 @@ inline double Vector2D::length() const
 }
 inline Vector2D Vector2D::normalized() const
 {
-	return *this / length();
+    return length() != 0 ? *this / length() : *this;
 }
 
 inline double Vector2D::dot(const Vector2D& rhs) const

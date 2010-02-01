@@ -19,7 +19,7 @@ public:
 
 	ActorID id() const { return _actorID; }
 
-    virtual void Update() { }
+    virtual void Update(double elapsed) { }
 	
 	// Tells the given actor to interpolate movement with the specified data.
 	// Most actors do not need to implement this.

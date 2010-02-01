@@ -47,10 +47,10 @@ const WorldInstance::ActorMap& WorldInstance::GetActorMap() const
     return _actors;
 }
 
-void WorldInstance::Update()
+void WorldInstance::Update(double elapsed)
 {
     for ( ActorMap::iterator i = _actors.begin(); i != _actors.end(); i++ ) {
-        i->second->Update();
+        i->second->Update(elapsed);
     }
 }
 

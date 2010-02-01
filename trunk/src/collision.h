@@ -124,7 +124,7 @@ public:
     // Move current collision rectangle of this object. Is blocked by obstacles,
     // with continuous collision detection. Can trigger OnCollision calls if the
     // associated CollisionWorld is set to use instant collisions.
-    void Move(double xOffset, double yOffset);
+    virtual void Move(double xOffset, double yOffset);
 
     // Called when this object collides with another. When a collision occurs
     // between objects A and B, both A.OnCollision(B) and B.OnCollision(A) are

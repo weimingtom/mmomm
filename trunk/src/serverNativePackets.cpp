@@ -20,6 +20,7 @@ void ConnectionPacket::respondServer() const
     update.rect = actor->GetCollisionRect();
     update.velocity = Vector2D(0, 0);
     update.sprite = ClientSprites::FIGHTER;
+    update.isClientPlayer = false;
 
     CreationPacket::CreationList creationList;
     creationList.push_back(update);
@@ -39,6 +40,7 @@ void ConnectionPacket::respondServer() const
         update.rect = i->second->GetCollisionRect();
         update.velocity = Vector2D(0, 0);
         update.sprite = ClientSprites::FIGHTER;
+        update.isClientPlayer = i->second == actor;
         existingList.push_back(update);
     }
     CreationPacket packet(existingList.begin(), existingList.end(), destructionList.begin(), destructionList.end());
