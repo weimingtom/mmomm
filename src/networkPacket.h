@@ -37,7 +37,6 @@ void serial(BitStream& bs, bool write, std::vector<T>& data)
 			serial(bs, write, data[i]);
 		}
 	}
-	bs.SerializeCompressed(write, data);
 }
 void serial(BitStream& bs, bool write, std::string& data);
 void serial(BitStream& bs, bool write, Vector2D& data);
