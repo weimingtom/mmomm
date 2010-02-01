@@ -12,6 +12,8 @@
 #include <cctype>
 #include <functional>
 
+const std::string NetworkServer::DEFAULT_HOST;
+
 NetworkServer *NetworkServer::_current = 0;
 
 char toLower(char c)
@@ -36,7 +38,7 @@ NetworkServer::NetworkServer()
 	_authMap["garrick"] = hashPassword("garrick", "vampire");
 }
 
-bool NetworkServer::listen(int port, int maxConnections)
+bool NetworkServer::listen(const std::string& host, int port, int maxConnections)
 {
     assert(!isConnected());
     assert(maxConnections > 0);
@@ -45,7 +47,7 @@ bool NetworkServer::listen(int port, int maxConnections)
 	RakPeerInterface* peer = RakNetworkFactory::GetRakPeerInterface();
 
 	int threadSleepMillis = 30;
-	SocketDescriptor descriptor(port, 0);
+	SocketDescriptor descriptor(port, host.c_str());
 	if (!peer->Startup(maxConnections, threadSleepMillis, &descriptor, 1)) {
 		RakNetworkFactory::DestroyRakPeerInterface(peer);
 		return false;
