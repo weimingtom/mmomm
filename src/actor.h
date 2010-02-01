@@ -2,7 +2,7 @@
 #define ACTOR_H_
 
 #include "collision.h"
-class WorldInstance;
+#include "worldInstance.h"
 
 // Actor superclass common to both client and server.
 class Actor : public Physical {
@@ -27,6 +27,8 @@ public:
 	// packetPosition: position of the actor at that time
 	// packetVelocity: velocity of the actor at that time
 	virtual void interpolate(double packetTime, const Vector2D& packetPosition, const Vector2D& packetVelocity) { }
+
+    void GetNearbyActors(WorldInstance::ActorList& output) const;
 
 private:
 	
