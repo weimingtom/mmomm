@@ -15,6 +15,7 @@ struct CreationUpdate {
 	Rect rect;
 	Vector2D velocity;
 	int sprite;
+    bool isClientPlayer;
 };
 
 inline void serial(BitStream& bs, bool write, CreationUpdate& data)
@@ -23,6 +24,7 @@ inline void serial(BitStream& bs, bool write, CreationUpdate& data)
 	serial(bs, write, data.rect);
 	serial(bs, write, data.velocity);
 	serial(bs, write, data.sprite);
+    serial(bs, write, data.isClientPlayer);
 }
 
 // Informs the player that an entity is no longer relevant

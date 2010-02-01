@@ -16,7 +16,8 @@ public:
     virtual void OnCollision(Physical& other) { }
     Sprite* GetSprite() const;
 
-    virtual void Update();
+    virtual void Move(double xOffset, double yOffset);
+    virtual void Update(double elapsed);
 	virtual void interpolate(double packetTime, const Vector2D& packetPosition, const Vector2D& packetVelocity);
 
 private:

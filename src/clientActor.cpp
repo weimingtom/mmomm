@@ -9,8 +9,6 @@ ClientActor::ClientActor(ActorID actorID, const Rect& rect, const Vector2D& velo
 , _hermite()
 , _useHermite(false)
 {
-    // TEST!
-    _sprite->PlayAnimation( "walk-right", 4 );
 }
 
 ClientActor::~ClientActor()
@@ -23,7 +21,7 @@ Sprite* ClientActor::GetSprite() const
     return _sprite;
 }
 
-void ClientActor::Update()
+void ClientActor::Update(double elapsed)
 {
 	if (_useHermite) {
 		SetPosition(_hermite.interpolatePosition(FrameTimer::current().frameTime()));
@@ -32,7 +30,7 @@ void ClientActor::Update()
 		}
 	}
 	else {
-		SetPosition(GetPosition() + _velocity * FrameTimer::current().elapsed());
+		SetPosition(GetPosition() + _velocity * elapsed);
 	}
 }
 
@@ -67,3 +65,22 @@ void ClientActor::interpolate(double packetTime, const Vector2D& packetPosition,
 	_useHermite = true;
 }
 
+void ClientActor::Move(double xOffset, double yOffset)
+{
+    Actor::Move(xOffset, yOffset);
+    if ( xOffset == 0 && yOffset == 0 ) {
+        _sprite->SetDefaultAnimation("stand");
+    }
+    else if ( abs(xOffset) >= abs(yOffset) ) {
+        if ( xOffset >= 0 )
+            _sprite->SetDefaultAnimation("walk-right");
+        else
+            _sprite->SetDefaultAnimation("walk-left");
+    }
+    else {
+        if ( yOffset >= 0 )
+            _sprite->SetDefaultAnimation("walk-down");
+        else
+            _sprite->SetDefaultAnimation("walk-up");
+    }
+}

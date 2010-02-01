@@ -14,6 +14,8 @@ void CreationPacket::respondClient() const
 
 		ClientActor *actor = new ClientActor(create.id, create.rect, create.velocity,
 			ClientSprites::SpriteType(create.sprite));
+        if ( create.isClientPlayer )
+            ClientWorldInstance::current().SetClientPlayerActor(actor);
 	}
 	BOOST_FOREACH(const DestructionUpdate& destruct, destruction()) {
 		WorldInstance::ActorMap::const_iterator found =

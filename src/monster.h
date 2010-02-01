@@ -2,12 +2,12 @@
 #define MONSTER_H_
 
 #include "actor.h"
-#include "clientAnimations.h"
+#include "clientSprites.h"
 
 class Monster : public Actor {
 public:
 
-    Monster(const Rect& rect, ClientAnimations::Animation animation);
+    Monster(const Rect& rect, ClientSprites::SpriteType animation);
     virtual ~Monster();
 
     virtual void OnCollision(Physical& other) { }
@@ -15,7 +15,7 @@ public:
 private:
 
 	// The sprite that the monster uses
-	ClientAnimations::Animation _animation;
+	ClientSprites::SpriteType _animation;
 };
 
 #endif

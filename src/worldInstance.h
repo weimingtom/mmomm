@@ -32,7 +32,7 @@ public:
     typedef boost::unordered_map< ActorID, Actor * > ActorMap;
     const ActorMap& GetActorMap() const;
 
-    virtual void Update();
+    virtual void Update(double elapsed);
 
     static WorldInstance& current() { assert(_current); return *_current; }
     static void setCurrent(WorldInstance* current) { _current = current; }
