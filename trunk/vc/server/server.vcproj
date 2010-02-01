@@ -237,6 +237,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\user.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\worldCommon.cpp"
 				>
 			</File>

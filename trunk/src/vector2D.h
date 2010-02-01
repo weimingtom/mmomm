@@ -16,6 +16,10 @@ struct Vector2D {
 	// Returns a vector pointing in the same direction, of length 1.
 	Vector2D normalized() const;
 	
+	// Memberwise multiplication/division
+	Vector2D memberwiseMult(const Vector2D& rhs) const;
+	Vector2D memberwiseDiv(const Vector2D& rhs) const;
+	
 	// Returns the dot product of this and another vector.
 	// |a||b|cos(theta)
 	double dot(const Vector2D& rhs) const;
@@ -96,6 +100,16 @@ inline bool operator==(const Vector2D& v1, const Vector2D& v2)
 inline bool operator!=(const Vector2D& v1, const Vector2D& v2)
 {
 	return !(v1 == v2);
+}
+
+inline Vector2D Vector2D::memberwiseMult(const Vector2D& rhs) const
+{
+	return Vector2D(x * rhs.x, y * rhs.y);
+}
+
+inline Vector2D Vector2D::memberwiseDiv(const Vector2D& rhs) const
+{
+	return Vector2D(x / rhs.x, y / rhs.y);
 }
 
 inline double Vector2D::lengthSquared() const
