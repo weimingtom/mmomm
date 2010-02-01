@@ -54,6 +54,11 @@ void WorldInstance::Update(double elapsed)
     }
 }
 
+void WorldInstance::GetNearbyActors(ActorList& output, const Vector2D& point)
+{
+    _collision->GetNearbyPhysicals(output, point.x, point.y);
+}
+
 void WorldInstance::addActor(Actor* actor)
 {
 	assert(!_actors.count(actor->id()));

@@ -36,4 +36,3 @@ void MovementPacket::respondClient() const
 		}
 	}
 }
-

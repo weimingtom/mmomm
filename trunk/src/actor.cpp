@@ -34,6 +34,12 @@ Actor::~Actor()
 	removeFromWorld();
 }
 
+void Actor::GetNearbyActors(WorldInstance::ActorList& output) const
+{
+    const Rect& r = GetCollisionRect();
+    WorldInstance::current().GetNearbyActors(output, Vector2D((r.left + r.right) / 2.0, (r.top + r.bottom) / 2.0));
+}
+
 void Actor::assignNewID()
 {
 	_actorID = WorldInstance::current().generateID();

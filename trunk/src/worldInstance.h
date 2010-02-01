@@ -36,6 +36,9 @@ public:
 
     static WorldInstance& current() { assert(_current); return *_current; }
     static void setCurrent(WorldInstance* current) { _current = current; }
+
+    typedef std::vector< Actor* > ActorList;
+    void GetNearbyActors(ActorList& output, const Vector2D& point);
 	
 private:
 	

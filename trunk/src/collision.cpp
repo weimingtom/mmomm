@@ -140,7 +140,7 @@ CollisionWorld::Cell& CollisionWorld::GetCellAtPoint(double x, double y)
     _rightBound  = std::max(_rightBound,  lx + 1);
     _bottomBound = std::max(_bottomBound, ly + 1);
 
-    return _map[ CellCoord( lx, ly ) ];
+    return _map[CellCoord(lx, ly)];
 }
 
 Physical::Physical(CollisionWorld& world, const Rect& rect)

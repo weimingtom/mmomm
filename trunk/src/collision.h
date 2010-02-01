@@ -4,6 +4,7 @@
 #include "worldCommon.h"
 #include <set>
 #include <boost/unordered_map.hpp>
+#include <boost/unordered_set.hpp>
 #include <vector>
 #include "vector2D.h"
 
@@ -52,6 +53,9 @@ public:
     // Must be implemented to determine whether two given objects should block each
     // others' movement. Odd behaviour could result if this relation is not symmetric.
     virtual bool ShouldBlock(Physical* a, Physical* b) const = 0;
+
+    template< typename T >
+    void GetNearbyPhysicals(std::vector< T* >& output, double x, double y);
 
 private:
 
@@ -144,5 +148,25 @@ private:
     Rect            _rect;
 
 };
+
+template< typename T >
+void CollisionWorld::GetNearbyPhysicals(std::vector< T* >& output, double x, double y)
+{
+    long lx = long(floor(x / CELL_SIZE));
+    long ly = long(floor(y / CELL_SIZE));
+    for ( long tx = lx - 2; tx <= lx + 1; tx++ ) {
+        for ( long ty = ly - 2; ty <= ly + 1; ly++ ) {
+            Cell& cell = _map[CellCoord(tx, ty)];
+            for ( Cell::iterator i = cell.begin(); i != cell.end(); i++ ) {
+                if ( tx == lx - 2 && ( *i )->GetCollisionRect().right < ( lx - 1 ) * CELL_SIZE )
+                    continue;
+                if ( ty == ly - 2 && ( *i )->GetCollisionRect().bottom < ( ly - 1 ) * CELL_SIZE )
+                    continue;
+                assert(dynamic_cast< T* >(*i));
+                output.push_back((T*)*i);
+            }
+        }
+    }
+}
 
 #endif
