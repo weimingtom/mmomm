@@ -93,6 +93,12 @@
 		<Unit filename="../src/clientNativePackets.cpp">
 			<Option virtualFolder="Net/" />
 		</Unit>
+		<Unit filename="../src/clientWorldInstance.cpp">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/clientWorldInstance.h">
+			<Option virtualFolder="Net/" />
+		</Unit>
 		<Unit filename="../src/collision.cpp">
 			<Option virtualFolder="Core/" />
 		</Unit>
@@ -110,6 +116,12 @@
 		</Unit>
 		<Unit filename="../src/events.h">
 			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/frameTimer.cpp">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/frameTimer.h">
+			<Option virtualFolder="Net/" />
 		</Unit>
 		<Unit filename="../src/gui.cpp">
 			<Option virtualFolder="Core/" />
@@ -222,6 +234,7 @@
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
