@@ -35,6 +35,8 @@ public:
 
     virtual void Update(double elapsed);
 
+    std::vector< int >& GetErroneousDestructionIds() { return _erroneousDestructionIds; }
+
 private:
 
     Actor* _clientPlayerActor;
@@ -43,6 +45,8 @@ private:
     typedef boost::unordered_map< SDLKey, Key >  KeyMap;
     KeyMap _keyMap;
     std::vector< bool > _keyDowns;
+
+    std::vector< int > _erroneousDestructionIds;
 
 };
 

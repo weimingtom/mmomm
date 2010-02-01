@@ -12,6 +12,18 @@ void CreationPacket::respondClient() const
 			delete found->second;
 		}
 
+        bool alreadyDestroyed = false;
+        for ( std::vector< int >::iterator i = ClientWorldInstance::current().GetErroneousDestructionIds().begin();
+              i != ClientWorldInstance::current().GetErroneousDestructionIds().end(); i++ ) {
+            if ( *i == create.id ) {
+                alreadyDestroyed = true;
+                ClientWorldInstance::current().GetErroneousDestructionIds().erase(i);
+                break;
+            }
+        }
+        if ( alreadyDestroyed )
+            continue;
+
 		ClientActor *actor = new ClientActor(create.id, create.rect, create.velocity,
 			ClientSprites::SpriteType(create.sprite));
         if ( create.isClientPlayer )
@@ -23,6 +35,9 @@ void CreationPacket::respondClient() const
 		if (found != ClientWorldInstance::current().GetActorMap().end()) {
 			delete found->second;
 		}
+        else {
+            ClientWorldInstance::current().GetErroneousDestructionIds().push_back(destruct.id);
+        }
 	}
 }
 
