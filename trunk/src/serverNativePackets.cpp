@@ -12,7 +12,7 @@ void ConnectionPacket::respondServer() const
 	std::cout << "connected " << sender().username() << std::endl;
 
     const ServerWorldInstance::UserMap& users = ServerWorldInstance::current().GetUserMap();
-    PlayerActor* actor = new PlayerActor(sender(), Rect(1.0 * users.size(), 0.0, 1.0, 1.0));
+    PlayerActor* actor = new PlayerActor(sender(), Rect(1.0 * users.size(), 0.0, 1.0 * (1 + users.size()), 1.0));
 
     // Tell existing users about the new actor
     CreationUpdate update;
