@@ -32,6 +32,8 @@ public:
 
     static ChatWindow& current() { assert(_current); return *_current; }
     void setCurrent(ChatWindow *current) { _current = current; }
+
+    void addText(string text) {_chatBox->setText(_chatBox->getText() + text + "\n");}
 };
 
 #endif
