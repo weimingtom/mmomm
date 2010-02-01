@@ -3,8 +3,6 @@
 #include "frameTimer.h"
 #include <iostream>
 
-#include "collisionPackets.h"
-
 int main(int argc, char **argv)
 {
 	
