@@ -1,6 +1,7 @@
 #include "clientWorldInstance.h"
 #include "clientActor.h"
 #include "renderer.h"
+#include "sprite.h"
 
 const double ClientWorldInstance::PIXELS_PER_WORLD_UNIT = 32.0;
 
@@ -26,7 +27,7 @@ void ClientWorldInstance::Render(double xCentre, double yCentre) const
     for ( ActorMap::const_iterator i = actors.begin(); i != actors.end(); i++ ) {
         assert(dynamic_cast< ClientActor* >(i->second));
         ClientActor* a = (ClientActor*)i->second;
-        AnimationManager::weak_ptr anim = a->GetAnimation();
+        AnimationManager::weak_ptr anim = a->GetSprite()->GetCurrentAnimation();
 
         SDL_Rect clip;
         clip.x = anim.lock().get()->getCurrentFrameX();

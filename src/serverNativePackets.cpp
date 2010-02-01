@@ -3,7 +3,7 @@
 #include "playerActor.h"
 #include "serverWorldInstance.h"
 #include "collisionPackets.h"
-#include "clientAnimations.h"
+#include "clientSprites.h"
 #include "networkServer.h"
 #include <iostream>
 
@@ -19,7 +19,7 @@ void ConnectionPacket::respondServer() const
     update.id = actor->id();
     update.rect = actor->GetCollisionRect();
     update.velocity = Vector2D(0, 0);
-    update.animation = ClientAnimations::FIGHTER;
+    update.sprite = ClientSprites::FIGHTER;
 
     CreationPacket::CreationList creationList;
     creationList.push_back(update);
@@ -38,7 +38,7 @@ void ConnectionPacket::respondServer() const
         update.id = i->first;
         update.rect = i->second->GetCollisionRect();
         update.velocity = Vector2D(0, 0);
-        update.animation = ClientAnimations::FIGHTER;
+        update.sprite = ClientSprites::FIGHTER;
         existingList.push_back(update);
     }
     CreationPacket packet(existingList.begin(), existingList.end(), destructionList.begin(), destructionList.end());
