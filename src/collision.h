@@ -4,7 +4,6 @@
 #include "worldCommon.h"
 #include <set>
 #include <boost/unordered_map.hpp>
-#include <boost/unordered_set.hpp>
 #include <vector>
 #include "vector2D.h"
 

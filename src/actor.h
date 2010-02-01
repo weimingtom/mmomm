@@ -30,7 +30,12 @@ public:
 
     void GetNearbyActors(WorldInstance::ActorList& output) const;
 
+    const Vector2D& GetVelocity() const                   { return _velocity; }
+    void            SetVelocity(const Vector2D& velocity) { _velocity = velocity; }
+
 private:
+
+    Vector2D _velocity;
 	
 	void assignNewID();
 	void addToWorld();
