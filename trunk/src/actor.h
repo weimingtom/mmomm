@@ -3,6 +3,7 @@
 
 #include "collision.h"
 #include "worldInstance.h"
+#include "clientSprites.h"
 
 // Actor superclass common to both client and server.
 class Actor : public Physical {
@@ -33,9 +34,13 @@ public:
     const Vector2D& GetVelocity() const                   { return _velocity; }
     void            SetVelocity(const Vector2D& velocity) { _velocity = velocity; }
 
+    ClientSprites::SpriteType GetSpriteType() const { return _spriteType; }
+    void SetSpriteType(ClientSprites::SpriteType spriteType) { _spriteType = spriteType; }
+
 private:
 
-    Vector2D _velocity;
+    Vector2D                  _velocity;
+    ClientSprites::SpriteType _spriteType;
 	
 	void assignNewID();
 	void addToWorld();
