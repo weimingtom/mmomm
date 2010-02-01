@@ -4,15 +4,15 @@
 
 void ConnectionPacket::respondClient() const
 {
-    ChatWindow::current().addText( "Connected." );
+    ChatWindow::current().addText( "Connected" );
 }
 
 void DisconnectionPacket::respondClient() const
 {
-    ChatWindow::current().addText( "Disconnected." );
+    ChatWindow::current().addText( "Disconnected: " + reason() );
 }
 
 void TamperPacket::respondClient() const
 {
-	ChatWindow::current().addText( "Tampered." );
+	ChatWindow::current().addText( "Tampered" );
 }
