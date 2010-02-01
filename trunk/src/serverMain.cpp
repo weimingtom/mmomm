@@ -3,8 +3,11 @@
 #include "frameTimer.h"
 #include <iostream>
 
+#include "collisionPackets.h"
+
 int main(int argc, char **argv)
 {
+	
 	NetworkServer::setCurrent(new NetworkServer());
     WorldInstance::setCurrent(new ServerWorldInstance());
 	int port = NetworkServer::DEFAULT_PORT;

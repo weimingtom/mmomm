@@ -29,8 +29,8 @@ void serial(BitStream& bs, bool write, std::string& data)
 
 void serial(BitStream& bs, bool write, Vector2D& data)
 {
-	bs.SerializeCompressed(write, data.x);
-	bs.SerializeCompressed(write, data.y);
+	serial(bs, write, data.x);
+	serial(bs, write, data.y);
 }
 
 NetworkPacket::NetworkPacket()

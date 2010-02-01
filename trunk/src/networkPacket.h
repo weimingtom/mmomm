@@ -41,6 +41,14 @@ void serial(BitStream& bs, bool write, std::vector<T>& data)
 }
 void serial(BitStream& bs, bool write, std::string& data);
 void serial(BitStream& bs, bool write, Vector2D& data);
+inline void serial(BitStream& bs, bool write, double& data)
+{
+	bs.Serialize(write, data);
+}
+inline void serial(BitStream& bs, bool write, float& data)
+{
+	bs.Serialize(write, data);
+}
 
 // Parameters for a network packet.
 // See similarly-named NetworkPacket functions.
