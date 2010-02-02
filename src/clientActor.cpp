@@ -58,7 +58,7 @@ void ClientActor::interpolate(double packetTime, const Vector2D& packetPosition,
 		currentVelocity = _velocity;
 	}
 	double elapsed = futureTime - packetTime;
-	Vector2D futurePosition = currentPosition + elapsed * packetVelocity;
+	Vector2D futurePosition = packetPosition + elapsed * packetVelocity;
 	_hermite = HermiteInterpolation(currentTime, futureTime,
 		currentPosition, futurePosition,
 		currentVelocity, packetVelocity);
