@@ -73,5 +73,4 @@ void DisconnectionPacket::respondServer() const
 void TamperPacket::respondServer() const
 {
 	std::cout << "tamper " << sender().username() << std::endl;
-	
 }
