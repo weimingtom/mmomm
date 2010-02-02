@@ -3,6 +3,7 @@
 
 Actor::Actor(const Rect& rect)
 : Physical(WorldInstance::current().GetCollision(), rect)
+, _spriteType(ClientSprites::FIGHTER)
 {
 	assignNewID();
 	addToWorld();
