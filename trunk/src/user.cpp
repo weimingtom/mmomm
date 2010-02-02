@@ -87,6 +87,7 @@ void User::sendNetworkUpdate(const Actor *userActor)
 			create.velocity = actor->GetVelocity();
 			create.sprite = actor->GetSpriteType();
 			create.isClientPlayer = false;
+            create.name = actor->GetName();
 			creation.push_back(create);
 
 			// Store this entry in the replacement map

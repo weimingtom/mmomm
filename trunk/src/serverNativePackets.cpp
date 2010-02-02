@@ -13,6 +13,7 @@ void ConnectionPacket::respondServer() const
 
     const ServerWorldInstance::UserMap& users = ServerWorldInstance::current().GetUserMap();
     PlayerActor* actor = new PlayerActor(sender(), Rect(1.0 * users.size(), 0.0, 1.0 * (1 + users.size()), 1.0));
+    actor->SetName(sender().username());
 
     // Tell the user about the new actor; others will get it later
     CreationUpdate update;
@@ -21,6 +22,7 @@ void ConnectionPacket::respondServer() const
     update.velocity = actor->GetVelocity();
     update.sprite = actor->GetSpriteType();
     update.isClientPlayer = true;
+    update.name = actor->GetName();
 	
     CreationPacket::CreationList creationList;
     creationList.push_back(update);

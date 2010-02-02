@@ -2,7 +2,8 @@
 #include "frameTimer.h"
 #include "sprite.h"
 
-ClientActor::ClientActor(ActorID actorID, const Rect& rect, const Vector2D& velocity, ClientSprites::SpriteType sprite)
+ClientActor::ClientActor(ActorID actorID, const Rect& rect, const Vector2D& velocity,
+                         ClientSprites::SpriteType sprite)
 : Actor(actorID, rect)
 , _sprite(ClientSprites::Get(sprite))
 , _hermite()
@@ -24,14 +25,14 @@ Sprite* ClientActor::GetSprite() const
 void ClientActor::Update(double elapsed)
 {
 	if (_useHermite) {
-		SetPosition(_hermite.interpolatePosition(FrameTimer::current().frameTime()));
+        Physical::Move(_hermite.interpolatePosition(FrameTimer::current().frameTime()) - GetPosition());
 		if (FrameTimer::current().frameTime() >= _hermite.finalTime()) {
 			_useHermite = false;
 			SetVelocity(_hermite.interpolateVelocity(FrameTimer::current().frameTime()));
 		}
 	}
 	else {
-		SetPosition(GetPosition() + GetVelocity() * elapsed);
+        Physical::Move(GetVelocity() * elapsed);
 	}
 }
 
@@ -84,10 +85,10 @@ void ClientActor::interpolate(double packetTime, const Vector2D& packetPosition,
 void ClientActor::Move(double xOffset, double yOffset)
 {
     Actor::Move(xOffset, yOffset);
-    if ( xOffset == 0 && yOffset == 0 ) {
+    if ( abs(xOffset) < 0.01 && abs(yOffset) < 0.01 ) {
         _sprite->SetDefaultAnimation("stand");
     }
-    else if ( abs(xOffset) >= abs(yOffset) ) {
+    else if ( abs(xOffset) + 0.01 >= abs(yOffset) ) {
         if ( xOffset >= 0 )
             _sprite->SetDefaultAnimation("walk-right");
         else

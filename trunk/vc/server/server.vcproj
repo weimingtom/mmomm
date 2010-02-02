@@ -138,7 +138,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="RakNetDLL.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="dependencies\raknet\lib"
+				AdditionalLibraryDirectories="$(SolutionDir)\dependencies\raknet\lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"

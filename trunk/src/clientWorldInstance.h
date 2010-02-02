@@ -5,13 +5,10 @@
 #include <SDL/SDL.h>
 #include <boost/unordered_map.hpp>
 
-class NoCollision : public CollisionWorld {
+class LocalCollision : public CollisionWorld {
 public:
 
-    virtual bool ShouldBlock(Physical* a, Physical* b) const
-    {
-        return false;
-    }
+    virtual bool ShouldBlock(const Physical* a, const Physical* b) const;
 
 };
 
@@ -24,6 +21,8 @@ public:
         KEY_RIGHT,
         KEY_UP,
         KEY_DOWN,
+        KEY_LMB,
+        KEY_RMB,
 
         KEY_NONE
     };
@@ -32,13 +31,15 @@ public:
     virtual ~ClientWorldInstance();
 
     static ClientWorldInstance& current();
-
-    // Renders the world. The camera is centred at the given world coordinates.
-    void Render(double xCentre, double yCentre) const;
+    void Render() const;
 
     void KeyDown(SDLKey key);
     void KeyUp  (SDLKey key);
+    void MouseDown(Uint8 key);
+    void MouseUp  (Uint8 key);
+    void MouseMotion(Uint16 x, Uint16 y);
     bool IsKeyDown(Key key) const;
+    const Vector2D& GetWorldMouse() const;
 
     void   SetClientPlayerActor(Actor* actor) { _clientPlayerActor = actor; }
     Actor* GetClientPlayerActor() const       { return _clientPlayerActor; }
@@ -58,7 +59,10 @@ private:
 
     std::vector< int > _erroneousDestructionIds;
 
-    double _updateOffset;
+    double   _updateOffset;
+    double   _xCam;
+    double   _yCam;
+    Vector2D _mouse;
 
 };
 
