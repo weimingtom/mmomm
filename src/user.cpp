@@ -152,7 +152,7 @@ void User::sendNetworkUpdate(const Actor *userActor)
 	std::swap(_packetMap, replacementMap);
 	
 	// Send the packets
-	if (!creation.empty() && !destruction.empty()) {
+	if (!creation.empty() || !destruction.empty()) {
 		CreationPacket createPacket(creation.begin(), creation.end(),
 			destruction.begin(), destruction.end());
 		NetworkServer::current().send(createPacket, *this);
