@@ -4,7 +4,7 @@
 #include <boost/noncopyable.hpp>
 #include <RakNet/GetTime.h>
 #include <cassert>
-#include <list>
+#include <deque>
 
 // Handles frame timings for the game.
 class FrameTimer: boost::noncopyable {
@@ -40,7 +40,7 @@ public:
 	static FrameTimer& current() { assert(_current); return *_current; }
 
 private:
-	typedef std::list<double> FrameTiming;
+	typedef std::deque<double> FrameTiming;
 	FrameTiming _frameTiming;
 	double _totalFrameTiming;
 	
