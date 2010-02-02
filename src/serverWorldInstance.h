@@ -9,7 +9,7 @@ class PlayerActor;
 class TestCollision : public CollisionWorld {
 public:
 
-    virtual bool ShouldBlock(Physical* a, Physical* b) const
+    virtual bool ShouldBlock(const Physical* a, const Physical* b) const
     {
         return true;
     }

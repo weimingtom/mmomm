@@ -51,7 +51,7 @@ public:
 
     // Must be implemented to determine whether two given objects should block each
     // others' movement. Odd behaviour could result if this relation is not symmetric.
-    virtual bool ShouldBlock(Physical* a, Physical* b) const = 0;
+    virtual bool ShouldBlock(const Physical* a, const Physical* b) const = 0;
 
     template< typename T >
     void GetNearbyPhysicals(std::vector< T* >& output, double x, double y);
@@ -128,7 +128,7 @@ public:
     // with continuous collision detection. Can trigger OnCollision calls if the
     // associated CollisionWorld is set to use instant collisions.
     virtual void Move(double xOffset, double yOffset);
-    virtual void Move(const Vector2D& vector) { Move(vector.x, vector.y); }
+    /*   */ void Move(const Vector2D& vector) { Move(vector.x, vector.y); }
 
     // Called when this object collides with another. When a collision occurs
     // between objects A and B, both A.OnCollision(B) and B.OnCollision(A) are

@@ -31,11 +31,14 @@ public:
 
     void GetNearbyActors(WorldInstance::ActorList& output) const;
 
-    const Vector2D& GetVelocity() const                   { return _velocity; }
-    void            SetVelocity(const Vector2D& velocity) { _velocity = velocity; }
+    const Vector2D& GetVelocity() const { return _velocity; }
+    void SetVelocity(const Vector2D& velocity) { _velocity = velocity; }
 
     ClientSprites::SpriteType GetSpriteType() const { return _spriteType; }
     void SetSpriteType(ClientSprites::SpriteType spriteType) { _spriteType = spriteType; }
+
+    void SetName(const std::string& name) { _name = name; }
+    const std::string& GetName() { return _name; }
 
 private:
 
@@ -46,7 +49,8 @@ private:
 	void addToWorld();
 	void removeFromWorld();
 	
-    ActorID _actorID;
+    ActorID     _actorID;
+    std::string _name;
 
 };
 

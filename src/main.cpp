@@ -72,6 +72,15 @@ int main(int argc, char **argv)
                 case SDL_KEYUP:
                     ClientWorldInstance::current().KeyUp(event.key.keysym.sym);
                     break;
+                case SDL_MOUSEBUTTONDOWN:
+                    ClientWorldInstance::current().MouseDown(event.button.button);
+                    break;
+                case SDL_MOUSEBUTTONUP:
+                    ClientWorldInstance::current().MouseUp(event.button.button);
+                    break;
+                case SDL_MOUSEMOTION:
+                    ClientWorldInstance::current().MouseMotion(event.motion.x, event.motion.y);
+                    break;
                 case SDL_QUIT:
                     loop = false;
                     break;
@@ -148,7 +157,7 @@ int main(int argc, char **argv)
         WorldInstance::current().Update(FrameTimer::current().elapsed());
 
         renderer->beginDraw();
-        ClientWorldInstance::current().Render(0, 0);
+        ClientWorldInstance::current().Render();
         Gui::current().draw();
         renderer->swapBuffers();
 

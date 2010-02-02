@@ -120,7 +120,7 @@
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="&quot;$(SolutionDir)dependencies\raknet\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include\SDL&quot;;&quot;$(SolutionDir)\dependencies\guichan-0.8.2\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include&quot;;&quot;$(SolutionDir)\dependencies\OpenGL\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;MMOMM_CLIENT"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"

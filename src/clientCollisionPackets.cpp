@@ -26,6 +26,7 @@ void CreationPacket::respondClient() const
 
 		ClientActor *actor = new ClientActor(create.id, create.rect, create.velocity,
 			ClientSprites::SpriteType(create.sprite));
+        actor->SetName(create.name);
         if ( create.isClientPlayer )
             ClientWorldInstance::current().SetClientPlayerActor(actor);
 	}

@@ -226,6 +226,10 @@ void Physical::Move(double xOffset, double yOffset)
     long dx = long(floor(_rect.left + xOffset / CollisionWorld::CELL_SIZE));
     long dy = long(floor(_rect.top  + yOffset / CollisionWorld::CELL_SIZE));
 
+    bool   xCarry = false;
+    bool   yCarry = false;
+    double carry  = 0.0;
+
     for ( long ty = std::min(ry, dy) - 1; ty <= std::max(ry, dy) + 1; ty++ ) {
         for ( long tx = std::min(rx, dx) - 1; tx <= std::max(rx, dx) + 1; tx++ ) {
             Cell& cell = _world._map[CellCoord(tx, ty)];
@@ -243,9 +247,13 @@ void Physical::Move(double xOffset, double yOffset)
                      _rect.bottom + yOffset > iRect.top ) {
                     double left  = _rect.left  + xOffset * (iRect.top - _rect.bottom) / yOffset;
                     double right = _rect.right + xOffset * (iRect.top - _rect.bottom) / yOffset;
+                    
                     if ( !(left >= iRect.right || right < iRect.left) ) {
+                        yCarry = !(xCarry = true);
+                        carry  = xOffset;
                         xOffset *= (iRect.top - _rect.bottom) / yOffset;
                         yOffset = iRect.top - _rect.bottom;
+                        carry -= xOffset;
                         _collisions.clear();
                         _collisions.push_back(*i);
                     }
@@ -256,8 +264,11 @@ void Physical::Move(double xOffset, double yOffset)
                     double left  = _rect.left  + xOffset * (iRect.bottom - _rect.top) / yOffset;
                     double right = _rect.right + xOffset * (iRect.bottom - _rect.top) / yOffset;
                     if ( !(left >= iRect.right || right < iRect.left) ) {
+                        yCarry = !(xCarry = true);
+                        carry  = xOffset;
                         xOffset *= (iRect.bottom - _rect.top) / yOffset;
                         yOffset = iRect.bottom - _rect.top;
+                        carry -= xOffset;
                         _collisions.clear();
                         _collisions.push_back(*i);
                     }
@@ -268,8 +279,11 @@ void Physical::Move(double xOffset, double yOffset)
                     double top    = _rect.top    + yOffset * (iRect.left - _rect.right) / xOffset;
                     double bottom = _rect.bottom + yOffset * (iRect.left - _rect.right) / xOffset;
                     if ( !(top >= iRect.bottom || bottom < iRect.top) ) {
+                        xCarry = !(yCarry = true);
+                        carry  = yOffset;
                         yOffset *= (iRect.left - _rect.right) / xOffset;
                         xOffset = iRect.left - _rect.right;
+                        carry -= yOffset;
                         _collisions.clear();
                         _collisions.push_back(*i);
                     }
@@ -280,8 +294,11 @@ void Physical::Move(double xOffset, double yOffset)
                     double top    = _rect.top    + yOffset * (iRect.right - _rect.left) / xOffset;
                     double bottom = _rect.bottom + yOffset * (iRect.right - _rect.left) / xOffset;
                     if ( !(top >= iRect.bottom || bottom < iRect.top) ) {
+                        xCarry = !(yCarry = true);
+                        carry  = yOffset;
                         yOffset *= (iRect.right - _rect.left) / xOffset;
                         xOffset = iRect.right - _rect.left;
+                        carry -= yOffset;
                         _collisions.clear();
                         _collisions.push_back(*i);
                     }
@@ -352,13 +369,22 @@ void Physical::Move(double xOffset, double yOffset)
     _rect.top    += yOffset;
     _rect.right  += xOffset;
     _rect.bottom += yOffset;
-    // If instant collisions are turned off, need to store collisions in the
-    // CollisionWorld for the next call to TriggerCollisions
-    if ( !_world._instantCollisions ) {
-        for ( std::size_t i = 0; i < _collisions.size(); i++ )
-            _world._collisions.push_back(std::pair< Physical*, Physical* >(this, _collisions[i]));
+
+    if ( xCarry ) {
+        Move( carry, 0.0 );
     }
-    UpdateWorld();
+    else if ( yCarry ) {
+        Move( 0.0, carry );
+    }
+    else {
+        // If instant collisions are turned off, need to store collisions in the
+        // CollisionWorld for the next call to TriggerCollisions
+        if ( !_world._instantCollisions ) {
+            for ( std::size_t i = 0; i < _collisions.size(); i++ )
+                _world._collisions.push_back(std::pair< Physical*, Physical* >(this, _collisions[i]));
+        }
+        UpdateWorld();
+    }
 }
 
 void Physical::UpdateWorld()
