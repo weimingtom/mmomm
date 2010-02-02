@@ -27,6 +27,7 @@ void ClientActor::Update(double elapsed)
 		SetPosition(_hermite.interpolatePosition(FrameTimer::current().frameTime()));
 		if (FrameTimer::current().frameTime() >= _hermite.finalTime()) {
 			_useHermite = false;
+			SetVelocity(_hermite.interpolateVelocity(FrameTimer::current().frameTime()));
 		}
 	}
 	else {
@@ -37,6 +38,18 @@ void ClientActor::Update(double elapsed)
 void ClientActor::interpolate(double packetTime, const Vector2D& packetPosition, const Vector2D& packetVelocity)
 {
 	double currentTime = FrameTimer::current().frameTime();
+
+	// Instantly move for small differences (less than a pixel)
+	{
+		Vector2D terp = packetPosition + (currentTime - packetTime) * packetVelocity;
+		const double SMALL_DIFFERENCE = 2;
+		if (terp.lengthSquared() < SMALL_DIFFERENCE * SMALL_DIFFERENCE) {
+			_useHermite = false;
+			SetPosition(terp);
+			SetVelocity(packetVelocity);
+		}
+	}
+	
 	const double INTERPOLATION_TIME = .1;
 	double futureTime = currentTime + INTERPOLATION_TIME;
 	if (packetTime > futureTime)

@@ -21,6 +21,21 @@ HermiteInterpolation::HermiteInterpolation(double initialTime, double finalTime,
 , _initialVelocity(initialVelocity)
 , _finalVelocity(finalVelocity)
 {
+	Vector2D bonus = _finalPosition - _initialPosition;
+	double SMALL_VALUE = .0000001;
+	if (bonus.lengthSquared() < SMALL_VALUE) {
+		bonus = Vector2D(0, 0);
+	}
+	else {
+		bonus = bonus.normalized();
+		bonus *= .02;
+	}
+	if (_initialVelocity.lengthSquared() < .001) {
+		_initialVelocity += bonus;
+	}
+	if (_finalVelocity.lengthSquared() < .001) {
+		_finalVelocity += bonus;
+	}
 }
 
 Vector2D HermiteInterpolation::interpolatePosition(double t) const
@@ -32,18 +47,22 @@ Vector2D HermiteInterpolation::interpolatePosition(double t) const
 	
 	t = (t - _initialTime) / (_finalTime - _initialTime);
 	assert(t >= 0 && t < 1);
-	return (1 - t) * _initialPosition + t * _finalPosition;
-	/*
-	double a = 1 + 2 * t;
-	double b = t - 1;
-	double b_2 = b * b;
-	double c = 3 - 2 * t;
+	//return (1 - t) * _initialPosition + t * _finalPosition;
+
 	double t_2 = t * t;
-	return	a * b_2 * _initialPosition +
-		t * b_2 * _initialVelocity +
-		t_2 * c * _finalPosition +
-		t_2 * b * _finalVelocity;
-	*/
+	double t_3 = t * t_2;
+
+	//double h00 =  2 * t_3 - 3 * t_2 + 1;
+	double h10 =      t_3 - 2 * t_2 + t;
+	//double h01 = -2 * t_3 - 3 * t_2;
+	double h11 =      t_3 -     t_2;
+
+	double time = _finalTime - _initialTime;
+
+	return (1 - t) * _initialPosition +
+	       h10 * time * _initialVelocity +
+	       t * _finalPosition +
+	       h11 * time * _finalVelocity;
 }
 
 Vector2D HermiteInterpolation::interpolateVelocity(double t) const
@@ -52,17 +71,23 @@ Vector2D HermiteInterpolation::interpolateVelocity(double t) const
 	if (t >= _finalTime) {
 		return _finalVelocity;
 	}
-	return _finalVelocity;
-	/*
+	// return _finalVelocity;
+	
 	t = (t - _initialTime) / (_finalTime - _initialTime);
 	assert(t >= 0 && t < 1);
-	double a = 6 * t;
-	double b = t - 1;
-	double c = 3 * t - 4;
-	double d = 3 * t - 2;
-	return	a * b * _initialPosition +
-		t * c * _initialVelocity +
-		-a * b * _finalPosition +
-		t * d * _finalVelocity;
-	*/
+
+	double t_2 = t * t;
+	double t_3 = t * t_2;
+
+	//double h00 =  6 * t_2 - 6 * t;
+	double h10 =  3 * t_2 - 4 * t + 1;
+	//double h01 = -6 * t_2 - 6 * t;
+	double h11 =  3 * t_2 - 2 * t;
+
+	double time = _finalTime - _initialTime;
+
+	return	-_initialPosition +
+		h10 * time * _initialVelocity +
+		_finalPosition +
+		h11 * time * _finalVelocity;
 }
