@@ -20,6 +20,8 @@ void MovementPacket::respondServer() const
 			continue;
 		}
 		if (actor->getUpdateTime() < timestamp()) {
+			// TODO: Verify that the movement is feasible (avoid teleport hacks).
+
 			actor->setUpdateTime(timestamp());
 			double time = FrameTimer::current().frameTime() - timestamp();
 			Vector2D position = update.position + update.velocity * time;
