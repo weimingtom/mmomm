@@ -56,8 +56,8 @@ Vector2D HermiteInterpolation::interpolateVelocity(double t) const
 	if (t >= _finalTime) {
 		return _finalVelocity;
 	}
-	 return _finalVelocity;
-	/*
+	//return _finalVelocity;
+	
 	t = (t - _initialTime) / (_finalTime - _initialTime);
 	assert(t >= 0 && t < 1);
 
@@ -74,5 +74,4 @@ Vector2D HermiteInterpolation::interpolateVelocity(double t) const
 		h10 * time * _initialVelocity +
 		_finalPosition +
 		h11 * time * _finalVelocity;
-	*/
 }

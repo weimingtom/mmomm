@@ -43,7 +43,7 @@ void ClientActor::interpolate(double packetTime, const Vector2D& packetPosition,
 	/*
 	{
 		Vector2D terp = packetPosition + (currentTime - packetTime) * packetVelocity;
-		const double SMALL_DIFFERENCE = 2;
+		const double SMALL_DIFFERENCE = .5;
 		if (terp.lengthSquared() < SMALL_DIFFERENCE * SMALL_DIFFERENCE) {
 			_useHermite = false;
 			SetPosition(terp);
