@@ -2,6 +2,7 @@
 #define SERVERWORLDINSTANCE_H_
 
 #include "worldInstance.h"
+#include <list>
 class User;
 class PlayerActor;
 
@@ -20,9 +21,14 @@ public:
     typedef boost::unordered_map< User*, PlayerActor* > UserMap;
     const UserMap& GetUserMap() const;
 
+    virtual void Update(bool elapsed);
+
 private:
 
     UserMap _userMap;
+    typedef std::list< User* > UserList;
+    UserList _userList;
+    double _updatesOffset;
 
 };
 
