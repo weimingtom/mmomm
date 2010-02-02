@@ -154,7 +154,7 @@ void CollisionWorld::GetNearbyPhysicals(std::vector< T* >& output, double x, dou
     long lx = long(floor(x / CELL_SIZE));
     long ly = long(floor(y / CELL_SIZE));
     for ( long tx = lx - 2; tx <= lx + 1; tx++ ) {
-        for ( long ty = ly - 2; ty <= ly + 1; ly++ ) {
+        for ( long ty = ly - 2; ty <= ly + 1; ty++ ) {
             Cell& cell = _map[CellCoord(tx, ty)];
             for ( Cell::iterator i = cell.begin(); i != cell.end(); i++ ) {
                 if ( tx == lx - 2 && ( *i )->GetCollisionRect().right < ( lx - 1 ) * CELL_SIZE )
