@@ -193,6 +193,8 @@ void Physical::SetCollisionRect(const Rect& rect)
 
 void Physical::SetPosition(double x, double y)
 {
+    _rect.right  += x - _rect.left;
+    _rect.bottom += y - _rect.top;
     _rect.left = x;
     _rect.top  = y;
     UpdateWorld();
