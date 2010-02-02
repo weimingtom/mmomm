@@ -5,10 +5,10 @@
 ClientActor::ClientActor(ActorID actorID, const Rect& rect, const Vector2D& velocity, ClientSprites::SpriteType sprite)
 : Actor(actorID, rect)
 , _sprite(ClientSprites::Get(sprite))
-, _velocity(velocity)
 , _hermite()
 , _useHermite(false)
 {
+	SetVelocity(velocity);
 }
 
 ClientActor::~ClientActor()
@@ -31,7 +31,7 @@ void ClientActor::Update(double elapsed)
 		}
 	}
 	else {
-		SetPosition(GetPosition() + _velocity * elapsed);
+		SetPosition(GetPosition() + GetVelocity() * elapsed);
 	}
 }
 
@@ -40,6 +40,7 @@ void ClientActor::interpolate(double packetTime, const Vector2D& packetPosition,
 	double currentTime = FrameTimer::current().frameTime();
 
 	// Instantly move for small differences (less than a pixel)
+	/*
 	{
 		Vector2D terp = packetPosition + (currentTime - packetTime) * packetVelocity;
 		const double SMALL_DIFFERENCE = 2;
@@ -47,8 +48,10 @@ void ClientActor::interpolate(double packetTime, const Vector2D& packetPosition,
 			_useHermite = false;
 			SetPosition(terp);
 			SetVelocity(packetVelocity);
+			return;
 		}
 	}
+	*/
 	
 	const double INTERPOLATION_TIME = .1;
 	double futureTime = currentTime + INTERPOLATION_TIME;
@@ -64,11 +67,11 @@ void ClientActor::interpolate(double packetTime, const Vector2D& packetPosition,
 			return;
 		}
 		currentPosition = _hermite.interpolatePosition(currentTime);
-		currentVelocity = _hermite.interpolatePosition(futureTime);
+		currentVelocity = _hermite.interpolateVelocity(currentTime);
 	}
 	else {
 		currentPosition = GetPosition();
-		currentVelocity = _velocity;
+		currentVelocity = GetVelocity();
 	}
 	double elapsed = futureTime - packetTime;
 	Vector2D futurePosition = packetPosition + elapsed * packetVelocity;
