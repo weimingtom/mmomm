@@ -5,6 +5,16 @@
 #include <SDL/SDL.h>
 #include <boost/unordered_map.hpp>
 
+class NoCollision : public CollisionWorld {
+public:
+
+    virtual bool ShouldBlock(Physical* a, Physical* b) const
+    {
+        return false;
+    }
+
+};
+
 class ClientWorldInstance : public WorldInstance {
 public:
 

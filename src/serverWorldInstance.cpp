@@ -5,7 +5,8 @@
 #include <iostream>
 
 ServerWorldInstance::ServerWorldInstance()
-: _updatesOffset(0)
+: WorldInstance(new TestCollision())
+, _updatesOffset(0)
 {
 }
 

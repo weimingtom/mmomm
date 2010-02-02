@@ -25,7 +25,7 @@ void MovementPacket::respondServer() const
 			actor->setUpdateTime(timestamp());
 			double time = FrameTimer::current().frameTime() - timestamp();
 			Vector2D position = update.position + update.velocity * time;
-			actor->SetPosition(position);
+			actor->Move(position - actor->GetPosition());
 			actor->SetVelocity(update.velocity);
 		}
 	}

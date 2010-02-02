@@ -5,11 +5,11 @@
 
 WorldInstance* WorldInstance::_current = 0;
 
-WorldInstance::WorldInstance()
+WorldInstance::WorldInstance(CollisionWorld* collision)
+: _collision(collision)
+, _worldMap(new WorldMap())
+, _nextID(0)
 {
-    _collision = new TestCollision();
-    _worldMap  = new WorldMap();
-	_nextID = 0;
 }
 
 WorldInstance::~WorldInstance()
