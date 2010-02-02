@@ -49,7 +49,7 @@ ServerWorldInstance& ServerWorldInstance::current()
     return *(ServerWorldInstance*)&WorldInstance::current();
 }
 
-void ServerWorldInstance::Update(bool elapsed)
+void ServerWorldInstance::Update(double elapsed)
 {
     WorldInstance::Update(elapsed);
     _updatesOffset += _userList.size() * 10.0 / FrameTimer::current().framerate();
