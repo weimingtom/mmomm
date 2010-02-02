@@ -31,6 +31,9 @@ Vector2D HermiteInterpolation::interpolatePosition(double t) const
 	}
 	
 	t = (t - _initialTime) / (_finalTime - _initialTime);
+	assert(t >= 0 && t < 1);
+	return (1 - t) * _initialPosition + t * _finalPosition;
+	/*
 	double a = 1 + 2 * t;
 	double b = t - 1;
 	double b_2 = b * b;
@@ -40,6 +43,7 @@ Vector2D HermiteInterpolation::interpolatePosition(double t) const
 		t * b_2 * _initialVelocity +
 		t_2 * c * _finalPosition +
 		t_2 * b * _finalVelocity;
+	*/
 }
 
 Vector2D HermiteInterpolation::interpolateVelocity(double t) const
@@ -48,8 +52,10 @@ Vector2D HermiteInterpolation::interpolateVelocity(double t) const
 	if (t >= _finalTime) {
 		return _finalVelocity;
 	}
-	
+	return _finalVelocity;
+	/*
 	t = (t - _initialTime) / (_finalTime - _initialTime);
+	assert(t >= 0 && t < 1);
 	double a = 6 * t;
 	double b = t - 1;
 	double c = 3 * t - 4;
@@ -58,4 +64,5 @@ Vector2D HermiteInterpolation::interpolateVelocity(double t) const
 		t * c * _initialVelocity +
 		-a * b * _finalPosition +
 		t * d * _finalVelocity;
+	*/
 }
