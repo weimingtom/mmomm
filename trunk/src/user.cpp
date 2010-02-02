@@ -82,16 +82,16 @@ void User::sendNetworkUpdate(const Actor *userActor)
 		PacketMap::const_iterator found = _packetMap.find(actor);
 		if (found == _packetMap.end()) {
 			CreationUpdate create;
-			create.id = found->first->id();
-			create.rect = found->first->GetCollisionRect();
-			create.velocity = found->first->GetVelocity();
-			create.sprite = found->first->GetSpriteType();
+			create.id = actor->id();
+			create.rect = actor->GetCollisionRect();
+			create.velocity = actor->GetVelocity();
+			create.sprite = actor->GetSpriteType();
 			create.isClientPlayer = false;
 
 			// Store this entry in the replacement map
 			ActorData data;
 			data.id = create.id;
-			data.position = found->first->GetPosition();
+			data.position = actor->GetPosition();
 			data.velocity = create.velocity;
 			data.time = FrameTimer::current().frameTime();
 			replacementMap[actor] = data;
