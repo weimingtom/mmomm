@@ -7,20 +7,10 @@
 class WorldMap;
 class Actor;
 
-class TestCollision : public CollisionWorld {
-public:
-
-    virtual bool ShouldBlock(Physical* a, Physical* b) const
-    {
-        return true;
-    }
-
-};
-
 class WorldInstance {
 public:
 
-    WorldInstance();
+    WorldInstance(CollisionWorld* collision);
     virtual ~WorldInstance();
 
     const CollisionWorld& GetCollision() const;

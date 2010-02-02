@@ -6,6 +6,16 @@
 class User;
 class PlayerActor;
 
+class TestCollision : public CollisionWorld {
+public:
+
+    virtual bool ShouldBlock(Physical* a, Physical* b) const
+    {
+        return true;
+    }
+
+};
+
 class ServerWorldInstance : public WorldInstance {
 public:
 

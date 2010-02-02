@@ -10,7 +10,8 @@
 const double ClientWorldInstance::PIXELS_PER_WORLD_UNIT = 32.0;
 
 ClientWorldInstance::ClientWorldInstance()
-: _clientPlayerActor(0)
+: WorldInstance(new NoCollision() )
+, _clientPlayerActor(0)
 , _updateOffset(0)
 {
     // Input map

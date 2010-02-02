@@ -239,8 +239,8 @@ void Physical::Move(double xOffset, double yOffset)
                 if ( iRect.left >= _rect.right && iRect.left >= _rect.right + xOffset )
                     break;
 
-                if ( yOffset > 0 && _rect.bottom < iRect.top &&
-                     _rect.bottom + yOffset >= iRect.top ) {
+                if ( yOffset > 0 && _rect.bottom <= iRect.top &&
+                     _rect.bottom + yOffset > iRect.top ) {
                     double left  = _rect.left  + xOffset * (iRect.top - _rect.bottom) / yOffset;
                     double right = _rect.right + xOffset * (iRect.top - _rect.bottom) / yOffset;
                     if ( !(left >= iRect.right || right < iRect.left) ) {
@@ -263,8 +263,8 @@ void Physical::Move(double xOffset, double yOffset)
                     }
                 }
 
-                if ( xOffset > 0 && _rect.right < iRect.left &&
-                     _rect.right + xOffset >= iRect.left ) {
+                if ( xOffset > 0 && _rect.right <= iRect.left &&
+                     _rect.right + xOffset > iRect.left ) {
                     double top    = _rect.top    + yOffset * (iRect.left - _rect.right) / xOffset;
                     double bottom = _rect.bottom + yOffset * (iRect.left - _rect.right) / xOffset;
                     if ( !(top >= iRect.bottom || bottom < iRect.top) ) {
