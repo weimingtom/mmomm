@@ -189,10 +189,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\hermite.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\initializePacketManager.cpp"
 				>
 			</File>
@@ -276,10 +272,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\frameTimer.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\hermite.h"
 				>
 			</File>
 			<File
