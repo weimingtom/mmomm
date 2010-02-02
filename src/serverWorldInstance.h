@@ -21,7 +21,7 @@ public:
     typedef boost::unordered_map< User*, PlayerActor* > UserMap;
     const UserMap& GetUserMap() const;
 
-    virtual void Update(bool elapsed);
+    virtual void Update(double elapsed);
 
 private:
 
