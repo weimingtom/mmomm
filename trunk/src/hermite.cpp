@@ -21,21 +21,6 @@ HermiteInterpolation::HermiteInterpolation(double initialTime, double finalTime,
 , _initialVelocity(initialVelocity)
 , _finalVelocity(finalVelocity)
 {
-	Vector2D bonus = _finalPosition - _initialPosition;
-	double SMALL_VALUE = .0000001;
-	if (bonus.lengthSquared() < SMALL_VALUE) {
-		bonus = Vector2D(0, 0);
-	}
-	else {
-		bonus = bonus.normalized();
-		bonus *= .02;
-	}
-	if (_initialVelocity.lengthSquared() < .001) {
-		_initialVelocity += bonus;
-	}
-	if (_finalVelocity.lengthSquared() < .001) {
-		_finalVelocity += bonus;
-	}
 }
 
 Vector2D HermiteInterpolation::interpolatePosition(double t) const
@@ -71,13 +56,12 @@ Vector2D HermiteInterpolation::interpolateVelocity(double t) const
 	if (t >= _finalTime) {
 		return _finalVelocity;
 	}
-	// return _finalVelocity;
-	
+	 return _finalVelocity;
+	/*
 	t = (t - _initialTime) / (_finalTime - _initialTime);
 	assert(t >= 0 && t < 1);
 
 	double t_2 = t * t;
-	double t_3 = t * t_2;
 
 	//double h00 =  6 * t_2 - 6 * t;
 	double h10 =  3 * t_2 - 4 * t + 1;
@@ -90,4 +74,5 @@ Vector2D HermiteInterpolation::interpolateVelocity(double t) const
 		h10 * time * _initialVelocity +
 		_finalPosition +
 		h11 * time * _finalVelocity;
+	*/
 }

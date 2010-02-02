@@ -24,7 +24,6 @@ private:
 
     int                        _tempID;
     Sprite*                    _sprite;
-	Vector2D                   _velocity;
 	HermiteInterpolation	   _hermite;
 	bool                       _useHermite;
 };
