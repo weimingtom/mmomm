@@ -12,10 +12,13 @@ public:
 
     virtual void OnCollision(Physical& other) { }
 
+	double getUpdateTime() const { return _updateTime; }
+	void setUpdateTime(double updateTime) { _updateTime = updateTime; }
+
 private:
 
     User& _user;
-
+	double _updateTime;
 };
 
 #endif
