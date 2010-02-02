@@ -160,7 +160,7 @@ void User::sendNetworkUpdate(const Actor *userActor)
 	}
 
 	if (!movement.empty()) {
-		MovementPacket movePacket(movement.begin(), movement.end());
+ 		MovementPacket movePacket(movement.begin(), movement.end());
 		NetworkServer::current().send(movePacket, *this);
 	}
 }
