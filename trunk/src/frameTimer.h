@@ -4,6 +4,7 @@
 #include <boost/noncopyable.hpp>
 #include <RakNet/GetTime.h>
 #include <cassert>
+#include <list>
 
 // Handles frame timings for the game.
 class FrameTimer: boost::noncopyable {
@@ -27,6 +28,9 @@ public:
 	void setFramerate(double rate) { assert(rate > 0); _framerate = rate; }
 	double framerate() const { return _framerate; }
 	
+	// The actual framerate experienced
+	double actualFramerate() const;
+	
 	// Convert to/from a RakNet timestamp
 	static RakNetTime toTimestamp(double time) { return RakNetTime(time * 1000); }
 	static double fromTimestamp(RakNetTime timestamp) { return double(timestamp) / 1000; }
@@ -36,6 +40,9 @@ public:
 	static FrameTimer& current() { assert(_current); return *_current; }
 
 private:
+	typedef std::list<double> FrameTiming;
+	FrameTiming _frameTiming;
+	double _totalFrameTiming;
 	
 	double _frameTime;
 	double _elapsed;

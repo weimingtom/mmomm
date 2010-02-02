@@ -3,10 +3,14 @@
 #include <RakNet/GetTime.h>
 #include <RakNet/RakSleep.h>
 
+// Average framerate over this many seconds.
+const double FRAMERATE_SECONDS = 3;
+
 FrameTimer *FrameTimer::_current = 0;
 
 FrameTimer::FrameTimer()
-:	_frameTime(now())
+:	_totalFrameTiming(0)
+,	_frameTime(now())
 ,	_elapsed(0)
 ,	_framerate(60)
 {
@@ -25,6 +29,14 @@ void FrameTimer::step()
 	double previous = _frameTime;
 	_frameTime = now();
 	_elapsed = _frameTime - previous;
+	
+	// Framerate computation
+	if (_totalFrameTiming > FRAMERATE_SECONDS && !_frameTiming.empty()) {
+		_totalFrameTiming -= _frameTiming.front();
+		_frameTiming.pop_front();
+	}
+	_totalFrameTiming += _elapsed;
+	_frameTiming.push_back(_elapsed);
 }
 
 // Gets the absolute current time, in seconds.
@@ -33,3 +45,10 @@ double FrameTimer::now() const
 	return double(RakNet::GetTimeUS()) / (1000 * 1000);
 }
 
+double FrameTimer::actualFramerate() const
+{
+	if (_frameTiming.empty()) {
+		return 0;
+	}
+	return _frameTiming.size() / _totalFrameTiming;
+}
