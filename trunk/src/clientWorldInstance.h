@@ -48,6 +48,8 @@ private:
 
     std::vector< int > _erroneousDestructionIds;
 
+    double _updateOffset;
+
 };
 
 #endif

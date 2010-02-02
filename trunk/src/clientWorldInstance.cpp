@@ -3,11 +3,15 @@
 #include "renderer.h"
 #include "sprite.h"
 #include "vector2d.h"
+#include "frameTimer.h"
+#include "collisionPackets.h"
+#include "networkClient.h"
 
 const double ClientWorldInstance::PIXELS_PER_WORLD_UNIT = 32.0;
 
 ClientWorldInstance::ClientWorldInstance()
 : _clientPlayerActor(0)
+, _updateOffset(0)
 {
     // Input map
     _keyMap[SDLK_LEFT]  = KEY_LEFT;
@@ -59,6 +63,9 @@ void ClientWorldInstance::Update(double elapsed)
 {
     WorldInstance::Update(elapsed);
 
+    if ( !_clientPlayerActor )
+        return;
+
     Vector2D v;
     if ( IsKeyDown(KEY_LEFT) )
         v.x -= 1.0;
@@ -70,8 +77,20 @@ void ClientWorldInstance::Update(double elapsed)
         v.y += 1.0;
     v = v.normalized();
     v *= elapsed * 5.0;
-    if ( _clientPlayerActor )
-        _clientPlayerActor->Move(v.x, v.y);
+    _clientPlayerActor->Move(v.x, v.y);
+
+    _updateOffset += 10.0 / FrameTimer::current().framerate();
+    if ( _updateOffset >= 1.0 ) {
+        _updateOffset -= int(_updateOffset);
+        MovementPacket::MovementList list;
+        MovementUpdate update;
+        update.id = _clientPlayerActor->id();
+        update.position = _clientPlayerActor->GetPosition();
+        update.velocity = _clientPlayerActor->GetVelocity();
+        list.push_back(update);
+        MovementPacket movement(list.begin(), list.end());
+        NetworkClient::current().send(movement);
+    }
 }
 
 void ClientWorldInstance::KeyDown(SDLKey key)
