@@ -1,0 +1,26 @@
+#summary Goals we're heading towards
+
+= #1 =
+
+  * Connect to server, run about and collide with other players doing the same
+
+Status: *complete*, pending test on proper server
+
+
+= #2 =
+Subject to change. Possibly including some of the following:
+
+  * Sending terrain from server and displaying on client
+  * Chat (and chat window improvment)
+  * Character details, /inspect functionality
+  * Items that you can pick up and put down (not necessarily manipulate)
+  * Some test NPCs
+
+Status: *incomplete*
+
+= #3 =
+Add things for the future.
+
+  * ?
+
+Status: *incomplete*
