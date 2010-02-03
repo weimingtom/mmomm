@@ -4,7 +4,7 @@
 
   * Connect to server, run about and collide with other players doing the same
 
-Status: *complete*, pending test on proper server
+Status: *complete*
 
 
 = #2 =
