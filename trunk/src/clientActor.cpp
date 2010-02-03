@@ -25,14 +25,14 @@ Sprite* ClientActor::GetSprite() const
 void ClientActor::Update(double elapsed)
 {
 	if (_useHermite) {
-        Physical::Move(_hermite.interpolatePosition(FrameTimer::current().frameTime()) - GetPosition());
+        SetPosition(_hermite.interpolatePosition(FrameTimer::current().frameTime()));
 		if (FrameTimer::current().frameTime() >= _hermite.finalTime()) {
 			_useHermite = false;
 			SetVelocity(_hermite.interpolateVelocity(FrameTimer::current().frameTime()));
 		}
 	}
 	else {
-        Physical::Move(GetVelocity() * elapsed);
+        SetPosition(GetPosition() + GetVelocity() * elapsed);
 	}
 }
 
