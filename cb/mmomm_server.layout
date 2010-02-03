@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Debug" />
-	<File name="../src/collision.cpp" open="0" top="0" tabpos="0">
+	<ActiveTarget name="Release" />
+	<File name="../src/collision.cpp" open="1" top="0" tabpos="0">
 		<Cursor position="1546" topLine="41" />
 	</File>
 	<File name="../src/collisionPackets.h" open="0" top="0" tabpos="0">
@@ -17,10 +17,13 @@
 		<Cursor position="249" topLine="0" />
 	</File>
 	<File name="../src/serverCollisionPackets.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="222" topLine="0" />
+		<Cursor position="870" topLine="0" />
 	</File>
-	<File name="../src/serverNativePackets.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="608" topLine="10" />
+	<File name="../src/serverNativePackets.cpp" open="1" top="1" tabpos="3">
+		<Cursor position="540" topLine="0" />
+	</File>
+	<File name="../src/serverWorldInstance.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="767" topLine="17" />
 	</File>
 	<File name="../src/user.cpp" open="1" top="0" tabpos="4">
 		<Cursor position="3761" topLine="101" />

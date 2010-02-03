@@ -830,3 +830,12 @@
 	"frameTimer.h"
 	<vector>
 
+1265148848 source:/home/stu/dev/mmomm/src/clientSprites.cpp
+	"clientSprites.h"
+	"animationManager.h"
+	"sprite.h"
+
+1265148848 source:/home/stu/dev/mmomm/src/sprite.cpp
+	"sprite.h"
+	<boost/shared_ptr.hpp>
+

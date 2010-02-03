@@ -23,11 +23,13 @@ void MovementPacket::respondServer() const
 			// TODO: Verify that the movement is feasible (avoid teleport hacks).
 
 			actor->setUpdateTime(timestamp());
-			double time = FrameTimer::current().frameTime() - timestamp();
+			double time       = FrameTimer::current().frameTime() - timestamp();
 			Vector2D position = update.position + update.velocity * time;
-            Rect r = actor->GetCollisionRect();
+			Vector2D move     = position - actor->GetPosition();
+            Rect     r        = actor->GetCollisionRect();
+
             actor->SetSize((r.right - r.left) / 2.0, (r.bottom - r.top) / 2.0);
-			actor->Move(position - actor->GetPosition());
+			actor->Move(move);
             actor->SetSize(r.right - r.left, r.bottom - r.top);
 			actor->SetVelocity(update.velocity);
 		}

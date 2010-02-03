@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Release" />
-	<File name="../src/actor.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="0" topLine="0" />
+	<ActiveTarget name="Release-x64" />
+	<File name="../src/actor.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="181" topLine="0" />
 	</File>
-	<File name="../src/animation.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="747" topLine="0" />
+	<File name="../src/animation.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="222" topLine="0" />
 	</File>
-	<File name="../src/animation.h" open="0" top="0" tabpos="2">
-		<Cursor position="1738" topLine="0" />
+	<File name="../src/animation.h" open="1" top="0" tabpos="5">
+		<Cursor position="590" topLine="0" />
 	</File>
 	<File name="../src/animationManager.cpp" open="1" top="0" tabpos="2">
 		<Cursor position="1166" topLine="0" />
@@ -25,14 +25,8 @@
 	<File name="../src/clientActor.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="263" topLine="0" />
 	</File>
-	<File name="../src/clientAnimations.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="523" topLine="0" />
-	</File>
-	<File name="../src/clientAnimations.h" open="0" top="0" tabpos="0">
-		<Cursor position="440" topLine="0" />
-	</File>
-	<File name="../src/collision.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="0" topLine="81" />
+	<File name="../src/collision.cpp" open="1" top="1" tabpos="11">
+		<Cursor position="9775" topLine="239" />
 	</File>
 	<File name="../src/collision.h" open="0" top="0" tabpos="3">
 		<Cursor position="0" topLine="0" />
@@ -94,7 +88,7 @@
 	<File name="../src/worldCommon.h" open="0" top="0" tabpos="0">
 		<Cursor position="14" topLine="0" />
 	</File>
-	<File name="../src/worldInstance.h" open="1" top="1" tabpos="3">
+	<File name="../src/worldInstance.h" open="1" top="0" tabpos="3">
 		<Cursor position="591" topLine="8" />
 	</File>
 	<File name="../src/worldMap.h" open="0" top="0" tabpos="0">

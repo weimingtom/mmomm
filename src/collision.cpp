@@ -64,7 +64,7 @@ void CollisionWorld::TriggerCollisions()
 
             for ( Cell::const_iterator i = a.begin(); i != a.end(); i++ ) {
                 const Rect& r = (*i)->GetCollisionRect();
-                
+
                 // Check objects in cells, starting at the current object (so as
                 // not to check the same pair twice)
                 Cell::const_iterator j = i;
@@ -108,7 +108,7 @@ bool CollisionWorld::CheckCollision(Physical* a, Physical* b, const Rect& aRect)
     // again. This can happen if an object enters another as it moves, and comes to
     // rest still overlapping it
     for ( std::size_t i = 0; i < _collisions.size(); i++ ) {
-        if ( (_collisions[i].first  == a && _collisions[i].second == b) || 
+        if ( (_collisions[i].first  == a && _collisions[i].second == b) ||
              (_collisions[i].second == b && _collisions[i].first  == a) ) {
             return true;
         }
@@ -243,62 +243,73 @@ void Physical::Move(double xOffset, double yOffset)
                 if ( iRect.left >= _rect.right && iRect.left >= _rect.right + xOffset )
                     break;
 
-                if ( yOffset > 0 && _rect.bottom <= iRect.top &&
+                if ( yOffset > 0 && _rect.bottom < (iRect.top + iRect.bottom) / 2.0 &&
                      _rect.bottom + yOffset > iRect.top ) {
-                    double left  = _rect.left  + xOffset * (iRect.top - _rect.bottom) / yOffset;
-                    double right = _rect.right + xOffset * (iRect.top - _rect.bottom) / yOffset;
-                    
-                    if ( !(left >= iRect.right || right < iRect.left) ) {
-                        yCarry = !(xCarry = true);
-                        carry  = xOffset;
-                        xOffset *= (iRect.top - _rect.bottom) / yOffset;
-                        yOffset = iRect.top - _rect.bottom;
-                        carry -= xOffset;
+                    bool overlap = _rect.bottom > iRect.top;
+                    double left  = overlap ? _rect.left  : _rect.left  + xOffset * (iRect.top - _rect.bottom) / yOffset;
+                    double right = overlap > iRect.top ? _rect.right : _rect.right + xOffset * (iRect.top - _rect.bottom) / yOffset;
+
+                    if ( !(left >= iRect.right || right <= iRect.left) ) {
+                        yCarry   = !(xCarry = true);
+                        carry    = xOffset;
+                        xOffset *= overlap ? 0 : (iRect.top - _rect.bottom) / yOffset;
+                        yOffset  = overlap ? 0 : iRect.top - _rect.bottom;
+                        carry   -= xOffset;
+
                         _collisions.clear();
                         _collisions.push_back(*i);
                     }
                 }
 
-                if ( yOffset < 0 && _rect.top >= iRect.bottom &&
+                if ( yOffset < 0 && _rect.top > (iRect.bottom + iRect.top) / 2.0 &&
                      _rect.top + yOffset < iRect.bottom ) {
-                    double left  = _rect.left  + xOffset * (iRect.bottom - _rect.top) / yOffset;
-                    double right = _rect.right + xOffset * (iRect.bottom - _rect.top) / yOffset;
-                    if ( !(left >= iRect.right || right < iRect.left) ) {
-                        yCarry = !(xCarry = true);
-                        carry  = xOffset;
-                        xOffset *= (iRect.bottom - _rect.top) / yOffset;
-                        yOffset = iRect.bottom - _rect.top;
-                        carry -= xOffset;
+                    bool overlap = _rect.top < iRect.bottom;
+                    double left  = overlap ? _rect.left  : _rect.left  + xOffset * (iRect.bottom - _rect.top) / yOffset;
+                    double right = overlap ? _rect.right : _rect.right + xOffset * (iRect.bottom - _rect.top) / yOffset;
+
+                    if ( !(left >= iRect.right || right <= iRect.left) ) {
+                        yCarry   = !(xCarry = true);
+                        carry    = xOffset;
+                        xOffset *= overlap ? 0 : (iRect.bottom - _rect.top) / yOffset;
+                        yOffset  = overlap ? 0 : iRect.bottom - _rect.top;
+                        carry   -= xOffset;
+
                         _collisions.clear();
                         _collisions.push_back(*i);
                     }
                 }
 
-                if ( xOffset > 0 && _rect.right <= iRect.left &&
+                if ( xOffset > 0 && _rect.right < (iRect.left + iRect.right) / 2.0 &&
                      _rect.right + xOffset > iRect.left ) {
-                    double top    = _rect.top    + yOffset * (iRect.left - _rect.right) / xOffset;
-                    double bottom = _rect.bottom + yOffset * (iRect.left - _rect.right) / xOffset;
-                    if ( !(top >= iRect.bottom || bottom < iRect.top) ) {
-                        xCarry = !(yCarry = true);
-                        carry  = yOffset;
-                        yOffset *= (iRect.left - _rect.right) / xOffset;
-                        xOffset = iRect.left - _rect.right;
-                        carry -= yOffset;
+                    bool overlap  = _rect.right > iRect.left;
+                    double top    = overlap ? _rect.top    : _rect.top    + yOffset * (iRect.left - _rect.right) / xOffset;
+                    double bottom = overlap ? _rect.bottom : _rect.bottom + yOffset * (iRect.left - _rect.right) / xOffset;
+
+                    if ( !(top >= iRect.bottom || bottom <= iRect.top) ) {
+                        xCarry   = !(yCarry = true);
+                        carry    = yOffset;
+                        yOffset *= overlap ? 0 : (iRect.left - _rect.right) / xOffset;
+                        xOffset  = overlap ? 0 : iRect.left - _rect.right;
+                        carry   -= yOffset;
+
                         _collisions.clear();
                         _collisions.push_back(*i);
                     }
                 }
 
-                if ( xOffset < 0 && _rect.left >= iRect.right &&
+                if ( xOffset < 0 && _rect.left > (iRect.right + iRect.left) / 2.0 &&
                      _rect.left + xOffset < iRect.right ) {
-                    double top    = _rect.top    + yOffset * (iRect.right - _rect.left) / xOffset;
-                    double bottom = _rect.bottom + yOffset * (iRect.right - _rect.left) / xOffset;
-                    if ( !(top >= iRect.bottom || bottom < iRect.top) ) {
-                        xCarry = !(yCarry = true);
-                        carry  = yOffset;
-                        yOffset *= (iRect.right - _rect.left) / xOffset;
-                        xOffset = iRect.right - _rect.left;
-                        carry -= yOffset;
+                    bool overlap  = _rect.left < iRect.right;
+                    double top    = overlap ? _rect.top    : _rect.top    + yOffset * (iRect.right - _rect.left) / xOffset;
+                    double bottom = overlap ? _rect.bottom : _rect.bottom + yOffset * (iRect.right - _rect.left) / xOffset;
+
+                    if ( !(top >= iRect.bottom || bottom <= iRect.top) ) {
+                        xCarry   = !(yCarry = true);
+                        carry    = yOffset;
+                        yOffset *= overlap ? 0 : (iRect.right - _rect.left) / xOffset;
+                        xOffset  = overlap ? 0 : iRect.right - _rect.left;
+                        carry   -= yOffset;
+
                         _collisions.clear();
                         _collisions.push_back(*i);
                     }
