@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="../src/initializePacketManager.cpp" open="1" top="0" tabpos="2">
+	<File name="../src/collision.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="1546" topLine="41" />
+	</File>
+	<File name="../src/collisionPackets.h" open="0" top="0" tabpos="0">
+		<Cursor position="280" topLine="0" />
+	</File>
+	<File name="../src/initializePacketManager.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/networkServer.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="5084" topLine="177" />
+	<File name="../src/networkServer.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="5499" topLine="207" />
+	</File>
+	<File name="../src/playerActor.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="249" topLine="0" />
+	</File>
+	<File name="../src/serverCollisionPackets.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="222" topLine="0" />
+	</File>
+	<File name="../src/serverNativePackets.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="608" topLine="10" />
+	</File>
+	<File name="../src/user.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="3761" topLine="101" />
 	</File>
 </CodeBlocks_layout_file>

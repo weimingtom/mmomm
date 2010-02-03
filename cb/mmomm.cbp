@@ -232,6 +232,9 @@
 		<Unit filename="../src/packetTypes.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
+		<Unit filename="../src/playerActor.cpp">
+			<Option virtualFolder="Core/Actors/" />
+		</Unit>
 		<Unit filename="../src/renderer.cpp">
 			<Option virtualFolder="Core/Renderers/" />
 		</Unit>

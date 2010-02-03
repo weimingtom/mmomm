@@ -459,3 +459,374 @@
 	<RakNet/GetTime.h>
 	<RakNet/RakSleep.h>
 
+1265148848 source:/home/stu/dev/mmomm/src/actor.cpp
+	"actor.h"
+	"worldInstance.h"
+
+1265233813 /home/stu/dev/mmomm/src/actor.h
+	"collision.h"
+	"worldInstance.h"
+	"clientSprites.h"
+
+1265233813 /home/stu/dev/mmomm/src/collision.h
+	"worldCommon.h"
+	<set>
+	<boost/unordered_map.hpp>
+	<vector>
+	"vector2D.h"
+
+1264946341 /home/stu/dev/mmomm/src/worldCommon.h
+	<boost/functional/hash.hpp>
+
+1265148848 /home/stu/dev/mmomm/src/vector2D.h
+	<cmath>
+
+1265148848 /home/stu/dev/mmomm/src/worldInstance.h
+	"collision.h"
+	<boost/unordered_map.hpp>
+
+1265148848 /home/stu/dev/mmomm/src/clientSprites.h
+	<boost/unordered_map.hpp>
+
+1264873576 source:/home/stu/dev/mmomm/src/chatWindow.cpp
+	"chatWindow.h"
+
+1265233813 /home/stu/dev/mmomm/src/chatWindow.h
+	<iostream>
+	<string>
+	<sstream>
+	<vector>
+	<guichan.hpp>
+	"gui.h"
+	"renderer.h"
+	"events.h"
+
+1264873576 /home/stu/dev/mmomm/src/gui.h
+	<iostream>
+	<assert.h>
+	<guichan.hpp>
+	<guichan/sdl.hpp>
+	<guichan/opengl.hpp>
+	<guichan/opengl/openglsdlimageloader.hpp>
+	"SDL.h"
+
+1264873576 /home/stu/dev/mmomm/src/renderer.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<string>
+	<sstream>
+	<iostream>
+	<assert.h>
+	"image.h"
+
+1264873576 /home/stu/dev/mmomm/src/image.h
+	<windows.h>
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"renderer.h"
+
+1264873576 /home/stu/dev/mmomm/src/events.h
+
+1264873576 source:/home/stu/dev/mmomm/src/clientChat.cpp
+	"chat.h"
+	<iostream>
+
+1264873576 /home/stu/dev/mmomm/src/chat.h
+	"networkPacket.h"
+	"packetTypes.h"
+	<string>
+
+1265148848 /home/stu/dev/mmomm/src/networkPacket.h
+	<RakNet/BitStream.h>
+	<RakNet/RakNetTypes.h>
+	<RakNet/RakPeerInterface.h>
+	<string>
+	<vector>
+	<boost/foreach.hpp>
+	"vector2D.h"
+	"frameTimer.h"
+
+1265148848 /home/stu/dev/mmomm/src/frameTimer.h
+	<boost/noncopyable.hpp>
+	<RakNet/GetTime.h>
+	<cassert>
+	<deque>
+
+1264873576 /home/stu/dev/mmomm/src/packetTypes.h
+	<RakNet/MessageIdentifiers.h>
+
+1265233813 source:/home/stu/dev/mmomm/src/collision.cpp
+	"collision.h"
+	<cmath>
+	<algorithm>
+
+1264873576 source:/home/stu/dev/mmomm/src/configurationMenu.cpp
+	"configurationMenu.h"
+
+1264873576 /home/stu/dev/mmomm/src/configurationMenu.h
+	<iostream>
+	<string>
+	<sstream>
+	<vector>
+	<guichan.hpp>
+	"gui.h"
+	"renderer.h"
+	"events.h"
+
+1265148848 source:/home/stu/dev/mmomm/src/frameTimer.cpp
+	"frameTimer.h"
+	<RakNet/GetTime.h>
+	<RakNet/RakSleep.h>
+
+1264873576 source:/home/stu/dev/mmomm/src/gui.cpp
+	"gui.h"
+
+1264873576 source:/home/stu/dev/mmomm/src/imageManager.cpp
+	"imageManager.h"
+	<vector>
+
+1264873576 /home/stu/dev/mmomm/src/imageManager.h
+	<string>
+	<boost/shared_ptr.hpp>
+	<boost/unordered_map.hpp>
+	"image.h"
+
+1264873576 source:/home/stu/dev/mmomm/src/initializePacketManager.cpp
+	"initializePacketManager.h"
+	"networkPacketManager.h"
+	"chat.h"
+	"collisionPackets.h"
+
+1264873576 /home/stu/dev/mmomm/src/initializePacketManager.h
+
+1264873576 /home/stu/dev/mmomm/src/networkPacketManager.h
+	"networkPacket.h"
+	<map>
+	<boost/function.hpp>
+	<boost/tuple/tuple.hpp>
+
+1265233813 /home/stu/dev/mmomm/src/collisionPackets.h
+	"networkPacket.h"
+	"packetTypes.h"
+	"vector2D.h"
+	"collision.h"
+	<string>
+
+1264873576 source:/home/stu/dev/mmomm/src/loginMenu.cpp
+	"loginMenu.h"
+
+1264873576 /home/stu/dev/mmomm/src/loginMenu.h
+	<iostream>
+	<string>
+	<sstream>
+	<vector>
+	<guichan.hpp>
+	"gui.h"
+	"renderer.h"
+	"events.h"
+
+1264873576 source:/home/stu/dev/mmomm/src/networkClient.cpp
+	"networkClient.h"
+	"networkCommon.h"
+	"networkPacket.h"
+	"initializePacketManager.h"
+	"nativePackets.h"
+	"packetTypes.h"
+	<RakNet/RakNetTypes.h>
+	<RakNet/RakNetworkFactory.h>
+	<RakNet/RakPeerInterface.h>
+	<RakNet/MessageIdentifiers.h>
+	<iostream>
+
+1264873576 /home/stu/dev/mmomm/src/networkClient.h
+	<boost/noncopyable.hpp>
+	<RakNet/RakNetTypes.h>
+	"networkPacket.h"
+	"networkPacketManager.h"
+
+1264873576 /home/stu/dev/mmomm/src/networkCommon.h
+	"networkPacket.h"
+	<ostream>
+	<memory>
+
+1264873576 /home/stu/dev/mmomm/src/nativePackets.h
+	"networkPacket.h"
+	"packetTypes.h"
+	<RakNet/MessageIdentifiers.h>
+	<string>
+
+1264873576 source:/home/stu/dev/mmomm/src/networkCommon.cpp
+	"networkCommon.h"
+	<RakNet/MessageIdentifiers.h>
+	<iostream>
+
+1265148848 source:/home/stu/dev/mmomm/src/networkPacket.cpp
+	"networkPacket.h"
+	<RakNet/MessageIdentifiers.h>
+	<RakNet/StringCompressor.h>
+	<string>
+
+1264873576 source:/home/stu/dev/mmomm/src/openglRenderer.cpp
+	"openglRenderer.h"
+	<GL/glext.h>
+	<boost/scoped_array.hpp>
+
+1264873576 /home/stu/dev/mmomm/src/openglRenderer.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<string>
+	<sstream>
+	<iostream>
+	"renderer.h"
+	"image.h"
+
+1265148848 source:/home/stu/dev/mmomm/src/playerActor.cpp
+	"playerActor.h"
+	"user.h"
+	"frameTimer.h"
+
+1265148848 /home/stu/dev/mmomm/src/playerActor.h
+	"actor.h"
+
+1265148848 /home/stu/dev/mmomm/src/user.h
+	<string>
+	<RakNet/RakNetTypes.h>
+	<boost/unordered_set.hpp>
+	<boost/unordered_map.hpp>
+	"collision.h"
+	"vector2D.h"
+
+1264873576 source:/home/stu/dev/mmomm/src/renderer.cpp
+	"renderer.h"
+
+1264873576 source:/home/stu/dev/mmomm/src/softwareRenderer.cpp
+	"softwareRenderer.h"
+	<math.h>
+
+1264873576 /home/stu/dev/mmomm/src/softwareRenderer.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<SDL/SDL.h>
+	<string>
+	<sstream>
+	<iostream>
+	"image.h"
+	"renderer.h"
+
+1264873576 source:/home/stu/dev/mmomm/src/worldCommon.cpp
+	"worldCommon.h"
+
+1265148848 source:/home/stu/dev/mmomm/src/worldInstance.cpp
+	"worldInstance.h"
+	"worldMap.h"
+	"collision.h"
+	"actor.h"
+
+1264946341 /home/stu/dev/mmomm/src/worldMap.h
+	"worldCommon.h"
+	<boost/multi_array.hpp>
+	<boost/unordered_map.hpp>
+
+1264873576 source:/home/stu/dev/mmomm/src/worldMap.cpp
+	"worldMap.h"
+
+1265148848 source:/home/stu/dev/mmomm/src/animation.cpp
+	"animation.h"
+	"sprite.h"
+
+1265148848 /home/stu/dev/mmomm/src/animation.h
+	"image.h"
+	"imageManager.h"
+
+1265148848 /home/stu/dev/mmomm/src/sprite.h
+	<string>
+	<boost/unordered_map.hpp>
+	"animationManager.h"
+
+1265148848 /home/stu/dev/mmomm/src/animationManager.h
+	<boost/shared_ptr.hpp>
+	<boost/weak_ptr.hpp>
+	<boost/unordered_map.hpp>
+	<vector>
+	"animation.h"
+
+1265148848 source:/home/stu/dev/mmomm/src/animationManager.cpp
+	<boost/foreach.hpp>
+	"animationManager.h"
+
+1265233813 source:/home/stu/dev/mmomm/src/clientActor.cpp
+	"clientActor.h"
+	"frameTimer.h"
+	"sprite.h"
+
+1265148848 /home/stu/dev/mmomm/src/clientActor.h
+	"actor.h"
+	"clientSprites.h"
+	"animationManager.h"
+	"hermite.h"
+
+1264873576 /home/stu/dev/mmomm/src/hermite.h
+	"vector2D.h"
+
+1265233813 source:/home/stu/dev/mmomm/src/clientCollisionPackets.cpp
+	"collisionPackets.h"
+	"clientActor.h"
+	"clientWorldInstance.h"
+	<iostream>
+
+1265233813 /home/stu/dev/mmomm/src/clientWorldInstance.h
+	"worldInstance.h"
+	<SDL/SDL.h>
+	<boost/unordered_map.hpp>
+
+1265148848 source:/home/stu/dev/mmomm/src/clientNativePackets.cpp
+	"nativePackets.h"
+	"chatWindow.h"
+	"clientWorldInstance.h"
+	<iostream>
+
+1265234053 source:/home/stu/dev/mmomm/src/clientWorldInstance.cpp
+	"clientWorldInstance.h"
+	"clientActor.h"
+	"renderer.h"
+	"sprite.h"
+	"vector2D.h"
+	"frameTimer.h"
+	"collisionPackets.h"
+	"networkClient.h"
+	"chatWindow.h"
+
+1265148848 source:/home/stu/dev/mmomm/src/hermite.cpp
+	"hermite.h"
+	<cassert>
+
+1265148848 source:/home/stu/dev/mmomm/src/image.cpp
+	"image.h"
+	<sstream>
+	<iostream>
+
+1265233813 source:/home/stu/dev/mmomm/src/main.cpp
+	"events.h"
+	"renderer.h"
+	"openglRenderer.h"
+	"softwareRenderer.h"
+	"image.h"
+	"imageManager.h"
+	"animation.h"
+	"animationManager.h"
+	"clientSprites.h"
+	"gui.h"
+	"configurationMenu.h"
+	"loginMenu.h"
+	"networkClient.h"
+	"chatWindow.h"
+	"clientWorldInstance.h"
+	"clientActor.h"
+	"frameTimer.h"
+	<vector>
+
