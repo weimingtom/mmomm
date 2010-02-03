@@ -23,14 +23,13 @@ template<typename T>
 void serial(BitStream& bs, bool write, std::vector<T>& data)
 {
 	if (write) {
-		bs.WriteCompressed(data.size());
+		bs.WriteCompressed(unsigned(data.size()));
 		BOOST_FOREACH(T& value, data) {
 			serial(bs, write, value);
 		}
 	}
 	else {
-		typedef typename std::vector<T>::size_type Size;
-		Size size;
+		unsigned size;
 		bs.ReadCompressed(size);
 		data.resize(size);
 		for (Size i = 0; i < size; ++i) {
