@@ -12,7 +12,7 @@ void ConnectionPacket::respondServer() const
 	std::cout << "connected " << sender().username() << std::endl;
 
     const ServerWorldInstance::UserMap& users = ServerWorldInstance::current().GetUserMap();
-    PlayerActor* actor = new PlayerActor(sender(), Rect(1.0 * users.size(), 0.0, 1.0 * (1 + users.size()), 1.0));
+    PlayerActor* actor = new PlayerActor(sender(), Rect(0.25 + 1.0 * users.size(), 0.0, 0.75 + 1.0 * users.size(), 1.0));
     actor->SetName(sender().username());
 
     // Tell the user about the new actor; others will get it later
@@ -23,11 +23,11 @@ void ConnectionPacket::respondServer() const
     update.sprite = actor->GetSpriteType();
     update.isClientPlayer = true;
     update.name = actor->GetName();
-	
+
     CreationPacket::CreationList creationList;
     creationList.push_back(update);
     CreationPacket::DestructionList destructionList;
-	
+
     CreationPacket packet(creationList.begin(), creationList.end(), destructionList.begin(), destructionList.end());
     NetworkServer::current().send(packet, sender());
 

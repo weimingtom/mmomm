@@ -115,12 +115,6 @@
 		<Unit filename="../src/clientActor.h">
 			<Option virtualFolder="Core/Actors/" />
 		</Unit>
-		<Unit filename="../src/clientAnimations.cpp">
-			<Option virtualFolder="Core/Animations/" />
-		</Unit>
-		<Unit filename="../src/clientAnimations.h">
-			<Option virtualFolder="Core/Animations/" />
-		</Unit>
 		<Unit filename="../src/clientChat.cpp">
 			<Option virtualFolder="Net/" />
 		</Unit>
@@ -129,6 +123,12 @@
 		</Unit>
 		<Unit filename="../src/clientNativePackets.cpp">
 			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/clientSprites.cpp">
+			<Option virtualFolder="Core/Animations/" />
+		</Unit>
+		<Unit filename="../src/clientSprites.h">
+			<Option virtualFolder="Core/Animations/" />
 		</Unit>
 		<Unit filename="../src/clientWorldInstance.cpp">
 			<Option virtualFolder="Net/" />
@@ -246,6 +246,12 @@
 		</Unit>
 		<Unit filename="../src/softwareRenderer.h">
 			<Option virtualFolder="Core/Renderers/" />
+		</Unit>
+		<Unit filename="../src/sprite.cpp">
+			<Option virtualFolder="Core/Animations/" />
+		</Unit>
+		<Unit filename="../src/sprite.h">
+			<Option virtualFolder="Core/Animations/" />
 		</Unit>
 		<Unit filename="../src/user.h">
 			<Option virtualFolder="Net/" />
