@@ -25,7 +25,10 @@ void MovementPacket::respondServer() const
 			actor->setUpdateTime(timestamp());
 			double time = FrameTimer::current().frameTime() - timestamp();
 			Vector2D position = update.position + update.velocity * time;
+            Rect r = actor->GetCollisionRect();
+            actor->SetSize((r.right - r.left) / 2.0, (r.bottom - r.top) / 2.0);
 			actor->Move(position - actor->GetPosition());
+            actor->SetSize(r.right - r.left, r.bottom - r.top);
 			actor->SetVelocity(update.velocity);
 		}
 	}
