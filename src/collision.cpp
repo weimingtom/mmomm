@@ -247,7 +247,7 @@ void Physical::Move(double xOffset, double yOffset)
                      _rect.bottom + yOffset > iRect.top ) {
                     bool overlap = _rect.bottom > iRect.top;
                     double left  = overlap ? _rect.left  : _rect.left  + xOffset * (iRect.top - _rect.bottom) / yOffset;
-                    double right = overlap > iRect.top ? _rect.right : _rect.right + xOffset * (iRect.top - _rect.bottom) / yOffset;
+                    double right = overlap ? _rect.right : _rect.right + xOffset * (iRect.top - _rect.bottom) / yOffset;
 
                     if ( !(left >= iRect.right || right <= iRect.left) ) {
                         yCarry   = !(xCarry = true);
