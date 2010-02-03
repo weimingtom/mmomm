@@ -10,20 +10,56 @@
 			<Target title="Debug">
 				<Option output="bin/Debug/mmomm" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add option="-Winit-self" />
+					<Add option="-Wredundant-decls" />
+					<Add option="-Wcast-align" />
+					<Add option="-Wundef" />
+					<Add option="-Winline" />
+					<Add option="-Wunreachable-code" />
+					<Add option="-Wmissing-declarations" />
+					<Add option="-Wmissing-include-dirs" />
+					<Add option="-Wswitch-enum" />
+					<Add option="-Wswitch-default" />
+					<Add option="-std=c++98" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/mmomm" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-march=i486" />
+					<Add option="-march=i586" />
 					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Debug-x64">
+				<Option output="bin/Debug-x64/mmomm" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug-x64" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-std=c++98" />
+				</Compiler>
+			</Target>
+			<Target title="Release-x64">
+				<Option output="bin/Release-x64/mmomm" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release-x64" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-march=k8" />
+					<Add option="-O1" />
 					<Add option="-DNDEBUG" />
 				</Compiler>
 				<Linker>
@@ -34,6 +70,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-DMMOMM_CLIENT" />
+			<Add option="-DBOOST_DISABLE_THREAD" />
 		</Compiler>
 		<Linker>
 			<Add option="-lSDL" />

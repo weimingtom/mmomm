@@ -2,7 +2,7 @@
 #include "clientActor.h"
 #include "renderer.h"
 #include "sprite.h"
-#include "vector2d.h"
+#include "vector2D.h"
 #include "frameTimer.h"
 #include "collisionPackets.h"
 #include "networkClient.h"
