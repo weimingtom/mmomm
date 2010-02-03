@@ -13,20 +13,15 @@
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-Wall" />
-					<Add option="-g" />
-					<Add option="-Winit-self" />
-					<Add option="-Wredundant-decls" />
-					<Add option="-Wcast-align" />
-					<Add option="-Wundef" />
-					<Add option="-Winline" />
-					<Add option="-Wunreachable-code" />
-					<Add option="-Wmissing-declarations" />
-					<Add option="-Wmissing-include-dirs" />
-					<Add option="-Wswitch-enum" />
-					<Add option="-Wswitch-default" />
+					<Add option="-march=i586" />
 					<Add option="-std=c++98" />
+					<Add option="-Wall" />
+					<Add option="-m32" />
+					<Add option="-g3 -ggdb" />
 				</Compiler>
+				<Linker>
+					<Add option="-m32" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/mmomm" prefix_auto="1" extension_auto="1" />
@@ -36,10 +31,12 @@
 				<Compiler>
 					<Add option="-march=i586" />
 					<Add option="-O2" />
+					<Add option="-m32" />
 					<Add option="-DNDEBUG" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="-m32" />
 				</Linker>
 			</Target>
 			<Target title="Debug-x64">
@@ -48,9 +45,16 @@
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-Wall" />
 					<Add option="-std=c++98" />
+					<Add option="-Wall" />
+					<Add option="-m64" />
+					<Add option="-g3 -ggdb" />
 				</Compiler>
+				<Linker>
+					<Add option="-lguichan" />
+					<Add option="-lguichan_sdl" />
+					<Add option="-lguichan_opengl" />
+				</Linker>
 			</Target>
 			<Target title="Release-x64">
 				<Option output="bin/Release-x64/mmomm" prefix_auto="1" extension_auto="1" />
@@ -58,12 +62,15 @@
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-march=k8" />
 					<Add option="-O1" />
+					<Add option="-m64" />
 					<Add option="-DNDEBUG" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="-lguichan" />
+					<Add option="-lguichan_sdl" />
+					<Add option="-lguichan_opengl" />
 				</Linker>
 			</Target>
 		</Build>

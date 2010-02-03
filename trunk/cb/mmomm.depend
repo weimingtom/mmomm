@@ -45,7 +45,7 @@
 1264384865 source:/home/oipo/Programming/mmomm/src/renderer.cpp
 	"renderer.h"
 
-1265223099 source:/home/oipo/Programming/mmomm/src/collision.cpp
+1265237215 source:/home/oipo/Programming/mmomm/src/collision.cpp
 	"collision.h"
 	<cmath>
 	<algorithm>
@@ -228,7 +228,13 @@
 	<ostream>
 	<memory>
 
-1264618017 /home/oipo/Programming/mmomm/src/user.h
+1265223099 /home/oipo/Programming/mmomm/src/user.h
+	<string>
+	<RakNet/RakNetTypes.h>
+	<boost/unordered_set.hpp>
+	<boost/unordered_map.hpp>
+	"collision.h"
+	"vector2D.h"
 
 1264618017 source:/home/oipo/Programming/mmomm/src/worldCommon.cpp
 	"worldCommon.h"
@@ -269,12 +275,13 @@
 	"packetTypes.h"
 	<string>
 
-1265223099 /home/oipo/Programming/mmomm/src/collisionPackets.h
+1265240858 /home/oipo/Programming/mmomm/src/collisionPackets.h
 	"networkPacket.h"
 	"packetTypes.h"
 	"vector2D.h"
 	"collision.h"
 	<string>
+	<iostream>
 
 1265223099 source:/home/oipo/Programming/mmomm/src/worldInstance.cpp
 	"worldInstance.h"
@@ -378,11 +385,11 @@
 	"image.h"
 	"renderer.h"
 
-1265223099 source:/home/oipo/Programming/mmomm/src/animation.cpp
+1265237962 source:/home/oipo/Programming/mmomm/src/animation.cpp
 	"animation.h"
 	"sprite.h"
 
-1265223099 /home/oipo/Programming/mmomm/src/animation.h
+1265237914 /home/oipo/Programming/mmomm/src/animation.h
 	"image.h"
 	"imageManager.h"
 
@@ -836,6 +843,23 @@
 	"sprite.h"
 
 1265148848 source:/home/stu/dev/mmomm/src/sprite.cpp
+	"sprite.h"
+	<boost/shared_ptr.hpp>
+
+1265223099 source:/home/oipo/Programming/mmomm/src/clientSprites.cpp
+	"clientSprites.h"
+	"animationManager.h"
+	"sprite.h"
+
+1265223099 source:/home/oipo/Programming/mmomm/src/playerActor.cpp
+	"playerActor.h"
+	"user.h"
+	"frameTimer.h"
+
+1265223099 /home/oipo/Programming/mmomm/src/playerActor.h
+	"actor.h"
+
+1265223099 source:/home/oipo/Programming/mmomm/src/sprite.cpp
 	"sprite.h"
 	<boost/shared_ptr.hpp>
 
