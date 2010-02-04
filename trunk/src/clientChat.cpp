@@ -1,7 +1,16 @@
 #include "chat.h"
+#include "chatWindow.h"
 #include <iostream>
 
 void ChatMessagePacket::respondClient() const
 {
-	// Add message to display
+    if(type() == CHAT_MESSAGE_PRIVATE)
+    {
+        string newmsg = from();
+        newmsg += ": ";
+        newmsg += message();
+	    ChatWindow::current().addText(newmsg, type());
+    }
+    else
+        ChatWindow::current().addText(message(), type());
 }
