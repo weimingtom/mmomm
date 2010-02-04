@@ -50,7 +50,7 @@
 	<cmath>
 	<algorithm>
 
-1265223099 /home/oipo/Programming/mmomm/src/collision.h
+1265299119 /home/oipo/Programming/mmomm/src/collision.h
 	"worldCommon.h"
 	<set>
 	<boost/unordered_map.hpp>
@@ -275,13 +275,14 @@
 	"packetTypes.h"
 	<string>
 
-1265241451 /home/oipo/Programming/mmomm/src/collisionPackets.h
+1265243173 /home/oipo/Programming/mmomm/src/collisionPackets.h
 	"networkPacket.h"
 	"packetTypes.h"
 	"vector2D.h"
 	"collision.h"
 	<string>
 	<iostream>
+	<boost/static_assert.hpp>
 
 1265223099 source:/home/oipo/Programming/mmomm/src/worldInstance.cpp
 	"worldInstance.h"
