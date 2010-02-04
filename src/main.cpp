@@ -39,26 +39,26 @@ int main(int argc, char **argv)
 #ifndef NDEBUG
     ImageManager::current().use_count();
 #endif
-	
+
     AnimationManager::setCurrent(new AnimationManager());
     ClientSprites::Setup();
-	
+
     WorldInstance::setCurrent(new ClientWorldInstance());
-	
+
     Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
-	
+
     loginMenu = new LoginMenu(100, 150);
     loginMenu->setCurrent(loginMenu);
-	
+
     chatWindow = new ChatWindow(300, 150);
     chatWindow->setCurrent(chatWindow);
-	
+
 	NetworkClient::setCurrent(new NetworkClient());
-	
+
 	FrameTimer::setCurrent(new FrameTimer());
-	
+
     bool loop  = true;
-	
+
     while(loop)
     {
         SDL_Event event;
@@ -127,7 +127,7 @@ int main(int argc, char **argv)
                             std::stringstream ss;
                             ss << "Could not access network "
                                << data->host << ":" << data->port << "." << std::endl;
-                            chatWindow->addText( ss.str() );
+                            chatWindow->addText( ss.str(), ChatMessagePacket::CHAT_MESSAGE_SERVER );
 	                    }
                         delete data;
                     }

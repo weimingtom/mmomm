@@ -73,12 +73,12 @@ void ClientWorldInstance::Render() const
             continue;
         renderer.drawClippedImage(anim.lock().get()->getImage().get(), float(tx), float(ty), clip);
 
-        if ( _mouse.x < r.right && _mouse.x >= r.left && _mouse.y < r.bottom && _mouse.y >= r.top ) {
+        /*if ( _mouse.x < r.right && _mouse.x >= r.left && _mouse.y < r.bottom && _mouse.y >= r.top ) {
             // Need a Renderer::drawText
             std::stringstream ss;
             ss << "That is ye " << a->GetName();
             ChatWindow::current().setText( ss.str() );
-        }
+        }*/
     }
 }
 

@@ -138,10 +138,10 @@
 			<Option virtualFolder="Core/Animations/" />
 		</Unit>
 		<Unit filename="../src/clientWorldInstance.cpp">
-			<Option virtualFolder="Net/" />
+			<Option virtualFolder="World/" />
 		</Unit>
 		<Unit filename="../src/clientWorldInstance.h">
-			<Option virtualFolder="Net/" />
+			<Option virtualFolder="World/" />
 		</Unit>
 		<Unit filename="../src/collision.cpp">
 			<Option virtualFolder="Core/" />
