@@ -7,7 +7,11 @@
 #include <vector>
 #include "vector2D.h"
 
+#ifdef __LP64__ //64 linux support and such.
+typedef unsigned ActorID;
+#else
 typedef unsigned long ActorID;
+#endif
 
 class Physical;
 struct Rect {
