@@ -211,8 +211,8 @@ void Physical::SetSize(double width, double height)
     assert(width  < CollisionWorld::CELL_SIZE);
     assert(height < CollisionWorld::CELL_SIZE);
 
-    _rect.left -= (width  - (_rect.right  - _rect.left)) / 2.0;
-    _rect.top  -= (height - (_rect.bottom - _rect.top )) / 2.0;
+    _rect.left   = _rect.left - (width  - (_rect.right  - _rect.left)) / 2.0;
+    _rect.top    = _rect.top  - (height - (_rect.bottom - _rect.top )) / 2.0;
     _rect.right  = _rect.left + width;
     _rect.bottom = _rect.top  + height;
     UpdateWorld();
@@ -243,7 +243,7 @@ void Physical::Move(double xOffset, double yOffset)
                 if ( iRect.left >= _rect.right && iRect.left >= _rect.right + xOffset )
                     break;
 
-                if ( yOffset > 0 && _rect.bottom < (iRect.top + iRect.bottom) / 2.0 &&
+                if ( yOffset > 0 && _rect.bottom < (iRect.top + iRect.bottom + _rect.bottom - _rect.top) / 2.0 &&
                      _rect.bottom + yOffset > iRect.top ) {
                     bool overlap = _rect.bottom > iRect.top;
                     double left  = overlap ? _rect.left  : _rect.left  + xOffset * (iRect.top - _rect.bottom) / yOffset;
@@ -261,7 +261,7 @@ void Physical::Move(double xOffset, double yOffset)
                     }
                 }
 
-                if ( yOffset < 0 && _rect.top > (iRect.bottom + iRect.top) / 2.0 &&
+                if ( yOffset < 0 && _rect.top > (iRect.bottom + iRect.top - _rect.bottom + _rect.top) / 2.0 &&
                      _rect.top + yOffset < iRect.bottom ) {
                     bool overlap = _rect.top < iRect.bottom;
                     double left  = overlap ? _rect.left  : _rect.left  + xOffset * (iRect.bottom - _rect.top) / yOffset;
@@ -279,7 +279,7 @@ void Physical::Move(double xOffset, double yOffset)
                     }
                 }
 
-                if ( xOffset > 0 && _rect.right < (iRect.left + iRect.right) / 2.0 &&
+                if ( xOffset > 0 && _rect.right < (iRect.left + iRect.right + _rect.right - _rect.left) / 2.0 &&
                      _rect.right + xOffset > iRect.left ) {
                     bool overlap  = _rect.right > iRect.left;
                     double top    = overlap ? _rect.top    : _rect.top    + yOffset * (iRect.left - _rect.right) / xOffset;
@@ -297,7 +297,7 @@ void Physical::Move(double xOffset, double yOffset)
                     }
                 }
 
-                if ( xOffset < 0 && _rect.left > (iRect.right + iRect.left) / 2.0 &&
+                if ( xOffset < 0 && _rect.left > (iRect.right + iRect.left - _rect.right + _rect.left) / 2.0 &&
                      _rect.left + xOffset < iRect.right ) {
                     bool overlap  = _rect.left < iRect.right;
                     double top    = overlap ? _rect.top    : _rect.top    + yOffset * (iRect.right - _rect.left) / xOffset;
