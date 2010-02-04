@@ -7,9 +7,9 @@ Animation::Animation(ImageManager::shared_ptr img, int frameWidth, int frameHeig
 ,   _frameWidth(frameWidth)
 ,   _frameHeight(frameHeight)
 ,   _interval(interval)
+,   _active(active)
 ,   _startFrame(startFrame)
 ,   _currentFrame(_startFrame)
-,   _active(active)
 ,   _callbackSprite(0)
 {
 	assert(interval > 0);
@@ -44,7 +44,7 @@ void Animation::update(double elapsed)
 
     double maxTime = (_endFrame - _startFrame)*_interval;
     _totalTime += elapsed;
-	
+
 	while (_totalTime >= maxTime)
 		_totalTime -= maxTime;
 

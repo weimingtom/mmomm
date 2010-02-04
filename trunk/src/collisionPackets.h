@@ -8,6 +8,7 @@
 #include "vector2D.h"
 #include "collision.h"
 #include <string>
+#include <iostream>
 
 // Gives information about the initial state of an object.
 struct CreationUpdate {
@@ -56,7 +57,7 @@ inline void serial(BitStream& bs, bool write, MovementUpdate& data)
 // Occurs to inform about new entities and destroyed entities.
 class CreationPacket: public NetworkPacket {
 public:
-	
+
 	CreationPacket() { }
 	// Initialize from a series of movementUpdates
 	template<typename CreationIterator, typename DestructionIterator>
@@ -64,26 +65,26 @@ public:
 			DestructionIterator destructBegin, DestructionIterator destructEnd)
 		: _creation(createBegin, createEnd)
 		, _destruction(destructBegin, destructEnd) { }
-	
+
 	NetworkParams params() const
 	{
 		return NetworkParams(ID_COLLISION_CREATE, HIGH_PRIORITY,
 				RELIABLE, ORDER_DEFAULT, true);
 	}
-	
+
 	// Respond to object creation on client.
 	void respondClient() const;
-	
+
 	// Invalid message on server.
 	void respondServer() const { }
-	
+
 	// Serialization function.
 	void serialize(BitStream& bs, bool write)
 	{
 		serial(bs, write, _creation);
 		serial(bs, write, _destruction);
 	}
-	
+
 	typedef std::vector<CreationUpdate> CreationList;
 	const CreationList& creation() const { return _creation; }
 
@@ -99,32 +100,32 @@ private:
 // May be processed before a CreationUpdate or after a DestructionUpdate
 class MovementPacket: public NetworkPacket {
 public:
-	
+
 	MovementPacket() { }
 	// Initialize from a series of movementUpdates
 	template<typename MovementIterator>
 	MovementPacket(MovementIterator moveBegin, MovementIterator moveEnd)
 		: _movement(moveBegin, moveEnd) { }
-	
+
 	NetworkParams params() const
 	{
 		// Could be just UNRELIABLE, though packet inversion would look odd
 		return NetworkParams(ID_COLLISION_UPDATE, HIGH_PRIORITY,
 				UNRELIABLE, SEQUENCE_DEFAULT, true);
 	}
-	
+
 	// Respond to actor movement on client.
 	void respondClient() const;
-	
+
 	// Respond to player movement on server.
 	void respondServer() const;
-	
+
 	// Serialization function.
 	void serialize(BitStream& bs, bool write)
 	{
 		serial(bs, write, _movement);
 	}
-	
+
 	typedef std::vector<MovementUpdate> MovementList;
 	const MovementList& movement() const { return _movement; }
 
