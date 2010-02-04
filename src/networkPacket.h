@@ -32,7 +32,7 @@ void serial(BitStream& bs, bool write, std::vector<T>& data)
 		unsigned size;
 		bs.ReadCompressed(size);
 		data.resize(size);
-		for (Size i = 0; i < size; ++i) {
+		for (unsigned i = 0; i < size; ++i) {
 			serial(bs, write, data[i]);
 		}
 	}

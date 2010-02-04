@@ -14,12 +14,12 @@ private:
     int                         _frameWidth;
     int                         _frameHeight;
     double                      _interval;      //time between switching frames.
-    int                         _currentFrame;
     double                      _totalTime;
     int                         _totalHoriFrames;
     int                         _totalVertFrames;
     bool                        _active;
     int                         _startFrame;
+    int                         _currentFrame;
     int                         _endFrame;
 
     Sprite*                     _callbackSprite;
