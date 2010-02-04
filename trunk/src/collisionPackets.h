@@ -9,6 +9,7 @@
 #include "collision.h"
 #include <string>
 #include <iostream>
+#include <boost/static_assert.hpp>
 
 // Gives information about the initial state of an object.
 struct CreationUpdate {
@@ -19,6 +20,11 @@ struct CreationUpdate {
     bool isClientPlayer;
     std::string name;
 };
+
+BOOST_STATIC_ASSERT(sizeof(ActorID) == 4);
+BOOST_STATIC_ASSERT(sizeof(Rect) == 32);
+BOOST_STATIC_ASSERT(sizeof(Vector2D) == 16);
+BOOST_STATIC_ASSERT(sizeof(int) == 4);
 
 inline void serial(BitStream& bs, bool write, CreationUpdate& data)
 {
