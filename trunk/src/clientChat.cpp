@@ -12,5 +12,10 @@ void ChatMessagePacket::respondClient() const
 	    ChatWindow::current().addText(newmsg, type());
     }
     else
-        ChatWindow::current().addText(message(), type());
+    {
+        string newmsg = from();
+        newmsg += ": ";
+        newmsg += message();
+        ChatWindow::current().addText(newmsg, type());
+    }
 }
