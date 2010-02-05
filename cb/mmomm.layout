@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Debug" />
+	<ActiveTarget name="Debug-x64" />
 	<File name="../src/actor.cpp" open="0" top="0" tabpos="6">
 		<Cursor position="0" topLine="0" />
 	</File>
@@ -16,20 +16,20 @@
 	<File name="../src/animationManager.h" open="0" top="0" tabpos="4">
 		<Cursor position="111" topLine="0" />
 	</File>
-	<File name="../src/chat.h" open="1" top="0" tabpos="3">
+	<File name="../src/chat.h" open="0" top="0" tabpos="3">
 		<Cursor position="196" topLine="0" />
 	</File>
-	<File name="../src/chatWindow.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="357" topLine="2" />
+	<File name="../src/chatWindow.cpp" open="1" top="1" tabpos="0">
+		<Cursor position="1222" topLine="9" />
 	</File>
-	<File name="../src/chatWindow.h" open="1" top="1" tabpos="2">
-		<Cursor position="2777" topLine="27" />
+	<File name="../src/chatWindow.h" open="0" top="0" tabpos="2">
+		<Cursor position="631" topLine="7" />
 	</File>
 	<File name="../src/clientActor.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="263" topLine="0" />
 	</File>
-	<File name="../src/clientChat.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="191" topLine="0" />
+	<File name="../src/clientChat.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="312" topLine="0" />
 	</File>
 	<File name="../src/clientCollisionPackets.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="693" topLine="0" />
@@ -89,7 +89,7 @@
 		<Cursor position="3417" topLine="0" />
 	</File>
 	<File name="../src/networkClient.h" open="0" top="0" tabpos="2">
-		<Cursor position="930" topLine="0" />
+		<Cursor position="930" topLine="27" />
 	</File>
 	<File name="../src/networkPacket.h" open="0" top="0" tabpos="5">
 		<Cursor position="781" topLine="15" />

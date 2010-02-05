@@ -6,7 +6,7 @@ ChatWindow::ChatWindow(int x, int y)
 {
     try {
         _window             = new gcn::Window("Chat");
-        _tabArea            = new MMOMMTabbedArea;
+        _tabArea            = new gcn::TabbedArea;
         _serverTab          = new gcn::Tab();
         _generalTab         = new gcn::Tab();
         _privateTab         = new gcn::Tab();
@@ -18,13 +18,16 @@ ChatWindow::ChatWindow(int x, int y)
         _chatBoxScroll      = new gcn::ScrollArea(_chatBox, gcn::ScrollArea::SHOW_NEVER, gcn::ScrollArea::SHOW_ALWAYS);
         _inputLabel         = new gcn::Label("Input");
         _targetLabel        = new gcn::Label("Target");
-        _inputListener      = new textInputListener();
         _inputField         = new gcn::TextField("");
         _targetField        = new gcn::TextField("");
+        _inputListener      = new textInputListener();
+        _switchListener     = new tabSwitchListener();
 
 
         _chatBox    ->setEditable(false);
-        _inputField ->addActionListener(_inputListener);
+        _serverContainer->setOpaque(false);
+        _generalContainer->setOpaque(false);
+        _privateContainer->setOpaque(false);
         _serverTab  ->setCaption("Server");
         _generalTab ->setCaption("General");
         _privateTab ->setCaption("Private");
@@ -64,8 +67,8 @@ ChatWindow::ChatWindow(int x, int y)
 
         _serverContainer ->add(_chatBoxScroll);
 
-        _wasteContainer  ->add(_inputField);
-        _wasteContainer  ->add(_targetField);
+        //_wasteContainer  ->add(_inputField);
+        //_wasteContainer  ->add(_targetField);
 
         _tabArea->addTab(_serverTab,  _serverContainer);
         _tabArea->addTab(_generalTab, _generalContainer);
@@ -75,13 +78,19 @@ ChatWindow::ChatWindow(int x, int y)
         //_tabArea->setSelectedTab(_privateTab);
 
         _window->add(_tabArea);
-        _window->setVisible(true);
 
         Gui::current().addWidget(_window);
 
     } catch (gcn::Exception e) {
         cout << e.getMessage() << endl;
     }
+}
+
+void ChatWindow::finishInit()
+{
+    _inputField ->addActionListener(_inputListener);
+    _tabArea    ->addActionListener(_switchListener);
+    _window->setVisible(true);
 }
 
 ChatWindow::~ChatWindow()
@@ -123,11 +132,11 @@ void ChatWindow::addText(string text, ChatMessagePacket::TYPE type)
             _chatBoxScroll->setVerticalScrollAmount(_chatBoxScroll->getVerticalMaxScroll());
     }
     if(type == ChatMessagePacket::CHAT_MESSAGE_GENERAL)
-        _generalText += text;
+        _generalText += text + '\n';
     else if(type == ChatMessagePacket::CHAT_MESSAGE_PRIVATE)
-        _privateText += text;
+        _privateText += text + '\n';
     else if(type == ChatMessagePacket::CHAT_MESSAGE_SERVER)
-        _serverText += text;
+        _serverText += text + '\n';
 }
 
 void ChatWindow::setText(string text)
@@ -139,11 +148,9 @@ void ChatWindow::switchTabs()
 {
     if(_tabArea->getSelectedTab() == _generalTab) {
         _type = ChatMessagePacket::CHAT_MESSAGE_GENERAL;
-        _inputField->setEnabled(true);
         setText(_generalText);
     } else if(_tabArea->getSelectedTab() == _privateTab) {
         _type = ChatMessagePacket::CHAT_MESSAGE_PRIVATE;
-        _targetField->setEnabled(true);
         setText(_privateText);
     }  else if(_tabArea->getSelectedTab() == _serverTab) {
         _type = ChatMessagePacket::CHAT_MESSAGE_SERVER;

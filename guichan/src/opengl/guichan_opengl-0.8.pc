@@ -1,0 +1,12 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=/usr/lib32
+includedir=${prefix}/include
+
+Name: guichan
+Description: A portable C++ GUI library designed for games using Allegro, HGE, OpenGL, OpenLayer and/or SDL.
+Version: 0.8.2
+Requires:
+Conflicts:
+Libs: -L${libdir} -lguichan_opengl
+Cflags: -I${includedir}

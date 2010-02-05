@@ -51,9 +51,7 @@
 					<Add option="-g3 -ggdb" />
 				</Compiler>
 				<Linker>
-					<Add option="-lguichan" />
-					<Add option="-lguichan_sdl" />
-					<Add option="-lguichan_opengl" />
+					<Add option="-m64" />
 				</Linker>
 			</Target>
 			<Target title="Release-x64">
@@ -68,9 +66,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="-lguichan" />
-					<Add option="-lguichan_sdl" />
-					<Add option="-lguichan_opengl" />
+					<Add option="-m64" />
 				</Linker>
 			</Target>
 		</Build>
@@ -78,16 +74,16 @@
 			<Add option="-Wall" />
 			<Add option="-DMMOMM_CLIENT" />
 			<Add option="-DBOOST_DISABLE_THREAD" />
+			<Add directory="../guichan/include" />
 		</Compiler>
 		<Linker>
 			<Add option="-lSDL" />
 			<Add option="-lSDL_image" />
 			<Add option="-lGL" />
 			<Add option="-lGLU" />
-			<Add option="-lguichan" />
-			<Add option="-lguichan_sdl" />
-			<Add option="-lguichan_opengl" />
+			<Add option="../cb/libguichan-mmomm.a" />
 			<Add option="-lRakNet" />
+			<Add directory="../cb" />
 		</Linker>
 		<Unit filename="../src/actor.cpp">
 			<Option virtualFolder="Core/Actors/" />

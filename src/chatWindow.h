@@ -24,8 +24,8 @@ public:
     int                         getX() const;
     int                         getY() const;
 
-    static                      ChatWindow& current() { assert(_current); return *_current; }
-    void                        setCurrent(ChatWindow *current) { _current = current; }
+    static ChatWindow&          current() { assert(_current); return *_current; }
+    static void                 setCurrent(ChatWindow *current) { _current = current; current->finishInit(); }
 
     void                        addText(string text, ChatMessagePacket::TYPE type);
     void                        setText(string text);
@@ -50,34 +50,21 @@ private:
         }
     };
 
-    class MMOMMTabbedArea : public gcn::TabbedArea
+    class tabSwitchListener : public gcn::ActionListener
     {
-        public:
-        MMOMMTabbedArea() : gcn::TabbedArea() {}
-        void mousePressed(gcn::MouseEvent& mouseEvent)
+        void action(const gcn::ActionEvent& actionEvent)
         {
-            if (mouseEvent.isConsumed() && mouseEvent.getSource()->isFocusable())
-                return;
-
-            if (mouseEvent.getButton() == gcn::MouseEvent::LEFT)
+            if(NetworkClient::current().isActive())
             {
-                gcn::Widget* widget = mTabContainer->getWidgetAt(mouseEvent.getX(), mouseEvent.getY());
-                gcn::Tab* tab = dynamic_cast<gcn::Tab*>(widget);
-
-                if (tab != NULL)
-                {
-                    setSelectedTab(tab);
-                    ChatWindow::current().switchTabs();
-                }
+                ChatWindow::current().switchTabs();
             }
-
-            requestFocus();
         }
-
     };
 
+    void finishInit();
+
     gcn::Window				 *_window;
-    MMOMMTabbedArea          *_tabArea;
+    gcn::TabbedArea          *_tabArea;
     gcn::Tab                 *_serverTab;
     gcn::Tab                 *_generalTab;
     gcn::Tab                 *_privateTab;
@@ -93,6 +80,7 @@ private:
     gcn::Label               *_targetLabel;
 
     textInputListener        *_inputListener;
+    tabSwitchListener        *_switchListener;
 
     std::string               _serverText;
     std::string               _generalText;
