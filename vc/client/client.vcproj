@@ -241,6 +241,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ieeehalfprecision.c"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\image.cpp"
 				>
 			</File>
@@ -278,6 +282,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\renderer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\serial.cpp"
 				>
 			</File>
 			<File
@@ -367,6 +375,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ieeehalfprecision.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\image.h"
 				>
 			</File>
@@ -411,7 +423,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\rect.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\renderer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\serial.h"
 				>
 			</File>
 			<File

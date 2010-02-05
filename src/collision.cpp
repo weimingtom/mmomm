@@ -4,22 +4,6 @@
 
 const double CollisionWorld::CELL_SIZE = 32.0;
 
-Rect::Rect()
-{
-    this->left   = 0;
-    this->top    = 0;
-    this->right  = 0;
-    this->bottom = 0;
-}
-
-Rect::Rect(double left, double top, double right, double bottom)
-{
-    this->left   = left;
-    this->top    = top;
-    this->right  = right;
-    this->bottom = bottom;
-}
-
 CollisionWorld::CollisionWorld()
 : _instantCollisions(false)
 , _leftBound(0)

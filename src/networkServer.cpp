@@ -4,6 +4,7 @@
 #include "user.h"
 #include "initializePacketManager.h"
 #include "nativePackets.h"
+#include "serial.h"
 #include <RakNet/RakNetTypes.h>
 #include <RakNet/RakNetworkFactory.h>
 #include <RakNet/RakPeerInterface.h>

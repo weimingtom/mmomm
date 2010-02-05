@@ -7,52 +7,18 @@
 #include <string>
 #include <vector>
 #include <boost/foreach.hpp>
+#include <RakNet/NativeTypes.h>
 #include "vector2D.h"
 #include "frameTimer.h"
 
 using RakNet::BitStream;
 class User;
 
-// Extra serialization functions
-template<typename T>
-void serial(BitStream& bs, bool write, T& data)
-{
-	bs.SerializeCompressed(write, data);
-}
-template<typename T>
-void serial(BitStream& bs, bool write, std::vector<T>& data)
-{
-	if (write) {
-		bs.WriteCompressed(unsigned(data.size()));
-		BOOST_FOREACH(T& value, data) {
-			serial(bs, write, value);
-		}
-	}
-	else {
-		unsigned size;
-		bs.ReadCompressed(size);
-		data.resize(size);
-		for (unsigned i = 0; i < size; ++i) {
-			serial(bs, write, data[i]);
-		}
-	}
-}
-void serial(BitStream& bs, bool write, std::string& data);
-void serial(BitStream& bs, bool write, Vector2D& data);
-inline void serial(BitStream& bs, bool write, double& data)
-{
-	bs.Serialize(write, data);
-}
-inline void serial(BitStream& bs, bool write, float& data)
-{
-	bs.Serialize(write, data);
-}
-
 // Parameters for a network packet.
 // See similarly-named NetworkPacket functions.
 struct NetworkParams {
 
-	NetworkParams(unsigned char kind,
+	NetworkParams(uint8_t kind,
 			PacketPriority priority=LOW_PRIORITY,
 			PacketReliability reliability=RELIABLE_ORDERED,
 			char orderingChannel=0,
@@ -62,7 +28,7 @@ struct NetworkParams {
 	{
 	}
 
-	unsigned char kind;
+	uint8_t kind;
 	PacketPriority priority;
 	PacketReliability reliability;
 	char orderingChannel;
@@ -84,7 +50,7 @@ public:
 	void write(BitStream& bs) const;
 
 	// The kind of packet this is.
-	unsigned char kind() const { return params().kind; }
+	uint8_t kind() const { return params().kind; }
 
 	// What priority to send this packet at.
 	// Defaults to LOW_PRIORITY.

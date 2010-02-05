@@ -3,34 +3,30 @@
 
 // Packets linked with chatting.
 
-#include "networkPacket.h"
-#include "packetTypes.h"
-#include "vector2D.h"
-#include "collision.h"
 #include <string>
 #include <iostream>
 #include <boost/static_assert.hpp>
+#include "collision.h"
+#include "networkPacket.h"
+#include "packetTypes.h"
+#include "serial.h"
+#include "vector2D.h"
 
 // Gives information about the initial state of an object.
 struct CreationUpdate {
 	ActorID id;
 	Rect rect;
 	Vector2D velocity;
-	int sprite;
+	uint8_t sprite;
     bool isClientPlayer;
     std::string name;
 };
 
-BOOST_STATIC_ASSERT(sizeof(ActorID) == 4);
-BOOST_STATIC_ASSERT(sizeof(Rect) == 32);
-BOOST_STATIC_ASSERT(sizeof(Vector2D) == 16);
-BOOST_STATIC_ASSERT(sizeof(int) == 4);
-
 inline void serial(BitStream& bs, bool write, CreationUpdate& data)
 {
-	bs.Serialize(write, data.id);
-	serial(bs, write, data.rect);
-	serial(bs, write, data.velocity);
+	serialFull(bs, write, data.id);
+	serialPosition(bs, write, data.rect);
+	serialVelocity(bs, write, data.velocity);
 	serial(bs, write, data.sprite);
     serial(bs, write, data.isClientPlayer);
     serial(bs, write, data.name);
@@ -43,7 +39,7 @@ struct DestructionUpdate {
 
 inline void serial(BitStream& bs, bool write, DestructionUpdate& data)
 {
-	bs.Serialize(write, data.id);
+	serialFull(bs, write, data.id);
 }
 
 // Informs the player of an entity's new position and velocity
@@ -55,7 +51,7 @@ struct MovementUpdate {
 
 inline void serial(BitStream& bs, bool write, MovementUpdate& data)
 {
-	bs.Serialize(write, data.id);
+	serialFull(bs, write, data.id);
 	serial(bs, write, data.position);
 	serial(bs, write, data.velocity);
 }

@@ -1,28 +1,17 @@
 #ifndef COLLISION_H_
 #define COLLISION_H_
 
-#include "worldCommon.h"
 #include <set>
-#include <boost/unordered_map.hpp>
 #include <vector>
+#include <boost/unordered_map.hpp>
+#include <RakNet/NativeTypes.h>
+#include "rect.h"
 #include "vector2D.h"
+#include "worldCommon.h"
 
-#ifdef __LP64__ //64 linux support and such.
-typedef unsigned ActorID;
-#else
-typedef unsigned long ActorID;
-#endif
+typedef uint32_t ActorID;
 
 class Physical;
-struct Rect {
-	Rect();
-    Rect(double left, double top, double right, double bottom);
-
-    double left;
-    double top;
-    double right;
-    double bottom;
-};
 
 // A world consisting of physical objects that can collide with each other.
 // All objects in a world should be destroyed before the world is destroyed.

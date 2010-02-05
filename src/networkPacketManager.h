@@ -2,6 +2,7 @@
 #define NETWORK_PACKET_MANAGER_H_
 
 #include "networkPacket.h"
+#include "packetTypes.h"
 #include <map>
 #include <boost/function.hpp>
 #include <boost/tuple/tuple.hpp>
@@ -48,6 +49,8 @@ inline std::auto_ptr<NetworkPacket> NetworkPacketManager::create(unsigned char k
 
 inline void NetworkPacketManager::assign(unsigned char kind,
 		const CreationFunc& creation) {
+	assert(!_managerMap.count(kind));
+	assert(kind > ID_NOT_INTERNAL);
 	_managerMap[kind] = creation;
 }
 

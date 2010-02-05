@@ -4,6 +4,7 @@
 #include "initializePacketManager.h"
 #include "nativePackets.h"
 #include "packetTypes.h"
+#include "serial.h"
 #include <RakNet/RakNetTypes.h>
 #include <RakNet/RakNetworkFactory.h>
 #include <RakNet/RakPeerInterface.h>
@@ -162,7 +163,7 @@ NetworkClient::AutoPacket NetworkClient::processPacket(const Packet& raw)
 		_address = raw.systemAddress;
 		
 		BitStream bs;
-		bs.Write(static_cast<unsigned char>(ID_ACCOUNT_LOGIN));
+		bs.Write(static_cast<uint8_t>(ID_ACCOUNT_LOGIN));
 		serial(bs, true, _username);
 		serial(bs, true, _password);
 		bs.Write(_createAccount);
