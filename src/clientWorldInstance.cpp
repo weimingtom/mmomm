@@ -108,10 +108,10 @@ void ClientWorldInstance::Update(double elapsed)
         MovementPacket::MovementList list;
         MovementUpdate update;
         update.id = _clientPlayerActor->id();
-        update.position = _clientPlayerActor->GetPosition();
+        update.displacement = Vector2D(0, 0);
         update.velocity = _clientPlayerActor->GetVelocity();
         list.push_back(update);
-        MovementPacket movement(list.begin(), list.end());
+        MovementPacket movement(_clientPlayerActor->GetPosition(), list.begin(), list.end());
         NetworkClient::current().send(movement);
     }
 }

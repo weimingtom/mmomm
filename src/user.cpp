@@ -7,6 +7,7 @@
 #include <boost/foreach.hpp>
 #include <boost/unordered_set.hpp>
 #include <algorithm>
+#include <cmath>
 
 
 double User::score(const PacketValue& value, const Vector2D& reference)
@@ -55,6 +56,7 @@ struct User::ActorScoreComparator {
 
 void User::sendNetworkUpdate(const Actor *userActor)
 {
+	const double MAX_DISTANCE = 60;
 	const Vector2D position = userActor->GetPosition();
 
 	WorldInstance::ActorList actors;
@@ -77,13 +79,24 @@ void User::sendNetworkUpdate(const Actor *userActor)
 		// Skip the user.
 		if (userActor == actor)
 			continue;
+		
+		// Skip anyone too far away
+		Rect offsetRect = actor->GetCollisionRect() - position;
+		if (std::abs(offsetRect.left) > MAX_DISTANCE ||
+			std::abs(offsetRect.top) > MAX_DISTANCE ||
+			std::abs(offsetRect.right) > MAX_DISTANCE ||
+			std::abs(offsetRect.bottom) > MAX_DISTANCE) {
+			
+			continue;
+		}
 
+		
 		// Not found; create it
 		PacketMap::const_iterator found = _packetMap.find(actor);
 		if (found == _packetMap.end()) {
 			CreationUpdate create;
 			create.id = actor->id();
-			create.rect = actor->GetCollisionRect();
+			create.offsetRect = offsetRect;
 			create.velocity = actor->GetVelocity();
 			create.sprite = actor->GetSpriteType();
 			create.isClientPlayer = false;
@@ -129,14 +142,14 @@ void User::sendNetworkUpdate(const Actor *userActor)
 		// Add packet data
 		MovementUpdate move;
 		move.id = actorScore.actor->id();
-		move.position = actorScore.actor->GetPosition();
+		move.displacement = actorScore.actor->GetPosition() - position;
 		move.velocity = actorScore.actor->GetVelocity();
 		movement.push_back(move);
 		
 		// Add new map data
 		ActorData data;
 		data.id = move.id;
-		data.position = move.position;
+		data.position = actorScore.actor->GetPosition();
 		data.velocity = move.velocity;
 		data.time = FrameTimer::current().frameTime();
 		replacementMap[actorScore.actor] = data;
@@ -155,13 +168,15 @@ void User::sendNetworkUpdate(const Actor *userActor)
 	
 	// Send the packets
 	if (!creation.empty() || !destruction.empty()) {
-		CreationPacket createPacket(creation.begin(), creation.end(),
+		CreationPacket createPacket(position,
+			creation.begin(), creation.end(),
 			destruction.begin(), destruction.end());
 		NetworkServer::current().send(createPacket, *this);
 	}
 
 	if (!movement.empty()) {
- 		MovementPacket movePacket(movement.begin(), movement.end());
+ 		MovementPacket movePacket(position,
+			movement.begin(), movement.end());
 		NetworkServer::current().send(movePacket, *this);
 	}
 }
