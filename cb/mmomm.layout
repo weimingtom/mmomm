@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Debug-x64" />
+	<ActiveTarget name="Debug" />
 	<File name="../src/actor.cpp" open="0" top="0" tabpos="6">
 		<Cursor position="0" topLine="0" />
 	</File>
@@ -19,11 +19,11 @@
 	<File name="../src/chat.h" open="0" top="0" tabpos="3">
 		<Cursor position="196" topLine="0" />
 	</File>
-	<File name="../src/chatWindow.cpp" open="1" top="1" tabpos="0">
-		<Cursor position="1222" topLine="9" />
+	<File name="../src/chatWindow.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="3236" topLine="27" />
 	</File>
-	<File name="../src/chatWindow.h" open="0" top="0" tabpos="2">
-		<Cursor position="631" topLine="7" />
+	<File name="../src/chatWindow.h" open="1" top="1" tabpos="1">
+		<Cursor position="631" topLine="45" />
 	</File>
 	<File name="../src/clientActor.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="263" topLine="0" />
@@ -35,7 +35,7 @@
 		<Cursor position="693" topLine="0" />
 	</File>
 	<File name="../src/clientNativePackets.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="649" topLine="0" />
+		<Cursor position="244" topLine="0" />
 	</File>
 	<File name="../src/clientWorldInstance.cpp" open="0" top="0" tabpos="9">
 		<Cursor position="3622" topLine="85" />
@@ -44,7 +44,7 @@
 		<Cursor position="0" topLine="81" />
 	</File>
 	<File name="../src/collision.h" open="0" top="0" tabpos="3">
-		<Cursor position="272" topLine="0" />
+		<Cursor position="4040" topLine="85" />
 	</File>
 	<File name="../src/collisionPackets.h" open="0" top="0" tabpos="4">
 		<Cursor position="1228" topLine="29" />
@@ -63,6 +63,9 @@
 	</File>
 	<File name="../src/gui.h" open="0" top="0" tabpos="3">
 		<Cursor position="633" topLine="0" />
+	</File>
+	<File name="../src/ieeehalfprecision.c" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="397" />
 	</File>
 	<File name="../src/image.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="77" topLine="9" />
@@ -102,6 +105,9 @@
 	</File>
 	<File name="../src/renderer.h" open="0" top="0" tabpos="4">
 		<Cursor position="1264" topLine="1" />
+	</File>
+	<File name="../src/serial.cpp" open="1" top="0" tabpos="0">
+		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="../src/softwareRenderer.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="1788" topLine="30" />

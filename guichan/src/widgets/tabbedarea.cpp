@@ -318,6 +318,11 @@ namespace gcn
 
     void TabbedArea::logic()
     {
+        if (mSelectedTab != NULL)
+        {
+            mSelectedTab->logic();
+            mWidgetContainer->logic();
+        }
     }
 
     void TabbedArea::adjustSize()

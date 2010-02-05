@@ -1,31 +1,32 @@
 # depslib dependency file v1.0
-1264618017 source:/home/oipo/Programming/mmomm/src/networkCommon.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/networkCommon.cpp
 	"networkCommon.h"
 	<RakNet/MessageIdentifiers.h>
 	<iostream>
 
-1264632732 /home/oipo/Programming/mmomm/src/networkCommon.h
+1265396306 /home/oipo/Programming/mmomm/src/networkCommon.h
 	"networkPacket.h"
 	<ostream>
 	<memory>
 
-1265241387 /home/oipo/Programming/mmomm/src/networkPacket.h
+1265396306 /home/oipo/Programming/mmomm/src/networkPacket.h
 	<RakNet/BitStream.h>
 	<RakNet/RakNetTypes.h>
 	<RakNet/RakPeerInterface.h>
 	<string>
 	<vector>
 	<boost/foreach.hpp>
+	<RakNet/NativeTypes.h>
 	"vector2D.h"
 	"frameTimer.h"
 
-1265223099 source:/home/oipo/Programming/mmomm/src/networkPacket.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/networkPacket.cpp
 	"networkPacket.h"
+	"serial.h"
 	<RakNet/MessageIdentifiers.h>
-	<RakNet/StringCompressor.h>
 	<string>
 
-1265237215 source:/home/oipo/Programming/mmomm/src/serverNativePackets.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/serverNativePackets.cpp
 	"nativePackets.h"
 	"user.h"
 	"playerActor.h"
@@ -35,16 +36,16 @@
 	"networkServer.h"
 	<iostream>
 
-1264618017 /home/oipo/Programming/mmomm/src/nativePackets.h
+1265396306 /home/oipo/Programming/mmomm/src/nativePackets.h
 	"networkPacket.h"
 	"packetTypes.h"
 	<RakNet/MessageIdentifiers.h>
 	<string>
 
-1264632732 /home/oipo/Programming/mmomm/src/packetTypes.h
+1265396306 /home/oipo/Programming/mmomm/src/packetTypes.h
 	<RakNet/MessageIdentifiers.h>
 
-1265223099 /home/oipo/Programming/mmomm/src/user.h
+1265396306 /home/oipo/Programming/mmomm/src/user.h
 	<string>
 	<RakNet/RakNetTypes.h>
 	<boost/unordered_set.hpp>
@@ -52,13 +53,14 @@
 	"collision.h"
 	"vector2D.h"
 
-1265223099 source:/home/oipo/Programming/mmomm/src/networkServer.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/networkServer.cpp
 	"networkServer.h"
 	"networkCommon.h"
 	"networkPacket.h"
 	"user.h"
 	"initializePacketManager.h"
 	"nativePackets.h"
+	"serial.h"
 	<RakNet/RakNetTypes.h>
 	<RakNet/RakNetworkFactory.h>
 	<RakNet/RakPeerInterface.h>
@@ -67,7 +69,7 @@
 	<cctype>
 	<functional>
 
-1265223099 /home/oipo/Programming/mmomm/src/networkServer.h
+1265396306 /home/oipo/Programming/mmomm/src/networkServer.h
 	<boost/noncopyable.hpp>
 	<boost/foreach.hpp>
 	<RakNet/RakNetTypes.h>
@@ -76,43 +78,47 @@
 	<map>
 	<vector>
 
-1264424313 /home/oipo/Programming/mmomm/src/networkPacketManager.h
+1265396306 /home/oipo/Programming/mmomm/src/networkPacketManager.h
 	"networkPacket.h"
+	"packetTypes.h"
 	<map>
 	<boost/function.hpp>
 	<boost/tuple/tuple.hpp>
 
-1264424313 /home/oipo/Programming/mmomm/src/initializePacketManager.h
+1265396306 /home/oipo/Programming/mmomm/src/initializePacketManager.h
 
-1265223099 source:/home/oipo/Programming/mmomm/src/serverMain.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/serverMain.cpp
 	"serverWorldInstance.h"
 	"networkServer.h"
 	"frameTimer.h"
 	<iostream>
 	<sstream>
 
-1264632732 source:/home/oipo/Programming/mmomm/src/initializePacketManager.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/initializePacketManager.cpp
 	"initializePacketManager.h"
 	"networkPacketManager.h"
 	"chat.h"
 	"collisionPackets.h"
 
-1265223099 /home/oipo/Programming/mmomm/src/vector2D.h
+1265396306 /home/oipo/Programming/mmomm/src/vector2D.h
 	<cmath>
+	<cfloat>
 
-1265312723 /home/oipo/Programming/mmomm/src/chat.h
+1265396306 /home/oipo/Programming/mmomm/src/chat.h
 	"networkPacket.h"
 	"packetTypes.h"
+	"serial.h"
 	<string>
 
-1265300691 /home/oipo/Programming/mmomm/src/collisionPackets.h
-	"networkPacket.h"
-	"packetTypes.h"
-	"vector2D.h"
-	"collision.h"
+1265396306 /home/oipo/Programming/mmomm/src/collisionPackets.h
 	<string>
 	<iostream>
 	<boost/static_assert.hpp>
+	"collision.h"
+	"networkPacket.h"
+	"packetTypes.h"
+	"serial.h"
+	"vector2D.h"
 
 1264873576 source:/home/stu/dev/mmomm/src/initializePacketManager.cpp
 	"initializePacketManager.h"
@@ -331,74 +337,76 @@
 1264873576 source:/home/stu/dev/mmomm/src/worldMap.cpp
 	"worldMap.h"
 
-1265223099 /home/oipo/Programming/mmomm/src/frameTimer.h
+1265396306 /home/oipo/Programming/mmomm/src/frameTimer.h
 	<boost/noncopyable.hpp>
 	<RakNet/GetTime.h>
 	<cassert>
 	<deque>
 
-1265300691 /home/oipo/Programming/mmomm/src/collision.h
-	"worldCommon.h"
+1265396306 /home/oipo/Programming/mmomm/src/collision.h
 	<set>
-	<boost/unordered_map.hpp>
 	<vector>
+	<boost/unordered_map.hpp>
+	<RakNet/NativeTypes.h>
+	"rect.h"
 	"vector2D.h"
+	"worldCommon.h"
 
-1264947584 /home/oipo/Programming/mmomm/src/worldCommon.h
+1265396306 /home/oipo/Programming/mmomm/src/worldCommon.h
 	<boost/functional/hash.hpp>
 
-1264618017 source:/home/oipo/Programming/mmomm/src/worldCommon.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/worldCommon.cpp
 	"worldCommon.h"
 
-1264618017 source:/home/oipo/Programming/mmomm/src/worldMap.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/worldMap.cpp
 	"worldMap.h"
 
-1264943981 /home/oipo/Programming/mmomm/src/worldMap.h
+1265396306 /home/oipo/Programming/mmomm/src/worldMap.h
 	"worldCommon.h"
 	<boost/multi_array.hpp>
 	<boost/unordered_map.hpp>
 
-1265223099 source:/home/oipo/Programming/mmomm/src/actor.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/actor.cpp
 	"actor.h"
 	"worldInstance.h"
 
-1265223099 /home/oipo/Programming/mmomm/src/actor.h
+1265396306 /home/oipo/Programming/mmomm/src/actor.h
 	"collision.h"
 	"worldInstance.h"
 	"clientSprites.h"
 
-1265223099 /home/oipo/Programming/mmomm/src/worldInstance.h
+1265396306 /home/oipo/Programming/mmomm/src/worldInstance.h
 	"collision.h"
 	<boost/unordered_map.hpp>
 
-1265223099 /home/oipo/Programming/mmomm/src/clientSprites.h
+1265396306 /home/oipo/Programming/mmomm/src/clientSprites.h
 	<boost/unordered_map.hpp>
 
-1265300691 source:/home/oipo/Programming/mmomm/src/collision.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/collision.cpp
 	"collision.h"
 	<cmath>
 	<algorithm>
 
-1265223099 source:/home/oipo/Programming/mmomm/src/frameTimer.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/frameTimer.cpp
 	"frameTimer.h"
 	<RakNet/GetTime.h>
 	<RakNet/RakSleep.h>
 
-1265223099 source:/home/oipo/Programming/mmomm/src/playerActor.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/playerActor.cpp
 	"playerActor.h"
 	"user.h"
 	"frameTimer.h"
 
-1265223099 /home/oipo/Programming/mmomm/src/playerActor.h
+1265396306 /home/oipo/Programming/mmomm/src/playerActor.h
 	"actor.h"
 
-1265306487 source:/home/oipo/Programming/mmomm/src/serverChat.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/serverChat.cpp
 	"chat.h"
 	"user.h"
 	"networkServer.h"
 	<iostream>
 
-1265300691 source:/home/oipo/Programming/mmomm/src/serverCollisionPackets.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/serverCollisionPackets.cpp
 	"collisionPackets.h"
 	"frameTimer.h"
 	"networkServer.h"
@@ -407,18 +415,18 @@
 	"user.h"
 	<iostream>
 
-1265223099 /home/oipo/Programming/mmomm/src/serverWorldInstance.h
+1265396306 /home/oipo/Programming/mmomm/src/serverWorldInstance.h
 	"worldInstance.h"
 	<list>
 
-1265223099 source:/home/oipo/Programming/mmomm/src/serverWorldInstance.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/serverWorldInstance.cpp
 	"serverWorldInstance.h"
 	"user.h"
 	"frameTimer.h"
 	"playerActor.h"
 	<iostream>
 
-1265223099 source:/home/oipo/Programming/mmomm/src/user.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/user.cpp
 	"user.h"
 	"actor.h"
 	"collisionPackets.h"
@@ -428,10 +436,38 @@
 	<boost/foreach.hpp>
 	<boost/unordered_set.hpp>
 	<algorithm>
+	<cmath>
 
-1265223099 source:/home/oipo/Programming/mmomm/src/worldInstance.cpp
+1265396306 source:/home/oipo/Programming/mmomm/src/worldInstance.cpp
 	"worldInstance.h"
 	"worldMap.h"
 	"collision.h"
 	"actor.h"
+
+1265396306 /home/oipo/Programming/mmomm/src/rect.h
+	<cmath>
+	"vector2D.h"
+
+1265396306 /home/oipo/Programming/mmomm/src/serial.h
+	<RakNet/BitStream.h>
+	<RakNet/RakNetTypes.h>
+	<string>
+	<vector>
+	<boost/foreach.hpp>
+	<RakNet/NativeTypes.h>
+	<boost/static_assert.hpp>
+	"rect.h"
+	"vector2D.h"
+
+1265396306 source:/home/oipo/Programming/mmomm/src/serial.cpp
+	"serial.h"
+	"ieeehalfprecision.h"
+	<RakNet/StringCompressor.h>
+
+1265396306 /home/oipo/Programming/mmomm/src/ieeehalfprecision.h
+
+1265396306 source:/home/oipo/Programming/mmomm/src/ieeehalfprecision.c
+	<string.h>
+	<RakNet/NativeTypes.h>
+	"ieeehalfprecision.h"
 

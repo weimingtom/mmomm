@@ -74,6 +74,11 @@ namespace gcn
         drawChildren(graphics);
     }
 
+    void Container::logic()
+    {
+        logicChildren();
+    }
+
     void Container::setOpaque(bool opaque)
     {
         mOpaque = opaque;
@@ -108,15 +113,5 @@ namespace gcn
     Widget* Container::findWidgetById(const std::string &id)
     {
         return BasicContainer::findWidgetById(id);
-    }
-
-    void Container::logic()
-    {
-        BasicContainer::logic();
-    }
-
-    void Container::logicChildren()
-    {
-        BasicContainer::logicChildren();
     }
 }
