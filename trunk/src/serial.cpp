@@ -28,7 +28,7 @@ void serialHalf(BitStream& bs, bool write, float& data)
 	if (write) {
 		singles2halfp(&half, &data, 1);	
 	}
-	serial(bs, write, half);
+	serialFull(bs, write, half);
 	if (!write) {
 		halfp2singles(&data, &half, 1);	
 	}
