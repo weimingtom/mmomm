@@ -17,23 +17,23 @@ CollisionWorld::~CollisionWorld()
 {
 }
 
-void CollisionWorld::SetInstantCollisions(bool instantCollisions)
+void CollisionWorld::setInstantCollisions(bool instantCollisions)
 {
     _instantCollisions = instantCollisions;
 }
 
-bool CollisionWorld::GetInstantCollisions() const
+bool CollisionWorld::getInstantCollisions() const
 {
     return _instantCollisions;
 }
 
-void CollisionWorld::TriggerCollisions()
+void CollisionWorld::triggerCollisions()
 {
     // Trigger collisions for objects which have blocked each other since the
     // last time this function was called (or instant collisions turned off)
     for ( CollisionList::iterator i = _collisions.begin(); i != _collisions.end(); i++ ) {
-        i->first->OnCollision(*(i->second));
-        i->second->OnCollision(*(i->first));
+        i->first->onCollision(*(i->second));
+        i->second->onCollision(*(i->first));
     }
 
     for ( long y = _topBound; y < _bottomBound; y++ ) {
@@ -47,27 +47,27 @@ void CollisionWorld::TriggerCollisions()
             Cell& d = _map[CellCoord(x + 1, y + 1)];
 
             for ( Cell::const_iterator i = a.begin(); i != a.end(); i++ ) {
-                const Rect& r = (*i)->GetCollisionRect();
+                const Rect& r = (*i)->getCollisionRect();
 
                 // Check objects in cells, starting at the current object (so as
                 // not to check the same pair twice)
                 Cell::const_iterator j = i;
                 for ( j++; j != a.end(); j++ ) {
-                    if ( !CheckCollision(*i, *j, r) )
+                    if ( !checkCollision(*i, *j, r) )
                         break;
                 }
 
                 // Check objects in other cells
                 for ( j = b.begin(); j != b.end(); j++ ) {
-                    if ( !CheckCollision(*i, *j, r) )
+                    if ( !checkCollision(*i, *j, r) )
                         break;
                 }
                 for ( j = c.begin(); j != c.end(); j++ ) {
-                    if ( !CheckCollision(*i, *j, r) )
+                    if ( !checkCollision(*i, *j, r) )
                         break;
                 }
                 for ( j = d.begin(); j != d.end(); j++ ) {
-                    if ( !CheckCollision(*i, *j, r) )
+                    if ( !checkCollision(*i, *j, r) )
                         break;
                 }
 
@@ -79,14 +79,14 @@ void CollisionWorld::TriggerCollisions()
 
 bool CollisionWorld::Sort::operator()(const Physical* a, const Physical* b) const
 {
-    if ( a->GetCollisionRect().left != a->GetCollisionRect().left )
-        return a->GetCollisionRect().left < b->GetCollisionRect().left;
+    if ( a->getCollisionRect().left != a->getCollisionRect().left )
+        return a->getCollisionRect().left < b->getCollisionRect().left;
     // Objects in a set cannot be equal, so need some backup ordering in case
     // x-positions are equal
     return a < b;
 }
 
-bool CollisionWorld::CheckCollision(Physical* a, Physical* b, const Rect& aRect)
+bool CollisionWorld::checkCollision(Physical* a, Physical* b, const Rect& aRect)
 {
     // If these two objects have already collided this "frame", don't collide them
     // again. This can happen if an object enters another as it moves, and comes to
@@ -98,7 +98,7 @@ bool CollisionWorld::CheckCollision(Physical* a, Physical* b, const Rect& aRect)
         }
     }
 
-    const Rect& bRect = b->GetCollisionRect();
+    const Rect& bRect = b->getCollisionRect();
 
     // Return false to indicate don't need to check further objects
     if ( bRect.left >= aRect.right )
@@ -107,16 +107,16 @@ bool CollisionWorld::CheckCollision(Physical* a, Physical* b, const Rect& aRect)
     // Collide if rectangles overlap
     if ( !(aRect.left >= bRect.right || aRect.top >= bRect.bottom ||
            bRect.left >= aRect.right || bRect.top >= aRect.bottom) ) {
-        a->OnCollision(*b);
-        b->OnCollision(*a);
+        a->onCollision(*b);
+        b->onCollision(*a);
     }
     return true;
 }
 
-CollisionWorld::Cell& CollisionWorld::GetCellAtPoint(double x, double y)
+CollisionWorld::Cell& CollisionWorld::getCellAtPoint(const Vector2D& position)
 {
-    long lx = long(floor(x / CELL_SIZE));
-    long ly = long(floor(y / CELL_SIZE));
+    long lx = long(floor(position.x / CELL_SIZE));
+    long ly = long(floor(position.y / CELL_SIZE));
 
     // Update bounding area for all cells which potentially contain objects
     _leftBound   = std::min(_leftBound,   lx    );
@@ -133,26 +133,26 @@ Physical::Physical(CollisionWorld& world, const Rect& rect)
 , _rect(rect)
 {
     // Object can't be bigger than a cell - increase CELL_SIZE if you need to
-    assert(rect.right  - rect.left < CollisionWorld::CELL_SIZE);
-    assert(rect.bottom - rect.top  < CollisionWorld::CELL_SIZE);
+    assert(rect.dim().x < CollisionWorld::CELL_SIZE);
+    assert(rect.dim().y < CollisionWorld::CELL_SIZE);
 
-    _cell = &_world.GetCellAtPoint(_rect.left, _rect.top);
+    _cell = &_world.getCellAtPoint(_rect.min());
     _cell->insert(this);
-    UpdateWorld();
+    updateWorld();
 }
 
-Physical::Physical(CollisionWorld& world, double width, double height)
+Physical::Physical(CollisionWorld& world, const Vector2D& dimensions)
 : _world(world)
 , _cell(0)
-, _rect(0, 0, width, height)
+, _rect(Vector2D(), dimensions)
 {
     // Object can't be bigger than a cell - increase CELL_SIZE if you need to
-    assert(width  < CollisionWorld::CELL_SIZE);
-    assert(height < CollisionWorld::CELL_SIZE);
+    assert(dimensions.x < CollisionWorld::CELL_SIZE);
+    assert(dimensions.y < CollisionWorld::CELL_SIZE);
 
-    _cell = &_world.GetCellAtPoint(_rect.left, _rect.top);
+    _cell = &_world.getCellAtPoint(_rect.min());
     _cell->insert(this);
-    UpdateWorld();
+    updateWorld();
 }
 
 Physical::~Physical()
@@ -160,139 +160,140 @@ Physical::~Physical()
     _cell->erase(this);
 }
 
-const Rect& Physical::GetCollisionRect() const
+const Rect& Physical::getCollisionRect() const
 {
     return _rect;
 }
 
-void Physical::SetCollisionRect(const Rect& rect)
+void Physical::setCollisionRect(const Rect& rect)
 {
     // Object can't be bigger than a cell - increase CELL_SIZE if you need to
-    assert(rect.right  - rect.left < CollisionWorld::CELL_SIZE);
-    assert(rect.bottom - rect.top  < CollisionWorld::CELL_SIZE);
+    assert(rect.dim().x < CollisionWorld::CELL_SIZE);
+    assert(rect.dim().y < CollisionWorld::CELL_SIZE);
 
     _rect = rect;
-    UpdateWorld();
+    updateWorld();
 }
 
-void Physical::SetPosition(double x, double y)
+void Physical::setPosition(const Vector2D& position)
 {
-    _rect.right  += x - _rect.left;
-    _rect.bottom += y - _rect.top;
-    _rect.left = x;
-    _rect.top  = y;
-    UpdateWorld();
+	_rect += position - _rect.min();
+    updateWorld();
 }
 
-Vector2D Physical::GetPosition() const
+Vector2D Physical::getPosition() const
 {
-	return Vector2D(_rect.left, _rect.top);
+	return _rect.min();
 }
 
-void Physical::SetSize(double width, double height)
+void Physical::setSize(const Vector2D& dimensions)
 {
     // Object can't be bigger than a cell - increase CELL_SIZE if you need to
-    assert(width  < CollisionWorld::CELL_SIZE);
-    assert(height < CollisionWorld::CELL_SIZE);
-
-    _rect.left   = _rect.left - (width  - (_rect.right  - _rect.left)) / 2.0;
-    _rect.top    = _rect.top  - (height - (_rect.bottom - _rect.top )) / 2.0;
-    _rect.right  = _rect.left + width;
-    _rect.bottom = _rect.top  + height;
-    UpdateWorld();
+    assert(dimensions.x < CollisionWorld::CELL_SIZE);
+    assert(dimensions.y < CollisionWorld::CELL_SIZE);
+	
+	Vector2D offset = .5 * (dimensions - _rect.dim());
+	
+    _rect.left   -= offset.x;
+    _rect.top    -= offset.y;
+    _rect.right  += offset.x;
+    _rect.bottom += offset.y;
+    updateWorld();
 }
 
-void Physical::Move(double xOffset, double yOffset)
+void Physical::move(const Vector2D& offset_)
 {
-    // Potential coordinates to check for obstacles
-    long rx = long(floor(_rect.left           / CollisionWorld::CELL_SIZE));
-    long ry = long(floor(_rect.top            / CollisionWorld::CELL_SIZE));
-    long dx = long(floor(_rect.left + xOffset / CollisionWorld::CELL_SIZE));
-    long dy = long(floor(_rect.top  + yOffset / CollisionWorld::CELL_SIZE));
+	Vector2D offset = offset_;
 
+    // Potential coordinates to check for obstacles
+    long rx = long(floor(_rect.left            / CollisionWorld::CELL_SIZE));
+    long ry = long(floor(_rect.top             / CollisionWorld::CELL_SIZE));
+    long dx = long(floor(_rect.left + offset.x / CollisionWorld::CELL_SIZE));
+    long dy = long(floor(_rect.top  + offset.y / CollisionWorld::CELL_SIZE));
+	
     bool   xCarry = false;
     bool   yCarry = false;
     double carry  = 0.0;
-
+	
     for ( long ty = std::min(ry, dy) - 1; ty <= std::max(ry, dy) + 1; ty++ ) {
         for ( long tx = std::min(rx, dx) - 1; tx <= std::max(rx, dx) + 1; tx++ ) {
             Cell& cell = _world._map[CellCoord(tx, ty)];
             for ( Cell::const_iterator i = cell.begin(); i != cell.end(); i++ ) {
                 // Sweep to find obstacles. Only go as far as the closest obstacle allows.
                 // The closest obstacle is added to list of collisions
-                if ( *i == this || !_world.ShouldBlock(this, *i) )
+                if ( *i == this || !_world.shouldBlock(this, *i) )
                     continue;
-                const Rect& iRect = (*i)->GetCollisionRect();
+                const Rect& iRect = (*i)->getCollisionRect();
 
-                if ( iRect.left >= _rect.right && iRect.left >= _rect.right + xOffset )
+                if ( iRect.left >= _rect.right && iRect.left >= _rect.right + offset.x )
                     break;
 
-                if ( yOffset > 0 && _rect.bottom < (iRect.top + iRect.bottom + _rect.bottom - _rect.top) / 2.0 &&
-                     _rect.bottom + yOffset > iRect.top ) {
+                if ( offset.y > 0 && _rect.bottom < (iRect.top + iRect.bottom + _rect.bottom - _rect.top) / 2.0 &&
+                     _rect.bottom + offset.x > iRect.top ) {
                     bool overlap = _rect.bottom > iRect.top;
-                    double left  = overlap ? _rect.left  : _rect.left  + xOffset * (iRect.top - _rect.bottom) / yOffset;
-                    double right = overlap ? _rect.right : _rect.right + xOffset * (iRect.top - _rect.bottom) / yOffset;
+                    double left  = overlap ? _rect.left  : _rect.left  + offset.x * (iRect.top - _rect.bottom) / offset.y;
+                    double right = overlap ? _rect.right : _rect.right + offset.x * (iRect.top - _rect.bottom) / offset.y;
 
                     if ( !(left >= iRect.right || right <= iRect.left) ) {
-                        yCarry   = !(xCarry = true);
-                        carry    = xOffset;
-                        xOffset *= overlap ? 0 : (iRect.top - _rect.bottom) / yOffset;
-                        yOffset  = overlap ? 0 : iRect.top - _rect.bottom;
-                        carry   -= xOffset;
+                        yCarry    = !(xCarry = true);
+                        carry     = offset.x;
+                        offset.x *= overlap ? 0 : (iRect.top - _rect.bottom) / offset.y;
+                        offset.y  = overlap ? 0 : iRect.top - _rect.bottom;
+                        carry    -= offset.x;
 
                         _collisions.clear();
                         _collisions.push_back(*i);
                     }
                 }
 
-                if ( yOffset < 0 && _rect.top > (iRect.bottom + iRect.top - _rect.bottom + _rect.top) / 2.0 &&
-                     _rect.top + yOffset < iRect.bottom ) {
+                if ( offset.y < 0 && _rect.top > (iRect.bottom + iRect.top - _rect.bottom + _rect.top) / 2.0 &&
+                     _rect.top + offset.y < iRect.bottom ) {
                     bool overlap = _rect.top < iRect.bottom;
-                    double left  = overlap ? _rect.left  : _rect.left  + xOffset * (iRect.bottom - _rect.top) / yOffset;
-                    double right = overlap ? _rect.right : _rect.right + xOffset * (iRect.bottom - _rect.top) / yOffset;
+                    double left  = overlap ? _rect.left  : _rect.left  + offset.x * (iRect.bottom - _rect.top) / offset.y;
+                    double right = overlap ? _rect.right : _rect.right + offset.x * (iRect.bottom - _rect.top) / offset.y;
 
                     if ( !(left >= iRect.right || right <= iRect.left) ) {
-                        yCarry   = !(xCarry = true);
-                        carry    = xOffset;
-                        xOffset *= overlap ? 0 : (iRect.bottom - _rect.top) / yOffset;
-                        yOffset  = overlap ? 0 : iRect.bottom - _rect.top;
-                        carry   -= xOffset;
+                        yCarry    = !(xCarry = true);
+                        carry     = offset.x;
+                        offset.x *= overlap ? 0 : (iRect.bottom - _rect.top) / offset.y;
+                        offset.y  = overlap ? 0 : iRect.bottom - _rect.top;
+                        carry    -= offset.x;
 
                         _collisions.clear();
                         _collisions.push_back(*i);
                     }
                 }
 
-                if ( xOffset > 0 && _rect.right < (iRect.left + iRect.right + _rect.right - _rect.left) / 2.0 &&
-                     _rect.right + xOffset > iRect.left ) {
+                if ( offset.x > 0 && _rect.right < (iRect.left + iRect.right + _rect.right - _rect.left) / 2.0 &&
+                     _rect.right + offset.x > iRect.left ) {
                     bool overlap  = _rect.right > iRect.left;
-                    double top    = overlap ? _rect.top    : _rect.top    + yOffset * (iRect.left - _rect.right) / xOffset;
-                    double bottom = overlap ? _rect.bottom : _rect.bottom + yOffset * (iRect.left - _rect.right) / xOffset;
+                    double top    = overlap ? _rect.top    : _rect.top    + offset.y * (iRect.left - _rect.right) / offset.x;
+                    double bottom = overlap ? _rect.bottom : _rect.bottom + offset.y * (iRect.left - _rect.right) / offset.x;
 
                     if ( !(top >= iRect.bottom || bottom <= iRect.top) ) {
-                        xCarry   = !(yCarry = true);
-                        carry    = yOffset;
-                        yOffset *= overlap ? 0 : (iRect.left - _rect.right) / xOffset;
-                        xOffset  = overlap ? 0 : iRect.left - _rect.right;
-                        carry   -= yOffset;
+                        xCarry    = !(yCarry = true);
+                        carry     = offset.y;
+                        offset.y *= overlap ? 0 : (iRect.left - _rect.right) / offset.x;
+                        offset.x  = overlap ? 0 : iRect.left - _rect.right;
+                        carry    -= offset.y;
 
                         _collisions.clear();
                         _collisions.push_back(*i);
                     }
                 }
 
-                if ( xOffset < 0 && _rect.left > (iRect.right + iRect.left - _rect.right + _rect.left) / 2.0 &&
-                     _rect.left + xOffset < iRect.right ) {
+                if ( offset.x < 0 && _rect.left > (iRect.right + iRect.left - _rect.right + _rect.left) / 2.0 &&
+                     _rect.left + offset.x < iRect.right ) {
                     bool overlap  = _rect.left < iRect.right;
-                    double top    = overlap ? _rect.top    : _rect.top    + yOffset * (iRect.right - _rect.left) / xOffset;
-                    double bottom = overlap ? _rect.bottom : _rect.bottom + yOffset * (iRect.right - _rect.left) / xOffset;
+                    double top    = overlap ? _rect.top    : _rect.top    + offset.y * (iRect.right - _rect.left) / offset.x;
+                    double bottom = overlap ? _rect.bottom : _rect.bottom + offset.y * (iRect.right - _rect.left) / offset.x;
 
                     if ( !(top >= iRect.bottom || bottom <= iRect.top) ) {
-                        xCarry   = !(yCarry = true);
-                        carry    = yOffset;
-                        yOffset *= overlap ? 0 : (iRect.right - _rect.left) / xOffset;
-                        xOffset  = overlap ? 0 : iRect.right - _rect.left;
-                        carry   -= yOffset;
+                        xCarry    = !(yCarry = true);
+                        carry     = offset.y;
+                        offset.y *= overlap ? 0 : (iRect.right - _rect.left) / offset.x;
+                        offset.x  = overlap ? 0 : iRect.right - _rect.left;
+                        carry    -= offset.y;
 
                         _collisions.clear();
                         _collisions.push_back(*i);
@@ -310,47 +311,47 @@ void Physical::Move(double xOffset, double yOffset)
                 // Now sweep again to find objects on the restricted path that don't block
                 // (only such objects exist, since path limited to closest obstacle).
                 // Add to list of collisions
-                if ( *i == this || _world.ShouldBlock(this, *i) )
+                if ( *i == this || _world.shouldBlock(this, *i) )
                     continue;
-                const Rect& iRect = (*i)->GetCollisionRect();
+                const Rect& iRect = (*i)->getCollisionRect();
 
-                if ( iRect.left >= _rect.right && iRect.left >= _rect.right + xOffset )
+                if ( iRect.left >= _rect.right && iRect.left >= _rect.right + offset.x )
                     break;
 
-                if ( yOffset > 0 && _rect.bottom < iRect.top &&
-                     _rect.bottom + yOffset >= iRect.top ) {
-                    double left  = _rect.left  + xOffset * (iRect.top - _rect.bottom) / yOffset;
-                    double right = _rect.right + xOffset * (iRect.top - _rect.bottom) / yOffset;
+                if ( offset.y > 0 && _rect.bottom < iRect.top &&
+                     _rect.bottom + offset.y >= iRect.top ) {
+                    double left  = _rect.left  + offset.x * (iRect.top - _rect.bottom) / offset.y;
+                    double right = _rect.right + offset.x * (iRect.top - _rect.bottom) / offset.y;
                     if ( !(left >= iRect.right || right < iRect.left) ) {
                         _collisions.push_back(*i);
                         continue;
                     }
                 }
 
-                if ( yOffset < 0 && _rect.top >= iRect.bottom &&
-                     _rect.top + yOffset < iRect.bottom ) {
-                    double left  = _rect.left  + xOffset * (iRect.bottom - _rect.top) / yOffset;
-                    double right = _rect.right + xOffset * (iRect.bottom - _rect.top) / yOffset;
+                if ( offset.y < 0 && _rect.top >= iRect.bottom &&
+                     _rect.top + offset.y < iRect.bottom ) {
+                    double left  = _rect.left  + offset.x * (iRect.bottom - _rect.top) / offset.y;
+                    double right = _rect.right + offset.x * (iRect.bottom - _rect.top) / offset.y;
                     if ( !( left >= iRect.right || right < iRect.left ) ) {
                         _collisions.push_back(*i);
                         continue;
                     }
                 }
 
-                if ( xOffset > 0 && _rect.right < iRect.left &&
-                     _rect.right + xOffset >= iRect.left ) {
-                    double top    = _rect.top    + yOffset * ( iRect.left - _rect.right ) / xOffset;
-                    double bottom = _rect.bottom + yOffset * ( iRect.left - _rect.right ) / xOffset;
+                if ( offset.x > 0 && _rect.right < iRect.left &&
+                     _rect.right + offset.x >= iRect.left ) {
+                    double top    = _rect.top    + offset.y * ( iRect.left - _rect.right ) / offset.x;
+                    double bottom = _rect.bottom + offset.y * ( iRect.left - _rect.right ) / offset.x;
                     if ( !( top >= iRect.bottom || bottom < iRect.top ) ) {
                         _collisions.push_back(*i);
                         continue;
                     }
                 }
 
-                if ( xOffset < 0 && _rect.left >= iRect.right &&
-                     _rect.left + xOffset < iRect.right ) {
-                    double top    = _rect.top    + yOffset * (iRect.right - _rect.left) / xOffset;
-                    double bottom = _rect.bottom + yOffset * (iRect.right - _rect.left) / xOffset;
+                if ( offset.x < 0 && _rect.left >= iRect.right &&
+                     _rect.left + offset.x < iRect.right ) {
+                    double top    = _rect.top    + offset.y * (iRect.right - _rect.left) / offset.x;
+                    double bottom = _rect.bottom + offset.y * (iRect.right - _rect.left) / offset.x;
                     if ( !( top >= iRect.bottom || bottom < iRect.top ) ) {
                         _collisions.push_back(*i);
                         continue;
@@ -360,16 +361,13 @@ void Physical::Move(double xOffset, double yOffset)
         }
     }
 
-    _rect.left   += xOffset;
-    _rect.top    += yOffset;
-    _rect.right  += xOffset;
-    _rect.bottom += yOffset;
+	_rect += offset;
 
     if ( xCarry ) {
-        Move( carry, 0.0 );
+        move( Vector2D(carry, 0.0) );
     }
     else if ( yCarry ) {
-        Move( 0.0, carry );
+        move( Vector2D(0.0, carry) );
     }
     else {
         // If instant collisions are turned off, need to store collisions in the
@@ -378,14 +376,14 @@ void Physical::Move(double xOffset, double yOffset)
             for ( std::size_t i = 0; i < _collisions.size(); i++ )
                 _world._collisions.push_back(std::pair< Physical*, Physical* >(this, _collisions[i]));
         }
-        UpdateWorld();
+        updateWorld();
     }
 }
 
-void Physical::UpdateWorld()
+void Physical::updateWorld()
 {
     // Change current cell
-    Cell* t = &_world.GetCellAtPoint(_rect.left, _rect.top);
+    Cell* t = &_world.getCellAtPoint(_rect.min());
     if ( t != _cell ) {
         _cell->erase(this);
         t->insert(this);
@@ -396,12 +394,12 @@ void Physical::UpdateWorld()
     if ( _world._instantCollisions ) {
         long x = long(floor(_rect.left / CollisionWorld::CELL_SIZE));
         long y = long(floor(_rect.top  / CollisionWorld::CELL_SIZE));
-        const Rect& r = GetCollisionRect();
+        const Rect& r = getCollisionRect();
 
         // Collide with objects that were in the path of the last Move
         for ( std::size_t i = 0; i < _collisions.size(); i++ ) {
-            OnCollision(*_collisions[i]);
-            _collisions[i]->OnCollision(*this);
+            onCollision(*_collisions[i]);
+            _collisions[i]->onCollision(*this);
         }
 
         for ( long ty = y - 1; ty <= y + 1; ty++ ) {
@@ -423,7 +421,7 @@ void Physical::UpdateWorld()
                     if ( alreadyCollided )
                         continue;
 
-                    if ( !_world.CheckCollision(this, *i, r) )
+                    if ( !_world.checkCollision(this, *i, r) )
                         break;
                 }
             }

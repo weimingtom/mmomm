@@ -25,7 +25,7 @@ ConfigurationMenu::ConfigurationMenu(int x, int y)
 
         ss.clear();
         ss.str("");
-        ss << Renderer::current().getScreenWidth();
+        ss << Renderer::current().getScreenDimensions().x;
 
         _widthField = new gcn::TextField(ss.str());
         _widthField->setPosition(_screenResolutionLabel->getX() + _screenResolutionLabel->getWidth()  + 5,
@@ -35,7 +35,7 @@ ConfigurationMenu::ConfigurationMenu(int x, int y)
 
         ss.clear();
         ss.str("");
-        ss << Renderer::current().getScreenHeight();
+        ss << Renderer::current().getScreenDimensions().y;
 
         _heightField = new gcn::TextField(ss.str());
         _heightField->setPosition(_widthField->getX() + _widthField->getWidth()  + 5,

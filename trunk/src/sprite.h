@@ -13,23 +13,23 @@ public:
 
     // Adds the given animation with the given name. The first animation to be
     // added in this way is set as the default animation.
-    void AddAnimation(const std::string& name, int animationId);
+    void addAnimation(const std::string& name, int animationId);
 
     // Set the default animation. The default animation is played whenever
     // no one-shot animation is playing.
-    void SetDefaultAnimation(const std::string& name);
+    void setDefaultAnimation(const std::string& name);
 
     // Plays the given animation as a one-shot the specified number of times.
     // Will return to the set default animation afterwards.
-    void PlayAnimation(const std::string& name, int repetitionCount = 1);
+    void playAnimation(const std::string& name, int repetitionCount = 1);
 
     // Create a new sprite from this one, deep-copying animations.
-    Sprite* Clone() const;
+    Sprite* clone() const;
 
-    AnimationManager::weak_ptr GetCurrentAnimation() const;
+    AnimationManager::shared_ptr getCurrentAnimation() const;
 
     // Don't call this.
-    void RepetitionCallback();
+    void repetitionCallback();
 
 private:
 

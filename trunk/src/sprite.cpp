@@ -15,7 +15,7 @@ Sprite::~Sprite()
     }
 }
 
-void Sprite::AddAnimation(const std::string& name, int animationId)
+void Sprite::addAnimation(const std::string& name, int animationId)
 {
     assert(_map.find(name) == _map.end());
     bool first = _map.size() == 0;
@@ -26,7 +26,7 @@ void Sprite::AddAnimation(const std::string& name, int animationId)
     _map[name] = AnimationManager::current().createNewInstanceOf(animationId, -1, -1, -1, first);
 }
 
-void Sprite::SetDefaultAnimation(const std::string& name)
+void Sprite::setDefaultAnimation(const std::string& name)
 {
     AnimationMap::iterator i = _map.find(name);
     if ( i == _map.end() )
@@ -40,7 +40,7 @@ void Sprite::SetDefaultAnimation(const std::string& name)
         AnimationManager::current().setAnimationActive(_defaultAnim, true);
 }
 
-void Sprite::PlayAnimation(const std::string& name, int repetitionCount)
+void Sprite::playAnimation(const std::string& name, int repetitionCount)
 {
     if ( repetitionCount < 1 )
         return;
@@ -60,7 +60,7 @@ void Sprite::PlayAnimation(const std::string& name, int repetitionCount)
     boost::shared_ptr<Animation>(AnimationManager::current().getAnimation(_oneShotAnim))->setCallbackSprite(this);
 }
 
-void Sprite::RepetitionCallback()
+void Sprite::repetitionCallback()
 {
     if ( _oneShotReps == 0 )
         return;
@@ -73,17 +73,17 @@ void Sprite::RepetitionCallback()
         AnimationManager::current().setAnimationActive(_defaultAnim, true);
 }
 
-Sprite* Sprite::Clone() const
+Sprite* Sprite::clone() const
 {
     Sprite* r = new Sprite();
     for ( AnimationMap::const_iterator i = _map.begin(); i != _map.end(); i++ ) {
-        r->AddAnimation(i->first, i->second);
+        r->addAnimation(i->first, i->second);
     }
-    r->SetDefaultAnimation(_defaultString);
+    r->setDefaultAnimation(_defaultString);
     return r;
 }
 
-AnimationManager::weak_ptr Sprite::GetCurrentAnimation() const
+AnimationManager::shared_ptr Sprite::getCurrentAnimation() const
 {
     assert(_oneShotReps != 0 || _defaultAnim >= 0);
     if ( _oneShotReps != 0 )

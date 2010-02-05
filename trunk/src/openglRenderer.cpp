@@ -36,7 +36,7 @@ std::string translateGLError(GLenum errorcode)
     return errorStr;
 }
 
-OpenGLRenderer::OpenGLRenderer(int screenWidth, int screenHeight, bool fullscreen) : Renderer(screenWidth, screenHeight, fullscreen)
+OpenGLRenderer::OpenGLRenderer(const Vector2D& screenDimensions, bool fullscreen) : Renderer(screenDimensions, fullscreen)
 {
     if(!initScreen())
         cout << "Failed to initialise _screen" << endl;
@@ -56,7 +56,7 @@ bool OpenGLRenderer::initScreen()
     else
         flags = SDL_OPENGL;
 
-    _screen = SDL_SetVideoMode(_screenWidth, _screenHeight, 0, flags);
+    _screen = SDL_SetVideoMode(int(_screenDimensions.x), int(_screenDimensions.y), 0, flags);
     if(_screen == NULL) {
         //logger->echoError("SDL_SetVideoMode failed: " + std::string(SDL_GetError()));
         cout << "SDL_SetVideoMode failed: " << std::string(SDL_GetError()) << endl;
@@ -90,7 +90,7 @@ bool OpenGLRenderer::initScreen()
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     //set the opengl window to our window size
-    glViewport(0, 0, _screenWidth, _screenHeight);
+    glViewport(0, 0, GLint(_screenDimensions.x), GLint(_screenDimensions.y));
 
     //clear the _screen
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -100,7 +100,7 @@ bool OpenGLRenderer::initScreen()
     glLoadIdentity();
 
     //load perspective
-    glOrtho(0.0f, _screenWidth, _screenHeight, 0.0f, -1.0f, 1.0f);
+    glOrtho(0.0f, float(_screenDimensions.x), float(_screenDimensions.y), 0.0f, -1.0f, 1.0f);
 
     //clear the Modelview matrix
     glMatrixMode(GL_MODELVIEW);
@@ -122,8 +122,11 @@ OpenGLRenderer::~OpenGLRenderer()
     SDL_FreeSurface(_screen);
 }
 
-void OpenGLRenderer::drawImage(Image *img, float x, float y)
+void OpenGLRenderer::drawImage(Image *img, const Vector2D& position)
 {
+	float x = float(position.x);
+	float y = float(position.y);
+
     GLenum error;
 
     glEnable(extension);
@@ -179,8 +182,11 @@ void OpenGLRenderer::drawImage(Image *img, float x, float y)
 }
 
 //Note: This code is mainly the same as the regular draw. It just adds a cut from the image.
-void OpenGLRenderer::drawClippedImage(Image *img, float x, float y, SDL_Rect clip)
+void OpenGLRenderer::drawClippedImage(Image *img, const Vector2D& position, const SDL_Rect& clip)
 {
+	int x = int(position.x);
+	int y = int(position.y);
+
     GLenum error;
 
     glEnable(extension);

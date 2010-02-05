@@ -79,7 +79,7 @@ int main(int argc, char **argv)
 		}
 
 		// Update time step.
-        WorldInstance::current().Update(FrameTimer::current().elapsed());
+        WorldInstance::current().update(FrameTimer::current().elapsed());
 		
 		// Sleep until next frame.
 		FrameTimer::current().step();

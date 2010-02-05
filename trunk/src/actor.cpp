@@ -2,29 +2,29 @@
 #include "worldInstance.h"
 
 Actor::Actor(const Rect& rect)
-: Physical(WorldInstance::current().GetCollision(), rect)
+: Physical(WorldInstance::current().getCollision(), rect)
 , _spriteType(ClientSprites::FIGHTER)
 {
 	assignNewID();
 	addToWorld();
 }
 
-Actor::Actor(double width, double height)
-: Physical(WorldInstance::current().GetCollision(), width, height)
+Actor::Actor(const Vector2D& dimensions)
+: Physical(WorldInstance::current().getCollision(), dimensions)
 {
 	assignNewID();
 	addToWorld();
 }
 
 Actor::Actor(unsigned long actorID, const Rect& rect)
-: Physical(WorldInstance::current().GetCollision(), rect)
+: Physical(WorldInstance::current().getCollision(), rect)
 , _actorID(actorID)
 {
 	addToWorld();
 }
 
-Actor::Actor(unsigned long actorID, double width, double height)
-: Physical(WorldInstance::current().GetCollision(), width, height)
+Actor::Actor(unsigned long actorID, const Vector2D& dimensions)
+: Physical(WorldInstance::current().getCollision(), dimensions)
 , _actorID(actorID)
 {
 	addToWorld();
@@ -35,10 +35,10 @@ Actor::~Actor()
 	removeFromWorld();
 }
 
-void Actor::GetNearbyActors(WorldInstance::ActorList& output) const
+void Actor::getNearbyActors(WorldInstance::ActorList& output) const
 {
-    const Rect& r = GetCollisionRect();
-    WorldInstance::current().GetNearbyActors(output, Vector2D((r.left + r.right) / 2.0, (r.top + r.bottom) / 2.0));
+    const Rect& r = getCollisionRect();
+    WorldInstance::current().getNearbyActors(output, (r.min() + r.max()) * .5);
 }
 
 void Actor::assignNewID()

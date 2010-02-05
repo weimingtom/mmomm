@@ -13,7 +13,7 @@
 double User::score(const PacketValue& value, const Vector2D& reference)
 {
 	const Actor *actor = value.first;
-	const Vector2D actorPosition = actor->GetPosition();
+	const Vector2D actorPosition = actor->getPosition();
 	
 	// Score based on x and y distance
 	const Vector2D ASPECT(20.0 / 25.0, 15.0 / 25.0);
@@ -30,7 +30,7 @@ double User::score(const PacketValue& value, const Vector2D& reference)
 	const double VELOCITY_FACTOR = 10;
 
 	Vector2D displacement = ASPECT.memberwiseMult(actorPosition - value.second.position);
-	Vector2D velocity = ASPECT.memberwiseMult(actor->GetVelocity() - value.second.velocity);
+	Vector2D velocity = ASPECT.memberwiseMult(actor->getVelocity() - value.second.velocity);
 	
 	double displacementScore = -DISPLACEMENT_FACTOR * displacement.lengthSquared();
 	double velocityScore = -VELOCITY_FACTOR * velocity.lengthSquared();
@@ -57,10 +57,10 @@ struct User::ActorScoreComparator {
 void User::sendNetworkUpdate(const Actor *userActor)
 {
 	const double MAX_DISTANCE = 60;
-	const Vector2D position = userActor->GetPosition();
+	const Vector2D position = userActor->getPosition();
 
 	WorldInstance::ActorList actors;
-	ServerWorldInstance::current().GetNearbyActors(actors, position);
+	ServerWorldInstance::current().getNearbyActors(actors, position);
 	
 	// Packet data
 	std::vector< CreationUpdate > creation;
@@ -81,7 +81,7 @@ void User::sendNetworkUpdate(const Actor *userActor)
 			continue;
 		
 		// Skip anyone too far away
-		Rect offsetRect = actor->GetCollisionRect() - position;
+		Rect offsetRect = actor->getCollisionRect() - position;
 		if (std::abs(offsetRect.left) > MAX_DISTANCE ||
 			std::abs(offsetRect.top) > MAX_DISTANCE ||
 			std::abs(offsetRect.right) > MAX_DISTANCE ||
@@ -97,16 +97,16 @@ void User::sendNetworkUpdate(const Actor *userActor)
 			CreationUpdate create;
 			create.id = actor->id();
 			create.offsetRect = offsetRect;
-			create.velocity = actor->GetVelocity();
-			create.sprite = actor->GetSpriteType();
+			create.velocity = actor->getVelocity();
+			create.sprite = actor->getSpriteType();
 			create.isClientPlayer = false;
-            create.name = actor->GetName();
+            create.name = actor->getName();
 			creation.push_back(create);
 
 			// Store this entry in the replacement map
 			ActorData data;
 			data.id = create.id;
-			data.position = actor->GetPosition();
+			data.position = actor->getPosition();
 			data.velocity = create.velocity;
 			data.time = FrameTimer::current().frameTime();
 			replacementMap[actor] = data;
@@ -142,14 +142,14 @@ void User::sendNetworkUpdate(const Actor *userActor)
 		// Add packet data
 		MovementUpdate move;
 		move.id = actorScore.actor->id();
-		move.displacement = actorScore.actor->GetPosition() - position;
-		move.velocity = actorScore.actor->GetVelocity();
+		move.displacement = actorScore.actor->getPosition() - position;
+		move.velocity = actorScore.actor->getVelocity();
 		movement.push_back(move);
 		
 		// Add new map data
 		ActorData data;
 		data.id = move.id;
-		data.position = actorScore.actor->GetPosition();
+		data.position = actorScore.actor->getPosition();
 		data.velocity = move.velocity;
 		data.time = FrameTimer::current().frameTime();
 		replacementMap[actorScore.actor] = data;

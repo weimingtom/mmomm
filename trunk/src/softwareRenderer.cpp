@@ -1,7 +1,7 @@
 #include "softwareRenderer.h"
 #include <math.h>
 
-SoftwareRenderer::SoftwareRenderer(int screenWidth, int screenHeight, bool fullscreen) : Renderer(screenWidth, screenHeight, fullscreen)
+SoftwareRenderer::SoftwareRenderer(const Vector2D& screenDimensions, bool fullscreen) : Renderer(screenDimensions, fullscreen)
 {
     unsigned flags;
 
@@ -10,7 +10,7 @@ SoftwareRenderer::SoftwareRenderer(int screenWidth, int screenHeight, bool fulls
     else
         flags = SDL_SWSURFACE;
 
-    _screen = SDL_SetVideoMode(_screenWidth, _screenHeight, 0, flags);
+    _screen = SDL_SetVideoMode(int(screenDimensions.x), int(screenDimensions.y), 0, flags);
     if(_screen == NULL) {
         //logger->echoError("SDL_SetVideoMode failed: " + std::string(SDL_GetError()));
         cout << "SDL_SetVideoMode failed: " << std::string(SDL_GetError()) << endl;
@@ -23,15 +23,15 @@ SoftwareRenderer::~SoftwareRenderer()
     SDL_FreeSurface(_screen);
 }
 
-void SoftwareRenderer::drawImage(Image *img, float x, float y)
+void SoftwareRenderer::drawImage(Image *img, const Vector2D& position)
 {
     if(img == NULL)
         return;
 
     //the x and the y coordinates are only accepted as an SDL_Rect
     SDL_Rect offset;
-    offset.x = Sint16(x);
-    offset.y = Sint16(y);
+    offset.x = Sint16(position.x);
+    offset.y = Sint16(position.y);
 
     //put image on screen
     if(SDL_BlitSurface(img->getSurface(), NULL, _screen, &offset) == -1)
@@ -39,18 +39,19 @@ void SoftwareRenderer::drawImage(Image *img, float x, float y)
 }
 
 //Note: This code is mainly the same as the regular draw. It just adds a cut from the image.
-void SoftwareRenderer::drawClippedImage(Image *img, float x, float y, SDL_Rect clip)
+void SoftwareRenderer::drawClippedImage(Image *img, const Vector2D& position, const SDL_Rect& clip)
 {
     if(img == NULL)
         return;
 
     //the x and the y coordinates are only accepted as an SDL_Rect
     SDL_Rect offset;
-    offset.x = Sint16(x);
-    offset.y = Sint16(y);
+    offset.x = Sint16(position.x);
+    offset.y = Sint16(position.y);
 
+	// NOTE: const_cast should be ok in this situation
     //put image on screen
-    if(SDL_BlitSurface(img->getSurface(), &clip, _screen, &offset) == -1)
+    if(SDL_BlitSurface(img->getSurface(), const_cast<SDL_Rect *>(&clip), _screen, &offset) == -1)
         cout << "Blitting of image failed" << endl;
 }
 

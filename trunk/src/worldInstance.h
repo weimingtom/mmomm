@@ -13,22 +13,22 @@ public:
     WorldInstance(CollisionWorld* collision);
     virtual ~WorldInstance();
 
-    const CollisionWorld& GetCollision() const;
-    /* */ CollisionWorld& GetCollision();
+    const CollisionWorld& getCollision() const;
+    /* */ CollisionWorld& getCollision();
 
-    const WorldMap& GetWorldMap() const;
-    /* */ WorldMap& GetWorldMap();
+    const WorldMap& getWorldMap() const;
+    /* */ WorldMap& getWorldMap();
 
     typedef boost::unordered_map< ActorID, Actor * > ActorMap;
-    const ActorMap& GetActorMap() const;
+    const ActorMap& getActorMap() const;
 
-    virtual void Update(double elapsed);
+    virtual void update(double elapsed);
 
     static WorldInstance& current() { assert(_current); return *_current; }
     static void setCurrent(WorldInstance* current) { _current = current; }
 
     typedef std::vector< Actor* > ActorList;
-    void GetNearbyActors(ActorList& output, const Vector2D& point);
+    void getNearbyActors(ActorList& output, const Vector2D& point);
 	
 private:
 	

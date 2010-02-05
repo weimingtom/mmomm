@@ -10,7 +10,7 @@ public:
     PlayerActor(User& user, const Rect& rect);
     virtual ~PlayerActor();
 
-    virtual void OnCollision(Physical& other) { }
+    virtual void onCollision(Physical& other) { }
 
 	double getUpdateTime() const { return _updateTime; }
 	void setUpdateTime(double updateTime) { _updateTime = updateTime; }

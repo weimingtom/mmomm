@@ -12,29 +12,25 @@ AnimationManager::~AnimationManager()
 {
 }
 
-AnimationManager::weak_ptr AnimationManager::getAnimation(int id, bool reverse) //TODO: exception throwing?
+AnimationManager::shared_ptr AnimationManager::getAnimation(int id, bool reverse) //TODO: exception throwing?
 {
     if(reverse) {
         animap::iterator it = _inactiveAnimations.find(id);
         if(it == _inactiveAnimations.end()) {
             animap::iterator it = _activeAnimations.find(id);
             assert(it != _activeAnimations.end());
-            weak_ptr ptr_img(_activeAnimations[id]);
-            return ptr_img;
+            return _activeAnimations[id];
         } else {
-            weak_ptr ptr_img(_inactiveAnimations[id]);
-            return ptr_img;
+            return _inactiveAnimations[id];
         }
     } else {
         animap::iterator it = _activeAnimations.find(id);
         if(it == _activeAnimations.end()) {
             animap::iterator it = _inactiveAnimations.find(id);
             assert(it != _inactiveAnimations.end());
-            weak_ptr ptr_img(_inactiveAnimations[id]);
-            return ptr_img;
+            return _inactiveAnimations[id];
         } else {
-            weak_ptr ptr_img(_activeAnimations[id]);
-            return ptr_img;
+            return _activeAnimations[id];
         }
     }
 }
@@ -59,7 +55,7 @@ int AnimationManager::createNewInstanceOf(int id, double interval, int startFram
     int         actualStart     = startFrame;
     int         actualEnd       = endFrame;
     bool        actualActive    = (active != 0);
-    Animation  *anim            = getAnimation(id, !active).lock().get();
+    Animation  *anim            = getAnimation(id, !active).get();
 
     if(interval == -1)
         actualInterval = anim->getInterval();

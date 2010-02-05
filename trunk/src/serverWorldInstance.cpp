@@ -14,13 +14,13 @@ ServerWorldInstance::~ServerWorldInstance()
 {
 }
 
-void ServerWorldInstance::AddUser(User& user, PlayerActor* actor)
+void ServerWorldInstance::addUser(User& user, PlayerActor* actor)
 {
     _userMap[&user] = actor;
     _userList.push_front(&user);
 }
 
-void ServerWorldInstance::RemoveUser(User& user)
+void ServerWorldInstance::removeUser(User& user)
 {
     _userMap.erase(&user);
     for ( UserList::iterator i = _userList.begin(); i != _userList.end(); i++ ) {
@@ -31,7 +31,7 @@ void ServerWorldInstance::RemoveUser(User& user)
     }
 }
 
-PlayerActor* ServerWorldInstance::GetUserActor(User& user) const
+PlayerActor* ServerWorldInstance::getUserActor(User& user) const
 {
     UserMap::const_iterator i = _userMap.find(&user);
     if ( i == _userMap.end() )
@@ -39,7 +39,7 @@ PlayerActor* ServerWorldInstance::GetUserActor(User& user) const
     return i->second;
 }
 
-const ServerWorldInstance::UserMap& ServerWorldInstance::GetUserMap() const
+const ServerWorldInstance::UserMap& ServerWorldInstance::getUserMap() const
 {
     return _userMap;
 }
@@ -50,9 +50,9 @@ ServerWorldInstance& ServerWorldInstance::current()
     return *(ServerWorldInstance*)&WorldInstance::current();
 }
 
-void ServerWorldInstance::Update(double elapsed)
+void ServerWorldInstance::update(double elapsed)
 {
-    WorldInstance::Update(elapsed);
+    WorldInstance::update(elapsed);
     _updatesOffset += _userList.size() * 10.0 / FrameTimer::current().framerate();
     int updates = int(_updatesOffset);
     _updatesOffset -= updates;

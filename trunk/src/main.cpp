@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     SDL_EnableUNICODE(1);
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-    Renderer *renderer = new SoftwareRenderer(640, 480, false);
+    Renderer *renderer = new SoftwareRenderer(Vector2D(640, 480), false);
     renderer->setCurrent(renderer);
 
     ImageManager::setCurrent(new ImageManager());
@@ -67,19 +67,19 @@ int main(int argc, char **argv)
 
             switch (event.type) {
                 case SDL_KEYDOWN:
-                    ClientWorldInstance::current().KeyDown(event.key.keysym.sym);
+                    ClientWorldInstance::current().keyDown(event.key.keysym.sym);
                     break;
                 case SDL_KEYUP:
-                    ClientWorldInstance::current().KeyUp(event.key.keysym.sym);
+                    ClientWorldInstance::current().keyUp(event.key.keysym.sym);
                     break;
                 case SDL_MOUSEBUTTONDOWN:
-                    ClientWorldInstance::current().MouseDown(event.button.button);
+                    ClientWorldInstance::current().mouseDown(event.button.button);
                     break;
                 case SDL_MOUSEBUTTONUP:
-                    ClientWorldInstance::current().MouseUp(event.button.button);
+                    ClientWorldInstance::current().mouseUp(event.button.button);
                     break;
                 case SDL_MOUSEMOTION:
-                    ClientWorldInstance::current().MouseMotion(event.motion.x, event.motion.y);
+                    ClientWorldInstance::current().mouseMotion(Vector2D(event.motion.x, event.motion.y));
                     break;
                 case SDL_QUIT:
                     loop = false;
@@ -93,9 +93,9 @@ int main(int argc, char **argv)
                         delete renderer;
 
                         if(ints[3] != 0)
-                            renderer    = new SoftwareRenderer(ints[0], ints[1], (ints[2] != 0));
+                            renderer    = new SoftwareRenderer(Vector2D(ints[0], ints[1]), (ints[2] != 0));
                         else
-                            renderer    = new OpenGLRenderer  (ints[0], ints[1], (ints[2] != 0));
+                            renderer    = new OpenGLRenderer  (Vector2D(ints[0], ints[1]), (ints[2] != 0));
                         renderer->setCurrent(renderer);
 
                         ImageManager::current().reloadImages();
@@ -154,10 +154,10 @@ int main(int argc, char **argv)
 
         Gui::current().logic();
 		AnimationManager::current().update(FrameTimer::current().elapsed());
-        WorldInstance::current().Update(FrameTimer::current().elapsed());
+        WorldInstance::current().update(FrameTimer::current().elapsed());
 
         renderer->beginDraw();
-        ClientWorldInstance::current().Render();
+        ClientWorldInstance::current().render();
         Gui::current().draw();
         renderer->swapBuffers();
 

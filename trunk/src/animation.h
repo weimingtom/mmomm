@@ -36,19 +36,20 @@ public:
 
     void                        setCallbackSprite(Sprite* sprite);
 
-    ImageManager::shared_ptr    getImage()         const { return _img; }
-    int                         getFrameWidth()    const { return _frameWidth; }
-    int                         getFrameHeight()   const { return _frameHeight; }
-    int                         getHoriFrameNo()   const { return _totalHoriFrames; }
-    int                         getVertFrameNo()   const { return _totalVertFrames; }
-    int                         getCurrentFrame()  const { return _currentFrame; }
-	int                         getCurrentFrameX() const { return _currentFrame % getHoriFrameNo() *_frameWidth; }
-    int                         getCurrentFrameY() const { return (int(_currentFrame/getHoriFrameNo())) *_frameHeight; }
-    int                         getStartFrame()    const { return _startFrame; }
-    int                         getEndFrame()      const { return _endFrame; }
-    double                      getInterval()      const { return _interval; }
+    ImageManager::shared_ptr    getImage()            const { return _img; }
+    int                         getFrameWidth()       const { return _frameWidth; }
+    int                         getFrameHeight()      const { return _frameHeight; }
+    int                         getHoriFrameNo()      const { return _totalHoriFrames; }
+    int                         getVertFrameNo()      const { return _totalVertFrames; }
+    int                         getCurrentFrame()     const { return _currentFrame; }
+	int                         getCurrentFrameX()    const { return _currentFrame % getHoriFrameNo() *_frameWidth; }
+    int                         getCurrentFrameY()    const { return (int(_currentFrame/getHoriFrameNo())) *_frameHeight; }
+	SDL_Rect                    getCurrentFrameRect() const;
+    int                         getStartFrame()       const { return _startFrame; }
+    int                         getEndFrame()         const { return _endFrame; }
+    double                      getInterval()         const { return _interval; }
 
-    bool                        isActive()         const { return _active; }
+    bool                        isActive()            const { return _active; }
 };
 
 #endif

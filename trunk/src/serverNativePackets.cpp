@@ -11,37 +11,37 @@ void ConnectionPacket::respondServer() const
 {
 	std::cout << "connected " << sender().username() << std::endl;
 
-    const ServerWorldInstance::UserMap& users = ServerWorldInstance::current().GetUserMap();
+    const ServerWorldInstance::UserMap& users = ServerWorldInstance::current().getUserMap();
     PlayerActor* actor = new PlayerActor(sender(), Rect(0.25 + 1.0 * users.size(), 0.0, 0.75 + 1.0 * users.size(), 1.0));
-    actor->SetName(sender().username());
+    actor->setName(sender().username());
 
     // Tell the user about the new actor; others will get it later
     CreationUpdate update;
     update.id = actor->id();
-    update.offsetRect = actor->GetCollisionRect() - actor->GetPosition();
-    update.velocity = actor->GetVelocity();
-    update.sprite = actor->GetSpriteType();
+    update.offsetRect = actor->getCollisionRect() - actor->getPosition();
+    update.velocity = actor->getVelocity();
+    update.sprite = actor->getSpriteType();
     update.isClientPlayer = true;
-    update.name = actor->GetName();
+    update.name = actor->getName();
 
     CreationPacket::CreationList creationList;
     creationList.push_back(update);
     CreationPacket::DestructionList destructionList;
 
-    CreationPacket packet(actor->GetPosition(),
+    CreationPacket packet(actor->getPosition(),
 		creationList.begin(), creationList.end(),
 		destructionList.begin(), destructionList.end());
     NetworkServer::current().send(packet, sender());
 
-    ServerWorldInstance::current().AddUser(sender(), actor);
+    ServerWorldInstance::current().addUser(sender(), actor);
 }
 
 void DisconnectionPacket::respondServer() const
 {
 	std::cout << "disconnected " << sender().username() << std::endl;
 
-    delete ServerWorldInstance::current().GetUserActor(sender());
-    ServerWorldInstance::current().RemoveUser(sender());
+    delete ServerWorldInstance::current().getUserActor(sender());
+    ServerWorldInstance::current().removeUser(sender());
 }
 
 void TamperPacket::respondServer() const

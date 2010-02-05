@@ -281,11 +281,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\playerClientActor.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\renderer.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\src\serial.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\simulatedClientActor.cpp"
 				>
 			</File>
 			<File
@@ -423,6 +431,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\playerClientActor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\rect.h"
 				>
 			</File>
@@ -432,6 +444,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\serial.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\simulatedClientActor.h"
 				>
 			</File>
 			<File
