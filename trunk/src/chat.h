@@ -5,6 +5,7 @@
 
 #include "networkPacket.h"
 #include "packetTypes.h"
+#include "serial.h"
 #include <string>
 
 // Occurs when a connection has been established.
@@ -49,13 +50,13 @@ public:
 	// The message that was sent.
 	std::string message() const { return _message; }
 	// The type of message sent.
-	TYPE type() const { return _type; }
+	TYPE type() const { return TYPE(_type); }
 
 private:
 	std::string _from;
 	std::string _target;
 	std::string _message;
-	TYPE _type;
+	uint8_t _type;
 };
 
 

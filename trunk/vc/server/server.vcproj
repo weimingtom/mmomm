@@ -49,6 +49,7 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="4"
+				DisableSpecificWarnings="4996"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -124,6 +125,7 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
+				DisableSpecificWarnings="4996"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -189,6 +191,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ieeehalfprecision.c"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\initializePacketManager.cpp"
 				>
 			</File>
@@ -210,6 +216,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\playerActor.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\serial.cpp"
 				>
 			</File>
 			<File
@@ -275,6 +285,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\ieeehalfprecision.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\initializePacketManager.h"
 				>
 			</File>
@@ -304,6 +318,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\playerActor.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\serial.h"
 				>
 			</File>
 			<File
