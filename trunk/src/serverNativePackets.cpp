@@ -18,7 +18,7 @@ void ConnectionPacket::respondServer() const
     // Tell the user about the new actor; others will get it later
     CreationUpdate update;
     update.id = actor->id();
-    update.rect = actor->GetCollisionRect();
+    update.offsetRect = actor->GetCollisionRect() - actor->GetPosition();
     update.velocity = actor->GetVelocity();
     update.sprite = actor->GetSpriteType();
     update.isClientPlayer = true;
@@ -28,7 +28,9 @@ void ConnectionPacket::respondServer() const
     creationList.push_back(update);
     CreationPacket::DestructionList destructionList;
 
-    CreationPacket packet(creationList.begin(), creationList.end(), destructionList.begin(), destructionList.end());
+    CreationPacket packet(actor->GetPosition(),
+		creationList.begin(), creationList.end(),
+		destructionList.begin(), destructionList.end());
     NetworkServer::current().send(packet, sender());
 
     ServerWorldInstance::current().AddUser(sender(), actor);

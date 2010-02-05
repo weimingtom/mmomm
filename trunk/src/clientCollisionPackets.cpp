@@ -24,7 +24,7 @@ void CreationPacket::respondClient() const
         if ( alreadyDestroyed )
             continue;
 
-		ClientActor *actor = new ClientActor(create.id, create.rect, create.velocity,
+		ClientActor *actor = new ClientActor(create.id, referencePoint() + create.offsetRect, create.velocity,
 			ClientSprites::SpriteType(create.sprite));
         actor->SetName(create.name);
         if ( create.isClientPlayer )
@@ -48,7 +48,7 @@ void MovementPacket::respondClient() const
 		WorldInstance::ActorMap::const_iterator found =
 			ClientWorldInstance::current().GetActorMap().find(move.id);
 		if (found != ClientWorldInstance::current().GetActorMap().end()) {
-			found->second->interpolate(timestamp(), move.position, move.velocity);
+			found->second->interpolate(timestamp(), referencePoint() + move.displacement, move.velocity);
 		}
 	}
 }
