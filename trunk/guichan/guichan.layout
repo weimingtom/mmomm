@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug-x64" />
+	<File name="include/config.hpp" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="35" />
+	</File>
+	<File name="include/guichan.hpp" open="0" top="0" tabpos="0">
+		<Cursor position="2239" topLine="39" />
+	</File>
+	<File name="include/guichan/basiccontainer.hpp" open="0" top="0" tabpos="0">
+		<Cursor position="3686" topLine="76" />
+	</File>
+	<File name="include/guichan/color.hpp" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="15" />
+	</File>
+	<File name="include/guichan/platform.hpp" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="39" />
+	</File>
+	<File name="include/guichan/widget.hpp" open="0" top="0" tabpos="0">
+		<Cursor position="32743" topLine="950" />
+	</File>
+	<File name="include/guichan/widgets/container.hpp" open="0" top="0" tabpos="0">
+		<Cursor position="5466" topLine="101" />
+	</File>
+	<File name="src/basiccontainer.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="5737" topLine="187" />
+	</File>
+	<File name="src/color.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="15" />
+	</File>
+	<File name="src/widget.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="16962" topLine="165" />
+	</File>
+	<File name="src/widgets/container.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="3437" topLine="82" />
+	</File>
+	<File name="src/widgets/dropdown.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="15021" topLine="478" />
+	</File>
+	<File name="src/widgets/scrollarea.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="4524" topLine="110" />
+	</File>
+	<File name="src/widgets/tab.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="51" />
+	</File>
+	<File name="src/widgets/tabbedarea.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="2819" topLine="68" />
+	</File>
+	<File name="src/widgets/textbox.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="9" />
+	</File>
+</CodeBlocks_layout_file>
