@@ -29,7 +29,7 @@ public:
     static AnimationManager& current() { assert(_current); return *_current; }
     static void setCurrent(AnimationManager *current) { _current = current; }
 
-    weak_ptr            getAnimation(int id, bool reverse = false);
+    shared_ptr          getAnimation(int id, bool reverse = false);
     vector<weak_ptr>    getActiveAnimations();
     // Start frame is inclusive, end frame exclusive. Default value of endFrame (-1) sets to all possible frames.
     int                 createAnimation(ImageManager::shared_ptr img, int frameWidth, int frameHeight,

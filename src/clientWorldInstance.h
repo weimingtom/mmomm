@@ -8,7 +8,7 @@
 class LocalCollision : public CollisionWorld {
 public:
 
-    virtual bool ShouldBlock(const Physical* a, const Physical* b) const;
+    virtual bool shouldBlock(const Physical* a, const Physical* b) const;
 
 };
 
@@ -31,22 +31,22 @@ public:
     virtual ~ClientWorldInstance();
 
     static ClientWorldInstance& current();
-    void Render() const;
+    void render() const;
 
-    void KeyDown(SDLKey key);
-    void KeyUp  (SDLKey key);
-    void MouseDown(Uint8 key);
-    void MouseUp  (Uint8 key);
-    void MouseMotion(Uint16 x, Uint16 y);
-    bool IsKeyDown(Key key) const;
-    const Vector2D& GetWorldMouse() const;
+    void keyDown(SDLKey key);
+    void keyUp  (SDLKey key);
+    void mouseDown(Uint8 key);
+    void mouseUp  (Uint8 key);
+    void mouseMotion(const Vector2D& offset);
+    bool isKeyDown(Key key) const;
+    const Vector2D& getWorldMouse() const;
 
-    void   SetClientPlayerActor(Actor* actor) { _clientPlayerActor = actor; }
-    Actor* GetClientPlayerActor() const       { return _clientPlayerActor; }
+    void   setClientPlayerActor(Actor* actor) { _clientPlayerActor = actor; }
+    Actor* getClientPlayerActor() const       { return _clientPlayerActor; }
 
-    virtual void Update(double elapsed);
+    virtual void update(double elapsed);
 
-    std::vector< int >& GetErroneousDestructionIds() { return _erroneousDestructionIds; }
+    std::vector< int >& getErroneousDestructionIds() { return _erroneousDestructionIds; }
 
 private:
 
@@ -60,8 +60,7 @@ private:
     std::vector< int > _erroneousDestructionIds;
 
     double   _updateOffset;
-    double   _xCam;
-    double   _yCam;
+	Vector2D _camera;
     Vector2D _mouse;
 
 };

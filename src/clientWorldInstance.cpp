@@ -7,21 +7,21 @@
 #include "collisionPackets.h"
 #include "networkClient.h"
 #include "chatWindow.h"
+#include "rect.h"
 
 const double ClientWorldInstance::PIXELS_PER_WORLD_UNIT = 32.0;
 
-bool LocalCollision::ShouldBlock(const Physical* a, const Physical* b) const
+bool LocalCollision::shouldBlock(const Physical* a, const Physical* b) const
 {
-    return a == ClientWorldInstance::current().GetClientPlayerActor() ||
-           b == ClientWorldInstance::current().GetClientPlayerActor();
+    return a == ClientWorldInstance::current().getClientPlayerActor() ||
+           b == ClientWorldInstance::current().getClientPlayerActor();
 }
 
 ClientWorldInstance::ClientWorldInstance()
 : WorldInstance(new LocalCollision())
 , _clientPlayerActor(0)
 , _updateOffset(0)
-, _xCam(0)
-, _yCam(0)
+, _camera(0, 0)
 {
     // Input map
     _keyMap[SDLK_LEFT]  = KEY_LEFT;
@@ -48,30 +48,27 @@ ClientWorldInstance& ClientWorldInstance::current()
     return *(ClientWorldInstance*)&WorldInstance::current();
 }
 
-void ClientWorldInstance::Render() const
+void ClientWorldInstance::render() const
 {
-    double xCentre = _xCam;
-    double yCentre = _yCam;
-    const ActorMap& actors = GetActorMap();
+	Vector2D centre = _camera;
+    const ActorMap& actors = getActorMap();
     Renderer& renderer = Renderer::current();
 
     for ( ActorMap::const_iterator i = actors.begin(); i != actors.end(); i++ ) {
         assert(dynamic_cast< ClientActor* >(i->second));
-        ClientActor* a = (ClientActor*)i->second;
-        AnimationManager::weak_ptr anim = a->GetSprite()->GetCurrentAnimation();
-
-        SDL_Rect clip;
-        clip.x = anim.lock().get()->getCurrentFrameX();
-        clip.y = anim.lock().get()->getCurrentFrameY();
-        clip.w = anim.lock().get()->getFrameWidth();
-        clip.h = anim.lock().get()->getFrameHeight();
-
-        const Rect& r = a->GetCollisionRect();
-        double tx = PIXELS_PER_WORLD_UNIT * ((r.left + r.right ) / 2.0 - xCentre) + (renderer.getScreenWidth()  - clip.w) / 2.0;
-        double ty = PIXELS_PER_WORLD_UNIT * ((r.top  + r.bottom) / 2.0 - yCentre) + (renderer.getScreenHeight() - clip.h) / 2.0;
-        if ( tx + clip.w < 0 || tx >= renderer.getScreenWidth() || ty + clip.h < 0 || ty >= renderer.getScreenHeight() )
+        ClientActor *a = static_cast<ClientActor *>(i->second);
+        AnimationManager::shared_ptr anim = a->getSprite()->getCurrentAnimation();
+		
+        SDL_Rect clip = anim->getCurrentFrameRect();
+		
+        const Rect& r = a->getCollisionRect();
+		Vector2D renderPosition =
+			PIXELS_PER_WORLD_UNIT * (.5 * (r.min() + r.max()) - centre) +
+			.5 * (renderer.getScreenDimensions() - Vector2D(clip.w, clip.h));
+        if (renderPosition.x + clip.w < 0 || renderPosition.x >= renderer.getScreenDimensions().x ||
+			renderPosition.y + clip.h < 0 || renderPosition.y >= renderer.getScreenDimensions().y)
             continue;
-        renderer.drawClippedImage(anim.lock().get()->getImage().get(), float(tx), float(ty), clip);
+        renderer.drawClippedImage(anim->getImage().get(), renderPosition, clip);
 
         /*if ( _mouse.x < r.right && _mouse.x >= r.left && _mouse.y < r.bottom && _mouse.y >= r.top ) {
             // Need a Renderer::drawText
@@ -82,25 +79,28 @@ void ClientWorldInstance::Render() const
     }
 }
 
-void ClientWorldInstance::Update(double elapsed)
+void ClientWorldInstance::update(double elapsed)
 {
-    WorldInstance::Update(elapsed);
+	if ( _clientPlayerActor ) {
 
-    if ( !_clientPlayerActor )
-        return;
+		Vector2D v;
+		if ( isKeyDown(KEY_LEFT) )
+			v.x -= 1.0;
+		if ( isKeyDown(KEY_RIGHT) )
+			v.x += 1.0;
+		if ( isKeyDown(KEY_UP) )
+			v.y -= 1.0;
+		if ( isKeyDown(KEY_DOWN) )
+			v.y += 1.0;
+		v = v.normalized();
+		v *= 5.0;
+		_clientPlayerActor->setVelocity(v);
+	}
 
-    Vector2D v;
-    if ( IsKeyDown(KEY_LEFT) )
-        v.x -= 1.0;
-    if ( IsKeyDown(KEY_RIGHT) )
-        v.x += 1.0;
-    if ( IsKeyDown(KEY_UP) )
-        v.y -= 1.0;
-    if ( IsKeyDown(KEY_DOWN) )
-        v.y += 1.0;
-    v = v.normalized();
-    v *= elapsed * 5.0;
-    _clientPlayerActor->Move(v.x, v.y);
+    WorldInstance::update(elapsed);
+
+	if (!_clientPlayerActor)
+		return;
 
     _updateOffset += 10.0 / FrameTimer::current().framerate();
     if ( _updateOffset >= 1.0 ) {
@@ -109,28 +109,28 @@ void ClientWorldInstance::Update(double elapsed)
         MovementUpdate update;
         update.id = _clientPlayerActor->id();
         update.displacement = Vector2D(0, 0);
-        update.velocity = _clientPlayerActor->GetVelocity();
+        update.velocity = _clientPlayerActor->getVelocity();
         list.push_back(update);
-        MovementPacket movement(_clientPlayerActor->GetPosition(), list.begin(), list.end());
+        MovementPacket movement(_clientPlayerActor->getPosition(), list.begin(), list.end());
         NetworkClient::current().send(movement);
     }
 }
 
-void ClientWorldInstance::KeyDown(SDLKey key)
+void ClientWorldInstance::keyDown(SDLKey key)
 {
     KeyMap::const_iterator i = _keyMap.find(key);
     if ( i != _keyMap.end() )
         _keyDowns[i->second] = true;
 }
 
-void ClientWorldInstance::KeyUp(SDLKey key)
+void ClientWorldInstance::keyUp(SDLKey key)
 {
     KeyMap::const_iterator i = _keyMap.find(key);
     if ( i != _keyMap.end() )
         _keyDowns[i->second] = false;
 }
 
-void ClientWorldInstance::MouseDown(Uint8 key)
+void ClientWorldInstance::mouseDown(Uint8 key)
 {
     if ( key == SDL_BUTTON_LEFT )
         _keyDowns[KEY_LMB] = true;
@@ -138,7 +138,7 @@ void ClientWorldInstance::MouseDown(Uint8 key)
         _keyDowns[KEY_RMB] = true;
 }
 
-void ClientWorldInstance::MouseUp(Uint8 key)
+void ClientWorldInstance::mouseUp(Uint8 key)
 {
     if ( key == SDL_BUTTON_LEFT )
         _keyDowns[KEY_LMB] = false;
@@ -146,19 +146,18 @@ void ClientWorldInstance::MouseUp(Uint8 key)
         _keyDowns[KEY_RMB] = false;
 }
 
-void ClientWorldInstance::MouseMotion(Uint16 x, Uint16 y)
+void ClientWorldInstance::mouseMotion(const Vector2D& offset)
 {
-    _mouse.x = _xCam + ( x - Renderer::current().getScreenWidth()  / 2 ) / PIXELS_PER_WORLD_UNIT;
-    _mouse.y = _yCam + ( y - Renderer::current().getScreenHeight() / 2 ) / PIXELS_PER_WORLD_UNIT;
+	_mouse = _camera + (offset - .5 * Renderer::current().getScreenDimensions()) / PIXELS_PER_WORLD_UNIT;
 }
 
-bool ClientWorldInstance::IsKeyDown(Key key) const
+bool ClientWorldInstance::isKeyDown(Key key) const
 {
     assert(key >= 0 && key < KEY_NONE);
     return _keyDowns[key];
 }
 
-const Vector2D& ClientWorldInstance::GetWorldMouse() const
+const Vector2D& ClientWorldInstance::getWorldMouse() const
 {
     return _mouse;
 }

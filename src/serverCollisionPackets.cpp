@@ -8,7 +8,7 @@
 
 void MovementPacket::respondServer() const
 {
-	PlayerActor *actor = ServerWorldInstance::current().GetUserActor(sender());
+	PlayerActor *actor = ServerWorldInstance::current().getUserActor(sender());
 	if (!actor) {
 		std::cout << "Received a movement packet for ";
 		std::cout << sender().username() << " when no actor is assigned." << std::endl;
@@ -25,13 +25,13 @@ void MovementPacket::respondServer() const
 			actor->setUpdateTime(timestamp());
 			double time       = FrameTimer::current().frameTime() - timestamp();
 			Vector2D position = referencePoint() + update.displacement + update.velocity * time;
-			Vector2D move     = position - actor->GetPosition();
-            Rect     r        = actor->GetCollisionRect();
+			Vector2D move     = position - actor->getPosition();
+            Rect     r        = actor->getCollisionRect();
 
-            actor->SetSize((r.right - r.left) / 2.0, (r.bottom - r.top) / 2.0);
-			actor->Move(move);
-            actor->SetSize(r.right - r.left, r.bottom - r.top);
-			actor->SetVelocity(update.velocity);
+            actor->setSize(.5 * r.dim());
+			actor->move(move);
+            actor->setSize(r.dim());
+			actor->setVelocity(update.velocity);
 		}
 	}
 }

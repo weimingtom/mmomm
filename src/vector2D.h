@@ -2,6 +2,7 @@
 #define VECTOR2D_H_
 
 #include <cmath>
+#include <cfloat>
 
 // A mostly-immutable 2-dimensional vector
 
@@ -122,7 +123,7 @@ inline double Vector2D::length() const
 }
 inline Vector2D Vector2D::normalized() const
 {
-    return length() != 0 ? *this / length() : *this;
+    return lengthSquared() >= FLT_EPSILON * FLT_EPSILON ? *this / length() : Vector2D();
 }
 
 inline double Vector2D::dot(const Vector2D& rhs) const

@@ -10,7 +10,7 @@ public:
     Monster(const Rect& rect, ClientSprites::SpriteType animation);
     virtual ~Monster();
 
-    virtual void OnCollision(Physical& other) { }
+    virtual void onCollision(Physical& other) { }
 
 private:
 

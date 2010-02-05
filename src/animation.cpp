@@ -51,5 +51,15 @@ void Animation::update(double elapsed)
     int oldFrame = _currentFrame;
     _currentFrame = _startFrame + int(_totalTime/_interval);
     if ( _currentFrame < oldFrame && _callbackSprite )
-        _callbackSprite->RepetitionCallback();
+        _callbackSprite->repetitionCallback();
+}
+
+SDL_Rect Animation::getCurrentFrameRect() const
+{
+	SDL_Rect rect;
+	rect.x = getCurrentFrameX();
+	rect.y = getCurrentFrameY();
+	rect.w = getFrameWidth();
+	rect.h = getFrameHeight();
+	return rect;
 }

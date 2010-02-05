@@ -9,7 +9,7 @@ class PlayerActor;
 class TestCollision : public CollisionWorld {
 public:
 
-    virtual bool ShouldBlock(const Physical* a, const Physical* b) const
+    virtual bool shouldBlock(const Physical* a, const Physical* b) const
     {
         return true;
     }
@@ -24,14 +24,14 @@ public:
 
     static ServerWorldInstance& current();
 
-    void AddUser(User& user, PlayerActor* actor);
-    void RemoveUser(User& user);
-    PlayerActor* GetUserActor(User& user) const;
+    void addUser(User& user, PlayerActor* actor);
+    void removeUser(User& user);
+    PlayerActor* getUserActor(User& user) const;
 
     typedef boost::unordered_map< User*, PlayerActor* > UserMap;
-    const UserMap& GetUserMap() const;
+    const UserMap& getUserMap() const;
 
-    virtual void Update(double elapsed);
+    virtual void update(double elapsed);
 
 private:
 

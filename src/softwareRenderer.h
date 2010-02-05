@@ -24,11 +24,11 @@ private:
     SDL_Surface *_screen;
 
 public:
-    SoftwareRenderer(int screenWidth, int screenHeight, bool fullscreen);
+    SoftwareRenderer(const Vector2D& screenDimensions, bool fullscreen);
     ~SoftwareRenderer();
 
-    void drawImage(Image *img, float x, float y);
-    void drawClippedImage(Image *img, float x, float y, SDL_Rect clip);
+    void drawImage(Image *img, const Vector2D& position);
+    void drawClippedImage(Image *img, const Vector2D& position, const SDL_Rect& clip);
     void beginDraw();
     void swapBuffers();
     void generateTexture(GLuint *textureId, GLenum *textureFormat, SDL_Surface *surface);

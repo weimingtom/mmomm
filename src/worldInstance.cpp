@@ -22,41 +22,41 @@ WorldInstance::~WorldInstance()
     delete _worldMap;
 }
 
-const CollisionWorld& WorldInstance::GetCollision() const
+const CollisionWorld& WorldInstance::getCollision() const
 {
     return *_collision;
 }
 
-CollisionWorld& WorldInstance::GetCollision()
+CollisionWorld& WorldInstance::getCollision()
 {
     return *_collision;
 }
 
-const WorldMap& WorldInstance::GetWorldMap() const
+const WorldMap& WorldInstance::getWorldMap() const
 {
     return *_worldMap;
 }
 
-WorldMap& WorldInstance::GetWorldMap()
+WorldMap& WorldInstance::getWorldMap()
 {
     return *_worldMap;
 }
 
-const WorldInstance::ActorMap& WorldInstance::GetActorMap() const
+const WorldInstance::ActorMap& WorldInstance::getActorMap() const
 {
     return _actors;
 }
 
-void WorldInstance::Update(double elapsed)
+void WorldInstance::update(double elapsed)
 {
     for ( ActorMap::iterator i = _actors.begin(); i != _actors.end(); i++ ) {
-        i->second->Update(elapsed);
+        i->second->update(elapsed);
     }
 }
 
-void WorldInstance::GetNearbyActors(ActorList& output, const Vector2D& point)
+void WorldInstance::getNearbyActors(ActorList& output, const Vector2D& point)
 {
-    _collision->GetNearbyPhysicals(output, point.x, point.y);
+    _collision->getNearbyPhysicals(output, point);
 }
 
 void WorldInstance::addActor(Actor* actor)

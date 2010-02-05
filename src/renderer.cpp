@@ -2,10 +2,9 @@
 
 Renderer *Renderer::_current = 0;
 
-Renderer::Renderer(int screenWidth, int screenHeight, bool fullscreen)
+Renderer::Renderer(const Vector2D& screenDimensions, bool fullscreen)
 {
-    this->_screenWidth = screenWidth;
-    this->_screenHeight = screenHeight;
+	this->_screenDimensions = screenDimensions;
     this->_fullscreen = fullscreen;
 }
 
@@ -13,13 +12,13 @@ Renderer::~Renderer()
 {
 }
 
-void Renderer::drawImage(Image *img, float x, float y)
+void Renderer::drawImage(Image *img, const Vector2D& position)
 {
     return;
 }
 
 //Note: This code is mainly the same as the regular draw. It just adds a cut from the image.
-void Renderer::drawClippedImage(Image *img, float x, float y, SDL_Rect clip)
+void Renderer::drawClippedImage(Image *img, const Vector2D& position, const SDL_Rect& clip)
 {
     return;
 }

@@ -30,24 +30,24 @@ public:
     // When turned off, the TriggerCollisions method should be used periodically to
     // call the OnCollision() methods of all objects whose collision rectangles
     // currently overlap. The default value is false.
-    void SetInstantCollisions(bool instantCollisions);
+    void setInstantCollisions(bool instantCollisions);
 
     // Retrieves the current setting for instant collisions.
-    bool GetInstantCollisions() const;
+    bool getInstantCollisions() const;
 
     // Checks all objects in this CollisionWorld for collisions. For each collision
     // between objects A and B, both A.OnCollision(B) and B.OnCollision(A) are
     // called, in no specified order. If instant collisions are turned off, also calls
     // collision methods for objects which have collided, but block each other (and so
     // are not actually currently overlapping).
-    void TriggerCollisions();
+    void triggerCollisions();
 
     // Must be implemented to determine whether two given objects should block each
     // others' movement. Odd behaviour could result if this relation is not symmetric.
-    virtual bool ShouldBlock(const Physical* a, const Physical* b) const = 0;
+    virtual bool shouldBlock(const Physical* a, const Physical* b) const = 0;
 
     template< typename T >
-    void GetNearbyPhysicals(std::vector< T* >& output, double x, double y);
+    void getNearbyPhysicals(std::vector< T* >& output, const Vector2D& position);
 
 private:
 
@@ -65,8 +65,8 @@ private:
     typedef boost::unordered_map< CellCoord, Cell, CellCoord::Hash >  Map;
     typedef std::vector         < std::pair< Physical*, Physical* > > CollisionList;
 
-    bool CheckCollision(Physical* a, Physical* b, const Rect& aRect);
-    Cell& GetCellAtPoint(double x, double y);
+    bool checkCollision(Physical* a, Physical* b, const Rect& aRect);
+    Cell& getCellAtPoint(const Vector2D& position);
 
     friend class Physical;
 
@@ -93,44 +93,42 @@ public:
     // rectangle of given size. The top-left corner of the rectangle is set to
     // (0, 0). Can trigger OnCollision calls if the associated CollisionWorld
     // is set to use instant collisions.
-    Physical(CollisionWorld& world, double width, double height);
+    Physical(CollisionWorld& world, const Vector2D& dimensions);
 
     // Destructor.
     virtual ~Physical();
 
     // Retrieve current collision rectangle of this object.
-    const Rect& GetCollisionRect() const;
+    const Rect& getCollisionRect() const;
 
     // Set current collision rectangle of this object. Can trigger OnCollision
     // calls if the associated CollisionWorld is set to use instant collisions.
-    void SetCollisionRect(const Rect& rect);
+    void setCollisionRect(const Rect& rect);
 
     // Set top-left corner of the current collision rectangle of this object.
     // Can trigger OnCollision calls if the associated CollisionWorld is set to
     // use instant collisions.
-    void SetPosition(double x, double y);
-	void SetPosition(const Vector2D& position) { SetPosition(position.x, position.y); }
-	Vector2D GetPosition() const;
+    void setPosition(const Vector2D& position);
+	Vector2D getPosition() const;
 
     // Set size of the current collision rectangle of this object. The rectangle's
     // centre is preserved. Can trigger OnCollision calls if the associated
     // CollisionWorld is set to use instant collisions.
-    void SetSize(double width, double height);
+    void setSize(const Vector2D& dimensions);
 
     // Move current collision rectangle of this object. Is blocked by obstacles,
     // with continuous collision detection. Can trigger OnCollision calls if the
     // associated CollisionWorld is set to use instant collisions.
-    virtual void Move(double xOffset, double yOffset);
-    /*   */ void Move(const Vector2D& vector) { Move(vector.x, vector.y); }
+    virtual void move(const Vector2D& offset);
 
     // Called when this object collides with another. When a collision occurs
     // between objects A and B, both A.OnCollision(B) and B.OnCollision(A) are
     // called, in no specified order.
-    virtual void OnCollision(Physical& other) = 0;
+    virtual void onCollision(Physical& other) = 0;
 
 private:
 
-    void UpdateWorld();
+    void updateWorld();
 
     typedef CollisionWorld::Cell       Cell;
     typedef std::vector< Physical* >   CollisionList;
@@ -143,17 +141,17 @@ private:
 };
 
 template< typename T >
-void CollisionWorld::GetNearbyPhysicals(std::vector< T* >& output, double x, double y)
+void CollisionWorld::getNearbyPhysicals(std::vector< T* >& output, const Vector2D& position)
 {
-    long lx = long(floor(x / CELL_SIZE));
-    long ly = long(floor(y / CELL_SIZE));
+    long lx = long(floor(position.x / CELL_SIZE));
+    long ly = long(floor(position.y / CELL_SIZE));
     for ( long tx = lx - 2; tx <= lx + 1; tx++ ) {
         for ( long ty = ly - 2; ty <= ly + 1; ty++ ) {
             Cell& cell = _map[CellCoord(tx, ty)];
             for ( Cell::iterator i = cell.begin(); i != cell.end(); i++ ) {
-                if ( tx == lx - 2 && ( *i )->GetCollisionRect().right < ( lx - 1 ) * CELL_SIZE )
+                if ( tx == lx - 2 && ( *i )->getCollisionRect().right < ( lx - 1 ) * CELL_SIZE )
                     continue;
-                if ( ty == ly - 2 && ( *i )->GetCollisionRect().bottom < ( ly - 1 ) * CELL_SIZE )
+                if ( ty == ly - 2 && ( *i )->getCollisionRect().bottom < ( ly - 1 ) * CELL_SIZE )
                     continue;
                 assert(dynamic_cast< T* >(*i));
                 output.push_back((T*)*i);

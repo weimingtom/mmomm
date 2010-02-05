@@ -8,7 +8,7 @@ boost::unordered_map< ClientSprites::SpriteType, Sprite* > ClientSprites::_templ
     _templates[name] = sprite;
 #define ANIMATION( name, image, width, height, time, start, end ) img = ImageManager::current().getImage(image); \
     anim = AnimationManager::current().createAnimation(img, width, height, time, start, end, false); \
-    sprite->AddAnimation(name, anim); \
+    sprite->addAnimation(name, anim); \
     AnimationManager::current().deleteAnimation(anim);
 void ClientSprites::Setup()
 {
@@ -32,5 +32,5 @@ void ClientSprites::Delete()
 Sprite* ClientSprites::Get(SpriteType sprite)
 {
     assert(_templates.find(sprite) != _templates.end());
-    return _templates[sprite]->Clone();
+    return _templates[sprite]->clone();
 }
