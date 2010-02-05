@@ -175,6 +175,13 @@
 		<Unit filename="../src/hermite.h">
 			<Option virtualFolder="Core/" />
 		</Unit>
+		<Unit filename="../src/ieeehalfprecision.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/ieeehalfprecision.h">
+			<Option virtualFolder="Core/" />
+		</Unit>
 		<Unit filename="../src/image.cpp">
 			<Option virtualFolder="Core/" />
 		</Unit>
@@ -238,11 +245,32 @@
 		<Unit filename="../src/playerActor.cpp">
 			<Option virtualFolder="Core/Actors/" />
 		</Unit>
+		<Unit filename="../src/playerClientActor.cpp">
+			<Option virtualFolder="Core/Actors/" />
+		</Unit>
+		<Unit filename="../src/playerClientActor.h">
+			<Option virtualFolder="Core/Actors/" />
+		</Unit>
+		<Unit filename="../src/rect.h">
+			<Option virtualFolder="Core/" />
+		</Unit>
 		<Unit filename="../src/renderer.cpp">
 			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
 		<Unit filename="../src/renderer.h">
 			<Option virtualFolder="Core/Renderers/" />
+		</Unit>
+		<Unit filename="../src/serial.cpp">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/serial.h">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/simulatedClientActor.cpp">
+			<Option virtualFolder="Core/Actors/" />
+		</Unit>
+		<Unit filename="../src/simulatedClientActor.h">
+			<Option virtualFolder="Core/Actors/" />
 		</Unit>
 		<Unit filename="../src/softwareRenderer.cpp">
 			<Option virtualFolder="Core/Renderers/" />

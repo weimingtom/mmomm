@@ -152,8 +152,6 @@ namespace gcn
         virtual void draw(Graphics* graphics);
 
         virtual void logic();
-        virtual void logicChildren();
-
     protected:
         /**
          * True if the container is opaque, false otherwise.

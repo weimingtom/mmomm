@@ -295,6 +295,11 @@ namespace gcn
         int x = mouseEvent.getX();
         int y = mouseEvent.getY();
 
+        std::cout << "mouse pressed at " << x << " " << y << std::endl;
+        std::cout << "up button dimension: " << getUpButtonDimension().x << " " << getUpButtonDimension().y << std::endl;
+
+
+
         if (getUpButtonDimension().isPointInRect(x, y))
         {
             setVerticalScrollAmount(getVerticalScrollAmount()
@@ -975,11 +980,11 @@ namespace gcn
 
     Rectangle ScrollArea::getChildrenArea()
     {
-        Rectangle area = Rectangle(0, 
+        Rectangle area = Rectangle(0,
                                    0,
                                    mVBarVisible ? getWidth() - mScrollbarWidth : getWidth(),
-                                   mHBarVisible ? getHeight() - mScrollbarWidth : getHeight()); 
-        
+                                   mHBarVisible ? getHeight() - mScrollbarWidth : getHeight());
+
         if (area.width < 0 || area.height < 0)
             return Rectangle();
 
@@ -1234,7 +1239,7 @@ namespace gcn
         mOpaque = opaque;
     }
 
-    
+
     bool ScrollArea::isOpaque() const
     {
         return mOpaque;

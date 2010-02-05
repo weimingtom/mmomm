@@ -77,6 +77,8 @@ ChatWindow::ChatWindow(int x, int y)
 
         //_tabArea->setSelectedTab(_privateTab);
 
+        _type = ChatMessagePacket::CHAT_MESSAGE_SERVER;
+
         _window->add(_tabArea);
 
         Gui::current().addWidget(_window);
@@ -90,7 +92,7 @@ void ChatWindow::finishInit()
 {
     _inputField ->addActionListener(_inputListener);
     _tabArea    ->addActionListener(_switchListener);
-    _window->setVisible(true);
+    _window     ->setVisible(true);
 }
 
 ChatWindow::~ChatWindow()
