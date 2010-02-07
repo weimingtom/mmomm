@@ -17,6 +17,11 @@ void Renderer::drawImage(Image *img, const Vector2D& position)
     return;
 }
 
+void Renderer::drawSurface(SDL_Surface *surface, const Vector2D& position)
+{
+    return;
+}
+
 //Note: This code is mainly the same as the regular draw. It just adds a cut from the image.
 void Renderer::drawClippedImage(Image *img, const Vector2D& position, const SDL_Rect& clip)
 {

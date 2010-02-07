@@ -295,11 +295,6 @@ namespace gcn
         int x = mouseEvent.getX();
         int y = mouseEvent.getY();
 
-        std::cout << "mouse pressed at " << x << " " << y << std::endl;
-        std::cout << "up button dimension: " << getUpButtonDimension().x << " " << getUpButtonDimension().y << std::endl;
-
-
-
         if (getUpButtonDimension().isPointInRect(x, y))
         {
             setVerticalScrollAmount(getVerticalScrollAmount()

@@ -9,6 +9,7 @@
 #endif
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <SDL/SDL.h>
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -41,6 +42,7 @@ public:
     void setCurrent(Renderer *renderer) { _current = renderer; }
 
     virtual void drawImage(Image *img, const Vector2D& position);
+    virtual void drawSurface(SDL_Surface *surface, const Vector2D& position);
     virtual void drawClippedImage(Image *img, const Vector2D& position, const SDL_Rect& clip);
     virtual void beginDraw();
     virtual void swapBuffers();
@@ -48,7 +50,7 @@ public:
     virtual void deleteTexture(GLuint *textureId);
 
 	Vector2D getScreenDimensions() { return _screenDimensions; }
-    
+
     virtual SDL_Surface* getScreen();
     virtual bool isSoftwareRenderer();
 

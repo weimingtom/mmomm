@@ -100,8 +100,8 @@ namespace gcn
          * @param vPolicy The policy for the vertical scrollbar. See enum with
          *                policies.
          */
-        ScrollArea(Widget *content, 
-                   ScrollPolicy hPolicy, 
+        ScrollArea(Widget *content,
+                   ScrollPolicy hPolicy,
                    ScrollPolicy vPolicy);
 
         /**
@@ -239,7 +239,7 @@ namespace gcn
          * Sets the amount to scroll in pixels when the left scroll button is
          * pushed.
          *
-         * @param amount The amount to scroll in pixels. 
+         * @param amount The amount to scroll in pixels.
          * @see getLeftButtonScrollAmount
          */
         void setLeftButtonScrollAmount(int amount);
@@ -322,8 +322,8 @@ namespace gcn
          * @return True if the scroll area is opaque, false otherwise.
          */
         bool isOpaque() const;
-        
-        
+
+
         // Inherited from BasicContainer
 
         virtual void showWidgetPart(Widget* widget, Rectangle area);
@@ -357,6 +357,7 @@ namespace gcn
         virtual void mouseWheelMovedUp(MouseEvent& mouseEvent);
 
         virtual void mouseWheelMovedDown(MouseEvent& mouseEvent);
+
 
     protected:
         /**
@@ -483,7 +484,7 @@ namespace gcn
          * @return the dimension of the horizontal marker.
          */
         Rectangle getHorizontalMarkerDimension();
-        
+
         /**
          * Holds the vertical scroll amount.
          */

@@ -54,10 +54,7 @@ private:
     {
         void action(const gcn::ActionEvent& actionEvent)
         {
-            if(NetworkClient::current().isActive())
-            {
-                ChatWindow::current().switchTabs();
-            }
+            ChatWindow::current().switchTabs();
         }
     };
 
@@ -71,7 +68,6 @@ private:
     gcn::Container           *_serverContainer;
     gcn::Container           *_generalContainer;
     gcn::Container           *_privateContainer;
-    gcn::Container           *_wasteContainer; //Seriously, we need to fix guichan.
     gcn::TextField           *_inputField;
     gcn::TextField           *_targetField;
     gcn::ScrollArea          *_chatBoxScroll;

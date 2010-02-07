@@ -1,4 +1,5 @@
 #include "gui.h"
+#include "trueTypeFont.h"
 
 Gui *Gui::_current = 0;
 
@@ -12,6 +13,7 @@ Gui::Gui(SDL_Surface *screen, bool softwareRendering)
 
             _graphics = new gcn::SDLGraphics();
             ((gcn::SDLGraphics*)_graphics)->setTarget(screen);
+
         }
         else
         {
@@ -19,12 +21,14 @@ Gui::Gui(SDL_Surface *screen, bool softwareRendering)
             gcn::Image::setImageLoader(_imageLoader);
 
             _graphics = new gcn::OpenGLGraphics(screen->w, screen->h);
-
         }
+
+        gcn::contrib::SDLTrueTypeFont *font = new gcn::contrib::SDLTrueTypeFont("font.ttf", 12);
+        font->setColor(gcn::Color(0, 0, 0));
+        _font = font;
 
         _input = new gcn::SDLInput();
 
-        _font = new gcn::ImageFont("imagefont.png", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?+-/():;%&`'*#=[]\"<>{}^~|_@$\\");
         gcn::Widget::setGlobalFont(_font);
 
         _gui = new gcn::Gui();

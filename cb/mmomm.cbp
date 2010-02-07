@@ -260,6 +260,12 @@
 		<Unit filename="../src/renderer.h">
 			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
+		<Unit filename="../src/sdltruetypefont.cpp">
+			<Option virtualFolder="Guis/" />
+		</Unit>
+		<Unit filename="../src/sdltruetypefont.h">
+			<Option virtualFolder="Guis/" />
+		</Unit>
 		<Unit filename="../src/serial.cpp">
 			<Option virtualFolder="Net/" />
 		</Unit>

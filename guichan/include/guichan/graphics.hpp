@@ -57,37 +57,37 @@ namespace gcn
     class Image;
 
     /**
-     * Abstract class for providing drawing primitve functions. 
+     * Abstract class for providing drawing primitve functions.
      * It contains all vital functions for drawing.
      *
-     * Guichan contains implementations of Graphics for common 
-     * libraries like the Allegro library, the HGE library, 
-     * the OpenGL library, the OpenLayer library, and the SDL library. 
+     * Guichan contains implementations of Graphics for common
+     * libraries like the Allegro library, the HGE library,
+     * the OpenGL library, the OpenLayer library, and the SDL library.
      * To make Guichan usable with other libraries, a Graphics class
      * must be implemented.
      *
      * In Graphics you can set clip areas to limit drawing to certain
-     * areas of the screen. Clip areas are put on a stack, which 
-     * means that you can push smaller and smaller clip areas onto the 
-     * stack. All coordinates will be relative to the top most clip area. 
-     * In most cases you won't have to worry about the clip areas, 
-     * unless you want to implement some really complex widget. 
-     * Pushing and poping of clip areas are handled automatically by 
+     * areas of the screen. Clip areas are put on a stack, which
+     * means that you can push smaller and smaller clip areas onto the
+     * stack. All coordinates will be relative to the top most clip area.
+     * In most cases you won't have to worry about the clip areas,
+     * unless you want to implement some really complex widget.
+     * Pushing and poping of clip areas are handled automatically by
      * container widgets when their child widgets are drawn.
      *
      * IMPORTANT: Remember to pop each clip area that you pushed on the stack
      * after you are done with it.
      *
-     * If you feel that Graphics is to restrictive for your needs, 
-     * there is no one stopping you from using your own code for drawing 
-     * in widgets. You could for instance use pure SDL in the drawing of 
-     * widgets bypassing Graphics. This might however hurt portability of 
+     * If you feel that Graphics is to restrictive for your needs,
+     * there is no one stopping you from using your own code for drawing
+     * in widgets. You could for instance use pure SDL in the drawing of
+     * widgets bypassing Graphics. This might however hurt portability of
      * your application.
      *
-     * If you implement a Graphics class not present in Guichan we would 
+     * If you implement a Graphics class not present in Guichan we would
      * be very happy to add it to Guichan.
      *
-     * @see AllegroGraphics, HGEGraphics, OpenLayerGraphics, OpenGLGraphics, 
+     * @see AllegroGraphics, HGEGraphics, OpenLayerGraphics, OpenGLGraphics,
      *      SDLGraphics, Image
      * @since 0.1.0
      */
@@ -148,7 +148,7 @@ namespace gcn
          * zero width and height will be pushed.
          *
          * @param area The clip area to be pushed onto the stack.
-         * @return False if the the new area lays outside the current clip 
+         * @return False if the the new area lays outside the current clip
          *         area.
          */
         virtual bool pushClipArea(Rectangle area);
@@ -274,6 +274,8 @@ namespace gcn
                               int x,
                               int y,
                               Alignment alignment = LEFT);
+
+        ClipRectangle getClipStackTop() { return mClipStack.top();}
 
     protected:
         /**

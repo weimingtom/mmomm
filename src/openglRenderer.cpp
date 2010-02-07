@@ -89,6 +89,10 @@ bool OpenGLRenderer::initScreen()
     //which colour the _screen gets cleared to(black in this case)
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
+    //required for alpha?
+    glBlendFunc(GL_ONE, GL_ONE);
+	glEnable(GL_BLEND);
+
     //set the opengl window to our window size
     glViewport(0, 0, GLint(_screenDimensions.x), GLint(_screenDimensions.y));
 
@@ -175,6 +179,79 @@ void OpenGLRenderer::drawImage(Image *img, const Vector2D& position)
     if((error = glGetError()) != GL_NO_ERROR)
         //logger->echoError("A gl error happened in drawImage: " + translateGLError(error));
         cout << "A GL error happened in drawImage: " << translateGLError(error) << endl;
+
+    glDisable(extension);
+
+    return;
+}
+
+void OpenGLRenderer::drawSurface(SDL_Surface *surface, const Vector2D& position)
+{
+    if(surface == NULL)
+        return;
+
+	float x = float(position.x);
+	float y = float(position.y);
+
+    GLenum error;
+    GLuint id = 0;
+    GLenum textureFormat = 0;
+
+    generateTexture(&id, &textureFormat, surface);
+
+    glEnable(extension);
+
+    glBindTexture(extension, id);
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+
+
+    if(extension == GL_TEXTURE_2D) {
+        glBegin(GL_QUADS);
+          //Top-left vertex (corner)
+          glTexCoord2f(0, 0); //image/texture
+          glVertex2f(x, y); //_screen coordinates
+
+          //Bottom-left vertex (corner)
+          glTexCoord2f(1, 0);
+          glVertex2f(x+surface->w, y);
+
+          //Bottom-right vertex (corner)
+          glTexCoord2f(1, 1);
+          glVertex2f(x+surface->w, y+surface->h);
+
+          //Top-right vertex (corner)
+          glTexCoord2f(0, 1);
+          glVertex2f(x, y+surface->h);
+        glEnd();
+    }
+    else {
+        glBegin(GL_QUADS);
+          //Top-left vertex (corner)
+          glTexCoord2f(0, 0); //image/texture
+          glVertex2f(x, y); //_screen coordinates
+
+          //Bottom-left vertex (corner)
+          glTexCoord2f(GLfloat(surface->w), 0);
+          glVertex2f(GLfloat(x+surface->w), y);
+
+          //Bottom-right vertex (corner)
+          glTexCoord2f(GLfloat(surface->w), GLfloat(surface->h));
+          glVertex2f(x+GLfloat(surface->w), y+GLfloat(surface->h));
+
+          //Top-right vertex (corner)
+          glTexCoord2f(0, GLfloat(surface->h));
+          glVertex2f(x, y+GLfloat(surface->h));
+        glEnd();
+    }
+
+    glFinish();
+
+    if((error = glGetError()) != GL_NO_ERROR)
+        //logger->echoError("A gl error happened in drawImage: " + translateGLError(error));
+        cout << "A GL error happened in drawSurface: " << translateGLError(error) << endl;
+
+    deleteTexture(&id);
 
     glDisable(extension);
 

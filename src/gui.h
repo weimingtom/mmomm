@@ -22,7 +22,7 @@ private:
 
     gcn::Gui        *_gui;
     gcn::Container  *_top;
-    gcn::ImageFont  *_font;
+    gcn::Font       *_font;
 
 public:
     Gui(SDL_Surface *screen, bool softwareRendering);

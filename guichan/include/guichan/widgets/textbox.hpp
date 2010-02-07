@@ -177,7 +177,7 @@ namespace gcn
 
         /**
          * Scrolls the text to the caret if the text box is in a scroll area.
-         * 
+         *
          * @see ScrollArea
          */
         virtual void scrollToCaret();

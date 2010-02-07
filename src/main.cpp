@@ -17,6 +17,7 @@
 #include "frameTimer.h"
 
 #include <vector>
+#include <SDL/SDL_ttf.h>
 
 ConfigurationMenu *configMenu = 0;
 LoginMenu* loginMenu = 0;
@@ -31,6 +32,11 @@ int main(int argc, char **argv)
 
     SDL_EnableUNICODE(1);
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+
+    if ( TTF_Init() < 0 ) {
+        cout << "Unable to init TTF: " << TTF_GetError() << endl;
+        exit(1);
+    }
 
     Renderer *renderer = new SoftwareRenderer(Vector2D(640, 480), false);
     renderer->setCurrent(renderer);

@@ -38,6 +38,21 @@ void SoftwareRenderer::drawImage(Image *img, const Vector2D& position)
         cout << "Blitting of image failed" << endl;
 }
 
+void SoftwareRenderer::drawSurface(SDL_Surface *surface, const Vector2D& position)
+{
+    if(surface == NULL)
+        return;
+
+    //the x and the y coordinates are only accepted as an SDL_Rect
+    SDL_Rect offset;
+    offset.x = Sint16(position.x);
+    offset.y = Sint16(position.y);
+
+    //put image on screen
+    if(SDL_BlitSurface(surface, NULL, _screen, &offset) == -1)
+        cout << "Blitting of surface failed" << endl;
+}
+
 //Note: This code is mainly the same as the regular draw. It just adds a cut from the image.
 void SoftwareRenderer::drawClippedImage(Image *img, const Vector2D& position, const SDL_Rect& clip)
 {

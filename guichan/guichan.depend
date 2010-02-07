@@ -2,7 +2,7 @@
 1265396324 source:/home/oipo/Programming/mmomm/guichan/src/actionevent.cpp
 	"guichan/actionevent.hpp"
 
-1265396324 source:/home/oipo/Programming/mmomm/guichan/src/basiccontainer.cpp
+1265502598 source:/home/oipo/Programming/mmomm/guichan/src/basiccontainer.cpp
 	"guichan/basiccontainer.hpp"
 	<algorithm>
 	"guichan/exception.hpp"
@@ -48,7 +48,7 @@
 	"guichan/font.hpp"
 	"guichan/image.hpp"
 
-1265396324 source:/home/oipo/Programming/mmomm/guichan/src/gui.cpp
+1265502656 source:/home/oipo/Programming/mmomm/guichan/src/gui.cpp
 	"guichan/gui.hpp"
 	"guichan/basiccontainer.hpp"
 	"guichan/exception.hpp"
@@ -226,7 +226,7 @@
 	"guichan/key.hpp"
 	"guichan/mouseinput.hpp"
 
-1265396324 source:/home/oipo/Programming/mmomm/guichan/src/widgets/scrollarea.cpp
+1265502710 source:/home/oipo/Programming/mmomm/guichan/src/widgets/scrollarea.cpp
 	"guichan/widgets/scrollarea.hpp"
 	"guichan/exception.hpp"
 	"guichan/graphics.hpp"
@@ -245,7 +245,7 @@
 	"guichan/widgets/label.hpp"
 	"guichan/widgets/tabbedarea.hpp"
 
-1265401767 source:/home/oipo/Programming/mmomm/guichan/src/widgets/tabbedarea.cpp
+1265499944 source:/home/oipo/Programming/mmomm/guichan/src/widgets/tabbedarea.cpp
 	"guichan/widgets/tabbedarea.hpp"
 	"guichan/exception.hpp"
 	"guichan/focushandler.hpp"
@@ -255,7 +255,7 @@
 	"guichan/widgets/tab.hpp"
 	<algorithm>
 
-1265396324 source:/home/oipo/Programming/mmomm/guichan/src/widgets/textbox.cpp
+1265500640 source:/home/oipo/Programming/mmomm/guichan/src/widgets/textbox.cpp
 	"guichan/widgets/textbox.hpp"
 	"guichan/basiccontainer.hpp"
 	"guichan/font.hpp"
@@ -287,7 +287,7 @@
 
 1265396322 /home/oipo/Programming/mmomm/guichan/include/guichan/platform.hpp
 
-1265396322 /home/oipo/Programming/mmomm/guichan/include/guichan/basiccontainer.hpp
+1265502528 /home/oipo/Programming/mmomm/guichan/include/guichan/basiccontainer.hpp
 	<list>
 	"guichan/deathlistener.hpp"
 	"guichan/platform.hpp"
@@ -321,7 +321,7 @@
 	"guichan/event.hpp"
 	"guichan/platform.hpp"
 
-1265396322 /home/oipo/Programming/mmomm/guichan/include/guichan/graphics.hpp
+1265505464 /home/oipo/Programming/mmomm/guichan/include/guichan/graphics.hpp
 	<iosfwd>
 	<stack>
 	"guichan/cliprectangle.hpp"
@@ -526,7 +526,7 @@
 	"guichan/platform.hpp"
 	"guichan/widget.hpp"
 
-1265396322 /home/oipo/Programming/mmomm/guichan/include/guichan/widgets/scrollarea.hpp
+1265502366 /home/oipo/Programming/mmomm/guichan/include/guichan/widgets/scrollarea.hpp
 	<string>
 	"guichan/basiccontainer.hpp"
 	"guichan/mouselistener.hpp"
@@ -584,7 +584,7 @@
 	"guichan/graphics.hpp"
 	"guichan/platform.hpp"
 
-1265396322 /home/oipo/Programming/mmomm/guichan/include/guichan/widgets/textbox.hpp
+1265500652 /home/oipo/Programming/mmomm/guichan/include/guichan/widgets/textbox.hpp
 	<ctime>
 	<string>
 	<vector>
@@ -605,4 +605,20 @@
 	"guichan/mouselistener.hpp"
 	"guichan/platform.hpp"
 	"guichan/widgets/container.hpp"
+
+1265498336 source:/home/oipo/Programming/mmomm/guichan/src/contrib/sdl/sdltruetypefont.cpp
+	"guichan/contrib/sdl/sdltruetypefont.hpp"
+	"guichan/exception.hpp"
+	"guichan/image.hpp"
+	"guichan/graphics.hpp"
+	"guichan/sdl/sdlgraphics.hpp"
+
+1265498438 /home/oipo/Programming/mmomm/guichan/include/guichan/contrib/sdl/sdltruetypefont.hpp
+	<map>
+	<string>
+	<SDL/SDL_ttf.h>
+	"guichan/font.hpp"
+	"guichan/platform.hpp"
+	"guichan/graphics.hpp"
+	"guichan/color.hpp"
 
