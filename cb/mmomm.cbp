@@ -79,6 +79,7 @@
 		<Linker>
 			<Add option="-lSDL" />
 			<Add option="-lSDL_image" />
+			<Add option="-lSDL_ttf" />
 			<Add option="-lGL" />
 			<Add option="-lGLU" />
 			<Add option="../cb/libguichan-mmomm.a" />
@@ -239,6 +240,7 @@
 		<Unit filename="../src/openglRenderer.h">
 			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
+		<Unit filename="../src/opengltruetypefont.h" />
 		<Unit filename="../src/packetTypes.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
@@ -259,12 +261,6 @@
 		</Unit>
 		<Unit filename="../src/renderer.h">
 			<Option virtualFolder="Core/Renderers/" />
-		</Unit>
-		<Unit filename="../src/sdltruetypefont.cpp">
-			<Option virtualFolder="Guis/" />
-		</Unit>
-		<Unit filename="../src/sdltruetypefont.h">
-			<Option virtualFolder="Guis/" />
 		</Unit>
 		<Unit filename="../src/serial.cpp">
 			<Option virtualFolder="Net/" />
@@ -289,6 +285,12 @@
 		</Unit>
 		<Unit filename="../src/sprite.h">
 			<Option virtualFolder="Core/Animations/" />
+		</Unit>
+		<Unit filename="../src/trueTypeFont.cpp">
+			<Option virtualFolder="Guis/" />
+		</Unit>
+		<Unit filename="../src/trueTypeFont.h">
+			<Option virtualFolder="Guis/" />
 		</Unit>
 		<Unit filename="../src/user.h">
 			<Option virtualFolder="Net/" />
