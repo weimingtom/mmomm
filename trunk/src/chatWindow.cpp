@@ -13,7 +13,6 @@ ChatWindow::ChatWindow(int x, int y)
         _serverContainer    = new gcn::Container();
         _generalContainer   = new gcn::Container();
         _privateContainer   = new gcn::Container();
-        _wasteContainer     = new gcn::Container();
         _chatBox            = new gcn::TextBox();
         _chatBoxScroll      = new gcn::ScrollArea(_chatBox, gcn::ScrollArea::SHOW_NEVER, gcn::ScrollArea::SHOW_ALWAYS);
         _inputLabel         = new gcn::Label("Input");
@@ -67,15 +66,9 @@ ChatWindow::ChatWindow(int x, int y)
 
         _serverContainer ->add(_chatBoxScroll);
 
-        //_wasteContainer  ->add(_inputField);
-        //_wasteContainer  ->add(_targetField);
-
         _tabArea->addTab(_serverTab,  _serverContainer);
         _tabArea->addTab(_generalTab, _generalContainer);
         _tabArea->addTab(_privateTab, _privateContainer);
-
-
-        //_tabArea->setSelectedTab(_privateTab);
 
         _type = ChatMessagePacket::CHAT_MESSAGE_SERVER;
 

@@ -28,6 +28,7 @@ public:
     ~SoftwareRenderer();
 
     void drawImage(Image *img, const Vector2D& position);
+    void drawSurface(SDL_Surface *surface, const Vector2D& position);
     void drawClippedImage(Image *img, const Vector2D& position, const SDL_Rect& clip);
     void beginDraw();
     void swapBuffers();

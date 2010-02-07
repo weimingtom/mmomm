@@ -43,7 +43,7 @@
 	<File name="include/guichan/widgets/container.hpp" open="0" top="0" tabpos="0">
 		<Cursor position="5466" topLine="111" />
 	</File>
-	<File name="include/guichan/widgets/scrollarea.hpp" open="1" top="0" tabpos="4">
+	<File name="include/guichan/widgets/scrollarea.hpp" open="0" top="0" tabpos="4">
 		<Cursor position="13530" topLine="24" />
 	</File>
 	<File name="include/guichan/widgets/tab.hpp" open="0" top="0" tabpos="0">
@@ -52,14 +52,14 @@
 	<File name="include/guichan/widgets/tabbedarea.hpp" open="0" top="0" tabpos="0">
 		<Cursor position="7843" topLine="231" />
 	</File>
-	<File name="src/basiccontainer.cpp" open="1" top="0" tabpos="6">
+	<File name="src/basiccontainer.cpp" open="0" top="0" tabpos="6">
 		<Cursor position="5328" topLine="341" />
 	</File>
 	<File name="src/color.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="15" />
 	</File>
-	<File name="src/gui.cpp" open="1" top="0" tabpos="7">
-		<Cursor position="22434" topLine="708" />
+	<File name="src/gui.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="23441" topLine="705" />
 	</File>
 	<File name="src/key.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="42" />
@@ -73,22 +73,22 @@
 	<File name="src/sdl/sdlinput.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="31" />
 	</File>
-	<File name="src/widget.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="2639" topLine="47" />
+	<File name="src/widget.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="11239" topLine="97" />
 	</File>
-	<File name="src/widgets/container.cpp" open="1" top="0" tabpos="5">
+	<File name="src/widgets/container.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="2815" topLine="44" />
 	</File>
 	<File name="src/widgets/dropdown.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="15021" topLine="478" />
 	</File>
-	<File name="src/widgets/scrollarea.cpp" open="1" top="0" tabpos="3">
+	<File name="src/widgets/scrollarea.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="8834" topLine="275" />
 	</File>
-	<File name="src/widgets/tab.cpp" open="1" top="0" tabpos="8">
+	<File name="src/widgets/tab.cpp" open="0" top="0" tabpos="8">
 		<Cursor position="5214" topLine="48" />
 	</File>
-	<File name="src/widgets/tabbedarea.cpp" open="1" top="1" tabpos="1">
+	<File name="src/widgets/tabbedarea.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="3435" topLine="92" />
 	</File>
 	<File name="src/widgets/textbox.cpp" open="0" top="0" tabpos="0">

@@ -54,7 +54,7 @@ namespace gcn
 {
     /**
      * A base class for containers. The class implements the most
-     * common things for a container. If you are implementing a 
+     * common things for a container. If you are implementing a
      * container, consider inheriting from this class.
      *
      * @see Container
@@ -81,7 +81,7 @@ namespace gcn
          */
         virtual void showWidgetPart(Widget* widget, Rectangle area);
 
-        
+
         // Inherited from Widget
 
         virtual void moveToTop(Widget* widget);
@@ -101,6 +101,8 @@ namespace gcn
         void setInternalFocusHandler(FocusHandler* focusHandler);
 
         virtual Widget *getWidgetAt(int x, int y);
+
+        virtual void _setParent(Widget* parent);
 
 
         // Inherited from DeathListener
@@ -130,7 +132,7 @@ namespace gcn
          * @see remove, clear
          */
         virtual void clear();
-        
+
         /**
          * Draws the children widgets of the basic container.
          *
@@ -150,7 +152,7 @@ namespace gcn
          * the ability to create a Guichan GUI from an XML file.
          *
          * @param id The id to find a widget by.
-         * @return The widget with the corrosponding id, 
+         * @return The widget with the corrosponding id,
                    NULL of no widget is found.
          */
         virtual Widget* findWidgetById(const std::string& id);

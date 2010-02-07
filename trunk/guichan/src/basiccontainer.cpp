@@ -321,7 +321,7 @@ namespace gcn
 
         area.x += widget->getX();
         area.y += widget->getY();
-        
+
         if (area.x + area.width > widgetArea.width)
         {
             widget->setX(widget->getX() - area.x - area.width + widgetArea.width);
@@ -371,13 +371,13 @@ namespace gcn
             {
                 return (*iter);
             }
-            
+
             BasicContainer *basicContainer = dynamic_cast<BasicContainer*>(*iter);
-            
+
             if (basicContainer != NULL)
             {
                 Widget *widget = basicContainer->findWidgetById(id);
-                
+
                 if (widget != NULL)
                 {
                     return widget;
@@ -386,5 +386,16 @@ namespace gcn
         }
 
         return NULL;
+    }
+
+    void BasicContainer::_setParent(Widget* parent)
+    {
+        mParent = parent;
+
+        WidgetListIterator iter;
+        for (iter = mWidgets.begin(); iter != mWidgets.end(); iter++)
+        {
+            (*iter)->_setParent(this);
+        }
     }
 }
