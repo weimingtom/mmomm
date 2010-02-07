@@ -19,7 +19,7 @@
 	<File name="../src/chat.h" open="0" top="0" tabpos="3">
 		<Cursor position="196" topLine="0" />
 	</File>
-	<File name="../src/chatWindow.cpp" open="1" top="1" tabpos="3">
+	<File name="../src/chatWindow.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="1636" topLine="18" />
 	</File>
 	<File name="../src/chatWindow.h" open="0" top="0" tabpos="1">
@@ -58,17 +58,17 @@
 	<File name="../src/frameTimer.h" open="0" top="0" tabpos="8">
 		<Cursor position="84" topLine="0" />
 	</File>
-	<File name="../src/gui.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="1934" topLine="37" />
+	<File name="../src/gui.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="1338" topLine="12" />
 	</File>
 	<File name="../src/gui.h" open="0" top="0" tabpos="3">
-		<Cursor position="633" topLine="0" />
+		<Cursor position="151" topLine="0" />
 	</File>
 	<File name="../src/ieeehalfprecision.c" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="397" />
 	</File>
-	<File name="../src/image.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="77" topLine="9" />
+	<File name="../src/image.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="1219" topLine="20" />
 	</File>
 	<File name="../src/image.h" open="0" top="0" tabpos="4">
 		<Cursor position="1056" topLine="0" />
@@ -82,8 +82,8 @@
 	<File name="../src/loginMenu.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="3187" topLine="82" />
 	</File>
-	<File name="../src/main.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="4889" topLine="109" />
+	<File name="../src/main.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="881" topLine="10" />
 	</File>
 	<File name="../src/nativePackets.h" open="0" top="0" tabpos="0">
 		<Cursor position="299" topLine="9" />
@@ -97,17 +97,32 @@
 	<File name="../src/networkPacket.h" open="0" top="0" tabpos="5">
 		<Cursor position="781" topLine="15" />
 	</File>
-	<File name="../src/openglRenderer.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="5408" topLine="180" />
+	<File name="../src/openglRenderer.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="6921" topLine="181" />
+	</File>
+	<File name="../src/openglRenderer.h" open="1" top="0" tabpos="2">
+		<Cursor position="454" topLine="0" />
+	</File>
+	<File name="../src/opengltruetypefont.h" open="0" top="0" tabpos="0">
+		<Cursor position="3393" topLine="93" />
 	</File>
 	<File name="../src/renderer.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="275" topLine="0" />
+		<Cursor position="368" topLine="3" />
 	</File>
 	<File name="../src/renderer.h" open="0" top="0" tabpos="4">
-		<Cursor position="1264" topLine="1" />
+		<Cursor position="900" topLine="6" />
 	</File>
-	<File name="../src/softwareRenderer.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="1788" topLine="30" />
+	<File name="../src/softwareRenderer.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="1474" topLine="27" />
+	</File>
+	<File name="../src/softwareRenderer.h" open="0" top="0" tabpos="0">
+		<Cursor position="592" topLine="0" />
+	</File>
+	<File name="../src/trueTypeFont.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="3288" topLine="84" />
+	</File>
+	<File name="../src/trueTypeFont.h" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="99" />
 	</File>
 	<File name="../src/user.h" open="0" top="0" tabpos="0">
 		<Cursor position="227" topLine="0" />
