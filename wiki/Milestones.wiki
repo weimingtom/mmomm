@@ -2,25 +2,26 @@
 
 = #1 =
 
-  * Connect to server, run about and collide with other players doing the same
+  * Connect to server, run about and collide with other players doing the same - *100%*
 
 Status: *complete*
 
 
 = #2 =
-Subject to change. Possibly including some of the following:
 
-  * Sending terrain from server and displaying on client
-  * Chat (and chat window improvment)
-  * Character details, /inspect functionality
-  * Items that you can pick up and put down (not necessarily manipulate)
-  * Some test NPCs
+  * Sending terrain from server and displaying on client - *0%*
+  * Chat (and chat window improvement) - *100%*
+  * Character details, /inspect functionality - *0%*
+  * Items that you can pick up and put down (not necessarily manipulate) - *0%*
+  * Some test NPCs - *0%*
 
-Status: *incomplete*
+Status: *incomplete* - *20%*
 
 = #3 =
-Add things for the future.
+Subject to change. Possibly including some of the following:
 
-  * ?
+  * Adding z-levels to the terrain - *0%*
+  * Physics (rivers, wind, velocity, friction?) - *0%*
+  * Japanese Input in guichan-mmomm - *0%*
 
-Status: *incomplete*
+Status: *incomplete* - *0%*
