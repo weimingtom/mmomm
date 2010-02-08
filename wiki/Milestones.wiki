@@ -10,7 +10,7 @@ Status: *complete*
 = #2 =
 
   * Sending terrain from server and displaying on client - *0%*
-  * Chat (and chat window improvement) - *100%*
+  * Chat (and chat window improvement)(incidentally includes TTF support) - *100%*
   * Character details, /inspect functionality - *0%*
   * Items that you can pick up and put down (not necessarily manipulate) - *0%*
   * Some test NPCs - *0%*
@@ -23,5 +23,6 @@ Subject to change. Possibly including some of the following:
   * Adding z-levels to the terrain - *0%*
   * Physics (rivers, wind, velocity, friction?) - *0%*
   * Japanese Input in guichan-mmomm - *0%*
+  * Manipulation of items - *0%*
 
 Status: *incomplete* - *0%*
