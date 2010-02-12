@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Debug" />
+	<ActiveTarget name="Release-x64" />
 	<File name="include/config.hpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="35" />
 	</File>
@@ -8,10 +8,13 @@
 		<Cursor position="2239" topLine="39" />
 	</File>
 	<File name="include/guichan/basiccontainer.hpp" open="0" top="0" tabpos="0">
-		<Cursor position="3686" topLine="41" />
+		<Cursor position="5778" topLine="140" />
 	</File>
 	<File name="include/guichan/color.hpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="15" />
+	</File>
+	<File name="include/guichan/font.hpp" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="69" />
 	</File>
 	<File name="include/guichan/gui.hpp" open="0" top="0" tabpos="0">
 		<Cursor position="8617" topLine="207" />
@@ -38,10 +41,10 @@
 		<Cursor position="2249" topLine="22" />
 	</File>
 	<File name="include/guichan/widget.hpp" open="0" top="0" tabpos="0">
-		<Cursor position="6481" topLine="50" />
+		<Cursor position="13025" topLine="364" />
 	</File>
 	<File name="include/guichan/widgets/container.hpp" open="0" top="0" tabpos="0">
-		<Cursor position="5466" topLine="111" />
+		<Cursor position="5466" topLine="46" />
 	</File>
 	<File name="include/guichan/widgets/scrollarea.hpp" open="0" top="0" tabpos="4">
 		<Cursor position="13530" topLine="24" />
@@ -53,13 +56,22 @@
 		<Cursor position="7843" topLine="231" />
 	</File>
 	<File name="src/basiccontainer.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="5328" topLine="341" />
+		<Cursor position="7469" topLine="268" />
 	</File>
 	<File name="src/color.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="15" />
 	</File>
-	<File name="src/gui.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="23441" topLine="705" />
+	<File name="src/font.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="29" />
+	</File>
+	<File name="src/graphics.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="5072" topLine="145" />
+	</File>
+	<File name="src/gui.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="25072" topLine="732" />
+	</File>
+	<File name="src/guichan.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="862" topLine="0" />
 	</File>
 	<File name="src/key.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="42" />
@@ -73,14 +85,17 @@
 	<File name="src/sdl/sdlinput.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="31" />
 	</File>
-	<File name="src/widget.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="11239" topLine="97" />
+	<File name="src/widget.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="2979" topLine="59" />
 	</File>
 	<File name="src/widgets/container.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="2815" topLine="44" />
+		<Cursor position="3019" topLine="71" />
 	</File>
 	<File name="src/widgets/dropdown.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="15021" topLine="478" />
+	</File>
+	<File name="src/widgets/label.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="1877" topLine="78" />
 	</File>
 	<File name="src/widgets/scrollarea.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="8834" topLine="275" />
@@ -93,5 +108,8 @@
 	</File>
 	<File name="src/widgets/textbox.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="9" />
+	</File>
+	<File name="src/widgets/window.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="7428" topLine="220" />
 	</File>
 </CodeBlocks_layout_file>

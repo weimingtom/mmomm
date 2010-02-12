@@ -23,7 +23,7 @@ public:
     int getY() const;
 
     static LoginMenu& current() { assert(_current); return *_current; }
-    void setCurrent(LoginMenu *current) { _current = current; }
+    static void setCurrent(LoginMenu *current) { _current = current; }
 
     struct LoginData {
         string host;

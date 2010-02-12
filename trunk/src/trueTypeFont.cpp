@@ -104,6 +104,7 @@ namespace gcn
             int yoffset = getRowSpacing() / 2;
 
             SDL_Color sdlCol;
+            Color col = graphics->getColor();
             sdlCol.b = col.b;
             sdlCol.r = col.r;
             sdlCol.g = col.g;
@@ -153,11 +154,6 @@ namespace gcn
         bool SDLTrueTypeFont::isAntiAlias()
         {
             return mAntiAlias;
-        }
-
-        void SDLTrueTypeFont::setColor(Color col)
-        {
-            this->col = col;
         }
     }
 }
