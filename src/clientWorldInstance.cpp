@@ -58,9 +58,9 @@ void ClientWorldInstance::render() const
         assert(dynamic_cast< ClientActor* >(i->second));
         ClientActor *a = static_cast<ClientActor *>(i->second);
         AnimationManager::shared_ptr anim = a->getSprite()->getCurrentAnimation();
-		
+
         SDL_Rect clip = anim->getCurrentFrameRect();
-		
+
         const Rect& r = a->getCollisionRect();
 		Vector2D renderPosition =
 			PIXELS_PER_WORLD_UNIT * (.5 * (r.min() + r.max()) - centre) +
@@ -136,6 +136,19 @@ void ClientWorldInstance::mouseDown(Uint8 key)
         _keyDowns[KEY_LMB] = true;
     if ( key == SDL_BUTTON_RIGHT )
         _keyDowns[KEY_RMB] = true;
+
+    const ActorMap& actors = getActorMap();
+
+    for ( ActorMap::const_iterator i = actors.begin(); i != actors.end(); i++ ) {
+        assert(dynamic_cast< ClientActor* >(i->second));
+        ClientActor *a = static_cast<ClientActor *>(i->second);
+
+        const Rect& r = a->getCollisionRect();
+
+        if( _mouse.x < r.right && _mouse.x >= r.left && _mouse.y < r.bottom && _mouse.y >= r.top ) {
+
+        }
+    }
 }
 
 void ClientWorldInstance::mouseUp(Uint8 key)

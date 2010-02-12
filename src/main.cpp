@@ -10,6 +10,7 @@
 #include "gui.h"
 #include "configurationMenu.h"
 #include "loginMenu.h"
+#include "mouseSelectionMenu.h"
 #include "networkClient.h"
 #include "chatWindow.h"
 #include "clientWorldInstance.h"
@@ -22,6 +23,24 @@
 ConfigurationMenu *configMenu = 0;
 LoginMenu* loginMenu = 0;
 ChatWindow* chatWindow = 0;
+
+class listener : public gcn::MouseListener
+{
+public:
+    listener(MouseSelectionMenu *menu)
+    {
+        this->menu = menu;
+    }
+
+    void mouseClicked(gcn::MouseEvent &mouseEvent)
+    {
+        std::cout << "sure!" << std::endl;
+        Gui::current().removeWidget(menu);
+    }
+
+private:
+    MouseSelectionMenu *menu;
+};
 
 int main(int argc, char **argv)
 {
@@ -58,6 +77,19 @@ int main(int argc, char **argv)
 
     chatWindow = new ChatWindow(300, 150);
     chatWindow->setCurrent(chatWindow);
+
+    gcn::Label *label  = new gcn::Label("asdf");
+    gcn::Label *label2 = new gcn::Label("test2");
+    gcn::Label *label3 = new gcn::Label("test3");
+    gcn::Label *label4 = new gcn::Label("test4");
+
+    MouseSelectionMenu *mouseMenu = new MouseSelectionMenu(100, 350);
+    mouseMenu->addLabel(label);
+    mouseMenu->addLabel(label2);
+    mouseMenu->addLabel(label3);
+    mouseMenu->addLabel(label4);
+
+    label2->addMouseListener(new listener(mouseMenu));
 
 	NetworkClient::setCurrent(new NetworkClient());
 

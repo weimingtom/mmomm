@@ -24,7 +24,6 @@ Gui::Gui(SDL_Surface *screen, bool softwareRendering)
         }
 
         gcn::contrib::SDLTrueTypeFont *font = new gcn::contrib::SDLTrueTypeFont("font.ttf", 12);
-        font->setColor(gcn::Color(0, 0, 0));
         _font = font;
 
         _input = new gcn::SDLInput();

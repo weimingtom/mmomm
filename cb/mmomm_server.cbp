@@ -69,6 +69,7 @@
 			<Add option="-lpthread" />
 		</Linker>
 		<Unit filename="../src/actor.cpp" />
+		<Unit filename="../src/actor.h" />
 		<Unit filename="../src/chat.h" />
 		<Unit filename="../src/collision.cpp" />
 		<Unit filename="../src/collisionPackets.h" />
@@ -87,8 +88,13 @@
 		<Unit filename="../src/networkPacketManager.h" />
 		<Unit filename="../src/networkServer.cpp" />
 		<Unit filename="../src/networkServer.h" />
+		<Unit filename="../src/npc.cpp" />
+		<Unit filename="../src/npc.h" />
+		<Unit filename="../src/npcActor.cpp" />
+		<Unit filename="../src/npcActor.h" />
 		<Unit filename="../src/packetTypes.h" />
 		<Unit filename="../src/playerActor.cpp" />
+		<Unit filename="../src/playerActor.h" />
 		<Unit filename="../src/serial.cpp" />
 		<Unit filename="../src/serial.h" />
 		<Unit filename="../src/serverChat.cpp" />
@@ -96,7 +102,9 @@
 		<Unit filename="../src/serverMain.cpp" />
 		<Unit filename="../src/serverNativePackets.cpp" />
 		<Unit filename="../src/serverWorldInstance.cpp" />
+		<Unit filename="../src/serverWorldInstance.h" />
 		<Unit filename="../src/user.cpp" />
+		<Unit filename="../src/user.h" />
 		<Unit filename="../src/worldCommon.cpp" />
 		<Unit filename="../src/worldInstance.cpp" />
 		<Unit filename="../src/worldMap.cpp" />

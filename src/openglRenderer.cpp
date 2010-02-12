@@ -200,6 +200,7 @@ void OpenGLRenderer::drawSurface(SDL_Surface *surface, const Vector2D& position)
     generateTexture(&id, &textureFormat, surface);
 
     glEnable(extension);
+    glDisable(GL_DEPTH_TEST);
 
     glBindTexture(extension, id);
 

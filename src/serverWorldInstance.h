@@ -5,6 +5,8 @@
 #include <list>
 class User;
 class PlayerActor;
+class Npc;
+class NpcActor;
 
 class TestCollision : public CollisionWorld {
 public:
@@ -29,6 +31,7 @@ public:
     PlayerActor* getUserActor(User& user) const;
 
     typedef boost::unordered_map< User*, PlayerActor* > UserMap;
+    typedef boost::unordered_map< Npc*, NpcActor* > NpcMap;
     const UserMap& getUserMap() const;
 
     virtual void update(double elapsed);

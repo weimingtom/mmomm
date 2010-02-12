@@ -5,7 +5,7 @@
 		<Option title="mmomm" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Core/;Core/;Core/Renderers/;Guis/;Net/;World/;Core/Animations/;Core/Actors/;" />
+		<Option virtualFolders="Core/;Core/;Core/Renderers/;Guis/;Net/;World/;Core/Animations/;Core/Actors/;Guis/MouseSelections/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/mmomm" prefix_auto="1" extension_auto="1" />
@@ -210,6 +210,12 @@
 		<Unit filename="../src/main.cpp">
 			<Option virtualFolder="Core/" />
 		</Unit>
+		<Unit filename="../src/mouseSelectionMenu.cpp">
+			<Option virtualFolder="Guis/MouseSelections/" />
+		</Unit>
+		<Unit filename="../src/mouseSelectionMenu.h">
+			<Option virtualFolder="Guis/MouseSelections/" />
+		</Unit>
 		<Unit filename="../src/nativePackets.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
@@ -240,7 +246,6 @@
 		<Unit filename="../src/openglRenderer.h">
 			<Option virtualFolder="Core/Renderers/" />
 		</Unit>
-		<Unit filename="../src/opengltruetypefont.h" />
 		<Unit filename="../src/packetTypes.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
