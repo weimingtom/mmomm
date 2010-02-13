@@ -1,13 +1,11 @@
 #include "mouseSelectionMenu.h"
 
+MouseSelectionMenu *MouseSelectionMenu::_current = 0;
+
 MouseSelectionMenu::MouseSelectionMenu(int x, int y)
 :   gcn::Window("Mouse Selection Menu")
 {
     try {
-        /*_window = new gcn::Window("Mouse Selection Menu");
-        _window->setPosition(x, y);
-        _window->setOpaque(true);*/
-
         setPosition(x, y);
         setOpaque(true);
         setMovable(false);
@@ -42,13 +40,11 @@ void MouseSelectionMenu::addLabel(gcn::Label *label)
 
 void MouseSelectionMenu::removeLabel(gcn::Label *label)
 {
-    /*remove(static_cast<gcn::Label*>(label));
-    setHeight(getHeight() - label->gcn::Label::getHeight());*/
+
 }
 
 gcn::Rectangle MouseSelectionMenu::getChildrenArea()
 {
-    //int height = (mWidgets.front() == NULL) ? 0 : mWidgets.front()->getHeight();
     return gcn::Rectangle(0, 0, getWidth(), getHeight());
 }
 
@@ -81,10 +77,8 @@ void MouseSelectionMenu::draw(gcn::Graphics* graphics)
                                       d.width + 2,
                                       getHeight() - d.height - d.y - 1));
 
-    if (isOpaque())
-    {
+    if ( isOpaque() )
         graphics->fillRectangle(d);
-    }
 
     // Construct a rectangle one pixel bigger than the content
     d.x -= 1;
@@ -118,41 +112,13 @@ void MouseSelectionMenu::draw(gcn::Graphics* graphics)
                        d.x + d.width - 1,
                        d.y + d.height - 1);
 
-    /*drawChildren(graphics);*/
-
-    /*int textX;
-    int textY;
-
-    textY = ((int)getTitleBarHeight() - getFont()->getHeight()) / 2;
-
-    switch (getAlignment())
-    {
-      case gcn::Graphics::LEFT:
-          textX = 4;
-          break;
-      case gcn::Graphics::CENTER:
-          textX = getWidth() / 2;
-          break;
-      case gcn::Graphics::RIGHT:
-          textX = getWidth() - 4;
-          break;
-      default:
-          throw GCN_EXCEPTION("Unknown alignment.");
-    }
-
-    graphics->setColor(getForegroundColor());
-    graphics->setFont(getFont());
-    graphics->pushClipArea(gcn::Rectangle(0, 0, getWidth(), getTitleBarHeight() - 1));
-    graphics->drawText(getCaption(), textX, textY, getAlignment());
-    graphics->popClipArea();*/
-
     graphics->pushClipArea(getChildrenArea());
 
     WidgetListIterator iter;
-    for (iter = mWidgets.begin(); iter != mWidgets.end(); iter++) {
+    for( iter = mWidgets.begin(); iter != mWidgets.end(); iter++ ) {
         gcn::Rectangle rec = (*iter)->getDimension();
         graphics->pushClipArea(rec);
-        if((*iter)->getY() > drawRect.y && (*iter)->getY() < drawRect.y + drawRect.height) {
+        if( (*iter)->getY() > drawRect.y && (*iter)->getY() < drawRect.y + drawRect.height ) {
             //graphics->setColor(gcn::Color(0, 0, 0, 0));
             //graphics->fillRectangle(drawRect);
             gcn::Color prevColor = (*iter)->getForegroundColor();
@@ -171,8 +137,8 @@ void MouseSelectionMenu::draw(gcn::Graphics* graphics)
 void MouseSelectionMenu::mouseMoved(gcn::MouseEvent &mouseEvent)
 {
     WidgetListIterator iter;
-    for (iter = mWidgets.begin(); iter != mWidgets.end(); iter++) {
-        if(mouseEvent.getY() > (*iter)->getY() && mouseEvent.getY() < (*iter)->getY() + (*iter)->getHeight()) {
+    for( iter = mWidgets.begin(); iter != mWidgets.end(); iter++ ) {
+        if( mouseEvent.getY() > (*iter)->getY() && mouseEvent.getY() < (*iter)->getY() + (*iter)->getHeight() ) {
             drawRect.x      = (*iter)->getX()       - 1;
             drawRect.y      = (*iter)->getY()       - 1;
             drawRect.width  = (*iter)->getWidth()   + 1;
@@ -180,4 +146,19 @@ void MouseSelectionMenu::mouseMoved(gcn::MouseEvent &mouseEvent)
             return;
         }
     }
+}
+
+void MouseSelectionMenu::mouseClicked(gcn::MouseEvent &mouseEvent)
+{
+    WidgetListIterator iter;
+    for (iter = mWidgets.begin(); iter != mWidgets.end(); iter++) {
+        gcn::Rectangle rec = (*iter)->getDimension();
+        if( (*iter)->getY() <= mouseEvent.getY() && (*iter)->getY() + (*iter)->getHeight() >= mouseEvent.getY() &&
+            (*iter)->getX() <= mouseEvent.getX() && (*iter)->getX() + (*iter)->getWidth()  >= mouseEvent.getX() ) {
+            Gui::current().removeWidget(this);
+        }
+    }
+
+    mouseEvent.consume();
+    return;
 }

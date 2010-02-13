@@ -62,6 +62,7 @@ private:
     double   _updateOffset;
 	Vector2D _camera;
     Vector2D _mouse;
+    Vector2D _absoluteMouse;
 
 };
 

@@ -24,24 +24,6 @@ ConfigurationMenu *configMenu = 0;
 LoginMenu* loginMenu = 0;
 ChatWindow* chatWindow = 0;
 
-class listener : public gcn::MouseListener
-{
-public:
-    listener(MouseSelectionMenu *menu)
-    {
-        this->menu = menu;
-    }
-
-    void mouseClicked(gcn::MouseEvent &mouseEvent)
-    {
-        std::cout << "sure!" << std::endl;
-        Gui::current().removeWidget(menu);
-    }
-
-private:
-    MouseSelectionMenu *menu;
-};
-
 int main(int argc, char **argv)
 {
     if ( SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO) < 0 ) {
@@ -78,30 +60,17 @@ int main(int argc, char **argv)
     chatWindow = new ChatWindow(300, 150);
     chatWindow->setCurrent(chatWindow);
 
-    gcn::Label *label  = new gcn::Label("asdf");
-    gcn::Label *label2 = new gcn::Label("test2");
-    gcn::Label *label3 = new gcn::Label("test3");
-    gcn::Label *label4 = new gcn::Label("test4");
-
-    MouseSelectionMenu *mouseMenu = new MouseSelectionMenu(100, 350);
-    mouseMenu->addLabel(label);
-    mouseMenu->addLabel(label2);
-    mouseMenu->addLabel(label3);
-    mouseMenu->addLabel(label4);
-
-    label2->addMouseListener(new listener(mouseMenu));
-
 	NetworkClient::setCurrent(new NetworkClient());
 
 	FrameTimer::setCurrent(new FrameTimer());
 
     bool loop  = true;
 
-    while(loop)
+    while( loop )
     {
         SDL_Event event;
 
-        while(SDL_PollEvent(&event)) {
+        while( SDL_PollEvent(&event) ) {
 
             switch (event.type) {
                 case SDL_KEYDOWN:
@@ -140,6 +109,11 @@ int main(int argc, char **argv)
 
                         Gui::setCurrent(new Gui(renderer->getScreen(), renderer->isSoftwareRenderer()));
 
+                        if( loginMenu != NULL ) {
+                            delete loginMenu;
+                            loginMenu = 0;
+                        }
+
                         loginMenu = new LoginMenu(configMenu->getX(), configMenu->getY());
                         loginMenu->setCurrent(loginMenu);
                         delete &ConfigurationMenu::current();
@@ -150,6 +124,11 @@ int main(int argc, char **argv)
                         delete ints;
                     }
                     if ( event.user.code == EVENT_OPTIONS_CANCEL ) {
+                        if( loginMenu != NULL ) {
+                            delete loginMenu;
+                            loginMenu = 0;
+                        }
+
                         loginMenu = new LoginMenu(configMenu->getX(), configMenu->getY());
                         loginMenu->setCurrent(loginMenu);
                         delete configMenu;
@@ -170,6 +149,11 @@ int main(int argc, char **argv)
                         delete data;
                     }
                     if ( event.user.code == EVENT_LOGIN_OPTIONS ) {
+                        if( configMenu != NULL ) {
+                            delete configMenu;
+                            configMenu = 0;
+                        }
+
                         configMenu = new ConfigurationMenu(loginMenu->getX(), loginMenu->getY());
                         configMenu->setCurrent(configMenu);
                         delete loginMenu;
@@ -202,15 +186,15 @@ int main(int argc, char **argv)
 		FrameTimer::current().step();
     }
 
-    if (configMenu) {
+    if ( configMenu ) {
         delete configMenu;
         configMenu = 0;
     }
-    if (loginMenu) {
+    if ( loginMenu ) {
         delete loginMenu;
         loginMenu = 0;
     }
-    if (chatWindow) {
+    if ( chatWindow ) {
         delete chatWindow;
         chatWindow = 0;
     }
