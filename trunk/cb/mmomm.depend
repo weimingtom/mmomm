@@ -25,7 +25,7 @@
 	"vector2D.h"
 	"image.h"
 
-1265934673 source:/home/oipo/Programming/mmomm/src/main.cpp
+1266101272 source:/home/oipo/Programming/mmomm/src/main.cpp
 	"events.h"
 	"renderer.h"
 	"openglRenderer.h"
@@ -463,12 +463,13 @@
 	<boost/unordered_map.hpp>
 	"animationManager.h"
 
-1265379433 /home/oipo/Programming/mmomm/src/clientWorldInstance.h
+1266102733 /home/oipo/Programming/mmomm/src/clientWorldInstance.h
 	"worldInstance.h"
 	<SDL/SDL.h>
 	<boost/unordered_map.hpp>
 
-1265924436 source:/home/oipo/Programming/mmomm/src/clientWorldInstance.cpp
+1266102226 source:/home/oipo/Programming/mmomm/src/clientWorldInstance.cpp
+	<guichan.hpp>
 	"clientWorldInstance.h"
 	"clientActor.h"
 	"renderer.h"
@@ -478,6 +479,7 @@
 	"collisionPackets.h"
 	"networkClient.h"
 	"chatWindow.h"
+	"mouseSelectionMenu.h"
 	"rect.h"
 
 1265223099 source:/home/oipo/Programming/mmomm/src/frameTimer.cpp
@@ -1716,7 +1718,7 @@
 	"events.h"
 	"mouseSelectionMenu.h"
 
-1265936120 /home/oipo/Programming/mmomm/src/mouseSelectionMenu.h
+1266076975 /home/oipo/Programming/mmomm/src/mouseSelectionMenu.h
 	<iostream>
 	<string>
 	<sstream>
@@ -1725,6 +1727,6 @@
 	<guichan/graphics.hpp>
 	"gui.h"
 
-1265936116 source:/home/oipo/Programming/mmomm/src/mouseSelectionMenu.cpp
+1266076962 source:/home/oipo/Programming/mmomm/src/mouseSelectionMenu.cpp
 	"mouseSelectionMenu.h"
 

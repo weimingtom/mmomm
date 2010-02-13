@@ -1,3 +1,4 @@
+#include <guichan.hpp>
 #include "clientWorldInstance.h"
 #include "clientActor.h"
 #include "renderer.h"
@@ -7,9 +8,62 @@
 #include "collisionPackets.h"
 #include "networkClient.h"
 #include "chatWindow.h"
+#include "mouseSelectionMenu.h"
 #include "rect.h"
 
 const double ClientWorldInstance::PIXELS_PER_WORLD_UNIT = 32.0;
+
+class identifyLabelListener : public gcn::MouseListener
+{
+    private:
+    std::string _text;
+    gcn::Window *_window;
+
+    class closeButtonListener : public gcn::MouseListener
+    {
+        private:
+        gcn::Window *_window;
+
+        public:
+        closeButtonListener(gcn::Window *window)
+        {
+            _window = window;
+        }
+
+        void mouseClicked(gcn::MouseEvent &mouseEvent)
+        {
+            Gui::current().removeWidget(_window);
+            delete _window;
+        }
+    };
+
+    public:
+    identifyLabelListener(std::string text)
+    {
+        _text = text;
+    }
+
+    void mouseClicked(gcn::MouseEvent &mouseEvent)
+    {
+        gcn::Window *_window = new gcn::Window("Identify");
+        gcn::Label *label = new gcn::Label(_text);
+        gcn::Button *button = new gcn::Button("close");
+
+        label->setForegroundColor(gcn::Color(255, 255, 255));
+        label->setPosition(0, 0);
+
+        button->setPosition(0, 30);
+        button->addMouseListener(new closeButtonListener(_window));
+
+        _window->add(label);
+        _window->add(button);
+        _window->setPosition(0, 0);
+        _window->setVisible(true);
+        _window->resizeToContent();
+
+        Gui::current().addWidget(_window);
+    }
+};
 
 bool LocalCollision::shouldBlock(const Physical* a, const Physical* b) const
 {
@@ -136,19 +190,6 @@ void ClientWorldInstance::mouseDown(Uint8 key)
         _keyDowns[KEY_LMB] = true;
     if ( key == SDL_BUTTON_RIGHT )
         _keyDowns[KEY_RMB] = true;
-
-    const ActorMap& actors = getActorMap();
-
-    for ( ActorMap::const_iterator i = actors.begin(); i != actors.end(); i++ ) {
-        assert(dynamic_cast< ClientActor* >(i->second));
-        ClientActor *a = static_cast<ClientActor *>(i->second);
-
-        const Rect& r = a->getCollisionRect();
-
-        if( _mouse.x < r.right && _mouse.x >= r.left && _mouse.y < r.bottom && _mouse.y >= r.top ) {
-
-        }
-    }
 }
 
 void ClientWorldInstance::mouseUp(Uint8 key)
@@ -156,12 +197,35 @@ void ClientWorldInstance::mouseUp(Uint8 key)
     if ( key == SDL_BUTTON_LEFT )
         _keyDowns[KEY_LMB] = false;
     if ( key == SDL_BUTTON_RIGHT )
+    {
+
         _keyDowns[KEY_RMB] = false;
+
+        const ActorMap& actors = getActorMap();
+
+        for ( ActorMap::const_iterator i = actors.begin(); i != actors.end(); i++ ) {
+            assert(dynamic_cast< ClientActor* >(i->second));
+            ClientActor *a = static_cast<ClientActor *>(i->second);
+
+            const Rect& r = a->getCollisionRect();
+
+            if( _mouse.x < r.right && _mouse.x >= r.left && _mouse.y < r.bottom && _mouse.y >= r.top ) {
+                std::cout << "pos: " << _absoluteMouse.x << " " << _absoluteMouse.y << std::endl;
+                MouseSelectionMenu *menu = new MouseSelectionMenu(_absoluteMouse.x, _absoluteMouse.y);
+                MouseSelectionMenu::setCurrent(menu);
+
+                gcn::Label *label = new gcn::Label("identify");
+                label->addMouseListener(new identifyLabelListener(a->getName()));
+                menu->addLabel(label);
+            }
+        }
+    }
 }
 
 void ClientWorldInstance::mouseMotion(const Vector2D& offset)
 {
 	_mouse = _camera + (offset - .5 * Renderer::current().getScreenDimensions()) / PIXELS_PER_WORLD_UNIT;
+	_absoluteMouse = offset;
 }
 
 bool ClientWorldInstance::isKeyDown(Key key) const

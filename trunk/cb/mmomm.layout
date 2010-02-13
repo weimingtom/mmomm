@@ -41,10 +41,10 @@
 		<Cursor position="244" topLine="0" />
 	</File>
 	<File name="../src/clientWorldInstance.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="4271" topLine="126" />
+		<Cursor position="4868" topLine="134" />
 	</File>
 	<File name="../src/clientWorldInstance.h" open="0" top="0" tabpos="0">
-		<Cursor position="889" topLine="25" />
+		<Cursor position="635" topLine="0" />
 	</File>
 	<File name="../src/collision.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="0" topLine="81" />
@@ -65,10 +65,10 @@
 		<Cursor position="84" topLine="0" />
 	</File>
 	<File name="../src/gui.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="1629" topLine="49" />
+		<Cursor position="124" topLine="0" />
 	</File>
 	<File name="../src/gui.h" open="0" top="0" tabpos="3">
-		<Cursor position="151" topLine="0" />
+		<Cursor position="267" topLine="0" />
 	</File>
 	<File name="../src/ieeehalfprecision.c" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="397" />
@@ -91,14 +91,14 @@
 	<File name="../src/loginMenu.h" open="0" top="0" tabpos="0">
 		<Cursor position="426" topLine="0" />
 	</File>
-	<File name="../src/main.cpp" open="1" top="1" tabpos="0">
-		<Cursor position="726" topLine="26" />
+	<File name="../src/main.cpp" open="1" top="1" tabpos="3">
+		<Cursor position="2235" topLine="43" />
 	</File>
-	<File name="../src/mouseSelectionMenu.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="5033" topLine="141" />
+	<File name="../src/mouseSelectionMenu.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="3705" topLine="121" />
 	</File>
-	<File name="../src/mouseSelectionMenu.h" open="0" top="0" tabpos="0">
-		<Cursor position="513" topLine="0" />
+	<File name="../src/mouseSelectionMenu.h" open="1" top="0" tabpos="2">
+		<Cursor position="857" topLine="0" />
 	</File>
 	<File name="../src/nativePackets.h" open="0" top="0" tabpos="0">
 		<Cursor position="299" topLine="9" />
@@ -120,9 +120,6 @@
 	</File>
 	<File name="../src/openglRenderer.h" open="0" top="0" tabpos="2">
 		<Cursor position="454" topLine="0" />
-	</File>
-	<File name="../src/playerActor.cpp" open="1" top="0" tabpos="0">
-		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="../src/renderer.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="368" topLine="3" />
