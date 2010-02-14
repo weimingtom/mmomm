@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)dependencies\raknet\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include\SDL&quot;;&quot;$(SolutionDir)\dependencies\guichan-0.8.2\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include&quot;;&quot;$(SolutionDir)\dependencies\OpenGL\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)dependencies\raknet\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include\SDL&quot;;&quot;$(SolutionDir)\..\guichan\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include&quot;;&quot;$(SolutionDir)\dependencies\OpenGL\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS; MMOMM_CLIENT"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,9 +62,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="opengl32.lib glu32.lib SDL.lib SDL_image.lib SDLmain.lib RakNetDLLDebug.lib guichanDebug.lib"
+				AdditionalDependencies="opengl32.lib glu32.lib SDL.lib SDL_image.lib SDL_ttf.lib SDLmain.lib RakNetDLLDebug.lib guichanDebug.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)dependencies\raknet\lib&quot;;&quot;$(SolutionDir)dependencies\guichan-0.8.2\lib&quot;;&quot;$(SolutionDir)dependencies\SDL-1.2.14\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)dependencies\raknet\lib&quot;;&quot;$(SolutionDir)dependencies\guichan\lib&quot;;&quot;$(SolutionDir)dependencies\SDL-1.2.14\lib&quot;"
 				IgnoreDefaultLibraryNames="msvcrt.lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -119,7 +119,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)dependencies\raknet\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include\SDL&quot;;&quot;$(SolutionDir)\dependencies\guichan-0.8.2\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include&quot;;&quot;$(SolutionDir)\dependencies\OpenGL\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)dependencies\raknet\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include\SDL&quot;;&quot;$(SolutionDir)\..\guichan\include&quot;;&quot;$(SolutionDir)\dependencies\SDL-1.2.14\include&quot;;&quot;$(SolutionDir)\dependencies\OpenGL\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;MMOMM_CLIENT"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -139,9 +139,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="opengl32.lib glu32.lib SDL.lib SDL_image.lib SDLmain.lib RakNetDLLDebug.lib guichan.lib"
+				AdditionalDependencies="opengl32.lib glu32.lib SDL.lib SDL_image.lib SDL_ttf.lib SDLmain.lib RakNetDLLDebug.lib guichan.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)dependencies\raknet\lib&quot;;&quot;$(SolutionDir)dependencies\guichan-0.8.2\lib&quot;;&quot;$(SolutionDir)dependencies\SDL-1.2.14\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)dependencies\raknet\lib&quot;;&quot;$(SolutionDir)dependencies\guichan\lib&quot;;&quot;$(SolutionDir)dependencies\SDL-1.2.14\lib&quot;"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -265,6 +265,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\mouseSelectionMenu.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\networkClient.cpp"
 				>
 			</File>
@@ -302,6 +306,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\sprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\trueTypeFont.cpp"
 				>
 			</File>
 			<File
@@ -403,6 +411,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\mouseSelectionMenu.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\nativePackets.h"
 				>
 			</File>
@@ -431,6 +443,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\playerActor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\playerClientActor.h"
 				>
 			</File>
@@ -456,6 +472,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\sprite.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\trueTypeFont.h"
 				>
 			</File>
 			<File
