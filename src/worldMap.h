@@ -1,15 +1,20 @@
 #ifndef WORLD_MAP_H_
 #define WORLD_MAP_H_
 
-#include "worldCommon.h"
-#ifdef NDEBUG
-#define BOOST_DISABLE_ASSERTS
-#endif
 #include <boost/multi_array.hpp>
 #include <boost/unordered_map.hpp>
+#include <RakNet/NativeTypes.h>
+#include "vector2D.h"
 
 // Maybe change later
-typedef unsigned int Tile;
+// Assume less than 255 types.
+enum Tile {
+	TILE_ETHER,
+	TILE_DIRT,
+	TILE_GRASS,
+	TILE_COUNT // number of tiles; keep last
+};
+BOOST_STATIC_ASSERT(TILE_COUNT < 256);
 
 class WorldCell {
 public:
@@ -48,7 +53,7 @@ public:
 
 private:
 
-    typedef boost::unordered_map< CellCoord, WorldCell, CellCoord::Hash > Map;
+    typedef boost::unordered_map< IVector2D, WorldCell > Map;
     Map _map;
 
 };
