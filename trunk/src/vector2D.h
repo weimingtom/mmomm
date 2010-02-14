@@ -3,134 +3,167 @@
 
 #include <cmath>
 #include <cfloat>
+#include <RakNet/NativeTypes.h>
+#include <boost/functional/hash.hpp>
 
 // A mostly-immutable 2-dimensional vector
-
-struct Vector2D {
-	Vector2D(): x(), y() { }
-	Vector2D(double x, double y): x(x), y(y) { }
+template<typename T>
+struct GVector2D {
+	GVector2D(): x(), y() { }
+	template<typename U>
+	GVector2D(U x, U y): x(T(x)), y(T(y)) { }
 	
 	// Returns the length squared of this vector (faster than length()).
-	double lengthSquared() const;
+	T lengthSquared() const;
 	// Returns the length of this vector.
-	double length() const;
+	T length() const;
 	// Returns a vector pointing in the same direction, of length 1.
-	Vector2D normalized() const;
+	GVector2D normalized() const;
 	
 	// Memberwise multiplication/division
-	Vector2D memberwiseMult(const Vector2D& rhs) const;
-	Vector2D memberwiseDiv(const Vector2D& rhs) const;
+	GVector2D memberwiseMult(const GVector2D& rhs) const;
+	GVector2D memberwiseDiv(const GVector2D& rhs) const;
 	
 	// Returns the dot product of this and another vector.
 	// |a||b|cos(theta)
-	double dot(const Vector2D& rhs) const;
+	T dot(const GVector2D& rhs) const;
 	// Returns the perpendicular dot product of this and another vector.
 	// Similar to cross product, or wedge product.
 	// |a||b|sin(theta)
-	double perpDot(const Vector2D& rhs) const;
+	T perpDot(const GVector2D& rhs) const;
 	
 	// x and y coordinates
-	double x;
-	double y;
+	T x;
+	T y;
+
+	// Returns a hash of the given value.
+    friend std::size_t hash_value(const GVector2D& v)
+    {
+        std::size_t seed = 0;
+        boost::hash_combine(seed, v.x);
+        boost::hash_combine(seed, v.y);
+        return seed;
+    }
 };
 
 // Negation
-inline Vector2D operator+(const Vector2D& v)
+template<typename T>
+inline GVector2D<T> operator+(const GVector2D<T>& v)
 {
 	return v;
 }
-inline Vector2D operator-(const Vector2D& v)
+template<typename T>
+inline GVector2D<T> operator-(const GVector2D<T>& v)
 {
-	return Vector2D(-v.x, -v.y);
+	return GVector2D<T>(-v.x, -v.y);
 }
 
 // Vector addition/subtraction
-inline Vector2D operator+(const Vector2D& v1, const Vector2D& v2)
+template<typename T>
+inline GVector2D<T> operator+(const GVector2D<T>& v1, const GVector2D<T>& v2)
 {
-	return Vector2D(v1.x + v2.x, v1.y + v2.y);
+	return GVector2D<T>(v1.x + v2.x, v1.y + v2.y);
 }
-inline Vector2D operator-(const Vector2D& v1, const Vector2D& v2)
+template<typename T>
+inline GVector2D<T> operator-(const GVector2D<T>& v1, const GVector2D<T>& v2)
 {
-	return Vector2D(v1.x - v2.x, v1.y - v2.y);
+	return GVector2D<T>(v1.x - v2.x, v1.y - v2.y);
 }
-inline Vector2D& operator+=(Vector2D& v1, const Vector2D& v2)
+template<typename T>
+inline GVector2D<T>& operator+=(GVector2D<T>& v1, const GVector2D<T>& v2)
 {
 	v1 = v1 + v2;
 	return v1;
 }
-inline Vector2D& operator-=(Vector2D& v1, const Vector2D& v2)
+template<typename T>
+inline GVector2D<T>& operator-=(GVector2D<T>& v1, const GVector2D<T>& v2)
 {
 	v1 = v1 - v2;
 	return v1;
 }
 
 // Scalar multiplication/division
-inline Vector2D operator*(const Vector2D& v, double scalar)
+template<typename T>
+inline GVector2D<T> operator*(const GVector2D<T>& v, T scalar)
 {
-	return Vector2D(v.x * scalar, v.y * scalar);
+	return GVector2D<T>(v.x * scalar, v.y * scalar);
 }
-inline Vector2D operator*(double scalar, const Vector2D& v)
+template<typename T>
+inline GVector2D<T> operator*(T scalar, const GVector2D<T>& v)
 {
 	return v * scalar;
 }
-inline Vector2D operator/(const Vector2D& v, double scalar)
+template<typename T>
+inline GVector2D<T> operator/(const GVector2D<T>& v, T scalar)
 {
-	return Vector2D(v.x / scalar, v.y / scalar);
+	return GVector2D<T>(v.x / scalar, v.y / scalar);
 }
-inline Vector2D operator/(double scalar, const Vector2D& v)
+template<typename T>
+inline GVector2D<T> operator/(T scalar, const GVector2D<T>& v)
 {
-	return Vector2D(scalar / v.x, scalar / v.y);
+	return GVector2D<T>(scalar / v.x, scalar / v.y);
 }
 
-inline Vector2D& operator*=(Vector2D& v, double scalar)
+template<typename T>
+inline GVector2D<T>& operator*=(GVector2D<T>& v, T scalar)
 {
 	v = v * scalar;
 	return v;
 }
-inline Vector2D& operator/=(Vector2D& v, double scalar)
+template<typename T>
+inline GVector2D<T>& operator/=(GVector2D<T>& v, T scalar)
 {
 	v = v / scalar;
 	return v;
 }
 
 
-inline bool operator==(const Vector2D& v1, const Vector2D& v2)
+template<typename T>
+inline bool operator==(const GVector2D<T>& v1, const GVector2D<T>& v2)
 {
 	return (v1.x == v2.x && v1.y == v2.y);
 }
-inline bool operator!=(const Vector2D& v1, const Vector2D& v2)
+template<typename T>
+inline bool operator!=(const GVector2D<T>& v1, const GVector2D<T>& v2)
 {
 	return !(v1 == v2);
 }
 
-inline Vector2D Vector2D::memberwiseMult(const Vector2D& rhs) const
+template<typename T>
+inline GVector2D<T> GVector2D<T>::memberwiseMult(const GVector2D<T>& rhs) const
 {
-	return Vector2D(x * rhs.x, y * rhs.y);
+	return GVector2D<T>(x * rhs.x, y * rhs.y);
 }
 
-inline Vector2D Vector2D::memberwiseDiv(const Vector2D& rhs) const
+template<typename T>
+inline GVector2D<T> GVector2D<T>::memberwiseDiv(const GVector2D<T>& rhs) const
 {
-	return Vector2D(x / rhs.x, y / rhs.y);
+	return GVector2D<T>(x / rhs.x, y / rhs.y);
 }
 
-inline double Vector2D::lengthSquared() const
+template<typename T>
+inline T GVector2D<T>::lengthSquared() const
 {
 	return this->dot(*this);
 }
-inline double Vector2D::length() const
+template<typename T>
+inline T GVector2D<T>::length() const
 {
 	return std::sqrt(lengthSquared());
 }
-inline Vector2D Vector2D::normalized() const
+template<typename T>
+inline GVector2D<T> GVector2D<T>::normalized() const
 {
-    return lengthSquared() >= FLT_EPSILON * FLT_EPSILON ? *this / length() : Vector2D();
+    return lengthSquared() >= FLT_EPSILON * FLT_EPSILON ? *this / length() : GVector2D<T>();
 }
 
-inline double Vector2D::dot(const Vector2D& rhs) const
+template<typename T>
+inline T GVector2D<T>::dot(const GVector2D<T>& rhs) const
 {
 	return x * rhs.x + y * rhs.y;
 }
-inline double Vector2D::perpDot(const Vector2D& rhs) const
+template<typename T>
+inline T GVector2D<T>::perpDot(const GVector2D<T>& rhs) const
 {
 	return x * rhs.y - y * rhs.x;
 }
@@ -140,15 +173,19 @@ inline double Vector2D::perpDot(const Vector2D& rhs) const
 namespace std {
 
 // Returns the minimal/maximal coordinates of the pair.
-inline ::Vector2D min(const ::Vector2D& v1, const ::Vector2D& v2)
+inline ::GVector2D min(const ::GVector2D& v1, const ::GVector2D& v2)
 {
 	return ::Vector2D(min(v1.x, v2.x), min(v1.y, v2.y));
 }
-inline ::Vector2D max(const ::Vector2D& v1, const ::Vector2D& v2)
+inline ::GVector2D max(const ::GVector2D& v1, const ::GVector2D& v2)
 {
 	return ::Vector2D(max(v1.x, v2.x), max(v1.y, v2.y));
 }
 
 }
 */
+
+typedef GVector2D<double> Vector2D;
+typedef GVector2D<uint32_t> IVector2D;
+
 #endif

@@ -29,17 +29,17 @@ void WorldCell::SetTile(std::size_t x, std::size_t y, const Tile& tile)
 
 const WorldCell& WorldMap::GetCell(long x, long y)
 {
-    return _map[CellCoord(x, y)];
+    return _map[IVector2D(x, y)];
 }
 
 void WorldMap::SetCell(long x, long y, const WorldCell& cell)
 {
-    _map[CellCoord(x, y)] = cell;
+    _map[IVector2D(x, y)] = cell;
 }
 
 void WorldMap::DiscardCell(long x, long y)
 {
-    _map.erase(CellCoord(x, y));
+    _map.erase(IVector2D(x, y));
 }
 
 const Tile& WorldMap::GetTile(long x, long y)
@@ -50,7 +50,7 @@ const Tile& WorldMap::GetTile(long x, long y)
     long yCell = y >= 0 ? y / uHeight : -(-y / uHeight) - 1;
     long xTile = x >= 0 ? x % uWidth  : uWidth - ((-x - 1) % uWidth ) - 1;
     long yTile = y >= 0 ? y % uHeight : uWidth - ((-y - 1) % uHeight) - 1;
-    return _map[CellCoord(xCell, yCell)].GetTile(xTile, yTile);
+    return _map[IVector2D(xCell, yCell)].GetTile(xTile, yTile);
 }
 
 void WorldMap::SetTile(long x, long y, const Tile& tile)
@@ -61,5 +61,5 @@ void WorldMap::SetTile(long x, long y, const Tile& tile)
     long yCell = y >= 0 ? y / uHeight : -(-y / uHeight) - 1;
     long xTile = x >= 0 ? x % uWidth  : uWidth - ((-x - 1) % uWidth ) - 1;
     long yTile = y >= 0 ? y % uHeight : uWidth - ((-y - 1) % uHeight) - 1;
-    _map[CellCoord(xCell, yCell)].SetTile(xTile, yTile, tile);
+    _map[IVector2D(xCell, yCell)].SetTile(xTile, yTile, tile);
 }

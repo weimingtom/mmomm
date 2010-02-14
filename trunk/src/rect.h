@@ -18,7 +18,27 @@ struct Rect {
 	Vector2D min() const { return Vector2D(left, top); }
 	Vector2D max() const { return Vector2D(right, bottom); }
 	Vector2D dim() const { return max() - min(); }
-
+	
+	// Point containment
+	bool contains(const Vector2D& v)
+	{
+		return contains(Rect(v, v));
+	}
+	
+	// Rectangle containment test.
+	bool contains(const Rect& rhs)
+	{
+		return (left <= rhs.left && right >= rhs.right &&
+			top <= rhs.top && bottom >= rhs.bottom);
+	}
+	
+	// Rectangle-rectangle intersection test.
+	bool intersects(const Rect& rhs)
+	{
+		return (left <= rhs.right && right >= rhs.left &&
+			top <= rhs.bottom && bottom >= rhs.top);
+	}
+	
     double left;
     double top;
     double right;

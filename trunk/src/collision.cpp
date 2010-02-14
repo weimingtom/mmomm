@@ -41,10 +41,10 @@ void CollisionWorld::triggerCollisions()
             // An object's cell is defined by its top-left coordinate, so can
             // check all possible collisions by checking objects in its cell
             // and the cells one space down or to the right (or both)
-            Cell& a = _map[CellCoord(x,     y    )];
-            Cell& b = _map[CellCoord(x + 1, y    )];
-            Cell& c = _map[CellCoord(x,     y + 1)];
-            Cell& d = _map[CellCoord(x + 1, y + 1)];
+            Cell& a = _map[IVector2D(x,     y    )];
+            Cell& b = _map[IVector2D(x + 1, y    )];
+            Cell& c = _map[IVector2D(x,     y + 1)];
+            Cell& d = _map[IVector2D(x + 1, y + 1)];
 
             for ( Cell::const_iterator i = a.begin(); i != a.end(); i++ ) {
                 const Rect& r = (*i)->getCollisionRect();
@@ -124,7 +124,7 @@ CollisionWorld::Cell& CollisionWorld::getCellAtPoint(const Vector2D& position)
     _rightBound  = std::max(_rightBound,  lx + 1);
     _bottomBound = std::max(_bottomBound, ly + 1);
 
-    return _map[CellCoord(lx, ly)];
+    return _map[IVector2D(lx, ly)];
 }
 
 Physical::Physical(CollisionWorld& world, const Rect& rect)
@@ -217,7 +217,7 @@ void Physical::move(const Vector2D& offset_)
 	
     for ( long ty = std::min(ry, dy) - 1; ty <= std::max(ry, dy) + 1; ty++ ) {
         for ( long tx = std::min(rx, dx) - 1; tx <= std::max(rx, dx) + 1; tx++ ) {
-            Cell& cell = _world._map[CellCoord(tx, ty)];
+            Cell& cell = _world._map[IVector2D(tx, ty)];
             for ( Cell::const_iterator i = cell.begin(); i != cell.end(); i++ ) {
                 // Sweep to find obstacles. Only go as far as the closest obstacle allows.
                 // The closest obstacle is added to list of collisions
@@ -306,7 +306,7 @@ void Physical::move(const Vector2D& offset_)
 
     for ( long ty = std::min(ry, dy) - 1; ty <= std::max(ry, dy) + 1; ty++ ) {
         for ( long tx = std::min(rx, dx) - 1; tx <= std::max(rx, dx) + 1; tx++ ) {
-            Cell& cell = _world._map[CellCoord(tx, ty)];
+            Cell& cell = _world._map[IVector2D(tx, ty)];
             for ( Cell::const_iterator i = cell.begin(); i != cell.end(); i++ ) {
                 // Now sweep again to find objects on the restricted path that don't block
                 // (only such objects exist, since path limited to closest obstacle).
@@ -404,7 +404,7 @@ void Physical::updateWorld()
 
         for ( long ty = y - 1; ty <= y + 1; ty++ ) {
             for ( long tx = x - 1; tx <= x + 1; tx++ ) {
-                Cell& cell = _world._map[CellCoord(tx, ty)];
+                Cell& cell = _world._map[IVector2D(tx, ty)];
                 for ( Cell::const_iterator i = cell.begin(); i != cell.end(); i++ ) {
                     if ( *i == this )
                         continue;

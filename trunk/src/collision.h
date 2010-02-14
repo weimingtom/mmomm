@@ -7,7 +7,6 @@
 #include <RakNet/NativeTypes.h>
 #include "rect.h"
 #include "vector2D.h"
-#include "worldCommon.h"
 
 typedef uint32_t ActorID;
 
@@ -62,7 +61,7 @@ private:
     };
 
     typedef std::set            < Physical*, Sort >                   Cell;
-    typedef boost::unordered_map< CellCoord, Cell, CellCoord::Hash >  Map;
+    typedef boost::unordered_map< IVector2D, Cell >  Map;
     typedef std::vector         < std::pair< Physical*, Physical* > > CollisionList;
 
     bool checkCollision(Physical* a, Physical* b, const Rect& aRect);
@@ -147,7 +146,7 @@ void CollisionWorld::getNearbyPhysicals(std::vector< T* >& output, const Vector2
     long ly = long(floor(position.y / CELL_SIZE));
     for ( long tx = lx - 2; tx <= lx + 1; tx++ ) {
         for ( long ty = ly - 2; ty <= ly + 1; ty++ ) {
-            Cell& cell = _map[CellCoord(tx, ty)];
+            Cell& cell = _map[IVector2D(tx, ty)];
             for ( Cell::iterator i = cell.begin(); i != cell.end(); i++ ) {
                 if ( tx == lx - 2 && ( *i )->getCollisionRect().right < ( lx - 1 ) * CELL_SIZE )
                     continue;
