@@ -1,17 +1,20 @@
 #include "serverWorldInstance.h"
-#include "user.h"
+#include <iostream>
 #include "frameTimer.h"
 #include "playerActor.h"
-#include <iostream>
+#include "serverWorldMap.h"
+#include "user.h"
 
 ServerWorldInstance::ServerWorldInstance()
 : WorldInstance(new TestCollision())
 , _updatesOffset(0)
+, _worldMap(new ServerWorldMap())
 {
 }
 
 ServerWorldInstance::~ServerWorldInstance()
 {
+	delete _worldMap;
 }
 
 void ServerWorldInstance::addUser(User& user, PlayerActor* actor)

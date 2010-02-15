@@ -4,7 +4,6 @@
 #include "collision.h"
 #include <boost/unordered_map.hpp>
 
-class WorldMap;
 class Actor;
 
 class WorldInstance {
@@ -15,9 +14,6 @@ public:
 
     const CollisionWorld& getCollision() const;
     /* */ CollisionWorld& getCollision();
-
-    const WorldMap& getWorldMap() const;
-    /* */ WorldMap& getWorldMap();
 
     typedef boost::unordered_map< ActorID, Actor * > ActorMap;
     const ActorMap& getActorMap() const;
@@ -35,7 +31,6 @@ private:
     static WorldInstance *_current;
 
     CollisionWorld* _collision;
-    WorldMap*       _worldMap;
 	
     ActorMap        _actors;
 

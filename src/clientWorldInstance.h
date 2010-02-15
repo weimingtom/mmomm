@@ -5,6 +5,8 @@
 #include <SDL/SDL.h>
 #include <boost/unordered_map.hpp>
 
+class ClientWorldMap;
+
 class LocalCollision : public CollisionWorld {
 public:
 
@@ -32,6 +34,9 @@ public:
 
     static ClientWorldInstance& current();
     void render() const;
+
+	ClientWorldMap& getWorldMap() { return *_worldMap; }
+	const ClientWorldMap& getWorldMap() const { return *_worldMap; }
 
     void keyDown(SDLKey key);
     void keyUp  (SDLKey key);
@@ -64,6 +69,7 @@ private:
     Vector2D _mouse;
     Vector2D _absoluteMouse;
 
+	ClientWorldMap *_worldMap;
 };
 
 #endif

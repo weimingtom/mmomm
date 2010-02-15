@@ -7,6 +7,7 @@ class User;
 class PlayerActor;
 class Npc;
 class NpcActor;
+class ServerWorldMap;
 
 class TestCollision : public CollisionWorld {
 public:
@@ -26,6 +27,9 @@ public:
 
     static ServerWorldInstance& current();
 
+	ServerWorldMap& getWorldMap() { return *_worldMap; }
+	const ServerWorldMap& getWorldMap() const { return *_worldMap; }
+
     void addUser(User& user, PlayerActor* actor);
     void removeUser(User& user);
     PlayerActor* getUserActor(User& user) const;
@@ -42,6 +46,8 @@ private:
     typedef std::list< User* > UserList;
     UserList _userList;
     double _updatesOffset;
+
+	ServerWorldMap *_worldMap;
 
 };
 

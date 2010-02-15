@@ -243,15 +243,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\serverWorldMap.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\tileTypes.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\user.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\src\worldInstance.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\worldMap.cpp"
 				>
 			</File>
 		</Filter>
@@ -325,6 +329,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\serverWorldMap.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\tileTypes.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\user.h"
 				>
 			</File>
@@ -334,10 +346,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\worldInstance.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\worldMap.h"
 				>
 			</File>
 		</Filter>

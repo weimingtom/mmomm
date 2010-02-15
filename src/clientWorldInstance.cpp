@@ -1,15 +1,16 @@
-#include <guichan.hpp>
 #include "clientWorldInstance.h"
+#include <guichan.hpp>
+#include "chatWindow.h"
 #include "clientActor.h"
+#include "clientWorldMap.h"
+#include "collisionPackets.h"
+#include "frameTimer.h"
+#include "mouseSelectionMenu.h"
+#include "networkClient.h"
+#include "rect.h"
 #include "renderer.h"
 #include "sprite.h"
 #include "vector2D.h"
-#include "frameTimer.h"
-#include "collisionPackets.h"
-#include "networkClient.h"
-#include "chatWindow.h"
-#include "mouseSelectionMenu.h"
-#include "rect.h"
 
 const double ClientWorldInstance::PIXELS_PER_WORLD_UNIT = 32.0;
 
@@ -76,6 +77,7 @@ ClientWorldInstance::ClientWorldInstance()
 , _clientPlayerActor(0)
 , _updateOffset(0)
 , _camera(0, 0)
+, _worldMap(new ClientWorldMap())
 {
     // Input map
     _keyMap[SDLK_LEFT]  = KEY_LEFT;
@@ -94,6 +96,7 @@ ClientWorldInstance::ClientWorldInstance()
 
 ClientWorldInstance::~ClientWorldInstance()
 {
+	delete _worldMap;
 }
 
 ClientWorldInstance& ClientWorldInstance::current()
@@ -211,7 +214,7 @@ void ClientWorldInstance::mouseUp(Uint8 key)
 
             if( _mouse.x < r.right && _mouse.x >= r.left && _mouse.y < r.bottom && _mouse.y >= r.top ) {
                 std::cout << "pos: " << _absoluteMouse.x << " " << _absoluteMouse.y << std::endl;
-                MouseSelectionMenu *menu = new MouseSelectionMenu(_absoluteMouse.x, _absoluteMouse.y);
+                MouseSelectionMenu *menu = new MouseSelectionMenu(int(_absoluteMouse.x), int(_absoluteMouse.y));
                 MouseSelectionMenu::setCurrent(menu);
 
                 gcn::Label *label = new gcn::Label("identify");
