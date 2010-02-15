@@ -1,5 +1,4 @@
 #include "worldInstance.h"
-#include "worldMap.h"
 #include "collision.h"
 #include "actor.h"
 
@@ -7,7 +6,6 @@ WorldInstance* WorldInstance::_current = 0;
 
 WorldInstance::WorldInstance(CollisionWorld* collision)
 : _collision(collision)
-, _worldMap(new WorldMap())
 , _nextID(0)
 {
 }
@@ -19,7 +17,6 @@ WorldInstance::~WorldInstance()
 	}
 	
     delete _collision;
-    delete _worldMap;
 }
 
 const CollisionWorld& WorldInstance::getCollision() const
@@ -30,16 +27,6 @@ const CollisionWorld& WorldInstance::getCollision() const
 CollisionWorld& WorldInstance::getCollision()
 {
     return *_collision;
-}
-
-const WorldMap& WorldInstance::getWorldMap() const
-{
-    return *_worldMap;
-}
-
-WorldMap& WorldInstance::getWorldMap()
-{
-    return *_worldMap;
 }
 
 const WorldInstance::ActorMap& WorldInstance::getActorMap() const

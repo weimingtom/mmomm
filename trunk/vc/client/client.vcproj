@@ -221,6 +221,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\clientWorldMap.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\collision.cpp"
 				>
 			</File>
@@ -309,15 +313,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\tileTypes.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\trueTypeFont.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\src\worldInstance.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\worldMap.cpp"
 				>
 			</File>
 		</Filter>
@@ -356,6 +360,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\clientWorldInstance.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\clientWorldMap.h"
 				>
 			</File>
 			<File
@@ -459,6 +467,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\serializationException.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\simulatedClientActor.h"
 				>
 			</File>
@@ -471,6 +483,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\tileTypes.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\trueTypeFont.h"
 				>
 			</File>
@@ -480,10 +496,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\worldInstance.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\worldMap.h"
 				>
 			</File>
 		</Filter>

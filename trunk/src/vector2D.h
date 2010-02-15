@@ -23,6 +23,7 @@ struct GVector2D {
 	// Memberwise multiplication/division
 	GVector2D memberwiseMult(const GVector2D& rhs) const;
 	GVector2D memberwiseDiv(const GVector2D& rhs) const;
+	GVector2D memberwiseMod(const GVector2D& rhs) const;
 	
 	// Returns the dot product of this and another vector.
 	// |a||b|cos(theta)
@@ -72,14 +73,12 @@ inline GVector2D<T> operator-(const GVector2D<T>& v1, const GVector2D<T>& v2)
 template<typename T>
 inline GVector2D<T>& operator+=(GVector2D<T>& v1, const GVector2D<T>& v2)
 {
-	v1 = v1 + v2;
-	return v1;
+	return v1 = v1 + v2;
 }
 template<typename T>
 inline GVector2D<T>& operator-=(GVector2D<T>& v1, const GVector2D<T>& v2)
 {
-	v1 = v1 - v2;
-	return v1;
+	return v1 = v1 - v2;
 }
 
 // Scalar multiplication/division
@@ -103,18 +102,26 @@ inline GVector2D<T> operator/(T scalar, const GVector2D<T>& v)
 {
 	return GVector2D<T>(scalar / v.x, scalar / v.y);
 }
+template<typename T>
+inline GVector2D<T> operator%(const GVector2D<T>& v, T scalar)
+{
+	return GVector2D<T>(v.x % scalar, v.y % scalar);
+}
 
 template<typename T>
 inline GVector2D<T>& operator*=(GVector2D<T>& v, T scalar)
 {
-	v = v * scalar;
-	return v;
+	return v = v * scalar;
 }
 template<typename T>
 inline GVector2D<T>& operator/=(GVector2D<T>& v, T scalar)
 {
-	v = v / scalar;
-	return v;
+	return v = v / scalar;
+}
+template<typename T>
+inline GVector2D<T>& operator%=(GVector2D<T>& v, T scalar)
+{
+	return v = v % scalar;
 }
 
 
@@ -134,11 +141,15 @@ inline GVector2D<T> GVector2D<T>::memberwiseMult(const GVector2D<T>& rhs) const
 {
 	return GVector2D<T>(x * rhs.x, y * rhs.y);
 }
-
 template<typename T>
 inline GVector2D<T> GVector2D<T>::memberwiseDiv(const GVector2D<T>& rhs) const
 {
 	return GVector2D<T>(x / rhs.x, y / rhs.y);
+}
+template<typename T>
+inline GVector2D<T> GVector2D<T>::memberwiseMod(const GVector2D<T>& rhs) const
+{
+	return GVector2D<T>(x % rhs.x, y % rhs.y);
 }
 
 template<typename T>
@@ -186,6 +197,6 @@ inline ::GVector2D max(const ::GVector2D& v1, const ::GVector2D& v2)
 */
 
 typedef GVector2D<double> Vector2D;
-typedef GVector2D<uint32_t> IVector2D;
+typedef GVector2D<int32_t> IVector2D;
 
 #endif
