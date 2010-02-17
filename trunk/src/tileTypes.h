@@ -8,9 +8,11 @@
 
 extern const IVector2D CELL_DIMENSIONS;
 
+typedef uint8_t TileType;
+
 // Maybe change later
 // Assume less than 255 types.
-enum TileType {
+enum TileTypeEnum {
 	TILE_ETHER,
 	TILE_DIRT,
 	TILE_GRASS,

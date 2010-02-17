@@ -18,7 +18,7 @@ void serialHalf(BitStream& bs, bool write, double& data)
 	}
 	serial(bs, write, half);
 	if (!write) {
-		halfp2doubles(&data, &half, 1);	
+		halfp2doubles(&data, &half, 1);
 	}
 }
 
@@ -34,6 +34,21 @@ void serialHalf(BitStream& bs, bool write, float& data)
 	}
 }
 
+void serialDisplacement(BitStream& bs, bool write, int32_t& data)
+{
+	int8_t convert;
+	if (write) {
+		const int32_t MAXIMUM = 1 << 6;
+		assert(data > -MAXIMUM && data < MAXIMUM);
+
+		convert = int8_t(data);
+	}
+	serialFull(bs, write, convert);
+	if (!write) {
+		data = convert;
+	}
+}
+
 void serialDisplacement(BitStream& bs, bool write, double& data)
 {
 	// Maximum original displacement
@@ -44,7 +59,7 @@ void serialDisplacement(BitStream& bs, bool write, double& data)
 	
 	int16_t displacement;
 	if (write) {
-		assert(data > -MAXIMUM || data < MAXIMUM);
+		assert(data > -MAXIMUM && data < MAXIMUM);
 		displacement = int16_t(data * OFFSET);
 	}
 	serialFull(bs, write, displacement);
@@ -61,17 +76,31 @@ void serialDisplacement(BitStream& bs, bool write, float& data)
 	if (!write) data = float(dbl);
 }
 
+void serialPosition(BitStream& bs, bool write, int32_t& data)
+{
+	int16_t convert;
+	if (write) {
+		const int32_t MAXIMUM = 1 << 15;
+		assert(data > -MAXIMUM && data < MAXIMUM);
+		convert = int16_t(data);
+	}
+	serialFull(bs, write, convert);
+	if (!write) {
+		data = convert;
+	}
+}
+
 void serialPosition(BitStream& bs, bool write, double& data)
 {
 	// Maximum original position
-	const double MAXIMUM = 1 << (16 + 6);
+	const double MAXIMUM = 1 << 15;
 	// Offset from original
-	const double OFFSET = 1 << 9;
+	const double OFFSET = 1 << 16;
 	const double REVERSE_OFFSET = 1 / OFFSET;
 	
 	int32_t position;
 	if (write) {
-		assert(data > -MAXIMUM || data < MAXIMUM);
+		assert(data > -MAXIMUM && data < MAXIMUM);
 		position = int32_t(data * OFFSET);
 	}
 	serialFull(bs, write, position);
@@ -79,7 +108,6 @@ void serialPosition(BitStream& bs, bool write, double& data)
 		data = double(position) * REVERSE_OFFSET;
 	}
 }
-
 
 // Initializes the string compressor.
 struct StringCompressorInitializer {

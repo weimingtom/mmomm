@@ -22,13 +22,19 @@ BOOST_STATIC_ASSERT(sizeof(int32_t) == 4);
 BOOST_STATIC_ASSERT(sizeof(float) == 4);
 BOOST_STATIC_ASSERT(sizeof(double) == 8);
 
-// Boolean compression
-inline void serial(BitStream& bs, bool write, bool& data)
-{
-	bs.SerializeCompressed(write, data);
-}
+//////////////////////////////////////////////////////////////////////
+//
+// Integer serialization
+// 
+// serial:     General lossless compressing serialization.
+//             Use this if you usually use less than half the bits.
+//
+// serialFull: No compression serialization
+//             Use this if you usually use the full range of values.
+//
+//////////////////////////////////////////////////////////////////////
 
-// Normal integer serialization; better if use less than half
+// Normal integer serialization; better if usually use less than half
 inline void serial(BitStream& bs, bool write, uint8_t& data)
 {
 	bs.SerializeCompressed(write, data);
@@ -96,6 +102,31 @@ inline void serialFull(BitStream& bs, bool write, int64_t& data)
 	bs.Serialize(write, data);
 }
 
+//////////////////////////////////////////////////////////////////////
+//
+// Floating point serialization
+// 
+// serial:       General lossless serialization (64 bits).
+//               Use this if you need full quality.
+//               subnormal min: 5.00e-324
+//               normal min:    2.23e-308
+//               max:           1.80e+308
+//               accuracy:      15.955 decimal places
+//
+// serialSingle: Compress to single-precision floating point (32 bits).
+//               subnormal min: 1.40e-45
+//               normal min:    1.18e-38
+//               max:           3.40e+38
+//               accuracy:      7.225 decimal places
+//
+// serialHalf:   Compress to half-precision floating point (16 bits).
+//               subnormal min: 5.96e-8
+//               normal min:    6.10e-5
+//               max:           65504
+//               accuracy:      3.311 decimal places
+//
+//////////////////////////////////////////////////////////////////////
+
 // Full-quality float/double/vector/rect serialization
 inline void serial(BitStream& bs, bool write, double& data)
 {
@@ -138,7 +169,6 @@ inline void serialSingle(BitStream& bs, bool write, Rect& data)
 }
 
 // Serialize using lossy compression to half floating point precision.
-// Limit is fixed to +-65504. 5-bit exponent, 11-bit mantissa.
 void serialHalf(BitStream& bs, bool write, double& data);
 void serialHalf(BitStream& bs, bool write, float& data);
 inline void serialHalf(BitStream& bs, bool write, Vector2D& data)
@@ -154,25 +184,31 @@ inline void serialHalf(BitStream& bs, bool write, Rect& data)
 	serialHalf(bs, write, data.bottom);
 }
 
-// Serialize a displacement from a given position.
-// Limit is fixed to +-64 coords away.
-void serialDisplacement(BitStream& bs, bool write, double& data);
-void serialDisplacement(BitStream& bs, bool write, float& data);
-inline void serialDisplacement(BitStream& bs, bool write, Vector2D& data)
-{
-	serialDisplacement(bs, write, data.x);
-	serialDisplacement(bs, write, data.y);
-}
-inline void serialDisplacement(BitStream& bs, bool write, Rect& data)
-{
-	serialDisplacement(bs, write, data.left);
-	serialDisplacement(bs, write, data.top);
-	serialDisplacement(bs, write, data.right);
-	serialDisplacement(bs, write, data.bottom);
-}
+//////////////////////////////////////////////////////////////////////
+//
+// Serialization of position, displacement and velocity
+// 
+// serialPosition:     Limited to (-32768, 32768).
+//                     Bits: 16 (integer), 32 (float)
+//                     Use for absolute positioning on the world map.
+// 
+// serialDisplacement: Limited to (-64, 64). 
+//                     Bits: 8 (integer), 16 (float).
+//                     Use for positioning relative to a known point.
+// 
+// serialVelocity:     Biased; stored as half-precision float.
+//                     Bits: 16 (float only)
+//                     Use for velocities.
+//
+//////////////////////////////////////////////////////////////////////
 
 // Serialize an absolute position.
-// Limit is fixed to +-2^22 (over 2 million) coords away.
+void serialPosition(BitStream& bs, bool write, int32_t& data);
+inline void serialPosition(BitStream& bs, bool write, IVector2D& data)
+{
+	serialPosition(bs, write, data.x);
+	serialPosition(bs, write, data.y);
+}
 void serialPosition(BitStream& bs, bool write, double& data);
 inline void serialPosition(BitStream& bs, bool write, float& data)
 {
@@ -192,8 +228,29 @@ inline void serialPosition(BitStream& bs, bool write, Rect& data)
 	serialPosition(bs, write, data.bottom);
 }
 
+// Serialize a displacement from a known point.
+void serialDisplacement(BitStream& bs, bool write, int32_t& data);
+inline void serialDisplacement(BitStream& bs, bool write, IVector2D& data)
+{
+	serialDisplacement(bs, write, data.x);
+	serialDisplacement(bs, write, data.y);
+}
+void serialDisplacement(BitStream& bs, bool write, double& data);
+void serialDisplacement(BitStream& bs, bool write, float& data);
+inline void serialDisplacement(BitStream& bs, bool write, Vector2D& data)
+{
+	serialDisplacement(bs, write, data.x);
+	serialDisplacement(bs, write, data.y);
+}
+inline void serialDisplacement(BitStream& bs, bool write, Rect& data)
+{
+	serialDisplacement(bs, write, data.left);
+	serialDisplacement(bs, write, data.top);
+	serialDisplacement(bs, write, data.right);
+	serialDisplacement(bs, write, data.bottom);
+}
+
 // Serialize a velocity.
-// Half single precision; Limit is fixed to +-65504 coords per second.
 inline void serialVelocity(BitStream& bs, bool write, double& data)
 {
 	serialHalf(bs, write, data);
@@ -207,14 +264,33 @@ inline void serialVelocity(BitStream& bs, bool write, Vector2D& data)
 	serialHalf(bs, write, data);
 }
 
+//////////////////////////////////////////////////////////////////////
+//
+// Miscellaneous Compression
+// 
+// boolean:   Serialized as one bit
+//
+// vector<T>: Serialized as 16-bit length + each entry
+//            Limited to 65535 entries
+//
+// string:    Serialized with huffman compression.
+//
+//////////////////////////////////////////////////////////////////////
+
+// Boolean compression
+inline void serial(BitStream& bs, bool write, bool& data)
+{
+	bs.SerializeCompressed(write, data);
+}
+
 // Serialize a whole std::vector.
 // Limited to 65535 entries.
 template<typename T>
 void serial(BitStream& bs, bool write, std::vector<T>& data)
 {
 	if (write) {
-		uint16_t size = data.size();
-		assert(size < (2 << 16));
+		assert(data.size() < 2 << 16);
+		uint16_t size = uint16_t(data.size());
 		serial(bs, write, size);
 		BOOST_FOREACH(T& value, data) {
 			serial(bs, write, value);

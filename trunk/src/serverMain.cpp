@@ -3,6 +3,7 @@
 #include "frameTimer.h"
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
 
 int listen(int argc, char **argv)
 {
@@ -71,11 +72,16 @@ int main(int argc, char **argv)
 		
 		// Check packets
 		for (;;) {
-			// Check packets until we run out
-			std::auto_ptr<NetworkPacket> packet = NetworkServer::current().receive();
-			if (!packet.get()) break;
-			
-			packet->respondServer();
+			try {
+				// Check packets until we run out
+				std::auto_ptr<NetworkPacket> packet = NetworkServer::current().receive();
+				if (!packet.get()) break;
+				
+				packet->respondServer();
+			}
+			catch (std::runtime_error& e) {
+				std::cout << "Packet error: " << e.what() << std::endl;
+			}
 		}
 
 		// Update time step.

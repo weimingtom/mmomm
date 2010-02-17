@@ -1,24 +1,25 @@
-#include "events.h"
-#include "renderer.h"
-#include "openglRenderer.h"
-#include "softwareRenderer.h"
-#include "image.h"
-#include "imageManager.h"
 #include "animation.h"
 #include "animationManager.h"
+#include "chatWindow.h"
+#include "clientActor.h"
 #include "clientSprites.h"
-#include "gui.h"
+#include "clientWorldInstance.h"
 #include "configurationMenu.h"
+#include "events.h"
+#include "frameTimer.h"
+#include "gui.h"
+#include "image.h"
+#include "imageManager.h"
 #include "loginMenu.h"
 #include "mouseSelectionMenu.h"
 #include "networkClient.h"
-#include "chatWindow.h"
-#include "clientWorldInstance.h"
-#include "clientActor.h"
-#include "frameTimer.h"
+#include "openglRenderer.h"
+#include "renderer.h"
+#include "softwareRenderer.h"
 
-#include <vector>
 #include <SDL/SDL_ttf.h>
+#include <vector>
+#include <stdexcept>
 
 ConfigurationMenu *configMenu = 0;
 LoginMenu* loginMenu = 0;
@@ -167,11 +168,17 @@ int main(int argc, char **argv)
 
 		// Check packets
 		while (NetworkClient::current().isActive()) {
-			// Check packets until we run out
-			std::auto_ptr<NetworkPacket> packet = NetworkClient::current().receive();
-			if (!packet.get()) break;
+			try {
+				// Check packets until we run out
+				std::auto_ptr<NetworkPacket> packet = NetworkClient::current().receive();
 
-			packet->respondClient();
+				if (!packet.get()) break;
+
+				packet->respondClient();
+			}
+			catch (std::runtime_error& e) {
+				cout << "Packet error: " << e.what() << endl;
+			}
 		}
 
         Gui::current().logic();
