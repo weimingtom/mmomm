@@ -7,13 +7,15 @@
 #include "tileTypes.h"
 #include "vector2D.h"
 
+// TODO: Single tile updates (requires reworking of serverWorldMap).
+
 class ServerWorldMap {
 public:
 	
 	~ServerWorldMap();
 
 	// Saves/loads tile data from/to a given (possibly new) cell and returns it.
-	typedef std::vector<uint8_t> TileDataVector;
+	typedef std::vector<TileType> TileDataVector;
 	void loadCell(const IVector2D& v, const TileDataVector& tileData);
 	void saveCell(const IVector2D& v, TileDataVector& buffer);
 	
@@ -26,11 +28,11 @@ public:
 	
 private:
 
-    typedef boost::multi_array< uint8_t, 2 > Cell;
+    typedef boost::multi_array< TileType, 2 > Cell;
     typedef boost::unordered_map< IVector2D, Cell* > CellMap;
 	CellMap _cellMap;
 
-    uint8_t& getTile(const IVector2D& v);
+    TileType& getTile(const IVector2D& v);
     Cell& getCell(const IVector2D& v);
 };
 

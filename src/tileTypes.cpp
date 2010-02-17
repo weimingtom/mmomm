@@ -4,7 +4,7 @@ const IVector2D CELL_DIMENSIONS = IVector2D(32, 32);
 
 TileSprite determineTileSprite(
 	TileType center, 
-	TileType left, 
+	TileType left,
 	TileType top, 
 	TileType right, 
 	TileType bottom)

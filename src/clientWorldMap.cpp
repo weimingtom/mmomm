@@ -22,14 +22,13 @@ void ClientWorldMap::loadCell(const IVector2D& v, const TileDataVector& tileData
 {
 	Cell& cell = getCell(v);
 	if (tileData.size() != cell.num_elements()) {
-		std::stringstream ss;
-		ss << "Wrong amount of cell tile data given to load into a new cell. ";
-		ss << tileData.size() << " found, " << cell.num_elements() << " needed.";
-		throw new LoadException(ss.str());
+		SERIALIZATION_EXCEPTION(
+			"Wrong amount of cell tile data given to load into a new cell. " <<
+			tileData.size() << " found, " << cell.num_elements() << " needed.");
 	}
 	
 	ClientTile *iter = cell.data();
-	BOOST_FOREACH(uint8_t type, tileData) {
+	BOOST_FOREACH(TileType type, tileData) {
 		*iter++ = ClientTile(TileType(type), DIRTY_TILE);
 	}
 	assert(iter == cell.data() + cell.size());
@@ -63,8 +62,8 @@ TileType ClientWorldMap::getTile(const IVector2D& v) const
 
 ClientTile& ClientWorldMap::getTile(const IVector2D& v)
 {
-	IVector2D cellIndex = v.memberwiseMod(CELL_DIMENSIONS);
-	IVector2D tileIndex = v.memberwiseDiv(CELL_DIMENSIONS);
+	IVector2D cellIndex = v.memberwiseDiv(CELL_DIMENSIONS);
+	IVector2D tileIndex = v.memberwiseMod(CELL_DIMENSIONS);
 
 	if (v.x < 0) {
 		cellIndex.x -= 1;

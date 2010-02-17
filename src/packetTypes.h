@@ -18,7 +18,10 @@ enum PacketType {
 	
 	// World updates
 	ID_COLLISION_CREATE,
-	ID_COLLISION_UPDATE
+	ID_COLLISION_UPDATE,
+
+	// World map updates
+	ID_WORLD_MAP_CELL
 };
 
 // Ordering channels; max of 32
@@ -27,6 +30,8 @@ enum OrderedChannel {
 	ORDER_DEFAULT = 0,
 	// Chat message band
 	ORDER_CHAT = 1,
+	// World map update band
+	ORDER_CELL = 2,
 };
 
 // Sequence channels; max of 32

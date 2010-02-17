@@ -23,10 +23,9 @@ void ServerWorldMap::loadCell(const IVector2D& v, const TileDataVector& tileData
 {
 	Cell& cell = getCell(v);
 	if (tileData.size() != cell.num_elements()) {
-		std::stringstream ss;
-		ss << "Wrong amount of cell tile data given to load into a new cell. ";
-		ss << tileData.size() << " found, " << cell.num_elements() << " needed.";
-		throw new LoadException(ss.str());
+		SERIALIZATION_EXCEPTION(
+			"Wrong amount of cell tile data given to load into a new cell. " <<
+			tileData.size() << " found, " << cell.num_elements() << " needed.");
 	}
 	
 	std::copy(tileData.begin(), tileData.end(), cell.data());
@@ -47,10 +46,10 @@ void ServerWorldMap::discardCell(const IVector2D& v)
 
 TileType ServerWorldMap::getTile(const IVector2D& v) const
 {
-	return TileType(const_cast<ServerWorldMap&>(*this).getTile(v));
+	return const_cast<ServerWorldMap&>(*this).getTile(v);
 }
 
-uint8_t& ServerWorldMap::getTile(const IVector2D& v)
+TileType& ServerWorldMap::getTile(const IVector2D& v)
 {
 	IVector2D cellIndex = v.memberwiseMod(CELL_DIMENSIONS);
 	IVector2D tileIndex = v.memberwiseDiv(CELL_DIMENSIONS);

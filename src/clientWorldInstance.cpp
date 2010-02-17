@@ -110,7 +110,11 @@ void ClientWorldInstance::render() const
 	Vector2D centre = _camera;
     const ActorMap& actors = getActorMap();
     Renderer& renderer = Renderer::current();
-
+	
+	getWorldMap().render(
+		Rect(_camera - renderer.getScreenDimensions() * (.5 / PIXELS_PER_WORLD_UNIT),
+			 _camera + renderer.getScreenDimensions() * (.5 / PIXELS_PER_WORLD_UNIT)));
+	
     for ( ActorMap::const_iterator i = actors.begin(); i != actors.end(); i++ ) {
         assert(dynamic_cast< ClientActor* >(i->second));
         ClientActor *a = static_cast<ClientActor *>(i->second);

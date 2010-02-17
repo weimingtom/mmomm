@@ -317,6 +317,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\packetTypes.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\playerActor.h"
 				>
 			</File>
@@ -346,6 +350,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\worldInstance.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\worldMapPackets.h"
 				>
 			</File>
 		</Filter>

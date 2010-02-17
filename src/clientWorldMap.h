@@ -26,7 +26,7 @@ public:
 	~ClientWorldMap();
 
 	// Loads tile data into a given (possibly new) cell and returns it.
-	typedef std::vector<uint8_t> TileDataVector;
+	typedef std::vector<TileType> TileDataVector;
 	void loadCell(const IVector2D& v, const TileDataVector& tileData);
 	
     // Removes the given cell from memory, if it exists.

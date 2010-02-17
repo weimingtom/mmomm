@@ -2,6 +2,7 @@
 #include "frameTimer.h"
 #include "networkServer.h"
 #include "playerActor.h"
+#include "serializationException.h"
 #include "serverWorldInstance.h"
 #include "user.h"
 #include <iostream>
@@ -10,14 +11,15 @@ void MovementPacket::respondServer() const
 {
 	PlayerActor *actor = ServerWorldInstance::current().getUserActor(sender());
 	if (!actor) {
-		std::cout << "Received a movement packet for ";
-		std::cout << sender().username() << " when no actor is assigned." << std::endl;
+		SERIALIZATION_EXCEPTION(
+			"Received a movement packet from " <<
+			sender().username() << " when no actor is assigned.");
 	}
 	BOOST_FOREACH(const MovementUpdate& update, movement()) {
 		if (update.id != actor->id()) {
-			std::cout << "Received a movement update for ";
-			std::cout << sender().username() << " for non-player actor." << std::endl;
-			continue;
+			SERIALIZATION_EXCEPTION(
+				"Received a movement packet from " <<
+				sender().username() << " for a non-player actor " << update.id << ".");
 		}
 		if (actor->getUpdateTime() < timestamp()) {
 			// TODO: Verify that the movement is feasible (avoid teleport hacks).

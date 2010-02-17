@@ -9,15 +9,16 @@ void ChatMessagePacket::respondServer() const
 	std::vector<User *> users = NetworkServer::current().users();
 	if(type() == CHAT_MESSAGE_PRIVATE) {
         BOOST_FOREACH(User *user, users) {
-            if(!user->username().compare(target())) { //compare returns 0 if equal
+            if (user->username() == target()) {
                 NetworkServer::current().send(packet, *user);
             }
-            else if(!user->username().compare(from())) { //compare returns 0 if equal
+            else if(user->username() == from()) {
                 NetworkServer::current().send(packet, *user);
             }
         }
 	}
-	else
+	else {
         NetworkServer::current().send(packet, users.begin(), users.end());
+	}
 }
 
