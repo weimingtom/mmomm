@@ -1,15 +1,16 @@
 #ifndef NETWORK_PACKET_H_
 #define NETWORK_PACKET_H_
 
+#include "frameTimer.h"
+#include "serializationException.h"
+#include "vector2D.h"
 #include <RakNet/BitStream.h>
+#include <RakNet/NativeTypes.h>
 #include <RakNet/RakNetTypes.h>
 #include <RakNet/RakPeerInterface.h>
+#include <boost/foreach.hpp>
 #include <string>
 #include <vector>
-#include <boost/foreach.hpp>
-#include <RakNet/NativeTypes.h>
-#include "vector2D.h"
-#include "frameTimer.h"
 
 using RakNet::BitStream;
 class User;
@@ -89,9 +90,19 @@ public:
 	// Implementation is different between client and server.
 	// HACK: Use macro to avoid errors for not defining one or the other.
 #ifdef MMOMM_CLIENT
-	virtual void respondClient() const = 0;
+	virtual void respondClient() const
+	{
+		INVALID_PACKET_EXCEPTION(
+			"Received unexpected packet on client of type " <<
+			typeid(this).name() << ".");
+	}
 #else
-	virtual void respondServer() const = 0;
+	virtual void respondServer() const
+	{
+		INVALID_PACKET_EXCEPTION(
+			"Received unexpected packet on server of type " <<
+			typeid(this).name() << ".");
+	}
 #endif
 
 private:

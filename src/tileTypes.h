@@ -36,5 +36,9 @@ TileSprite determineTileSprite(
 // Render the specified sprite to the screen.
 void renderTileSprite(TileSprite sprite, const Vector2D& position);
 
+// Convert from tile coordinates to cell coordinates.
+IVector2D toCellCoordinates(const IVector2D& tile);
+// Convert from cell coordinates to tile coordinates.
+IVector2D toTileCoordinates(const IVector2D& cell);
 
 #endif

@@ -4,6 +4,8 @@
 #include "frameTimer.h"
 #include "networkServer.h"
 #include "serverWorldInstance.h"
+#include "serverWorldMap.h"
+#include "worldMapPackets.h"
 #include <boost/foreach.hpp>
 #include <boost/unordered_set.hpp>
 #include <algorithm>
@@ -178,5 +180,65 @@ void User::sendNetworkUpdate(const Actor *userActor)
  		MovementPacket movePacket(position,
 			movement.begin(), movement.end());
 		NetworkServer::current().send(movePacket, *this);
+	}
+}
+
+// Chebyshev distance
+// 3 3 3 3 3 3 3
+// 3 2 2 2 2 2 3
+// 3 2 1 1 1 2 3
+// 3 2 1 0 1 2 3
+// 3 2 1 1 1 2 3
+// 3 2 2 2 2 2 3
+// 3 3 3 3 3 3 3
+// Send/update everything within a Chebyshev distance of 1
+// Forget everything past a Chebyshev distance of 3
+// Client keeps everything within a Chebyshev distance of 4
+void User::sendWorldMapUpdate(const Actor *userActor)
+{
+	ServerWorldMap& map = ServerWorldInstance::current().getWorldMap();
+	const IVector2D tilePosition = IVector2D(userActor->getPosition());
+	const IVector2D cellPosition = toCellCoordinates(tilePosition);
+	
+	// Forget far away stuff
+	typedef std::vector<IVector2D> CellList;
+	CellList iterList;
+	BOOST_FOREACH(const CellMap::value_type& value, _cell) {
+		iterList.push_back(value.first);
+	}
+	BOOST_FOREACH(const IVector2D& index, iterList) {
+		const IVector2D dist = index - cellPosition;
+		int32_t distance = std::max(std::abs(dist.x), std::abs(dist.y));
+		if (distance > 3) {
+			_cell.erase(index);
+		}
+	}
+
+	// Send/update stuff within a chebyshev distance of 1
+	typedef std::vector<CellUpdate> CellUpdateList;
+	typedef std::vector<TileUpdate> TileUpdateList;
+	CellUpdateList cellUpdates;
+	TileUpdateList tileUpdates;
+	IVector2D index;
+	double now = FrameTimer::current().frameTime();
+	for (index.y = cellPosition.y - 1; index.y <= cellPosition.y + 1; ++index.y) {
+		for (index.x = cellPosition.x - 1; index.x <= cellPosition.x + 1; ++index.x) {
+			std::pair<CellMap::iterator, bool> result = _cell.insert(
+				CellMap::value_type(index, 0));
+			if (result.second || map.getUpdateTime(index) > result.first->second) {
+				cellUpdates.push_back(CellUpdate());
+				cellUpdates.back().position = index - cellPosition;
+				map.saveCell(index, cellUpdates.back().tiles);
+			}
+			result.first->second = now;
+		}
+	}
+
+	// Send out the packet, if there's anything to send
+	if (cellUpdates.size() > 0 || tileUpdates.size() > 0) {
+		CellPacket packet(tilePosition,
+			cellUpdates.begin(), cellUpdates.end(),
+			tileUpdates.begin(), tileUpdates.end());
+		NetworkServer::current().send(packet, *this);
 	}
 }
