@@ -12,6 +12,8 @@ struct GVector2D {
 	GVector2D(): x(), y() { }
 	template<typename U>
 	GVector2D(U x, U y): x(T(x)), y(T(y)) { }
+	template<typename U>
+	explicit GVector2D(const GVector2D<U>& rhs): x(T(rhs.x)), y(T(rhs.y)) { }
 	
 	// Returns the length squared of this vector (faster than length()).
 	T lengthSquared() const;

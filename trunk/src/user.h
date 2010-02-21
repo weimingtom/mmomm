@@ -23,7 +23,11 @@ public:
 	// Send actor updates centered on the given position
 	// Network-intensive; do not call every frame.
 	void sendNetworkUpdate(const Actor *userActor);
-	
+
+	// Send world updates centered on the given position
+	// Not-so-network-intensive; can call every frame.
+	void sendWorldMapUpdate(const Actor *userActor);
+
 private:
 	// Data we last told the user about
 	struct ActorData {
@@ -42,7 +46,11 @@ private:
 	struct ActorScore;
 	struct ActorScoreComparator;
 	static double score(const PacketValue& value, const Vector2D& reference);
-
+	
+	// What cells this actor has been told about, and when
+	typedef boost::unordered_map< IVector2D, double > CellMap;
+	CellMap _cell;
+	
 	std::string _username;
 	SystemAddress _address;
 };

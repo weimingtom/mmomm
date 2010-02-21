@@ -28,10 +28,10 @@ public:
 		return NetworkParams(ID_CHAT_MESSAGE, LOW_PRIORITY, RELIABLE_ORDERED, ORDER_CHAT);
 	}
 
-	// Respond to successful connection on client.
+	// Respond to a chat message received on the client.
 	void respondClient() const;
 
-	// Respond to a new incoming connection.
+	// Respond to a chat message received on the server.
 	void respondServer() const;
 
 	// Serialization function.

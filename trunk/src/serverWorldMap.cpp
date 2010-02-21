@@ -1,4 +1,5 @@
 #include "serverWorldMap.h"
+#include "frameTimer.h"
 #include "serializationException.h"
 #include <boost/foreach.hpp>
 #include <functional>
@@ -69,5 +70,10 @@ TileType& ServerWorldMap::getTile(const IVector2D& v)
 void ServerWorldMap::setTile(const IVector2D& v, TileType type)
 {
 	getTile(v) = type;
+	_updateMap[toCellCoordinates(v)] = FrameTimer::current().now();
 }
 
+double ServerWorldMap::getUpdateTime(const IVector2D& cell) const
+{
+	return _updateMap[cell];
+}

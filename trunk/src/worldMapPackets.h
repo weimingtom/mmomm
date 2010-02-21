@@ -1,7 +1,7 @@
 #ifndef WORLD_MAP_PACKETS_H_
 #define WORLD_MAP_PACKETS_H_
 
-// Packets linked world map tiles.
+// Packets involving world map tiles.
 
 #include <string>
 #include <iostream>
@@ -28,14 +28,14 @@ struct TileUpdate {
 
 inline void serial(BitStream& bs, bool write, CellUpdate& data)
 {
-	serial(bs, write, data.position);
-	serial(bs, write, data.tiles);
+	serialDisplacement(bs, write, data.position);
+	serialFixed(bs, write, data.tiles, CELL_DIMENSIONS.y * CELL_DIMENSIONS.x);
 }
 
 inline void serial(BitStream& bs, bool write, TileUpdate& data)
 {
-	serial(bs, write, data.position);
-	serial(bs, write, data.tile);
+	serialDisplacement(bs, write, data.position);
+	serialFull(bs, write, data.tile);
 }
 
 // Occurs to inform about new and updated cells.
@@ -62,7 +62,6 @@ public:
 	void respondClient() const;
 
 	// Invalid message on server.
-	void respondServer() const { }
 	
 	// Serialization function.
 	void serialize(BitStream& bs, bool write)
@@ -72,16 +71,16 @@ public:
 		serial(bs, write, _tile);
 	}
 	
-	const Vector2D& referencePoint() const { return _referencePoint; }
+	const IVector2D& referencePoint() const { return _referencePoint; }
 	
-	typedef std::vector<CreationUpdate> CellList;
+	typedef std::vector<CellUpdate> CellList;
 	const CellList& cell() const { return _cell; }
 	
-	typedef std::vector<DestructionUpdate> TileList;
+	typedef std::vector<TileUpdate> TileList;
 	const TileList& tile() const { return _tile; }
 	
 private:
-	Vector2D _referencePoint;
+	IVector2D _referencePoint;
 	CellList _cell;
 	TileList _tile;
 };

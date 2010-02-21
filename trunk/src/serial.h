@@ -268,12 +268,15 @@ inline void serialVelocity(BitStream& bs, bool write, Vector2D& data)
 //
 // Miscellaneous Compression
 // 
-// boolean:   Serialized as one bit
+// serial(boolean):                Serialized as one bit
 //
-// vector<T>: Serialized as 16-bit length + each entry
-//            Limited to 65535 entries
+// serial(vector<T>):              Serialized as 16-bit length + each entry
+//                                 Limited to 65535 entries
 //
-// string:    Serialized with huffman compression.
+// serialFixed(vector<T>, length): Serialized as a series of entries of known length
+//                                 Limited to 65535 entries
+//
+// serial(string):                 Serialized with huffman compression.
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -301,6 +304,24 @@ void serial(BitStream& bs, bool write, std::vector<T>& data)
 		serial(bs, write, size);
 		data.resize(size);
 		for (unsigned i = 0; i < size; ++i) {
+			serial(bs, write, data[i]);
+		}
+	}
+}
+
+// Serialize a whole std::vector with known length.
+template<typename T>
+void serialFixed(BitStream& bs, bool write, std::vector<T>& data, uint32_t length)
+{
+	if (write) {
+		assert(uint32_t(data.size()) == length);
+		BOOST_FOREACH(T& value, data) {
+			serial(bs, write, value);
+		}
+	}
+	else {
+		data.resize(length);
+		for (unsigned i = 0; i < length; ++i) {
 			serial(bs, write, data[i]);
 		}
 	}

@@ -1,7 +1,7 @@
 #ifndef COLLISION_PACKETS_H_
 #define COLLISION_PACKETS_H_
 
-// Packets linked with chatting.
+// Packets linked with actors and collision.
 
 #include <string>
 #include <iostream>
@@ -22,6 +22,18 @@ struct CreationUpdate {
     std::string name;
 };
 
+// Informs the player that an entity is no longer relevant
+struct DestructionUpdate {
+	ActorID id;
+};
+
+// Informs the player of an entity's new position and velocity
+struct MovementUpdate {
+	ActorID id;
+	Vector2D displacement;
+	Vector2D velocity;
+};
+
 inline void serial(BitStream& bs, bool write, CreationUpdate& data)
 {
 	serialFull(bs, write, data.id);
@@ -32,22 +44,10 @@ inline void serial(BitStream& bs, bool write, CreationUpdate& data)
     serial(bs, write, data.name);
 }
 
-// Informs the player that an entity is no longer relevant
-struct DestructionUpdate {
-	ActorID id;
-};
-
 inline void serial(BitStream& bs, bool write, DestructionUpdate& data)
 {
 	serialFull(bs, write, data.id);
 }
-
-// Informs the player of an entity's new position and velocity
-struct MovementUpdate {
-	ActorID id;
-	Vector2D displacement;
-	Vector2D velocity;
-};
 
 inline void serial(BitStream& bs, bool write, MovementUpdate& data)
 {
@@ -79,8 +79,7 @@ public:
 	// Respond to object creation on client.
 	void respondClient() const;
 
-	// Invalid message on server.
-	void respondServer() const { }
+	// Invalid on server.
 
 	// Serialization function.
 	void serialize(BitStream& bs, bool write)
