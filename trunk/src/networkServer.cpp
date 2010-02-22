@@ -101,7 +101,7 @@ NetworkServer::AutoPacket NetworkServer::receive()
 			User *user = findUser(raw->systemAddress);
 			if (!user) {
 				packetHeader(std::cout, *raw);
-				std::cout << "Packet from unknown user: " << packet->kind() << std::endl;
+				std::cout << "Packet from unknown user: " << int(packet->kind()) << std::endl;
 				continue;
 			}
 			packet->read(raw, user);
@@ -121,7 +121,7 @@ NetworkServer::AutoPacket NetworkServer::processPacket(const Packet& raw)
 			return packet;
 		}
 		packetHeader(std::cout, raw);
-		std::cout << "Unknown user packet detected: " << kind << std::endl;
+		std::cout << "Unknown user packet detected: " << int(kind) << std::endl;
 		return AutoPacket(new TamperPacket);
 	}
 
@@ -173,7 +173,7 @@ NetworkServer::AutoPacket NetworkServer::processPacket(const Packet& raw)
 	// Some other packet we don't care about
 	default:
 		packetHeader(std::cout, raw);
-		std::cout << "Unused system packet ignored: " << kind << std::endl;
+		std::cout << "Unused system packet ignored: " << int(kind) << std::endl;
 		return AutoPacket();
 	}
 }
