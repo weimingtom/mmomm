@@ -11,6 +11,7 @@
 #include <boost/foreach.hpp>
 #include <string>
 #include <vector>
+#include <typeinfo>
 
 using RakNet::BitStream;
 class User;
