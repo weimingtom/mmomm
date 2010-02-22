@@ -140,6 +140,12 @@
 		<Unit filename="../src/clientWorldInstance.h">
 			<Option virtualFolder="World/" />
 		</Unit>
+		<Unit filename="../src/clientWorldMap.cpp">
+			<Option virtualFolder="World/" />
+		</Unit>
+		<Unit filename="../src/clientWorldMap.h">
+			<Option virtualFolder="World/" />
+		</Unit>
 		<Unit filename="../src/collision.cpp">
 			<Option virtualFolder="Core/" />
 		</Unit>
@@ -291,6 +297,12 @@
 		<Unit filename="../src/sprite.h">
 			<Option virtualFolder="Core/Animations/" />
 		</Unit>
+		<Unit filename="../src/tileTypes.cpp">
+			<Option virtualFolder="World/" />
+		</Unit>
+		<Unit filename="../src/tileTypes.h">
+			<Option virtualFolder="World/" />
+		</Unit>
 		<Unit filename="../src/trueTypeFont.cpp">
 			<Option virtualFolder="Guis/" />
 		</Unit>
@@ -303,22 +315,10 @@
 		<Unit filename="../src/vector2D.h">
 			<Option virtualFolder="Core/" />
 		</Unit>
-		<Unit filename="../src/worldCommon.cpp">
-			<Option virtualFolder="World/" />
-		</Unit>
-		<Unit filename="../src/worldCommon.h">
-			<Option virtualFolder="World/" />
-		</Unit>
 		<Unit filename="../src/worldInstance.cpp">
 			<Option virtualFolder="World/" />
 		</Unit>
 		<Unit filename="../src/worldInstance.h">
-			<Option virtualFolder="World/" />
-		</Unit>
-		<Unit filename="../src/worldMap.cpp">
-			<Option virtualFolder="World/" />
-		</Unit>
-		<Unit filename="../src/worldMap.h">
 			<Option virtualFolder="World/" />
 		</Unit>
 		<Extensions>
