@@ -116,7 +116,7 @@ NetworkClient::AutoPacket NetworkClient::receive()
 			
 			if (_state != STATE_AUTHENTICATING) {
 				packetHeader(std::cout, *raw);
-				std::cout << "Received packet before being connected: " << packet->kind() << std::endl;
+				std::cout << "Received packet before being connected: " << int(packet->kind()) << std::endl;
 				continue;
 			}
 			// Assume a connection; packet just didn't get here first
@@ -126,7 +126,7 @@ NetworkClient::AutoPacket NetworkClient::receive()
 			packet.reset(new ConnectionPacket());
 
 			packetHeader(std::cout, *raw);
-			std::cout << "Received packet while authenticating (early connect): " << packet->kind() << std::endl;
+			std::cout << "Received packet while authenticating (early connect): " << int(packet->kind()) << std::endl;
 		}
 
 		assert(packet.get());
@@ -146,7 +146,7 @@ NetworkClient::AutoPacket NetworkClient::processPacket(const Packet& raw)
 			return packet;
 		}
 		packetHeader(std::cout, raw);
-		std::cout << "Unknown user packet detected: " << kind << std::endl;
+		std::cout << "Unknown user packet detected: " << int(kind) << std::endl;
 		return AutoPacket(new TamperPacket);
 	}
 	
@@ -156,7 +156,7 @@ NetworkClient::AutoPacket NetworkClient::processPacket(const Packet& raw)
 	{
 		if (_state != STATE_CONNECTING) {
 			packetHeader(std::cout, raw);
-			std::cout << "Duplicate connection accepted: " << kind << std::endl;
+			std::cout << "Duplicate connection accepted: " << int(kind) << std::endl;
 			return AutoPacket();
 		}
 		_state = STATE_AUTHENTICATING;
@@ -185,7 +185,7 @@ NetworkClient::AutoPacket NetworkClient::processPacket(const Packet& raw)
 	{
 		if (isConnected()) {
 			packetHeader(std::cout, raw);
-			std::cout << "Connection attempt failed while active; ignored. " << kind << std::endl;
+			std::cout << "Connection attempt failed while active; ignored. " << int(kind) << std::endl;
 			return AutoPacket();
 		}
 		disconnect();
@@ -226,7 +226,7 @@ NetworkClient::AutoPacket NetworkClient::processPacket(const Packet& raw)
 	{
 		if (_state != STATE_AUTHENTICATING) {
 			packetHeader(std::cout, raw);
-			std::cout << "Duplicate authentication ignored: " << kind << std::endl;
+			std::cout << "Duplicate authentication ignored: " << int(kind) << std::endl;
 			return AutoPacket();
 		}
 		_state = STATE_CONNECTED;
@@ -239,7 +239,7 @@ NetworkClient::AutoPacket NetworkClient::processPacket(const Packet& raw)
 	{
 		if (_state != STATE_AUTHENTICATING) {
 			packetHeader(std::cout, raw);
-			std::cout << "Duplicate authentication ignored: " << kind << std::endl;
+			std::cout << "Duplicate authentication ignored: " << int(kind) << std::endl;
 			return AutoPacket();
 		}
 		std::string reason;
@@ -257,7 +257,7 @@ NetworkClient::AutoPacket NetworkClient::processPacket(const Packet& raw)
 	// Some other packet we don't care about
 	default:
 		packetHeader(std::cout, raw);
-		std::cout << "Unused system packet ignored: " << kind << std::endl;
+		std::cout << "Unused system packet ignored: " << int(kind) << std::endl;
 		return AutoPacket();
 	}
 }

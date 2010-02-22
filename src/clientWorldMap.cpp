@@ -31,7 +31,7 @@ void ClientWorldMap::loadCell(const IVector2D& v, const TileDataVector& tileData
 	BOOST_FOREACH(TileType type, tileData) {
 		*iter++ = ClientTile(TileType(type), DIRTY_TILE);
 	}
-	assert(iter == cell.data() + cell.size());
+	assert(iter == cell.data() + cell.num_elements());
 
 	// Dirty the edges of the nearby cells.
 	Cell& left =   getCell(v - IVector2D(1, 0));

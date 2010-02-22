@@ -1,5 +1,6 @@
 #include "serverWorldInstance.h"
 #include <iostream>
+#include <boost/foreach.hpp>
 #include "frameTimer.h"
 #include "playerActor.h"
 #include "serverWorldMap.h"
@@ -56,6 +57,13 @@ ServerWorldInstance& ServerWorldInstance::current()
 void ServerWorldInstance::update(double elapsed)
 {
     WorldInstance::update(elapsed);
+
+	// Update tiles for each user
+	BOOST_FOREACH(User *user, _userList) {
+		user->sendWorldMapUpdate(_userMap[user]);
+	}
+
+	// Update actors for each user
     _updatesOffset += _userList.size() * 10.0 / FrameTimer::current().framerate();
     int updates = int(_updatesOffset);
     _updatesOffset -= updates;
