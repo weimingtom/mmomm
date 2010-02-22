@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Debug-x64" />
+	<ActiveTarget name="Debug" />
 	<File name="../src/actor.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../src/actor.h" open="1" top="0" tabpos="0">
 		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="../src/animation.cpp" open="0" top="0" tabpos="2">
@@ -35,16 +32,19 @@
 		<Cursor position="312" topLine="0" />
 	</File>
 	<File name="../src/clientCollisionPackets.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="812" topLine="0" />
+		<Cursor position="734" topLine="0" />
 	</File>
 	<File name="../src/clientNativePackets.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="244" topLine="0" />
 	</File>
-	<File name="../src/clientWorldInstance.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="4868" topLine="134" />
+	<File name="../src/clientWorldInstance.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="6678" topLine="198" />
 	</File>
 	<File name="../src/clientWorldInstance.h" open="0" top="0" tabpos="0">
 		<Cursor position="635" topLine="0" />
+	</File>
+	<File name="../src/clientWorldMap.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="3514" topLine="0" />
 	</File>
 	<File name="../src/collision.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="0" topLine="81" />
@@ -85,19 +85,19 @@
 	<File name="../src/imageManager.h" open="0" top="0" tabpos="0">
 		<Cursor position="348" topLine="0" />
 	</File>
-	<File name="../src/loginMenu.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="253" topLine="0" />
+	<File name="../src/loginMenu.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="1891" topLine="66" />
 	</File>
 	<File name="../src/loginMenu.h" open="0" top="0" tabpos="0">
 		<Cursor position="426" topLine="0" />
 	</File>
-	<File name="../src/main.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="2235" topLine="43" />
+	<File name="../src/main.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="4716" topLine="139" />
 	</File>
-	<File name="../src/mouseSelectionMenu.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="3705" topLine="121" />
+	<File name="../src/mouseSelectionMenu.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="1032" topLine="4" />
 	</File>
-	<File name="../src/mouseSelectionMenu.h" open="1" top="0" tabpos="2">
+	<File name="../src/mouseSelectionMenu.h" open="0" top="0" tabpos="2">
 		<Cursor position="857" topLine="0" />
 	</File>
 	<File name="../src/nativePackets.h" open="0" top="0" tabpos="0">
@@ -109,11 +109,8 @@
 	<File name="../src/networkClient.h" open="0" top="0" tabpos="2">
 		<Cursor position="930" topLine="27" />
 	</File>
-	<File name="../src/networkCommon.cpp" open="1" top="0" tabpos="0">
-		<Cursor position="0" topLine="0" />
-	</File>
 	<File name="../src/networkPacket.h" open="0" top="0" tabpos="5">
-		<Cursor position="781" topLine="15" />
+		<Cursor position="781" topLine="0" />
 	</File>
 	<File name="../src/openglRenderer.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="1679" topLine="55" />
@@ -130,6 +127,9 @@
 	<File name="../src/serial.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="819" topLine="11" />
 	</File>
+	<File name="../src/serializationException.h" open="0" top="0" tabpos="0">
+		<Cursor position="518" topLine="0" />
+	</File>
 	<File name="../src/softwareRenderer.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="1474" topLine="27" />
 	</File>
@@ -145,19 +145,10 @@
 	<File name="../src/user.h" open="0" top="0" tabpos="0">
 		<Cursor position="227" topLine="0" />
 	</File>
-	<File name="../src/worldCommon.h" open="0" top="0" tabpos="0">
-		<Cursor position="14" topLine="0" />
-	</File>
 	<File name="../src/worldInstance.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="860" topLine="0" />
 	</File>
 	<File name="../src/worldInstance.h" open="0" top="0" tabpos="1">
 		<Cursor position="174" topLine="0" />
-	</File>
-	<File name="../src/worldMap.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="201" topLine="3" />
-	</File>
-	<File name="../src/worldMap.h" open="0" top="0" tabpos="0">
-		<Cursor position="36" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

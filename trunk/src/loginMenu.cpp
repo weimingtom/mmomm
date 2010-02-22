@@ -39,7 +39,7 @@ LoginMenu::LoginMenu(int x, int y)
                            max(_usernameLabel->getX() + _usernameLabel->getWidth(),
                                _passwordLabel->getX() + _passwordLabel->getWidth()));
 
-        _hostField = new gcn::TextField("localhost");
+        _hostField = new gcn::TextField("94.23.159.217");
         _hostField->setPosition(xPos, _hostLabel->getY() - 2);
         _hostField->setWidth(80);
         _window->add(_hostField);

@@ -140,13 +140,18 @@ int main(int argc, char **argv)
                         NetworkClient::current().disconnect();
                         delete &WorldInstance::current();
                         WorldInstance::setCurrent(new ClientWorldInstance());
-	                    if ( !NetworkClient::current().connect(data->host, data->port, data->username,
-                                                               data->password, data->createAccount) ) {
-                            std::stringstream ss;
-                            ss << "Could not access network "
-                               << data->host << ":" << data->port << "." << std::endl;
-                            chatWindow->addText( ss.str(), ChatMessagePacket::CHAT_MESSAGE_SERVER );
-	                    }
+                        try {
+                            if ( !NetworkClient::current().connect(data->host, data->port, data->username,
+                                                                   data->password, data->createAccount) ) {
+                                std::stringstream ss;
+                                ss << "Could not access network "
+                                   << data->host << ":" << data->port << "." << std::endl;
+                                chatWindow->addText( ss.str(), ChatMessagePacket::CHAT_MESSAGE_SERVER );
+                            }
+                        }
+                        catch(InvalidPacketException& e) {
+                            cout << "more packet error?: " << e.what() << endl;
+                        }
                         delete data;
                     }
                     if ( event.user.code == EVENT_LOGIN_OPTIONS ) {

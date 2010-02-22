@@ -1,4 +1,5 @@
 #include "mouseSelectionMenu.h"
+#include <boost/foreach.hpp>
 
 MouseSelectionMenu *MouseSelectionMenu::_current = 0;
 
@@ -22,7 +23,12 @@ MouseSelectionMenu::MouseSelectionMenu(int x, int y)
 
 MouseSelectionMenu::~MouseSelectionMenu()
 {
-
+    /*BOOST_FOREACH(Widget *w, mWidgets) {
+        std::cout << "deleting " << w << std::endl;
+        delete w;
+    }*/
+    //thing above segfaults for god knows why.
+    //FIXME memory leak here? No. Idea.
 }
 
 void MouseSelectionMenu::addLabel(gcn::Label *label)
@@ -40,7 +46,7 @@ void MouseSelectionMenu::addLabel(gcn::Label *label)
 
 void MouseSelectionMenu::removeLabel(gcn::Label *label)
 {
-
+    //FIXME fill this in and recalculate Y
 }
 
 gcn::Rectangle MouseSelectionMenu::getChildrenArea()
@@ -119,8 +125,6 @@ void MouseSelectionMenu::draw(gcn::Graphics* graphics)
         gcn::Rectangle rec = (*iter)->getDimension();
         graphics->pushClipArea(rec);
         if( (*iter)->getY() > drawRect.y && (*iter)->getY() < drawRect.y + drawRect.height ) {
-            //graphics->setColor(gcn::Color(0, 0, 0, 0));
-            //graphics->fillRectangle(drawRect);
             gcn::Color prevColor = (*iter)->getForegroundColor();
             (*iter)->setForegroundColor(gcn::Color(255, 255, 255, 0));
             (*iter)->draw(graphics);
@@ -156,6 +160,8 @@ void MouseSelectionMenu::mouseClicked(gcn::MouseEvent &mouseEvent)
         if( (*iter)->getY() <= mouseEvent.getY() && (*iter)->getY() + (*iter)->getHeight() >= mouseEvent.getY() &&
             (*iter)->getX() <= mouseEvent.getX() && (*iter)->getX() + (*iter)->getWidth()  >= mouseEvent.getX() ) {
             Gui::current().removeWidget(this);
+            break;
+            //FIXME add a signal-ish thing here, to delete the instance and not have memory leaks.
         }
     }
 
