@@ -35,9 +35,9 @@ public:
     // Directly access the correct tile of the underlying cell at the given position.
     TileType getTile(const IVector2D& v) const;
 	void setTile(const IVector2D& v, TileType type);
-	
-	// Render the specified tiles given the specified camera rect.
-	void render(const Rect& camera) const;
+
+    // Determine the sprite at the given position, calculating if necessary.
+    TileSprite getSprite(const IVector2D& v);
 	
 private:
 	

@@ -20,9 +20,9 @@ enum TileTypeEnum {
 };
 BOOST_STATIC_ASSERT(TILE_COUNT < 256);
 
-typedef uint16_t TileSprite;
+typedef boost::uint16_t TileSprite;
 
-const TileSprite DIRTY_TILE = uint16_t(-1);
+const TileSprite DIRTY_TILE = -1;
 
 // Given the center tile and surrounding tiles,
 // come up with a (possibly random) appropriate sprite.
@@ -32,9 +32,6 @@ TileSprite determineTileSprite(
 	TileType top, 
 	TileType right, 
 	TileType bottom);
-
-// Render the specified sprite to the screen.
-void renderTileSprite(TileSprite sprite, const Vector2D& position);
 
 // Convert from tile coordinates to cell coordinates.
 IVector2D toCellCoordinates(const IVector2D& tile);

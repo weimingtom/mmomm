@@ -9,13 +9,15 @@ TileSprite determineTileSprite(
 	TileType right, 
 	TileType bottom)
 {
-	// TODO: Implement sprite tile based on context.
-	return 0;
-}
-
-void renderTileSprite(TileSprite sprite, const Vector2D& position)
-{
-//    renderer.drawClippedImage(anim->getImage().get(), renderPosition, clip);
+    if ( center == TILE_ETHER )
+        return 0;
+    if ( center == TILE_DIRT )
+        return 1;
+    if ( center == TILE_GRASS )
+        return 2;
+    // Invalid tile type!
+	assert(false);
+    return 6; // Favourite number
 }
 
 IVector2D toCellCoordinates(const IVector2D& tile)

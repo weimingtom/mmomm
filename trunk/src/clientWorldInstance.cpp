@@ -79,6 +79,9 @@ ClientWorldInstance::ClientWorldInstance()
 , _camera(0, 0)
 , _worldMap(new ClientWorldMap())
 {
+    _tileset = AnimationManager::current().createAnimation(ImageManager::current().getImage("tileset.png"),
+                                                           32, 32, 1, 0, -1, false);
+
     // Input map
     _keyMap[SDLK_LEFT]  = KEY_LEFT;
     _keyMap[SDLK_RIGHT] = KEY_RIGHT;
@@ -105,19 +108,39 @@ ClientWorldInstance& ClientWorldInstance::current()
     return *(ClientWorldInstance*)&WorldInstance::current();
 }
 
-void ClientWorldInstance::render() const
+void ClientWorldInstance::render()
 {
+    if ( _clientPlayerActor )
+        _camera = Vector2D(.5 * (_clientPlayerActor->getCollisionRect().left + _clientPlayerActor->getCollisionRect().right ),
+                           .5 * (_clientPlayerActor->getCollisionRect().top  + _clientPlayerActor->getCollisionRect().bottom));
+    else
+        _camera = Vector2D(0, 0);
 	Vector2D centre = _camera;
     const ActorMap& actors = getActorMap();
     Renderer& renderer = Renderer::current();
+
+	// First/past-the-end tiles to render.
+    Rect camera = Rect(_camera - renderer.getScreenDimensions() * (.5 / PIXELS_PER_WORLD_UNIT),
+                       _camera + renderer.getScreenDimensions() * (.5 / PIXELS_PER_WORLD_UNIT));
+    IVector2D min(std::floor(camera.left), std::floor(camera.top));
+	IVector2D max(std::ceil(camera.right), std::ceil(camera.bottom));
 	
-	getWorldMap().render(
-		Rect(_camera - renderer.getScreenDimensions() * (.5 / PIXELS_PER_WORLD_UNIT),
-			 _camera + renderer.getScreenDimensions() * (.5 / PIXELS_PER_WORLD_UNIT)));
-	
+    AnimationManager::shared_ptr tileset = AnimationManager::current().getAnimation(_tileset);
+	IVector2D i;
+	for (i.y = min.y; i.y < max.y; ++i.y) {
+		for (i.x = min.x; i.x < max.x; ++i.x) {
+            tileset->setCurrentFrame(_worldMap->getSprite(i));
+            SDL_Rect clip = tileset->getCurrentFrameRect();
+
+		    Vector2D renderPosition = PIXELS_PER_WORLD_UNIT * (Vector2D(i.x, i.y) - centre) + .5 * (renderer.getScreenDimensions());
+            renderer.drawClippedImage(tileset->getImage().get(), renderPosition, clip);
+		}
+	}
+   
+    // Render actors	
     for ( ActorMap::const_iterator i = actors.begin(); i != actors.end(); i++ ) {
-        assert(dynamic_cast< ClientActor* >(i->second));
-        ClientActor *a = static_cast<ClientActor *>(i->second);
+        assert(dynamic_cast<ClientActor*>(i->second));
+        ClientActor *a = static_cast<ClientActor*>(i->second);
         AnimationManager::shared_ptr anim = a->getSprite()->getCurrentAnimation();
 
         SDL_Rect clip = anim->getCurrentFrameRect();
