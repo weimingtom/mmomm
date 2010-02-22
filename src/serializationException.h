@@ -23,7 +23,7 @@ struct SerializationException: public std::runtime_error {
 	do { \
 		std::stringstream _p_SS; \
 		_p_SS << msg; \
-		throw new type(_p_SS.str()); \
+		throw type(_p_SS.str()); \
 	} while (false)
 
 #define INVALID_PACKET_EXCEPTION(msg) THROW_EXCEPTION(InvalidPacketException, msg)
