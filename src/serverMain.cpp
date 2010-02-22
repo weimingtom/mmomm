@@ -61,13 +61,12 @@ int listen(int argc, char **argv)
 int main(int argc, char **argv)
 {
 	Random::setCurrent(new Random());
+    FrameTimer::setCurrent(new FrameTimer());
 	NetworkServer::setCurrent(new NetworkServer());
     WorldInstance::setCurrent(new ServerWorldInstance());
 	
 	if (listen(argc, argv))
 		return 1;
-
-	FrameTimer::setCurrent(new FrameTimer());
 	
 	// Keep looping until quit with control-c
 	for (;;) {

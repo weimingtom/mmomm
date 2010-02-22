@@ -92,30 +92,17 @@ void ClientWorldMap::setTile(const IVector2D& v, TileType type)
 	}
 }
 
-void ClientWorldMap::render(const Rect& camera) const
+TileSprite ClientWorldMap::getSprite(const IVector2D& v)
 {
-	// First/past-the-end tiles to render.
-	IVector2D min(camera.left, camera.top);
-	IVector2D max(std::ceil(camera.right), std::ceil(camera.bottom));
-	
-	// Small adjustment of camera position.
-	Vector2D adjust = camera.min() - Vector2D(min.x, min.y);
-	
-	IVector2D i;
-	for (i.y = min.y; i.y < max.y; ++i.y) {
-		for (i.x = min.x; i.x < max.x; ++i.x) {
-			ClientTile& tile = const_cast<ClientWorldMap&>(*this).getTile(i);
-			if (tile.sprite == DIRTY_TILE) {
-				tile.sprite = determineTileSprite(
-					tile.type,
-					getTile(i - IVector2D(1, 0)),
-					getTile(i + IVector2D(1, 0)),
-					getTile(i - IVector2D(0, 1)),
-					getTile(i - IVector2D(0, 1)));
-			}
-			assert(tile.sprite != DIRTY_TILE);
-			renderTileSprite(tile.sprite, Vector2D(i.x, i.y) + adjust);
-		}
+	ClientTile& tile = const_cast<ClientWorldMap&>(*this).getTile(v);
+	if (tile.sprite == DIRTY_TILE) {
+		tile.sprite = determineTileSprite(
+			tile.type,
+			getTile(v - IVector2D(1, 0)).type,
+			getTile(v + IVector2D(1, 0)).type,
+			getTile(v - IVector2D(0, 1)).type,
+			getTile(v - IVector2D(0, 1)).type);
 	}
+	assert(tile.sprite != DIRTY_TILE);
+    return tile.sprite;
 }
-

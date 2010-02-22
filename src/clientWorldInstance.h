@@ -33,7 +33,7 @@ public:
     virtual ~ClientWorldInstance();
 
     static ClientWorldInstance& current();
-    void render() const;
+    void render();
 
 	ClientWorldMap& getWorldMap() { return *_worldMap; }
 	const ClientWorldMap& getWorldMap() const { return *_worldMap; }
@@ -56,6 +56,7 @@ public:
 private:
 
     Actor* _clientPlayerActor;
+    int    _tileset;
 
     // Input
     typedef boost::unordered_map< SDLKey, Key >  KeyMap;

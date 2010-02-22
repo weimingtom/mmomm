@@ -50,6 +50,8 @@ public:
     double                      getInterval()         const { return _interval; }
 
     bool                        isActive()            const { return _active; }
+
+    void                        setCurrentFrame(int frame) { _currentFrame = frame; }
 };
 
 #endif

@@ -11,6 +11,14 @@ ServerWorldInstance::ServerWorldInstance()
 , _updatesOffset(0)
 , _worldMap(new ServerWorldMap())
 {
+    // Temporary!
+    IVector2D v;
+    for ( v.x = -64; v.x < 64; v.x++ )
+        for ( v.y = -64; v.y < 64; v.y++ )
+            _worldMap->setTile(v, TILE_ETHER);
+    for ( v.x = -32; v.x < 32; v.x++ )
+        for ( v.y = -32; v.y < 32; v.y++ )
+            _worldMap->setTile(v, std::abs(37 + 41 * v.x + 43 * v.y + 47 * v.x * v.x + 53 * v.y * v.y + 59 * v.x * v.y) % 31 < 20 ? TILE_GRASS : TILE_DIRT);
 }
 
 ServerWorldInstance::~ServerWorldInstance()
