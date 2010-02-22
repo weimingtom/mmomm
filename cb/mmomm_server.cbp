@@ -27,6 +27,8 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-m32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DBOOST_DISABLE_ASSERTS" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -54,6 +56,8 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-m64" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DBOOST_DISABLE_ASSERTS" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -80,6 +84,8 @@
 		<Unit filename="../src/ieeehalfprecision.h" />
 		<Unit filename="../src/initializePacketManager.cpp" />
 		<Unit filename="../src/initializePacketManager.h" />
+		<Unit filename="../src/monster.cpp" />
+		<Unit filename="../src/monster.h" />
 		<Unit filename="../src/nativePackets.h" />
 		<Unit filename="../src/networkCommon.cpp" />
 		<Unit filename="../src/networkCommon.h" />

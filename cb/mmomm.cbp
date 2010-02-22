@@ -33,6 +33,7 @@
 					<Add option="-O2" />
 					<Add option="-m32" />
 					<Add option="-DNDEBUG" />
+					<Add option="-DBOOST_DISABLE_ASSERTS" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -63,6 +64,7 @@
 					<Add option="-O1" />
 					<Add option="-m64" />
 					<Add option="-DNDEBUG" />
+					<Add option="-DBOOST_DISABLE_ASSERTS" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -146,6 +148,7 @@
 		<Unit filename="../src/clientWorldMap.h">
 			<Option virtualFolder="World/" />
 		</Unit>
+		<Unit filename="../src/clientWorldMapPackets.cpp" />
 		<Unit filename="../src/collision.cpp">
 			<Option virtualFolder="Core/" />
 		</Unit>
@@ -216,6 +219,12 @@
 		<Unit filename="../src/main.cpp">
 			<Option virtualFolder="Core/" />
 		</Unit>
+		<Unit filename="../src/monster.cpp">
+			<Option virtualFolder="Core/Actors/" />
+		</Unit>
+		<Unit filename="../src/monster.h">
+			<Option virtualFolder="Core/Actors/" />
+		</Unit>
 		<Unit filename="../src/mouseSelectionMenu.cpp">
 			<Option virtualFolder="Guis/" />
 		</Unit>
@@ -277,6 +286,9 @@
 			<Option virtualFolder="Net/" />
 		</Unit>
 		<Unit filename="../src/serial.h">
+			<Option virtualFolder="Net/" />
+		</Unit>
+		<Unit filename="../src/serializationException.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
 		<Unit filename="../src/simulatedClientActor.cpp">

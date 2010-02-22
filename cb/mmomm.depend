@@ -25,7 +25,7 @@
 	"vector2D.h"
 	"image.h"
 
-1266860459 source:/home/oipo/Programming/mmomm/src/main.cpp
+1266865210 source:/home/oipo/Programming/mmomm/src/main.cpp
 	"animation.h"
 	"animationManager.h"
 	"chatWindow.h"
@@ -132,7 +132,7 @@
 	<RakNet/MessageIdentifiers.h>
 	<string>
 
-1266860967 /home/oipo/Programming/mmomm/src/networkPacket.h
+1266875662 /home/oipo/Programming/mmomm/src/networkPacket.h
 	"frameTimer.h"
 	"serializationException.h"
 	"vector2D.h"
@@ -365,7 +365,7 @@
 	"imageManager.h"
 	<vector>
 
-1265396306 source:/home/oipo/Programming/mmomm/src/loginMenu.cpp
+1266876102 source:/home/oipo/Programming/mmomm/src/loginMenu.cpp
 	"loginMenu.h"
 
 1266860459 /home/oipo/Programming/mmomm/src/loginMenu.h
@@ -467,12 +467,12 @@
 	<boost/unordered_map.hpp>
 	"animationManager.h"
 
-1266860459 /home/oipo/Programming/mmomm/src/clientWorldInstance.h
+1266875663 /home/oipo/Programming/mmomm/src/clientWorldInstance.h
 	"worldInstance.h"
 	<SDL/SDL.h>
 	<boost/unordered_map.hpp>
 
-1266860459 source:/home/oipo/Programming/mmomm/src/clientWorldInstance.cpp
+1266875663 source:/home/oipo/Programming/mmomm/src/clientWorldInstance.cpp
 	"clientWorldInstance.h"
 	<guichan.hpp>
 	"chatWindow.h"
@@ -1732,10 +1732,11 @@
 	<guichan/graphics.hpp>
 	"gui.h"
 
-1266860459 source:/home/oipo/Programming/mmomm/src/mouseSelectionMenu.cpp
+1266876817 source:/home/oipo/Programming/mmomm/src/mouseSelectionMenu.cpp
 	"mouseSelectionMenu.h"
+	<boost/foreach.hpp>
 
-1266860459 /home/oipo/Programming/mmomm/src/serializationException.h
+1266876887 /home/oipo/Programming/mmomm/src/serializationException.h
 	<stdexcept>
 	<sstream>
 
@@ -1765,4 +1766,16 @@
 
 1266860459 source:/home/oipo/Programming/mmomm/src/tileTypes.cpp
 	"tileTypes.h"
+
+1266860459 source:/home/oipo/Programming/mmomm/src/clientWorldMap.cpp
+	"clientWorldMap.h"
+	"serializationException.h"
+	<boost/foreach.hpp>
+
+1265396306 source:/home/oipo/Programming/mmomm/src/monster.cpp
+	"monster.h"
+
+1265396306 /home/oipo/Programming/mmomm/src/monster.h
+	"actor.h"
+	"clientSprites.h"
 

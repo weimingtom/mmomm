@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Debug-x64" />
+	<ActiveTarget name="Debug" />
 	<File name="../src/actor.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="14" />
 	</File>
@@ -13,32 +13,26 @@
 	<File name="../src/collisionPackets.h" open="0" top="0" tabpos="1">
 		<Cursor position="507" topLine="0" />
 	</File>
-	<File name="../src/initializePacketManager.cpp" open="0" top="0" tabpos="2">
+	<File name="../src/initializePacketManager.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="../src/nativePackets.h" open="1" top="0" tabpos="0">
 		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="../src/networkCommon.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="11" />
 	</File>
-	<File name="../src/networkPacket.h" open="0" top="0" tabpos="0">
-		<Cursor position="846" topLine="24" />
+	<File name="../src/networkPacket.cpp" open="1" top="0" tabpos="0">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="../src/networkPacket.h" open="1" top="0" tabpos="0">
+		<Cursor position="362" topLine="65" />
 	</File>
 	<File name="../src/networkServer.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="5412" topLine="191" />
 	</File>
 	<File name="../src/networkServer.h" open="0" top="0" tabpos="0">
 		<Cursor position="3796" topLine="110" />
-	</File>
-	<File name="../src/npc.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="729" topLine="9" />
-	</File>
-	<File name="../src/npc.h" open="0" top="0" tabpos="0">
-		<Cursor position="954" topLine="0" />
-	</File>
-	<File name="../src/npcActor.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="13" topLine="0" />
-	</File>
-	<File name="../src/npcActor.h" open="0" top="0" tabpos="0">
-		<Cursor position="122" topLine="0" />
 	</File>
 	<File name="../src/packetTypes.h" open="0" top="0" tabpos="0">
 		<Cursor position="361" topLine="0" />
@@ -53,7 +47,7 @@
 		<Cursor position="870" topLine="0" />
 	</File>
 	<File name="../src/serverMain.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="1988" topLine="48" />
+		<Cursor position="1988" topLine="47" />
 	</File>
 	<File name="../src/serverNativePackets.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="1340" topLine="3" />
@@ -64,16 +58,19 @@
 	<File name="../src/serverWorldInstance.h" open="0" top="0" tabpos="0">
 		<Cursor position="153" topLine="0" />
 	</File>
+	<File name="../src/serverWorldMap.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="1942" topLine="0" />
+	</File>
+	<File name="../src/tileTypes.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="278" topLine="0" />
+	</File>
+	<File name="../src/tileTypes.h" open="0" top="0" tabpos="0">
+		<Cursor position="831" topLine="0" />
+	</File>
 	<File name="../src/user.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/worldCommon.cpp" open="0" top="0" tabpos="7">
-		<Cursor position="0" topLine="0" />
-	</File>
 	<File name="../src/worldInstance.cpp" open="0" top="0" tabpos="8">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../src/worldMap.cpp" open="0" top="0" tabpos="9">
 		<Cursor position="0" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>
