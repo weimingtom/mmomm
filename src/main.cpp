@@ -14,6 +14,7 @@
 #include "mouseSelectionMenu.h"
 #include "networkClient.h"
 #include "openglRenderer.h"
+#include "random.h"
 #include "renderer.h"
 #include "softwareRenderer.h"
 
@@ -27,6 +28,8 @@ ChatWindow* chatWindow = 0;
 
 int main(int argc, char **argv)
 {
+	Random::setCurrent(new Random());
+
     if ( SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO) < 0 ) {
         cout << "Unable to init SDL: " << SDL_GetError() << endl;
         exit(1);

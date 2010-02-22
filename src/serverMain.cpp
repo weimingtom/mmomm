@@ -1,6 +1,7 @@
 #include "serverWorldInstance.h"
 #include "networkServer.h"
 #include "frameTimer.h"
+#include "random.h"
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
@@ -59,6 +60,7 @@ int listen(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
+	Random::setCurrent(new Random());
 	NetworkServer::setCurrent(new NetworkServer());
     WorldInstance::setCurrent(new ServerWorldInstance());
 	
