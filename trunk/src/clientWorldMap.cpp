@@ -65,11 +65,11 @@ ClientTile& ClientWorldMap::getTile(const IVector2D& v)
 	IVector2D cellIndex = v.memberwiseDiv(CELL_DIMENSIONS);
 	IVector2D tileIndex = v.memberwiseMod(CELL_DIMENSIONS);
 
-	if (v.x < 0) {
+	if (v.x < 0 && tileIndex.x != 0) {
 		cellIndex.x -= 1;
 		tileIndex.x += CELL_DIMENSIONS.x;
 	}
-	if (v.y < 0) {
+	if (v.y < 0 && tileIndex.y != 0) {
 		cellIndex.y -= 1;
 		tileIndex.y += CELL_DIMENSIONS.y;
 	}
