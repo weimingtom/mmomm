@@ -297,6 +297,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\random.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\renderer.cpp"
 				>
 			</File>
@@ -456,6 +460,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\playerClientActor.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\random.h"
 				>
 			</File>
 			<File

@@ -52,8 +52,8 @@ TileType ServerWorldMap::getTile(const IVector2D& v) const
 
 TileType& ServerWorldMap::getTile(const IVector2D& v)
 {
-	IVector2D cellIndex = v.memberwiseMod(CELL_DIMENSIONS);
-	IVector2D tileIndex = v.memberwiseDiv(CELL_DIMENSIONS);
+	IVector2D cellIndex = v.memberwiseDiv(CELL_DIMENSIONS);
+	IVector2D tileIndex = v.memberwiseMod(CELL_DIMENSIONS);
 
 	if (v.x < 0) {
 		cellIndex.x -= 1;
