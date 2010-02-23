@@ -96,12 +96,18 @@ TileSprite ClientWorldMap::getSprite(const IVector2D& v)
 {
 	ClientTile& tile = const_cast<ClientWorldMap&>(*this).getTile(v);
 	if (tile.sprite == DIRTY_TILE) {
-		tile.sprite = determineTileSprite(
-			tile.type,
-			getTile(v - IVector2D(1, 0)).type,
-			getTile(v + IVector2D(1, 0)).type,
-			getTile(v - IVector2D(0, 1)).type,
-			getTile(v - IVector2D(0, 1)).type);
+        TileMatrix matrix;
+        matrix[TOP][LEFT]      = getTile(v + IVector2D(-1, -1)).type;
+        matrix[TOP][CENTER]    = getTile(v + IVector2D( 0, -1)).type;
+        matrix[TOP][RIGHT]     = getTile(v + IVector2D( 1, -1)).type;
+        matrix[CENTER][LEFT]   = getTile(v + IVector2D(-1,  0)).type;
+        matrix[CENTER][CENTER] = tile.type;
+        matrix[CENTER][RIGHT]  = getTile(v + IVector2D( 1,  0)).type;
+        matrix[BOTTOM][LEFT]   = getTile(v + IVector2D(-1,  1)).type;
+        matrix[BOTTOM][CENTER] = getTile(v + IVector2D( 0,  1)).type;
+        matrix[BOTTOM][RIGHT]  = getTile(v + IVector2D( 1,  1)).type;
+
+		tile.sprite = determineTileSprite(matrix);
 	}
 	assert(tile.sprite != DIRTY_TILE);
     return tile.sprite;

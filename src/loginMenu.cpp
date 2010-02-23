@@ -13,11 +13,6 @@ LoginMenu::LoginMenu(int x, int y)
         _window = new gcn::Window("Login");
         _window->setPosition(x, y);
 
-        _createAccountCheckBox = new gcn::CheckBox("Create New Account");
-        _createAccountCheckBox->adjustSize();
-        _createAccountCheckBox->setPosition(0, 80);
-        _window->add(_createAccountCheckBox);
-
         _hostLabel = new gcn::Label("Host");
         _hostLabel->setPosition(0, 0);
         _window->add(_hostLabel);
@@ -58,6 +53,11 @@ LoginMenu::LoginMenu(int x, int y)
         _passwordField->setPosition(xPos, _passwordLabel->getY() - 2);
         _passwordField->setWidth(80);
         _window->add(_passwordField);
+
+        _createAccountCheckBox = new gcn::CheckBox("Create New Account");
+        _createAccountCheckBox->adjustSize();
+        _createAccountCheckBox->setPosition(0, 80);
+        _window->add(_createAccountCheckBox);
 
         _okButton = new gcn::Button("Ok");
         _okButton->setPosition(0, 100);
