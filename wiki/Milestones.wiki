@@ -9,7 +9,7 @@ Status: *complete*
 
 = #2 =
 
-  * Sending terrain from server and displaying on client - *75%*
+  * Sending terrain from server and displaying on client - *100%*
   * Chat (and chat window improvement)(incidentally includes TTF support) - *100%*
   * Character details, /inspect functionality - *50%* (What else is needed?)
   * Items that you can pick up and put down (not necessarily manipulate) - *0%*
