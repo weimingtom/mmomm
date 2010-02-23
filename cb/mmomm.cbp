@@ -5,7 +5,7 @@
 		<Option title="mmomm" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Core/;Core/;Core/Renderers/;Guis/;Net/;World/;Core/Animations/;Core/Actors/;" />
+		<Option virtualFolders="Core/;Core/;Core/Renderers/;Guis/;Net/;World/;Core/Animations/;Core/Actors/;Core/Random/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/mmomm" prefix_auto="1" extension_auto="1" />
@@ -148,7 +148,9 @@
 		<Unit filename="../src/clientWorldMap.h">
 			<Option virtualFolder="World/" />
 		</Unit>
-		<Unit filename="../src/clientWorldMapPackets.cpp" />
+		<Unit filename="../src/clientWorldMapPackets.cpp">
+			<Option virtualFolder="World/" />
+		</Unit>
 		<Unit filename="../src/collision.cpp">
 			<Option virtualFolder="Core/" />
 		</Unit>
@@ -272,6 +274,18 @@
 		</Unit>
 		<Unit filename="../src/playerClientActor.h">
 			<Option virtualFolder="Core/Actors/" />
+		</Unit>
+		<Unit filename="../src/random.cpp">
+			<Option virtualFolder="Core/Random/" />
+		</Unit>
+		<Unit filename="../src/random.h">
+			<Option virtualFolder="Core/Random/" />
+		</Unit>
+		<Unit filename="../src/randomName.cpp">
+			<Option virtualFolder="Core/Random/" />
+		</Unit>
+		<Unit filename="../src/randomName.h">
+			<Option virtualFolder="Core/Random/" />
 		</Unit>
 		<Unit filename="../src/rect.h">
 			<Option virtualFolder="Core/" />

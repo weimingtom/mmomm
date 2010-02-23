@@ -97,6 +97,10 @@
 		<Unit filename="../src/packetTypes.h" />
 		<Unit filename="../src/playerActor.cpp" />
 		<Unit filename="../src/playerActor.h" />
+		<Unit filename="../src/random.cpp" />
+		<Unit filename="../src/random.h" />
+		<Unit filename="../src/randomName.cpp" />
+		<Unit filename="../src/randomName.h" />
 		<Unit filename="../src/serial.cpp" />
 		<Unit filename="../src/serial.h" />
 		<Unit filename="../src/serializationException.h" />

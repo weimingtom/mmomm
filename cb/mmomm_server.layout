@@ -13,7 +13,7 @@
 	<File name="../src/collisionPackets.h" open="0" top="0" tabpos="1">
 		<Cursor position="507" topLine="0" />
 	</File>
-	<File name="../src/initializePacketManager.cpp" open="1" top="0" tabpos="2">
+	<File name="../src/initializePacketManager.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="../src/nativePackets.h" open="1" top="0" tabpos="0">
@@ -25,7 +25,7 @@
 	<File name="../src/networkPacket.cpp" open="1" top="0" tabpos="0">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/networkPacket.h" open="1" top="0" tabpos="0">
+	<File name="../src/networkPacket.h" open="0" top="0" tabpos="0">
 		<Cursor position="362" topLine="65" />
 	</File>
 	<File name="../src/networkServer.cpp" open="0" top="0" tabpos="2">
