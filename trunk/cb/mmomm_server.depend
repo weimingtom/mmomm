@@ -89,10 +89,11 @@
 
 1265396306 /home/oipo/Programming/mmomm/src/initializePacketManager.h
 
-1266860459 source:/home/oipo/Programming/mmomm/src/serverMain.cpp
+1266943953 source:/home/oipo/Programming/mmomm/src/serverMain.cpp
 	"serverWorldInstance.h"
 	"networkServer.h"
 	"frameTimer.h"
+	"random.h"
 	<iostream>
 	<sstream>
 	<stdexcept>
@@ -425,7 +426,7 @@
 	"worldInstance.h"
 	<list>
 
-1266860459 source:/home/oipo/Programming/mmomm/src/serverWorldInstance.cpp
+1266943953 source:/home/oipo/Programming/mmomm/src/serverWorldInstance.cpp
 	"serverWorldInstance.h"
 	<iostream>
 	<boost/foreach.hpp>
@@ -480,7 +481,7 @@
 	<RakNet/NativeTypes.h>
 	"ieeehalfprecision.h"
 
-1266860459 /home/oipo/Programming/mmomm/src/serializationException.h
+1266876887 /home/oipo/Programming/mmomm/src/serializationException.h
 	<stdexcept>
 	<sstream>
 
@@ -494,7 +495,7 @@
 	"serial.h"
 	"vector2D.h"
 
-1266860459 /home/oipo/Programming/mmomm/src/tileTypes.h
+1266961494 /home/oipo/Programming/mmomm/src/tileTypes.h
 	<boost/multi_array.hpp>
 	<boost/unordered_map.hpp>
 	<RakNet/NativeTypes.h>
@@ -507,7 +508,7 @@
 	"tileTypes.h"
 	"vector2D.h"
 
-1266860459 source:/home/oipo/Programming/mmomm/src/serverWorldMap.cpp
+1266943953 source:/home/oipo/Programming/mmomm/src/serverWorldMap.cpp
 	"serverWorldMap.h"
 	"frameTimer.h"
 	"serializationException.h"
@@ -521,6 +522,27 @@
 	"actor.h"
 	"clientSprites.h"
 
-1266860459 source:/home/oipo/Programming/mmomm/src/tileTypes.cpp
+1266961494 source:/home/oipo/Programming/mmomm/src/tileTypes.cpp
 	"tileTypes.h"
+
+1266943953 source:/home/oipo/Programming/mmomm/src/random.cpp
+	"random.h"
+
+1266943953 /home/oipo/Programming/mmomm/src/random.h
+	<boost/noncopyable.hpp>
+	<boost/random/variate_generator.hpp>
+	<boost/random/mersenne_twister.hpp>
+	<boost/random/uniform_smallint.hpp>
+	<boost/random/uniform_int.hpp>
+	<boost/random/uniform_01.hpp>
+	<boost/random/uniform_real.hpp>
+	<cassert>
+
+1265396306 source:/home/oipo/Programming/mmomm/src/randomName.cpp
+	"randomName.h"
+
+1265396306 /home/oipo/Programming/mmomm/src/randomName.h
+	<string>
+	<ctime>
+	<boost/random.hpp>
 
