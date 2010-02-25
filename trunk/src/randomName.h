@@ -13,8 +13,8 @@ public:
     randomNameGenerator();
     ~randomNameGenerator();
 
-    char* getRandomName(int nameStyle);
-    char* getRandomName(const std::string& nameStyle);
+    string getRandomName(int nameStyle);
+    string getRandomName(const std::string& nameStyle);
 
 private:
 

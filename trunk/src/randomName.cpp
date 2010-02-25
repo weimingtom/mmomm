@@ -13,37 +13,37 @@ randomNameGenerator::randomNameGenerator()
     generator.seed(generator_seed);
 }
 
-char* randomNameGenerator::getRandomName(int nameStyle)
+string randomNameGenerator::getRandomName(int nameStyle)
 {
     if ( nameStyle == 1 ) {
         boost::uniform_int<> siz(0, 345);
         boost::variate_generator<boost::mt19937&, boost::uniform_int<> > rng(generator, siz);
-        return &frenchf[rng()][0];
+        return frenchf[rng()];
     }
     if ( nameStyle == 2 ) {
         boost::uniform_int<> siz(0, 339);
         boost::variate_generator<boost::mt19937&, boost::uniform_int<> > rng(generator, siz);
-        return &frenchm[rng()][0];
+        return frenchm[rng()];
     }
     if ( nameStyle == 3 ) {
         boost::uniform_int<> siz(0, 21);
         boost::variate_generator<boost::mt19937&, boost::uniform_int<> > rng(generator, siz);
-        return &japanesef[rng()][0];
+        return japanesef[rng()];
     }
     if ( nameStyle == 4 ) {
         boost::uniform_int<> siz(0, 32);
         boost::variate_generator<boost::mt19937&, boost::uniform_int<> > rng(generator, siz);
-        return &japanesem[rng()][0];
+        return japanesem[rng()];
     }
     if ( nameStyle == 5 ) {
         boost::uniform_int<> siz(0, 359);
         boost::variate_generator<boost::mt19937&, boost::uniform_int<> > rng(generator, siz);
-        return &(evilTitles[rng()%18] + " of " + evilStuff[rng()/18])[0];
+        return (evilTitles[rng()%18] + " of " + evilStuff[rng()/18]);
     }
     return "REPORT_ME";
 }
 
-char* randomNameGenerator::getRandomName(const std::string& nameStyle)
+string randomNameGenerator::getRandomName(const std::string& nameStyle)
 {
     if ( nameStyle == "frenchf" ) {
         return getRandomName(1);
