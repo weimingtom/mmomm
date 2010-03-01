@@ -21,7 +21,7 @@ public:
 	ActorID id() const { return _actorID; }
 
     virtual void update(double elapsed) { }
-	
+
 	// Tells the given actor to interpolate movement with the specified data.
 	// Most actors do not need to implement this.
 	// packetTime: absolute time on the packet
@@ -44,11 +44,11 @@ private:
 
     Vector2D                  _velocity;
     ClientSprites::SpriteType _spriteType;
-	
+
 	void assignNewID();
 	void addToWorld();
 	void removeFromWorld();
-	
+
     ActorID     _actorID;
     std::string _name;
 

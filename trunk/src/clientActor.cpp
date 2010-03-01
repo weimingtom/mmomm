@@ -18,8 +18,10 @@ ClientActor::~ClientActor()
 void ClientActor::setSprite(ClientSprites::SpriteType sprite)
 {
 	Sprite *old = _sprite;
-	_sprite = ClientSprites::Get(sprite);	
+	_sprite = ClientSprites::Get(sprite);
 	delete old;
+
+	AnimationManager::current().setAnimationActive(_sprite->getCurrentAnimation().get()->getId(), false);
 
 	setSpriteType(sprite);
 
@@ -37,20 +39,32 @@ void ClientActor::updateSprite()
 {
 	// Update animation
 	double EPSILON = .01;
+
+	/*if(getVelocity().length() == 0)
+        AnimationManager::current().setAnimationActive(_sprite->getCurrentAnimation().get()->getId(), false);
+	else
+	    AnimationManager::current().setAnimationActive(_sprite->getCurrentAnimation().get()->getId(), true);*/
+
     if (getVelocity().lengthSquared() < EPSILON * EPSILON) {
         _sprite->setDefaultAnimation("stand");
+        if(_sprite->getCurrentAnimation().get()->isActive())
+            AnimationManager::current().setAnimationActive(_sprite->getCurrentAnimation().get()->getId(), false);
     }
     else if (abs(getVelocity().x) + EPSILON > abs(getVelocity().y)) {
         if (getVelocity().x >= 0)
             _sprite->setDefaultAnimation("walk-right");
         else
             _sprite->setDefaultAnimation("walk-left");
+        if(!_sprite->getCurrentAnimation().get()->isActive())
+            AnimationManager::current().setAnimationActive(_sprite->getCurrentAnimation().get()->getId(), true);
     }
     else {
         if (getVelocity().y >= 0)
             _sprite->setDefaultAnimation("walk-down");
         else
             _sprite->setDefaultAnimation("walk-up");
+        if(!_sprite->getCurrentAnimation().get()->isActive())
+            AnimationManager::current().setAnimationActive(_sprite->getCurrentAnimation().get()->getId(), true);
     }
 }
 

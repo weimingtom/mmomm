@@ -39,7 +39,7 @@ int AnimationManager::createAnimation(ImageManager::shared_ptr img, int frameWid
                                       double interval, int startFrame, int endFrame, bool active)
 {
     _idCounter++;
-    shared_ptr anim = shared_ptr(new Animation(img, frameWidth, frameHeight, interval, startFrame, endFrame, active));
+    shared_ptr anim = shared_ptr(new Animation(_idCounter, img, frameWidth, frameHeight, interval, startFrame, endFrame, active));
 
     if(active)
         _activeAnimations.insert(pair<int, shared_ptr>(_idCounter, anim));
