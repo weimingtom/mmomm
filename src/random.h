@@ -1,6 +1,7 @@
 #ifndef RANDOM_H_
 #define RANDOM_H_
 
+#include <RakNet/NativeTypes.h>
 #include <boost/noncopyable.hpp>
 #include <boost/ref.hpp>
 #include <boost/random/mersenne_twister.hpp>
@@ -21,16 +22,12 @@ public:
 	static bool boolean();
 
 	// Returns an integer on [0, max).
-	template<typename T>
-	static T integer(T max) {
+	static int32_t integer(int32_t max) {
 		return integer(0, max);
 	}
 
 	// Returns an integer on [min, max).
-	template<typename T>
-	static T integer(T min, T max) {
-		return current().generate(boost::uniform_int<T>(min, max - 1));
-	}
+	static int32_t integer(int32_t min, int32_t max);
 	
 	// Returns a real on [0, 1).
 	static double real();
