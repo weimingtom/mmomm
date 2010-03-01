@@ -151,6 +151,9 @@ int main(int argc, char **argv)
                                    << data->host << ":" << data->port << "." << std::endl;
                                 chatWindow->addText( ss.str(), ChatMessagePacket::CHAT_MESSAGE_SERVER );
                             }
+                            else {
+                                delete loginMenu;
+                            }
                         }
                         catch(InvalidPacketException& e) {
                             cout << "more packet error?: " << e.what() << endl;
