@@ -1,9 +1,10 @@
 #include "animation.h"
 #include "sprite.h"
 
-Animation::Animation(ImageManager::shared_ptr img, int frameWidth, int frameHeight,
+Animation::Animation(int id, ImageManager::shared_ptr img, int frameWidth, int frameHeight,
                      double interval, int startFrame, int endFrame, bool active)
-:   _img(img)
+:   _id(id)
+,   _img(img)
 ,   _frameWidth(frameWidth)
 ,   _frameHeight(frameHeight)
 ,   _interval(interval)

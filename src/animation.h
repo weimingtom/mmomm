@@ -10,6 +10,7 @@ class Sprite;
 class Animation
 {
 private:
+    int                         _id;
     ImageManager::shared_ptr    _img;
     int                         _frameWidth;
     int                         _frameHeight;
@@ -28,7 +29,7 @@ private:
     friend class AnimationManager;
 
 public:
-    Animation(ImageManager::shared_ptr img, int frameWidth, int frameHeight,
+    Animation(int id, ImageManager::shared_ptr img, int frameWidth, int frameHeight,
               double interval, int startFrame = 0, int endFrame = -1, bool active = true);
     ~Animation();
 
@@ -36,6 +37,7 @@ public:
 
     void                        setCallbackSprite(Sprite* sprite);
 
+    int                         getId()               const { return _id; }
     ImageManager::shared_ptr    getImage()            const { return _img; }
     int                         getFrameWidth()       const { return _frameWidth; }
     int                         getFrameHeight()      const { return _frameHeight; }

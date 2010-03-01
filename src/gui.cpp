@@ -33,6 +33,7 @@ Gui::Gui(SDL_Surface *screen, bool softwareRendering)
         _gui = new gcn::Gui();
         _gui->setGraphics(_graphics);
         _gui->setInput(_input);
+        //_gui->setShouldDestruct(true); //auto destructs input, graphics and top
 
         _top = new gcn::Container();
         _top->setDimension(gcn::Rectangle(0, 0, screen->w, screen->h));
@@ -48,11 +49,8 @@ Gui::Gui(SDL_Surface *screen, bool softwareRendering)
 Gui::~Gui()
 {
     delete _font;
-    delete _top;
     delete _gui;
 
-    delete _input;
-    delete _graphics;
     delete _imageLoader;
 }
 

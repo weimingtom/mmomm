@@ -84,7 +84,8 @@
 			<Add option="-lSDL_ttf" />
 			<Add option="-lGL" />
 			<Add option="-lGLU" />
-			<Add option="../cb/libguichan-mmomm.a" />
+			<Add option="-L../cb/" />
+			<Add option="./libguichan-mmomm.a" />
 			<Add option="-lRakNet" />
 			<Add directory="../cb" />
 		</Linker>
