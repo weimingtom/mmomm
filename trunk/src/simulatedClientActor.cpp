@@ -47,7 +47,7 @@ void SimulatedClientActor::interpolate(double packetTime, const Vector2D& packet
 	}
 	*/
 	
-	const double INTERPOLATION_TIME = .1;
+	const double INTERPOLATION_TIME = .25;
 	double futureTime = currentTime + INTERPOLATION_TIME;
 	if (packetTime > futureTime)
 		futureTime = packetTime;
