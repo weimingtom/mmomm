@@ -94,6 +94,7 @@ void User::sendNetworkUpdate(const Actor *userActor)
 
 		
 		// Not found; create it
+		// TODO: Skip adding far-away actors.
 		PacketMap::const_iterator found = _packetMap.find(actor);
 		if (found == _packetMap.end()) {
 			CreationUpdate create;

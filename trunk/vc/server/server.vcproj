@@ -223,6 +223,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\randomName.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\serial.cpp"
 				>
 			</File>
@@ -330,6 +334,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\random.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\randomName.h"
 				>
 			</File>
 			<File
