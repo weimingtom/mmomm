@@ -13,7 +13,7 @@ Status: *complete*
   * Chat (and chat window improvement)(incidentally includes TTF support) - *100%*
   * Character details, /inspect functionality - *50%* (What else is needed?)
   * Items that you can pick up and put down (not necessarily manipulate) - *0%*
-  * Some test NPCs - *0%*
+  * Some test NPCs - *100%* (sorta)
 
 Status: *incomplete* - *40%*
 
