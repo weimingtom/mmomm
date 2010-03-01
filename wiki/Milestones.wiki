@@ -18,11 +18,17 @@ Status: *complete*
 Status: *incomplete* - *75%*
 
 = #3 =
-Subject to change. Possibly including some of the following:
+
+  * Find good sprite sheets - 0%
+  * Basic evolution of monsters (no attacks/specials/ai yet) - 0%
+  * Manipulation of items - 0%
+  * More varied terrain (pathing, cliffs, autotiles) - 0%
+  * Overhaul input (fix guichan bugs, don't move when input is active) - 0%
+
+= Future =
 
   * Adding z-levels to the terrain - *0%*
   * Physics (rivers, wind, velocity, friction?) - *0%*
   * Japanese Input in guichan-mmomm - *0%*
-  * Manipulation of items - *0%*
 
 Status: *incomplete* - *0%*
