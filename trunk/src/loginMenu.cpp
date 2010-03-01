@@ -8,6 +8,7 @@ LoginMenu::LoginMenu(int x, int y)
 
     try {
         _okButtonListener = new okButtonListener();
+        _localhostButtonListener = new localhostButtonListener();
         _optionsButtonListener = new optionsButtonListener();
 
         _window = new gcn::Window("Login");
@@ -64,8 +65,13 @@ LoginMenu::LoginMenu(int x, int y)
         _okButton->addActionListener(_okButtonListener);
         _window->add(_okButton);
 
+        _localhostButton = new gcn::Button("Localhost");
+        _localhostButton->setPosition(30, 100);
+        _localhostButton->addActionListener(_localhostButtonListener);
+        _window->add(_localhostButton);
+
         _optionsButton = new gcn::Button("Options");
-        _optionsButton->setPosition(30, 100);
+        _optionsButton->setPosition(100, 100);
         _optionsButton->addActionListener(_optionsButtonListener);
         _window->add(_optionsButton);
 
@@ -117,6 +123,30 @@ void LoginMenu::okButtonListener::action(const gcn::ActionEvent& actionEvent)
     ss >> data->port;
 
     data->host          = LoginMenu::current()._hostField->getText();
+    data->username      = LoginMenu::current()._usernameField->getText();
+    data->password      = LoginMenu::current()._passwordField->getText();
+
+    data->createAccount = LoginMenu::current()._createAccountCheckBox->isSelected();
+
+    event.type  = SDL_USEREVENT;
+    event.user.code  = EVENT_LOGIN_OK;
+    event.user.data1 = data;
+
+    SDL_PushEvent(&event);
+}
+
+void LoginMenu::localhostButtonListener::action(const gcn::ActionEvent& actionEvent)
+{
+    SDL_Event  event;
+    LoginData* data = new LoginData();
+
+    stringstream ss;
+    ss.clear();
+    ss.str("");
+    ss << LoginMenu::current()._portField->getText();
+    ss >> data->port;
+
+    data->host          = "localhost";
     data->username      = LoginMenu::current()._usernameField->getText();
     data->password      = LoginMenu::current()._passwordField->getText();
 

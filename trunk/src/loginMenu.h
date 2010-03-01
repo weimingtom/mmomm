@@ -39,6 +39,11 @@ private:
         void action(const gcn::ActionEvent& actionEvent);
     };
 
+    class localhostButtonListener : public gcn::ActionListener
+    {
+        void action(const gcn::ActionEvent& actionEvent);
+    };
+
     class optionsButtonListener : public gcn::ActionListener
     {
         void action(const gcn::ActionEvent& actionEvent);
@@ -52,6 +57,7 @@ private:
     gcn::Label              *_passwordLabel;
 
     gcn::Button             *_okButton;
+    gcn::Button             *_localhostButton;
     gcn::Button             *_optionsButton;
 
     gcn::TextField          *_hostField;
@@ -60,6 +66,7 @@ private:
     gcn::TextField          *_passwordField;
 
     okButtonListener        *_okButtonListener;
+    localhostButtonListener *_localhostButtonListener;
     optionsButtonListener   *_optionsButtonListener;
 
     static LoginMenu        *_current;
