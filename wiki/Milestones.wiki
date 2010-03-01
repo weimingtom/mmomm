@@ -15,7 +15,7 @@ Status: *complete*
   * Items that you can pick up and put down (not necessarily manipulate) - *0%*
   * Some test NPCs - *100%* (sorta)
 
-Status: *incomplete* - *40%*
+Status: *incomplete* - *75%*
 
 = #3 =
 Subject to change. Possibly including some of the following:
