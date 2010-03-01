@@ -25,10 +25,10 @@ Status: *incomplete* - *75%*
   * More varied terrain (pathing, cliffs, autotiles) - 0%
   * Overhaul input (fix guichan bugs, don't move when input is active) - 0%
 
+Status: *incomplete* - *0%*
+
 = Future =
 
   * Adding z-levels to the terrain - *0%*
   * Physics (rivers, wind, velocity, friction?) - *0%*
   * Japanese Input in guichan-mmomm - *0%*
-
-Status: *incomplete* - *0%*
