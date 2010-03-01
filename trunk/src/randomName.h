@@ -2,8 +2,6 @@
 #define RANDOMNAME_H_
 
 #include <string>
-#include <ctime>
-#include <boost/random.hpp>
 
 using namespace std;
 
@@ -17,8 +15,6 @@ public:
     string getRandomName(const std::string& nameStyle);
 
 private:
-
-    boost::mt19937 generator;
 
 };
 
