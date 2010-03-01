@@ -6,6 +6,9 @@
 #include <sstream>
 #include <stdexcept>
 
+#include "clientSprites.h"
+#include "monster.h"
+
 int listen(int argc, char **argv)
 {
 	// Argument parsing
@@ -68,6 +71,11 @@ int main(int argc, char **argv)
 	if (listen(argc, argv))
 		return 1;
 	
+	Rect baseRect(0, 0, 1, 1);
+
+	new Monster(baseRect + Vector2D(-1, 0), ClientSprites::FIGHTER);
+	new Monster(baseRect + Vector2D(-3, 0), ClientSprites::FIGHTER);
+
 	// Keep looping until quit with control-c
 	for (;;) {
 		
