@@ -62,6 +62,16 @@ If an ability is passive and no suitable target is available, the ability's acti
  * Location within X distance
  * Creature within X distance, and location within Y distance of self and Z distance of targeted creature (or somesuch; this is for teleports etc)
 
+== Sources ==
+
+Of course, an ability has to come from somewhere -- the eyes, an aura, etc.
+
+ * Aura
+ * Gaze
+ * Spitting
+ * Breathing
+ * Engulfing
+
 == Duration ==
 
 An ability's effect can be instantaneous (applied once, usually healing/damage), have a duration expressed in some time interval, or be permanent (unless dispelled or whatever).
