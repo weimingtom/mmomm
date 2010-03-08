@@ -1,14 +1,16 @@
-Characters can equip what items:
-Weapon(?)
-Armor(?)
-Helmet(?)
-Boots(?)
-Gloves(?)
-Amulet(?)
-Ring(s)(?)
-Cape(?)
-Bag(?)
+Character slots:
+-head
+-chest
+-hands
+-feet
+-2 misc slots(think necklaces, wristbands, rings, etc)
 
+Maximum item slots carried: 50
+Stack limit per item slot: 99
 
 Items are found/created how:
-???
+Entirely through players. Monsters can take items that are dropped and hoard them.
+
+Items can be created by combining a wooden pole of a certain quality with a sharp metal extension of a certain quality to create a spear of a quality dependent on the items combined quality or so.
+
+Currency is entirely through regular items. Shops therefore, can take any item as currency.
