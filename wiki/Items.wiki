@@ -1,16 +1,73 @@
-Character slots:
--head
--chest
--hands
--feet
--2 misc slots(think necklaces, wristbands, rings, etc)
+= Equipment Slots =
 
-Maximum item slots carried: 50
-Stack limit per item slot: 99
+Each character has eight equipment slots:
+  * Helmet
+  * Chest
+  * Gloves
+  * Boots
+  * Main hand
+  * Offhand
+  * Accessory #1
+  * Accessory #2
 
-Items are found/created how:
-Entirely through players. Monsters can take items that are dropped and hoard them.
+Accessories include amulets, rings, girdles, etc.
 
-Items can be created by combining a wooden pole of a certain quality with a sharp metal extension of a certain quality to create a spear of a quality dependent on the items combined quality or so.
+Each player gets 50 inventory slots.
 
-Currency is entirely through regular items. Shops therefore, can take any item as currency.
+= Item Attributes =
+
+An item has a quality between 0 and 100. The player sees generic quality indicators: bad, poor, mediocre, good, excellent, masterful.
+
+Can items be damaged? I'm not sure we decided yet.
+
+Each item can be a stack of up to 99 similar items, based on outward appearance. All items are stored as distinct entities.
+
+= Material =
+
+Materials that an item could be made out of include:
+  * Metal
+  * Wood
+  * Rock
+  * Clay
+  * Glass
+  * Cloth
+  * Leather
+  * Bone
+  * Meat
+  * Vegetable
+  * Wax
+  * Paper
+  * Liquid
+  * Vapor
+  * Light
+
+We may wish to break down Metal, Wood and Rock into further types.
+
+Materials affect the attributes of an item. If an item is created out of two types of material, the more relevant (the axe head rather than the shaft) is used for the type of the result, but the components figure into attributes such as weight and quality (a high-quality wood axe head would make a pretty bad axe).
+
+= Tech Tree =
+
+The player can make new items by either applying a tool to an existing item or by assembling two items.
+
+== Smelting ==
+
+Real-world stuff from Wikipedia.
+
+Smelting involves turning Oxides and Sulfides into pure metals and getting rid of slag.
+
+  # To get rid of slag, you add flux, like lime.
+  # Sulfides are converted to oxides by roasting; burning wood on top of the ore. (2ZnS + 3O,,2,, -> 2ZnO + 2SO,,2,,)
+  # Oxides are smelted with carbon in the form of charcoal. (ZnO + CO -> Zn + CO,,2,,)
+
+*Gold* is the oldest metal; often found in as flakes, grains, or nuggets in placer deposits. Was best harvested with hydraulic mining; found mostly pure and could be collected by filtering out the sediment with water. No smelting necessary.
+
+*Silver* ore (Ag,,2,,S) is mainly found in a *Lead* ore, Galena (PbS). Gold also contains a small percentage of silver, but there was no method to extract it. Electrum is gold with high silver content (>10%).
+
+*Copper* ores are some of the oldest used (3000 BC). It can be found as native copper, or as ores like malachite or azurite. It was forged with zinc, tin or arsenic ore to produce a brass or bronze.
+
+*Steel* has been forged as long as iron, dating back to 2000 BC. It was first mass-produced in China, then Damascus, about 300 BC using a very complicated method which has been lost because the raw materials used to produce it ran out. 
+
+In Europe in medieval to modern times (1600-1850), steel was produced by making pig iron from a very pure Swedish iron ore, fining it to wrought iron with charcoal, then cementing it with carbon for about a week (sorta like firing it in a kiln).
+
+*Aluminum* was shown to exist in 1808, and the process to produce it was not discovered until much later.
+
