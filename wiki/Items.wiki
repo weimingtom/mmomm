@@ -49,9 +49,9 @@ Materials affect the attributes of an item. If an item is created out of two typ
 
 The player can make new items by either applying a tool to an existing item or by assembling two items.
 
-== Smelting ==
+== Real-World Smelting ==
 
-Real-world stuff from Wikipedia.
+From Wikipedia.
 
 Smelting involves turning Oxides and Sulfides into pure metals and getting rid of slag.
 
@@ -70,4 +70,27 @@ Smelting involves turning Oxides and Sulfides into pure metals and getting rid o
 In Europe in medieval to modern times (1600-1850), steel was produced by making pig iron from a very pure Swedish iron ore, fining it to wrought iron with charcoal, then cementing it with carbon for about a week (sorta like firing it in a kiln).
 
 *Aluminum* was shown to exist in 1808, and the process to produce it was not discovered until much later.
+
+== Metals ==
+
+Some ideas: Gold, silver, iron, tin, copper, mercury, lead, zinc, orichalcum, unobtainium, adamantium, mithril.
+
+It is impossible to decompose metals, ores are almost never pure, and it is impossible to tell how pure an ore is. You can, however, mix metals to get alloys.
+
+Forge ores to get bars of 75-100% purity, in terms of other metals, with a quality rating indicating what part of the bar is not slag. Anything less than 75% pure is called an alloy, such as "copper alloy." Any component with greater than 25% composition is named, "copper-iron alloy"; some pairs have names, like "bronze." Any metal with no component greater than 25% is called "scrap" and given terrible stats.
+
+You can examine aspects of a metal bar to tell more about it. Immediately apparent are the name and the computed color of the ore, which give some hint as to its composition. Also apparent is its quality rating, which gives some indication of the slag:metal ratio. Tools are needed to examine the other attributes, which may include: ductility, tensile/shear strength, melting point, resistance to rust/corrosion, conductivity, and mass/density. These will be used to compute the final product's quality and weight and perhaps other properties. Tools used to test these properties will be split, according to tool quality between 2 and 8 subtypes.
+
+For the tools, it might be efficient to have a workbench mode where you split a stack of material according to its quality, then restack and split further according to another property.
+
+== Wood/Plants ==
+
+Trees and plants can be found in the wild, often living in environments that suit them because otherwise the previous generation would not have grown to produce them. They can be farmed more efficiently, but often less potently, as the world should be sufficiently volatile so that players have difficulty creating controlled environments.
+
+Conditions which the plant does not like will affect the plant's reproduction as well as its yield. Yew trees which are starved of water for a period of time may die, but some would also get an extra resilience, or have less water content and thus create better charcoal.
+
+== Stone ==
+
+Stone can be tested similarly to wood, except that stone is not created, but found. Generic type-name, quality and color help the player identify the base components. Tools can be used to determine other properties.
+
 
