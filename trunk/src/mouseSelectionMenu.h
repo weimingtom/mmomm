@@ -1,14 +1,8 @@
 #ifndef MOUSESELECTIONMENU_H_
 #define MOUSESELECTIONMENU_H_
 
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <vector>
+#include <cassert>
 #include <guichan.hpp>
-#include <guichan/graphics.hpp>
-
-#include "gui.h"
 
 using namespace std;
 

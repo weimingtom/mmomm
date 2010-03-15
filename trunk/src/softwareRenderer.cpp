@@ -1,5 +1,8 @@
 #include "softwareRenderer.h"
 #include <math.h>
+#include <string>
+#include <sstream>
+#include <iostream>
 
 SoftwareRenderer::SoftwareRenderer(const Vector2D& screenDimensions, bool fullscreen) : Renderer(screenDimensions, fullscreen)
 {

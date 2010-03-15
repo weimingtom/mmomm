@@ -2,37 +2,37 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug-x64" />
 	<File name="../src/actor.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="0" topLine="0" />
+		<Cursor position="630" topLine="0" />
 	</File>
 	<File name="../src/actor.h" open="0" top="0" tabpos="0">
-		<Cursor position="201" topLine="0" />
+		<Cursor position="1062" topLine="0" />
 	</File>
 	<File name="../src/animation.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="384" topLine="0" />
+		<Cursor position="227" topLine="0" />
 	</File>
 	<File name="../src/animation.h" open="0" top="0" tabpos="1">
-		<Cursor position="588" topLine="2" />
+		<Cursor position="1263" topLine="0" />
 	</File>
 	<File name="../src/animationManager.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="212" topLine="0" />
+		<Cursor position="3375" topLine="62" />
 	</File>
 	<File name="../src/animationManager.h" open="0" top="0" tabpos="4">
-		<Cursor position="111" topLine="0" />
+		<Cursor position="1088" topLine="0" />
 	</File>
 	<File name="../src/chat.h" open="0" top="0" tabpos="3">
 		<Cursor position="196" topLine="0" />
 	</File>
 	<File name="../src/chatWindow.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="1314" topLine="2" />
+		<Cursor position="1011" topLine="0" />
 	</File>
 	<File name="../src/chatWindow.h" open="0" top="0" tabpos="1">
 		<Cursor position="631" topLine="21" />
 	</File>
 	<File name="../src/clientActor.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="263" topLine="0" />
+		<Cursor position="566" topLine="0" />
 	</File>
 	<File name="../src/clientActor.h" open="0" top="0" tabpos="0">
-		<Cursor position="179" topLine="0" />
+		<Cursor position="459" topLine="0" />
 	</File>
 	<File name="../src/clientChat.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="312" topLine="0" />
@@ -43,6 +43,9 @@
 	<File name="../src/clientNativePackets.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="244" topLine="0" />
 	</File>
+	<File name="../src/clientSprites.h" open="0" top="0" tabpos="0">
+		<Cursor position="522" topLine="0" />
+	</File>
 	<File name="../src/clientWorldInstance.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="961" topLine="19" />
 	</File>
@@ -50,7 +53,7 @@
 		<Cursor position="1576" topLine="25" />
 	</File>
 	<File name="../src/collision.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="0" topLine="81" />
+		<Cursor position="6325" topLine="181" />
 	</File>
 	<File name="../src/collision.h" open="0" top="0" tabpos="4">
 		<Cursor position="2962" topLine="9" />
@@ -88,14 +91,14 @@
 	<File name="../src/imageManager.h" open="0" top="0" tabpos="0">
 		<Cursor position="348" topLine="0" />
 	</File>
-	<File name="../src/loginMenu.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="3711" topLine="66" />
+	<File name="../src/loginMenu.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="2707" topLine="106" />
 	</File>
 	<File name="../src/loginMenu.h" open="0" top="0" tabpos="0">
-		<Cursor position="426" topLine="13" />
+		<Cursor position="1691" topLine="18" />
 	</File>
-	<File name="../src/main.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="6417" topLine="135" />
+	<File name="../src/main.cpp" open="1" top="1" tabpos="0">
+		<Cursor position="5683" topLine="126" />
 	</File>
 	<File name="../src/mouseSelectionMenu.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="5207" topLine="118" />
@@ -121,10 +124,16 @@
 	<File name="../src/openglRenderer.h" open="0" top="0" tabpos="2">
 		<Cursor position="454" topLine="0" />
 	</File>
-	<File name="../src/randomName.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="9244" topLine="0" />
+	<File name="../src/playerClientActor.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="390" topLine="0" />
 	</File>
-	<File name="../src/randomName.h" open="1" top="0" tabpos="3">
+	<File name="../src/random.h" open="0" top="0" tabpos="0">
+		<Cursor position="597" topLine="0" />
+	</File>
+	<File name="../src/randomName.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="9044" topLine="0" />
+	</File>
+	<File name="../src/randomName.h" open="0" top="0" tabpos="3">
 		<Cursor position="275" topLine="0" />
 	</File>
 	<File name="../src/renderer.cpp" open="0" top="0" tabpos="3">
@@ -136,11 +145,20 @@
 	<File name="../src/serial.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="819" topLine="11" />
 	</File>
+	<File name="../src/simulatedClientActor.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="223" topLine="0" />
+	</File>
 	<File name="../src/softwareRenderer.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="1474" topLine="27" />
 	</File>
 	<File name="../src/softwareRenderer.h" open="0" top="0" tabpos="0">
 		<Cursor position="592" topLine="0" />
+	</File>
+	<File name="../src/sprite.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="675" topLine="12" />
+	</File>
+	<File name="../src/sprite.h" open="0" top="0" tabpos="0">
+		<Cursor position="128" topLine="0" />
 	</File>
 	<File name="../src/trueTypeFont.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="5148" topLine="118" />

@@ -1,16 +1,6 @@
 #ifndef SOFTWARE_RENDERER_H_
 #define SOFTWARE_RENDERER_H_
 
-#ifdef WIN32
-#include <windows.h>
-#endif
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <SDL/SDL.h>
-#include <string>
-#include <sstream>
-#include <iostream>
-
 class SoftwareRenderer;
 
 #include "image.h"

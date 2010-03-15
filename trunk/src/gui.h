@@ -1,13 +1,9 @@
 #ifndef GUI_H_
 #define GUI_H_
 
-#include <iostream>
-#include <assert.h>
+#include <cassert>
 #include <guichan.hpp>
 #include <guichan/sdl.hpp>
-#include <guichan/opengl.hpp>
-#include <guichan/opengl/openglsdlimageloader.hpp>
-#include "SDL.h"
 
 using namespace std;
 

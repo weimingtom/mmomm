@@ -213,6 +213,24 @@
 		<Unit filename="../src/initializePacketManager.h">
 			<Option virtualFolder="Net/" />
 		</Unit>
+		<Unit filename="../src/inventory.cpp">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/inventory.h">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/item.cpp">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/item.h">
+			<Option virtualFolder="Core/" />
+		</Unit>
+		<Unit filename="../src/itemWindow.cpp">
+			<Option virtualFolder="Guis/" />
+		</Unit>
+		<Unit filename="../src/itemWindow.h">
+			<Option virtualFolder="Guis/" />
+		</Unit>
 		<Unit filename="../src/loginMenu.cpp">
 			<Option virtualFolder="Guis/" />
 		</Unit>

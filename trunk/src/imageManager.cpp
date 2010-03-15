@@ -1,6 +1,7 @@
 #include "imageManager.h"
 
 #include <vector>
+#include <iostream>
 
 ImageManager *ImageManager::_current = 0;
 

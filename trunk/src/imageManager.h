@@ -1,6 +1,7 @@
 #ifndef IMAGE_MANAGER_H_
 #define IMAGE_MANAGER_H_
 
+#include <cassert>
 #include <string>
 #include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>

@@ -1,5 +1,12 @@
 #include "renderer.h"
 
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <string>
+#include <sstream>
+#include <iostream>
+#include <assert.h>
+
 Renderer *Renderer::_current = 0;
 
 Renderer::Renderer(const Vector2D& screenDimensions, bool fullscreen)

@@ -1,4 +1,6 @@
 #include "image.h"
+#include "renderer.h"
+
 #include <sstream>
 #include <iostream>
 

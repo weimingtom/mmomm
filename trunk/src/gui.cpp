@@ -1,6 +1,11 @@
 #include "gui.h"
 #include "trueTypeFont.h"
 
+#include <iostream>
+#include <guichan/opengl.hpp>
+#include <guichan/opengl/openglsdlimageloader.hpp>
+#include <SDL/SDL.h>
+
 Gui *Gui::_current = 0;
 
 Gui::Gui(SDL_Surface *screen, bool softwareRendering)

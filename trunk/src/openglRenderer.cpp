@@ -1,6 +1,12 @@
 #include "openglRenderer.h"
-#include <GL/glext.h>
+
 #include <boost/scoped_array.hpp>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glext.h>
+#include <string>
+#include <sstream>
+#include <iostream>
 
 //ret_type (APIENTRY * glExtensionName)(parameters) = NULL;
 GLenum extension = GL_TEXTURE_RECTANGLE_ARB;

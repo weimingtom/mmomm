@@ -11,6 +11,7 @@
 #include "renderer.h"
 #include "sprite.h"
 #include "vector2D.h"
+#include "gui.h"
 
 const double ClientWorldInstance::PIXELS_PER_WORLD_UNIT = 32.0;
 
@@ -124,7 +125,7 @@ void ClientWorldInstance::render()
                        _camera + renderer.getScreenDimensions() * (.5 / PIXELS_PER_WORLD_UNIT));
     IVector2D min(std::floor(camera.left), std::floor(camera.top));
 	IVector2D max(std::ceil(camera.right), std::ceil(camera.bottom));
-	
+
     AnimationManager::shared_ptr tileset = AnimationManager::current().getAnimation(_tileset);
 	IVector2D i;
 	for (i.y = min.y; i.y < max.y; ++i.y) {
@@ -136,8 +137,8 @@ void ClientWorldInstance::render()
             renderer.drawClippedImage(tileset->getImage().get(), renderPosition, clip);
 		}
 	}
-   
-    // Render actors	
+
+    // Render actors
     for ( ActorMap::const_iterator i = actors.begin(); i != actors.end(); i++ ) {
         assert(dynamic_cast<ClientActor*>(i->second));
         ClientActor *a = static_cast<ClientActor*>(i->second);

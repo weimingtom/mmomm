@@ -1,20 +1,15 @@
 #ifndef RENDERER_H_
 #define RENDERER_H_
 
+#include <SDL/SDL.h>
+#include <cassert>
 #ifdef WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #undef min
 #undef max
 #endif
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <SDL/SDL.h>
-#include <string>
-#include <sstream>
-#include <iostream>
-#include <assert.h>
-#include "rect.h"
+
 #include "vector2D.h"
 
 class Renderer;

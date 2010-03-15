@@ -1,4 +1,9 @@
 #include "configurationMenu.h"
+#include "gui.h"
+#include "renderer.h"
+
+#include <iostream>
+#include <vector>
 
 ConfigurationMenu *ConfigurationMenu::_current = 0;
 

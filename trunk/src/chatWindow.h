@@ -1,17 +1,12 @@
 #ifndef CHATWINDOW_H_
 #define CHATWINDOW_H_
 
-#include <iostream>
+#include <cassert>
 #include <string>
-#include <sstream>
-#include <vector>
 #include <guichan.hpp>
 
-#include "gui.h"
-#include "renderer.h"
-#include "events.h"
-#include "chat.h"
 #include "networkClient.h"
+#include "chat.h"
 
 using namespace std;
 
