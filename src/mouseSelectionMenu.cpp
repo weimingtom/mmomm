@@ -1,5 +1,14 @@
 #include "mouseSelectionMenu.h"
+#include "events.h"
+#include "gui.h"
+
 #include <boost/foreach.hpp>
+#include <guichan/graphics.hpp>
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
+
 
 MouseSelectionMenu *MouseSelectionMenu::_current = 0;
 
@@ -47,6 +56,8 @@ void MouseSelectionMenu::addLabel(gcn::Label *label)
 void MouseSelectionMenu::removeLabel(gcn::Label *label)
 {
     //FIXME fill this in and recalculate Y
+    //Maybe we should just remove this function and force the recreation
+    //of the menu in the unlikely event that a label needs removal?
 }
 
 gcn::Rectangle MouseSelectionMenu::getChildrenArea()
@@ -159,9 +170,16 @@ void MouseSelectionMenu::mouseClicked(gcn::MouseEvent &mouseEvent)
         gcn::Rectangle rec = (*iter)->getDimension();
         if( (*iter)->getY() <= mouseEvent.getY() && (*iter)->getY() + (*iter)->getHeight() >= mouseEvent.getY() &&
             (*iter)->getX() <= mouseEvent.getX() && (*iter)->getX() + (*iter)->getWidth()  >= mouseEvent.getX() ) {
+            SDL_Event event;
+
             Gui::current().removeWidget(this);
+
+            event.type = SDL_USEREVENT;
+            event.user.code = EVENT_DELETE_WIDGET;
+            event.user.data1 = this;
+
+            SDL_PushEvent(&event);
             break;
-            //FIXME add a signal-ish thing here, to delete the instance and not have memory leaks.
         }
     }
 

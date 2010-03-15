@@ -1,4 +1,9 @@
 #include "chatWindow.h"
+#include "gui.h"
+
+#include <iostream>
+#include <sstream>
+#include <vector>
 
 ChatWindow *ChatWindow::_current = 0;
 

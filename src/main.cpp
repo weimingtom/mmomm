@@ -8,8 +8,11 @@
 #include "events.h"
 #include "frameTimer.h"
 #include "gui.h"
+#include "inventory.h"
 #include "image.h"
 #include "imageManager.h"
+#include "item.h"
+#include "itemWindow.h"
 #include "loginMenu.h"
 #include "mouseSelectionMenu.h"
 #include "networkClient.h"
@@ -25,6 +28,7 @@
 ConfigurationMenu *configMenu = 0;
 LoginMenu* loginMenu = 0;
 ChatWindow* chatWindow = 0;
+ItemWindow* itemWindow = 0;
 
 int main(int argc, char **argv)
 {
@@ -63,6 +67,16 @@ int main(int argc, char **argv)
 
     chatWindow = new ChatWindow(300, 150);
     chatWindow->setCurrent(chatWindow);
+
+    Inventory inventory;
+    inventory.addItem(Item(0, "Sword",  100, ImageManager::current().getImage("data/icons/we_sword001.png")));
+    inventory.addItem(Item(1, "Axe",    100, ImageManager::current().getImage("data/icons/we_axe001.png")));
+    inventory.addItem(Item(2, "Mat",    100, ImageManager::current().getImage("data/icons/mat_001.png")));
+    inventory.addItem(Item(3, "Item",   100, ImageManager::current().getImage("data/icons/item_001.png")));
+    inventory.addItem(Item(4, "Helm",   100, ImageManager::current().getImage("data/icons/helm_001.png")));
+    inventory.addItem(Item(5, "Armor",  100, ImageManager::current().getImage("data/icons/armor_001.png")));
+
+    itemWindow = new ItemWindow(0, 0, inventory);
 
 	NetworkClient::setCurrent(new NetworkClient());
 
@@ -153,6 +167,7 @@ int main(int argc, char **argv)
                             }
                             else {
                                 delete loginMenu;
+                                loginMenu = 0;
                             }
                         }
                         catch(InvalidPacketException& e) {
@@ -170,6 +185,10 @@ int main(int argc, char **argv)
                         configMenu->setCurrent(configMenu);
                         delete loginMenu;
                         loginMenu = 0;
+                    }
+                    if ( event.user.code == EVENT_DELETE_WIDGET ) {
+                        gcn::Widget* widget = (gcn::Widget*)event.user.data1;
+                        delete widget;
                     }
                     break;
             }

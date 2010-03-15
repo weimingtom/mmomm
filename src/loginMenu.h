@@ -1,15 +1,8 @@
 #ifndef LOGINMENU_H_
 #define LOGINMENU_H_
 
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <vector>
+#include <cassert>
 #include <guichan.hpp>
-
-#include "gui.h"
-#include "renderer.h"
-#include "events.h"
 
 using namespace std;
 

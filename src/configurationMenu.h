@@ -1,14 +1,11 @@
 #ifndef CONFIGURATIONMENU_H_
 #define CONFIGURATIONMENU_H_
 
-#include <iostream>
 #include <string>
+#include <cassert>
 #include <sstream>
-#include <vector>
 #include <guichan.hpp>
-
-#include "gui.h"
-#include "renderer.h"
+#include <SDL/SDL.h>
 #include "events.h"
 
 using namespace std;

@@ -1,31 +1,26 @@
 # depslib dependency file v1.0
-1264947017 source:/home/oipo/Programming/mmomm/src/image.cpp
+1268667629 source:/home/oipo/Programming/mmomm/src/image.cpp
 	"image.h"
+	"renderer.h"
 	<sstream>
 	<iostream>
 
-1264790374 /home/oipo/Programming/mmomm/src/image.h
+1268667654 /home/oipo/Programming/mmomm/src/image.h
 	<windows.h>
 	<SDL/SDL.h>
 	<SDL/SDL_image.h>
 	<GL/gl.h>
 	<GL/glu.h>
-	"renderer.h"
-
-1265574442 /home/oipo/Programming/mmomm/src/renderer.h
-	<windows.h>
-	<GL/gl.h>
-	<GL/glu.h>
-	<SDL/SDL.h>
 	<string>
-	<sstream>
-	<iostream>
-	<assert.h>
-	"rect.h"
+
+1268667587 /home/oipo/Programming/mmomm/src/renderer.h
+	<SDL/SDL.h>
+	<cassert>
+	<windows.h>
 	"vector2D.h"
 	"image.h"
 
-1267129598 source:/home/oipo/Programming/mmomm/src/main.cpp
+1268669082 source:/home/oipo/Programming/mmomm/src/main.cpp
 	"animation.h"
 	"animationManager.h"
 	"chatWindow.h"
@@ -36,8 +31,11 @@
 	"events.h"
 	"frameTimer.h"
 	"gui.h"
+	"inventory.h"
 	"image.h"
 	"imageManager.h"
+	"item.h"
+	"itemWindow.h"
 	"loginMenu.h"
 	"mouseSelectionMenu.h"
 	"networkClient.h"
@@ -49,8 +47,14 @@
 	<vector>
 	<stdexcept>
 
-1265574441 source:/home/oipo/Programming/mmomm/src/renderer.cpp
+1268666918 source:/home/oipo/Programming/mmomm/src/renderer.cpp
 	"renderer.h"
+	<GL/gl.h>
+	<GL/glu.h>
+	<string>
+	<sstream>
+	<iostream>
+	<assert.h>
 
 1267129598 source:/home/oipo/Programming/mmomm/src/collision.cpp
 	"collision.h"
@@ -65,18 +69,18 @@
 	"rect.h"
 	"vector2D.h"
 
-1266269360 source:/home/oipo/Programming/mmomm/src/gui.cpp
+1268667128 source:/home/oipo/Programming/mmomm/src/gui.cpp
 	"gui.h"
 	"trueTypeFont.h"
-
-1265574442 /home/oipo/Programming/mmomm/src/gui.h
 	<iostream>
-	<assert.h>
-	<guichan.hpp>
-	<guichan/sdl.hpp>
 	<guichan/opengl.hpp>
 	<guichan/opengl/openglsdlimageloader.hpp>
-	"SDL.h"
+	<SDL/SDL.h>
+
+1268667565 /home/oipo/Programming/mmomm/src/gui.h
+	<cassert>
+	<guichan.hpp>
+	<guichan/sdl.hpp>
 
 1264384556 /home/oipo/Programming/mmomm/src/openglrenderer.h
 	<windows.h>
@@ -223,7 +227,7 @@
 1264947584 /home/oipo/Programming/mmomm/src/worldCommon.h
 	<boost/functional/hash.hpp>
 
-1264618017 /home/oipo/Programming/mmomm/src/events.h
+1268662618 /home/oipo/Programming/mmomm/src/events.h
 
 1264618017 source:/home/oipo/Programming/mmomm/src/loginmenu.cpp
 	"loginmenu.h"
@@ -321,38 +325,40 @@
 	"simulatedClientActor.h"
 	<iostream>
 
-1264782135 /home/oipo/Programming/mmomm/src/imageManager.h
+1268667639 /home/oipo/Programming/mmomm/src/imageManager.h
+	<cassert>
 	<string>
 	<boost/shared_ptr.hpp>
 	<boost/unordered_map.hpp>
 	"image.h"
 
-1267481509 source:/home/oipo/Programming/mmomm/src/chatWindow.cpp
+1268667421 source:/home/oipo/Programming/mmomm/src/chatWindow.cpp
 	"chatWindow.h"
-
-1265574441 /home/oipo/Programming/mmomm/src/chatWindow.h
+	"gui.h"
 	<iostream>
-	<string>
 	<sstream>
 	<vector>
+
+1268667556 /home/oipo/Programming/mmomm/src/chatWindow.h
+	<cassert>
+	<string>
 	<guichan.hpp>
-	"gui.h"
-	"renderer.h"
-	"events.h"
-	"chat.h"
 	"networkClient.h"
+	"chat.h"
 
-1265379433 source:/home/oipo/Programming/mmomm/src/configurationMenu.cpp
+1268667519 source:/home/oipo/Programming/mmomm/src/configurationMenu.cpp
 	"configurationMenu.h"
-
-1264724680 /home/oipo/Programming/mmomm/src/configurationMenu.h
-	<iostream>
-	<string>
-	<sstream>
-	<vector>
-	<guichan.hpp>
 	"gui.h"
 	"renderer.h"
+	<iostream>
+	<vector>
+
+1268667528 /home/oipo/Programming/mmomm/src/configurationMenu.h
+	<string>
+	<cassert>
+	<sstream>
+	<guichan.hpp>
+	<SDL/SDL.h>
 	"events.h"
 
 1265223099 source:/home/oipo/Programming/mmomm/src/hermite.cpp
@@ -362,56 +368,53 @@
 1264724680 /home/oipo/Programming/mmomm/src/hermite.h
 	"vector2D.h"
 
-1264947418 source:/home/oipo/Programming/mmomm/src/imageManager.cpp
+1268666755 source:/home/oipo/Programming/mmomm/src/imageManager.cpp
 	"imageManager.h"
 	<vector>
+	<iostream>
 
-1267482248 source:/home/oipo/Programming/mmomm/src/loginMenu.cpp
+1268666721 source:/home/oipo/Programming/mmomm/src/loginMenu.cpp
 	"loginMenu.h"
-
-1267482155 /home/oipo/Programming/mmomm/src/loginMenu.h
+	"gui.h"
+	"events.h"
 	<iostream>
 	<string>
 	<sstream>
 	<vector>
+
+1268667743 /home/oipo/Programming/mmomm/src/loginMenu.h
+	<cassert>
 	<guichan.hpp>
-	"gui.h"
-	"renderer.h"
-	"events.h"
 
-1265587793 source:/home/oipo/Programming/mmomm/src/openglRenderer.cpp
+1268667002 source:/home/oipo/Programming/mmomm/src/openglRenderer.cpp
 	"openglRenderer.h"
-	<GL/glext.h>
 	<boost/scoped_array.hpp>
-
-1265574442 /home/oipo/Programming/mmomm/src/openglRenderer.h
-	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>
+	<GL/glext.h>
 	<string>
 	<sstream>
 	<iostream>
+
+1268666998 /home/oipo/Programming/mmomm/src/openglRenderer.h
 	"renderer.h"
 	"image.h"
 
-1265574441 source:/home/oipo/Programming/mmomm/src/softwareRenderer.cpp
+1268666948 source:/home/oipo/Programming/mmomm/src/softwareRenderer.cpp
 	"softwareRenderer.h"
 	<math.h>
-
-1265574442 /home/oipo/Programming/mmomm/src/softwareRenderer.h
-	<windows.h>
-	<GL/gl.h>
-	<GL/glu.h>
-	<SDL/SDL.h>
 	<string>
 	<sstream>
 	<iostream>
+
+1268666951 /home/oipo/Programming/mmomm/src/softwareRenderer.h
 	"image.h"
 	"renderer.h"
 
-1267479345 source:/home/oipo/Programming/mmomm/src/animation.cpp
+1268666689 source:/home/oipo/Programming/mmomm/src/animation.cpp
 	"animation.h"
 	"sprite.h"
+	<iostream>
 
 1267479417 /home/oipo/Programming/mmomm/src/animation.h
 	"image.h"
@@ -473,7 +476,7 @@
 	<SDL/SDL.h>
 	<boost/unordered_map.hpp>
 
-1267129598 source:/home/oipo/Programming/mmomm/src/clientWorldInstance.cpp
+1268667800 source:/home/oipo/Programming/mmomm/src/clientWorldInstance.cpp
 	"clientWorldInstance.h"
 	<guichan.hpp>
 	"chatWindow.h"
@@ -487,6 +490,7 @@
 	"renderer.h"
 	"sprite.h"
 	"vector2D.h"
+	"gui.h"
 
 1265223099 source:/home/oipo/Programming/mmomm/src/frameTimer.cpp
 	"frameTimer.h"
@@ -1724,18 +1728,20 @@
 	"events.h"
 	"mouseSelectionMenu.h"
 
-1266076975 /home/oipo/Programming/mmomm/src/mouseSelectionMenu.h
+1268667821 /home/oipo/Programming/mmomm/src/mouseSelectionMenu.h
+	<cassert>
+	<guichan.hpp>
+
+1268667783 source:/home/oipo/Programming/mmomm/src/mouseSelectionMenu.cpp
+	"mouseSelectionMenu.h"
+	"events.h"
+	"gui.h"
+	<boost/foreach.hpp>
+	<guichan/graphics.hpp>
 	<iostream>
 	<string>
 	<sstream>
 	<vector>
-	<guichan.hpp>
-	<guichan/graphics.hpp>
-	"gui.h"
-
-1267129598 source:/home/oipo/Programming/mmomm/src/mouseSelectionMenu.cpp
-	"mouseSelectionMenu.h"
-	<boost/foreach.hpp>
 
 1267129598 /home/oipo/Programming/mmomm/src/serializationException.h
 	<stdexcept>
@@ -1813,4 +1819,29 @@
 1266701848 /home/oipo/Programming/mmomm/guichan/include/guichan/autodestructor.hpp
 	"guichan/platform.hpp"
 	<vector>
+
+1268663925 source:/home/oipo/Programming/mmomm/src/item.cpp
+	"item.h"
+
+1268665013 /home/oipo/Programming/mmomm/src/item.h
+	<boost/shared_ptr.hpp>
+	"image.h"
+	"imageManager.h"
+
+1268668877 source:/home/oipo/Programming/mmomm/src/itemWindow.cpp
+	"itemWindow.h"
+	"gui.h"
+	"renderer.h"
+	<cstdlib>
+
+1268667978 source:/home/oipo/Programming/mmomm/src/inventory.cpp
+	"inventory.h"
+
+1268667959 /home/oipo/Programming/mmomm/src/inventory.h
+	<vector>
+	"item.h"
+
+1268669378 /home/oipo/Programming/mmomm/src/itemWindow.h
+	<guichan.hpp>
+	"inventory.h"
 

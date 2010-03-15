@@ -5,5 +5,6 @@
 #define EVENT_OPTIONS_CANCEL        1
 #define EVENT_LOGIN_OK              2
 #define EVENT_LOGIN_OPTIONS         3
+#define EVENT_DELETE_WIDGET         4
 
 #endif

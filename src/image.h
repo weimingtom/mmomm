@@ -10,7 +10,7 @@ class Image;
 #include <SDL/SDL_image.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include "renderer.h"
+#include <string>
 
 using namespace std;
 

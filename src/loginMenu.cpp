@@ -1,4 +1,11 @@
 #include "loginMenu.h"
+#include "gui.h"
+#include "events.h"
+
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
 
 LoginMenu *LoginMenu::_current = 0;
 

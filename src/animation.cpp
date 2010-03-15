@@ -1,6 +1,8 @@
 #include "animation.h"
 #include "sprite.h"
 
+#include <iostream>
+
 Animation::Animation(int id, ImageManager::shared_ptr img, int frameWidth, int frameHeight,
                      double interval, int startFrame, int endFrame, bool active)
 :   _id(id)
